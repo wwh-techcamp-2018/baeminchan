@@ -190,7 +190,6 @@ html {
   box-sizing: inherit;
 }
 
-
 address {
   font-style: normal;
 }
@@ -1452,7 +1451,6 @@ a:focus {
 #main-visual .img-box .img-5 {
   background-image: url(./img/img-main-visual-slide_5.jpg);
 }
-
 
 #main-visual .direction-btn-box {
   position: absolute;
