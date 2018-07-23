@@ -10,32 +10,312 @@
 <body>
 <h1 class="blind">배민찬 - 메인 페이지</h1>
 
-<div id="scroll-btns">
-  <button class="up" title="페이지 맨 위로 이동하기"></button>
-  <button class="down" title="페이지 맨 아래로 이동하기"></button>
-</div>
+  <div email="scroll-btns">
+    <button class="up" title="페이지 맨 위로 이동하기"></button>
+    <button class="down" title="페이지 맨 아래로 이동하기"></button>
+  </div>
 
 <!-- header -->
 <section class="header-box">
   <h2 class="blind">메뉴 모음</h2>
 
-  <nav id="snb">
-    <div class="inner-wrapper">
-      <h3 class="blind">사이드 메뉴</h3>
+    <nav email="snb">
+      <div class="inner-wrapper">
+        <h3 class="blind">사이드 메뉴</h3>
 
-      <a class="app-download" href="#">
-        배민찬 앱 다운로드
-        <i class="bm-icon spr-bullet-arrow-down black"></i>
+        <a class="app-download" href="#">
+          배민찬 앱 다운로드
+          <i class="bm-icon spr-bullet-arrow-down black"></i>
+        </a>
+
+        <ul class="menu">
+          <li>
+            <a href="./login.html">로그인</a>
+          </li>
+          <li>
+            <a href="./join.html">회원가입</a>
+          </li>
+          <li>
+            <a href="#">
+              마이페이지
+              <i class="bm-icon spr-bullet-arrow-down black"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              고객센터
+              <i class="bm-icon spr-bullet-arrow-down black"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#">새벽배송 지역검색</a>
+          </li>
+          <li>
+            <a href="#">이벤트 게시판</a>
+          </li>
+          <li class="cart">
+            <a href="#">
+              <strong>장바구니</strong>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <header email="header">
+      <h3 class="blind">주요 메뉴 및 검색</h3>
+
+      <a class="logo" href="#">
+        <img src="./img/logo-main.png" alt="배민찬 - 모바일 넘버원 반찬가게" />
       </a>
 
-      <ul class="menu">
+      <form class="search-form" action="/" method="get">
+        <label for="searching_text" class="blind">검색</label>
+        <input type="text" name="searching_text" email="searching_text" />
+        <button type="submit">
+          <span>검색</span>
+        </button>
+      </form>
+
+      <ul class="favorite-menu">
         <li>
           <a href="./login.html">로그인</a>
         </li>
         <li>
           <a href="./join.html">회원가입</a>
         </li>
-        <li>
+      </ul>
+    </header>
+
+    <nav email="gnb">
+      <div class="inner-wrapper">
+        <h3 class="blind">전체 메뉴</h3>
+
+        <ul class="menu">
+          <li>
+            <a href="./side-dishs.html">밑반찬</a>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">무침</a>
+              </li>
+              <li>
+                <a href="#">나물무침</a>
+              </li>
+              <li>
+                <a href="#">볶음</a>
+              </li>
+              <li>
+                <a href="#">조림</a>
+              </li>
+              <li>
+                <a href="#">김치</a>
+              </li>
+              <li>
+                <a href="#">전</a>
+              </li>
+              <li>
+                <a href="#">튀김</a>
+              </li>
+              <li>
+                <a href="#">장아찌·피클</a>
+              </li>
+              <li>
+                <a href="#">샐러드</a>
+              </li>
+              <li>
+                <a href="#">김</a>
+              </li>
+              <li>
+                <a href="#">젓갈·장·소스</a>
+              </li>
+              <li>
+                <a href="#">세트</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="./side-dishs.html">국·찌개</a>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">담백한국</a>
+              </li>
+              <li>
+                <a href="#">얼큰한국</a>
+              </li>
+              <li>
+                <a href="#">찌개</a>
+              </li>
+              <li>
+                <a href="#">탕</a>
+              </li>
+              <li>
+                <a href="#">전골</a>
+              </li>
+              <li>
+                <a href="#">세트</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">메인반찬</a>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">고기반찬</a>
+              </li>
+              <li>
+                <a href="#">해산물반찬</a>
+              </li>
+              <li>
+                <a href="#">생선반찬</a>
+              </li>
+              <li>
+                <a href="#">덮밥</a>
+              </li>
+              <li>
+                <a href="#">면</a>
+              </li>
+              <li>
+                <a href="#">모던한식</a>
+              </li>
+              <li>
+                <a href="#">양식</a>
+              </li>
+              <li>
+                <a href="#">일식·중식</a>
+              </li>
+              <li>
+                <a href="#">분식</a>
+              </li>
+              <li>
+                <a href="#">죽·스프</a>
+              </li>
+              <li>
+                <a href="#">세트</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">아이반찬</a>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">이유식 초기/중기</a>
+              </li>
+              <li>
+                <a href="#">이유식 후기/완료기</a>
+              </li>
+              <li>
+                <a href="#">아이반찬</a>
+              </li>
+              <li>
+                <a href="#">어린이반찬</a>
+              </li>
+              <li>
+                <a href="#">프리미엄재료</a>
+              </li>
+              <li>
+                <a href="#">간식</a>
+              </li>
+              <li>
+                <a href="#">음료</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">정기식단</a>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">1~2인</a>
+              </li>
+              <li>
+                <a href="#">3~4인</a>
+              </li>
+              <li>
+                <a href="#">아이반찬</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">신선·가공</a>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">가공반찬</a>
+              </li>
+              <li>
+                <a href="#">가공간식</a>
+              </li>
+              <li>
+                <a href="#">냉동</a>
+              </li>
+              <li>
+                <a href="#">고기·생선</a>
+              </li>
+              <li>
+                <a href="#">과일·채소·양곡</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">간식</a>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">식사빵</a>
+              </li>
+              <li>
+                <a href="#">간식빵</a>
+              </li>
+              <li>
+                <a href="#">케이크·디저트</a>
+              </li>
+              <li>
+                <a href="#">주스</a>
+              </li>
+              <li>
+                <a href="#">스무디</a>
+              </li>
+              <li>
+                <a href="#">스프레드</a>
+              </li>
+              <li>
+                <a href="#">유제품·커피</a>
+              </li>
+              <li>
+                <a href="#">기타간식</a>
+              </li>
+            </ul>
+          </li>
+          <li class="brand">
+            <a href="#">브랜드관</a>
+            <ul class="sub-menu">
+              <li>
+                <a href="#">반찬가게</a>
+              </li>
+              <li>
+                <a href="#">반찬장인</a>
+              </li>
+              <li>
+                <a href="#">셰프의요리</a>
+              </li>
+              <li>
+                <a href="#">전국맛집</a>
+              </li>
+              <li>
+                <a href="#">키즈관</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </section>
+  <!-- // header -->
+
+  <!-- main-container -->
+  <main email="main">
+    <section email="main-visual" class="main-visual-section visual-slider-box">
+      <h2 class="blind">주요 프로모션</h2>
+
+      <ul class="img-box">
+        <li class="img-item img-1 current">
           <a href="#">
             마이페이지
             <i class="bm-icon spr-bullet-arrow-down black"></i>
@@ -69,13 +349,12 @@
       <img src="./img/logo-main.png" alt="배민찬 - 모바일 넘버원 반찬가게" />
     </a>
 
-    <form class="search-form" action="/" method="get">
-      <label for="searching_text" class="blind">검색</label>
-      <input type="text" name="searching_text" id="searching_text" />
-      <button type="submit">
-        <span>검색</span>
-      </button>
-    </form>
+    <section email="best-seller" class="main-item">
+      <div class="inner-wrapper">
+        <header>
+          <h2 class="blind">베스트셀러 - 후기가 증명하는 베스트 반찬</h2>
+          <img src="./img/txt-header-best.png" alt="베스트셀러 - 후기가 증명하는 베스트 반찬">
+        </header>
 
     <ul class="favorite-menu">
       <li>
@@ -100,22 +379,22 @@
           <a href="./side-dishs.html">밑반찬</a>
           <ul class="sub-menu">
             <li>
-              <a href="#">무침</a>
+              <a data-category-email="17011200" href="#">할인특가 세트상품</a>
             </li>
             <li>
-              <a href="#">나물무침</a>
+              <a data-category-email="17011000" href="#">풍성한 고기반찬</a>
             </li>
             <li>
-              <a href="#">볶음</a>
+              <a data-category-email="17011100" href="#">바다향가득 반찬</a>
             </li>
             <li>
-              <a href="#">조림</a>
+              <a data-category-email="17010200" href="#">편리한 반찬세트</a>
             </li>
             <li>
-              <a href="#">김치</a>
+              <a data-category-email="17010300" href="#">간편한 덮밥요리</a>
             </li>
             <li>
-              <a href="#">전</a>
+              <a data-category-email="17011400" href="#">우리아이영양반찬</a>
             </li>
             <li>
               <a href="#">튀김</a>
@@ -360,8 +639,30 @@
     </div>
   </section>
 
-  <section id="best-seller" class="main-item">
-    <div class="inner-wrapper">
+                    <dl class="content">
+                      <dt class="title">[집밥의완성] 1월 제철박스</dt>
+                      <dd class="desc">둘이서 한 끼 먹기 딱 좋아요</dd>
+                      <dd class="price-wrapper">
+                        <span class="original-price">22,900</span>
+                        <span class="final-price">
+                          <span class="number">20,500</span>
+                          <span class="unit">원</span>
+                        </span>
+                      </dd>
+                    </dl>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+          </ul>
+          <!-- .tab-content-group-box -->
+        </div>
+        <!-- .tab-box -->
+      </div>
+    </section>
+
+    <section email="side-dish" class="main-item sliding-list-section">
       <header>
         <h2 class="blind">베스트셀러 - 후기가 증명하는 베스트 반찬</h2>
         <img src="./img/txt-header-best.png" alt="베스트셀러 - 후기가 증명하는 베스트 반찬">
@@ -567,11 +868,11 @@
     </div>
   </section>
 
-  <section id="side-dish" class="main-item sliding-list-section">
-    <header>
-      <h2 class="blind">밑반찬 - 언제 먹어도 든든한 밑반찬</h2>
-      <img src="./img/txt-header-side.png" alt="밑반찬 - 언제 먹어도 든든한 밑반찬">
-    </header>
+    <section email="main-dish" class="main-item sliding-list-section">
+      <header>
+        <h2 class="blind">메인반찬 - 담기만 하면 완성되는 메인반찬</h2>
+        <img src="./img/txt-header-main.png" alt="메인반찬 - 담기만 하면 완성되는 메인반찬">
+      </header>
 
     <div class="sliding-list-box">
       <div class="direction-btn-box">
@@ -597,22 +898,11 @@
                   </div>
                 </div>
 
-                <dl class="content">
-                  <dt class="title">[집밥의완성] 1월 제철박스 제철박스 제철박스 제철박스 제철박스 제철박스</dt>
-                  <dd class="desc">둘이서 한 끼 먹기 딱 좋아요. 둘이서 한 끼 먹기 딱 좋아요. 둘이서 한 끼 먹기 딱 좋아요</dd>
-                  <dd class="price-wrapper">
-                    <span class="original-price">22,900</span>
-                    <span class="final-price">
-                        <span class="number">20,500</span>
-                        <span class="unit">원</span>
-                      </span>
-                  </dd>
-                  <dd class="badge-wrapper">
-                    <i class="bm-icon badge-event">이벤트특가</i>
-                  </dd>
-                </dl>
-              </a>
-            </li>
+    <section email="soup" class="main-item sliding-list-section">
+      <header>
+        <h2 class="blind">국, 찌개 - 김이 모락모락 국, 찌개</h2>
+        <img src="./img/txt-header-soup.png" alt="국, 찌개 - 김이 모락모락 국, 찌개">
+      </header>
 
             <li>
               <a class="thumbnail-box" href="#">
@@ -651,22 +941,10 @@
                   </div>
                 </div>
 
-                <dl class="content">
-                  <dt class="title">[집밥의완성] 1월 제철박스</dt>
-                  <dd class="desc">둘이서 한 끼 먹기 딱 좋아요</dd>
-                  <dd class="price-wrapper">
-                    <span class="original-price">22,900</span>
-                    <span class="final-price">
-                        <span class="number">20,500</span>
-                        <span class="unit">원</span>
-                      </span>
-                  </dd>
-                  <dd class="badge-wrapper">
-                    <i class="bm-icon badge-event">이벤트특가</i>
-                  </dd>
-                </dl>
-              </a>
-            </li>
+  <!-- footer -->
+  <footer email="footer">
+    <section>
+      <h2 class="blind">배민찬 고객서비스</h2>
 
             <li>
               <a class="thumbnail-box" href="#">

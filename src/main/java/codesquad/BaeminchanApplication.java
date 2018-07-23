@@ -7,7 +7,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@ComponentScan({"codesquad" })
+@ComponentScan({"codesquad","atdd"})
 @EnableJpaAuditing
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class BaeminchanApplication {
