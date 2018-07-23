@@ -15,13 +15,13 @@
 
 <body>
     <!--  skip navi -->
-    <a href="#container" id="skip_navigation">본문 바로가기</a>
+    <a href="#container" email="skip_navigation">본문 바로가기</a>
     <!--  skip navi -->
 
-    <div id="wrapper">
+    <div email="wrapper">
 
         <!--  상단 배너 -->
-        <div id="tbb" class="top_banner_wrap" style="display: none;">
+        <div email="tbb" class="top_banner_wrap" style="display: none;">
             <a href="#" class="top_banner">페이지 상단 배너</a>
             <a href="#" class="btn_close" title="닫기">닫기</a>
         </div>
@@ -32,16 +32,16 @@
         </div>
 
         <!-- //End  헤더영역 -->
-        <div id="header_wrap">
+        <div email="header_wrap">
             <div class="header join">
                 <h1 class="logo">
                     <a href="/">
-                        <img src="https://cdn.bmf.kr/web/common/bmc-logo.png" alt="모바일 넘버원 반찬가게-배민찬">
+                        <img src="https://cdn.bmf.kr/codesquad.atdd.web/common/bmc-logo.png" alt="모바일 넘버원 반찬가게-배민찬">
                     </a>
                 </h1>
             </div>
         </div>
-        <div id="container">
+        <div email="container">
             <div class="content join">
                 <h2 class="subtlt_h2">회원가입</h2>
                 <ul class="breadcrumb">
@@ -54,19 +54,19 @@
                         </a>
                     </li>
                 </ul>
-                <form name="joinFrm" id="joinFrm" class="join_form_box" method="post" action="/member/join.exe.php" target="hidden1529398405"
+                <form name="joinFrm" email="joinFrm" class="join_form_box" method="post" action="/member/join.exe.php" target="hidden1529398405"
                     onsubmit="return checkRegMember(this)">
-                    <input type="hidden" name="rURL" id="rURL" value="">
+                    <input type="hidden" name="rURL" email="rURL" value="">
                     <input type="hidden" name="return_url" value="/member/join.exe.php">
-                    <input type="hidden" name="nick_checked" id="nick_checked" value="0">
+                    <input type="hidden" name="nick_checked" email="nick_checked" value="0">
                     <input type="hidden" name="site_code" value="">
                     <input type="hidden" name="unique" value="">
                     <input type="hidden" name="exec" value="">
                     <input type="hidden" name="mode" value="join">
-                    <input type="hidden" name="reg_code_checked" id="reg_code_checked" value="0">
+                    <input type="hidden" name="reg_code_checked" email="reg_code_checked" value="0">
                     <input type="hidden" name="session_id" value="n125miq6k70eh3kqu128c086f7">
-                    <input type="hidden" name="member_id" id="member_id" value="">
-                    <input type="hidden" name="email" id="email" value="">
+                    <input type="hidden" name="member_id" email="member_id" value="">
+                    <input type="hidden" name="email" email="email" value="">
                     <fieldset>
                         <legend class="blind">회원가입 정보입력폼</legend>
                         <table border="1" class="tb_join">
@@ -81,13 +81,13 @@
                                         <label for="email">아이디 (이메일)</label>
                                     </th>
                                     <td>
-                                        <input type="text" size="50" name="email_id" value="" id="email_id" class="join_input" autofocus="">
+                                        <input type="text" size="50" name="email_id" value="" email="email_id" class="join_input" autofocus="">
                                         <span class="block"> @ </span>
-                                        <input type="text" size="50" name="email_domain" value="" id="email_domain" class="join_input">
+                                        <input type="text" size="50" name="email_domain" value="" email="email_domain" class="join_input">
                                         <div class="selectric-wrapper join w100">
                                             <div class="selectric-wrapper selectric-selectric">
                                                 <div class="selectric-hide-select">
-                                                    <select class="selectric" id="email_domain_select" tabindex="0">
+                                                    <select class="selectric" email="email_domain_select" tabindex="0">
                                                         <option value="0">직접입력</option>
                                                         <option value="naver.com">naver.com</option>
                                                         <option value="gmail.com">gmail.com</option>
@@ -139,7 +139,7 @@
                                                 <input class="selectric-input" tabindex="0">
                                             </div>
                                         </div>
-                                        <span class="tb_in_txt caution" style="display:none;" id="email_caution">이메일 형식을 확인해 주세요.</span>
+                                        <span class="tb_in_txt caution" style="display:none;" email="email_caution">이메일 형식을 확인해 주세요.</span>
                                     </td>
                                 </tr>
 
@@ -150,9 +150,9 @@
                                         <label for="pw1">비밀번호</label>
                                     </th>
                                     <td>
-                                        <input type="password" size="30" name="pwd[]" id="pw1" class="join_input" maxlength="25" placeholder="8-16자리 영문,숫자 조합">
+                                        <input type="password" size="30" name="pwd[]" email="pw1" class="join_input" maxlength="25" placeholder="8-16자리 영문,숫자 조합">
                                         <p class="tb_txt1">
-                                            <span id="join_check_password" class="tb_in_txt caution"></span>
+                                            <span email="join_check_password" class="tb_in_txt caution"></span>
                                         </p>
                                     </td>
                                 </tr>
@@ -161,9 +161,9 @@
                                         <label for="pw2">비밀번호 확인</label>
                                     </th>
                                     <td>
-                                        <input type="password" size="30" name="pwd[]" id="pw2" class="join_input" maxlength="25" placeholder="비밀번호 확인">
+                                        <input type="password" size="30" name="pwd[]" email="pw2" class="join_input" maxlength="25" placeholder="비밀번호 확인">
                                         <p class="tb_txt1">
-                                            <span id="join_check_password2" class="tb_in_txt caution"></span>
+                                            <span email="join_check_password2" class="tb_in_txt caution"></span>
                                         </p>
                                     </td>
                                 </tr>
@@ -172,7 +172,7 @@
                                         <label for="name">이름</label>
                                     </th>
                                     <td>
-                                        <input type="text" size="24" name="name" value="" id="name" class="join_input">
+                                        <input type="text" size="24" name="name" value="" email="name" class="join_input">
                                         <span class="tb_in_txt caution"></span>
                                     </td>
                                 </tr>
@@ -181,23 +181,23 @@
                                         <label for="cell1">휴대 전화 번호</label>
                                     </th>
                                     <td>
-                                        <input type="text" maxlength="3" size="10" name="cell[]" id="cell1" value="" title="휴대 전화 번호 앞자리" class="join_input small"
+                                        <input type="text" maxlength="3" size="10" name="cell[]" email="cell1" value="" title="휴대 전화 번호 앞자리" class="join_input small"
                                             onkeyup="goNext(this,3,'cell2')">
                                         <span class="block"> - </span>
-                                        <input type="text" maxlength="4" size="10" name="cell[]" id="cell2" value="" title="휴대 전화 번호 중간자리" class="join_input small"
+                                        <input type="text" maxlength="4" size="10" name="cell[]" email="cell2" value="" title="휴대 전화 번호 중간자리" class="join_input small"
                                             onkeyup="goNext(this,4,'cell3')">
                                         <span class="block"> - </span>
-                                        <input type="text" maxlength="4" size="10" name="cell[]" id="cell3" value="" title="휴대 전화 번호 뒷자리" class="join_input small"
+                                        <input type="text" maxlength="4" size="10" name="cell[]" email="cell3" value="" title="휴대 전화 번호 뒷자리" class="join_input small"
                                             onkeyup="goNext(this,4,'m_auth')">
-                                        <input type="radio" name="unique" value="2" id="unique_phone" onclick="selectRegMode(2)" style="display: none;">
-                                        <div class="comment_box login" id="duplicate_phone" style="display:none;">
-                                            <span class="tb_in_txt caution clear" id="duplicate_id"></span>
+                                        <input type="radio" name="unique" value="2" email="unique_phone" onclick="selectRegMode(2)" style="display: none;">
+                                        <div class="comment_box login" email="duplicate_phone" style="display:none;">
+                                            <span class="tb_in_txt caution clear" email="duplicate_id"></span>
                                             <br class="clear">
                                             <span class="tb_in_txt">기존 아이디로 로그인하거나 비밀번호를 찾으려면?</span>
                                             <br class="clear">
                                             <a href="/member/login.php">로그인</a>|
                                             <a href="/member/find_step1.php">비밀번호 찾기</a>
-                                            <p class="tb_in_txt" id="duplicate_continue" style="margin-top: 30px">이 번호를 사용하시려면, 인증 해주세요.</p>
+                                            <p class="tb_in_txt" email="duplicate_continue" style="margin-top: 30px">이 번호를 사용하시려면, 인증 해주세요.</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -216,7 +216,7 @@
         </div>
 
 
-        <div id="footer">
+        <div email="footer">
             <div class="wrap fnb_wrap">
                 <div class="content">
                     <ul class="fnb">
@@ -282,7 +282,7 @@
             </div>
         </div>
 
-        <div id="scroller">
+        <div email="scroller">
             <ul class="page_up_down_lst" style="display: none;">
                 <li class="page_up">
                     <a href="#">위로</a>
@@ -292,11 +292,11 @@
                 </li>
             </ul>
         </div>
-        <div id="popup_view" class="popup_view"></div>
+        <div email="popup_view" class="popup_view"></div>
 
     </div>
 
-    <iframe name="hidden1529398405" id="hidden1529398405" src="about:blank" width="0" height="0" scrolling="no" frameborder="0"
+    <iframe name="hidden1529398405" email="hidden1529398405" src="about:blank" width="0" height="0" scrolling="no" frameborder="0"
         style="display:none;"></iframe>
 </body>
 
