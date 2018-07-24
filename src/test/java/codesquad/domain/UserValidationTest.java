@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -107,5 +108,16 @@ public class UserValidationTest {
         user.setPasswordCheck("1239df");
         softly.assertThat(user.isEqualPassword()).isFalse().as("비밀번호 다름");
         softly.assertAll();
+    }
+
+    @Test
+    public void password인코딩() {
+        FixedPasswordEncoder encoder = new FixedPasswordEncoder();
+        user.encrypt(encoder);
+        User newUser = new User("abcde@gmail.com", "password15", "password15","가나다", "010-123-1234");
+        softly.assertThat(user.matchEncodedPassword(encoder, newUser)).isTrue();
+
+        softly.assertAll();
+
     }
 }
