@@ -7,8 +7,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -21,11 +23,15 @@ public class UserServiceTest {
     @InjectMocks
     private UserService userService;
 
+    @Spy
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Test
     public void create() {
+        String password = "password";
         User user = User.builder()
                 .email("tester@gmail.com")
-                .password("password")
+                .password(password)
                 .name("tester")
                 .phoneNumber("010-1234-5678")
                 .role(Role.USER)
@@ -35,7 +41,7 @@ public class UserServiceTest {
         User savedUser = userService.add(user);
         assertThat(savedUser.getEmail()).isEqualTo(user.getEmail());
         assertThat(savedUser.getName()).isEqualTo(user.getName());
-        assertThat(savedUser.getPassword()).isEqualTo(user.getPassword());
+        assertThat(passwordEncoder.matches(password, savedUser.getPassword())).isTrue();
         assertThat(savedUser.getPhoneNumber()).isEqualTo(user.getPhoneNumber());
         assertThat(savedUser.getRole()).isEqualTo(user.getRole());
     }
