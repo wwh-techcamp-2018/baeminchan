@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "DTYPE")
+@DiscriminatorColumn(name = "UserType")
 public class User {
 
     @Id
@@ -30,9 +30,6 @@ public class User {
 
     @Column(nullable = false)
     private String phoneNo;
-
-    @Column(nullable = false)
-    private boolean isAdmin = false;
 
     public User() {
     }
@@ -53,6 +50,10 @@ public class User {
         if (!this.encryptedPassword.equals(loginUserDto.getPassword())) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public boolean isAdmin() {
+        return false;
     }
 }
 
