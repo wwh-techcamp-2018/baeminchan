@@ -5,6 +5,8 @@ import codesquad.support.exception.UnAuthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -28,8 +30,8 @@ public class SecurityControllerAdvice {
     }
 
     @ExceptionHandler(UnAuthenticationException.class)
-    @ResponseStatus(value = HttpStatus.FORBIDDEN)
-    public void unAuthentication() {
+    public ResponseEntity<String> unAuthentication(UnAuthenticationException exception) {
         log.debug("UnAuthenticationException is happened!");
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).contentType(MediaType.APPLICATION_JSON_UTF8).body(exception.getMessage());
     }
 }

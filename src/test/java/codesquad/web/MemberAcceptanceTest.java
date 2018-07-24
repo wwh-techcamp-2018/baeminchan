@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class MemberAcceptanceTest {
-    public static final Logger log =  LoggerFactory.getLogger(MemberAcceptanceTest.class);
+    public static final Logger log = LoggerFactory.getLogger(MemberAcceptanceTest.class);
     @Autowired
     private TestRestTemplate template;
 
@@ -34,18 +34,18 @@ public class MemberAcceptanceTest {
         String email = "pobi@naver.com";
 
         ResponseEntity<Member> response = template.postForEntity("/members",
-                new MemberDto(email, "1234", "pobi","01012341234"), Member.class);
+                new MemberDto(email, "1234", "pobi", "01012341234"), Member.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(memberService.findByEmail(email)).isNotNull();
     }
 
     @Test
-    public void inValidationEmailFormatTest() throws JSONException {
+    public void memberCreateFailTest() throws JSONException {
         String email = "email";
 
         ResponseEntity<String> response = template.postForEntity("/members",
-                new MemberDto(email, "1234", "pobi","01012341234"), String.class);
+                new MemberDto(email, "1234", "pobi", "01012341234"), String.class);
         String errorMessage = getErrorMessageFromJsonString(response.getBody());
 
         assertThat(errorMessage).isEqualTo("메일의 양식을 지켜주세요.");
@@ -53,49 +53,20 @@ public class MemberAcceptanceTest {
     }
 
     @Test
-    public void inValidationPasswordFormatTest() throws JSONException {
-        ResponseEntity<String> response = template.postForEntity("/members",
-                new MemberDto("email@com", "123", "pobi","01012341234"), String.class);
-        String errorMessage = getErrorMessageFromJsonString(response.getBody());
-
-        assertThat(errorMessage).isEqualTo("비밀번호는 4자리 이상, 30자 이하이어야 합니다.");
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    @Test
-    public void inValidationNameFormatTest() throws JSONException {
-        ResponseEntity<String> response = template.postForEntity("/members",
-                new MemberDto("email@com", "1234", "1pobi2pobi3pobi4pobi5pobi6pobi7pobi8pobi","01012341234"), String.class);
-        String errorMessage = getErrorMessageFromJsonString(response.getBody());
-
-        assertThat(errorMessage).isEqualTo("이름은 30자 이하이어야 합니다.");
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    @Test
-    public void inValidationPhoneNumberFormatTest() throws JSONException {
-        ResponseEntity<String> response = template.postForEntity("/members",
-                new MemberDto("email@com", "1234", "pobi","01012a41!34"), String.class);
-        String errorMessage = getErrorMessageFromJsonString(response.getBody());
-
-        assertThat(errorMessage).isEqualTo("10~11자리의 숫자만 입력가능합니다");
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-
-        response = template.postForEntity("/members",
-                new MemberDto("email@com", "1234", "pobi","010123412345678"), String.class);
-        errorMessage = getErrorMessageFromJsonString(response.getBody());
-
-        assertThat(errorMessage).isEqualTo("10~11자리의 숫자만 입력가능합니다");
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    @Test
     public void loginTest() {
+        String email = "javajigi@naver.com";
+
+        ResponseEntity<Member> response = template.postForEntity("/members",
+                new MemberDto(email, "123123", "pobi", "01012341234"), Member.class);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        assertThat(memberService.findByEmail(email)).isNotNull();
+
         MemberDto memberDto = new MemberDto();
-        memberDto.setEmail("javajigi@naver.com");
+        memberDto.setEmail(email);
         memberDto.setPassword("123123");
-        ResponseEntity<String> response = template.postForEntity("/members/login", memberDto, String.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        ResponseEntity<String> loginResponse = template.postForEntity("/members/login", memberDto, String.class);
+        assertThat(loginResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     @Test
@@ -105,14 +76,14 @@ public class MemberAcceptanceTest {
         memberDto.setPassword("123123");
         ResponseEntity<String> response = template.postForEntity("/members/login", memberDto, String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
+        assertThat(response.getBody()).isEqualTo("유저 정보를 찾을 수 없습니다.");
     }
 
     private String getErrorMessageFromJsonString(String jsonText) throws JSONException {
         JSONObject jsonObject = new JSONObject(jsonText);
         JSONArray myResponse = jsonObject.getJSONArray("errors");
-        return ((JSONObject)myResponse.get(0)).getString("defaultMessage");
+        return ((JSONObject) myResponse.get(0)).getString("defaultMessage");
     }
-
 
 
 }

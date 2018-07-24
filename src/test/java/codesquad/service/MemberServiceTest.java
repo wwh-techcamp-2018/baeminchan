@@ -7,7 +7,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
@@ -17,8 +21,11 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MemberServiceTest {
+    public static final Logger log =  LoggerFactory.getLogger(MemberServiceTest.class);
     @Mock
     private MemberRepository memberRepository;
+    @Spy
+    private PasswordEncoder mockPasswordEncoder = new MockPasswordEncoder();
     @InjectMocks
     private MemberService memberService;
 
@@ -26,7 +33,9 @@ public class MemberServiceTest {
     public void createTest() {
         MemberDto memberDto = new MemberDto("pobi@naver.com", "1234", "pobi","01012341234");
         memberService.save(memberDto);
-        verify(memberRepository).save(memberDto.toEntity());
+        Member member  = memberDto.toEntity();
+        member.setPassword(mockPasswordEncoder.encode(member.getPassword()));
+        verify(memberRepository).save(member);
     }
 
     @Test
@@ -34,8 +43,22 @@ public class MemberServiceTest {
         Member member = new Member("javajigi@naver.com", "123123", "pobi", "01012341234");
         MemberDto memberDto = new MemberDto();
         memberDto.setEmail(member.getEmail());
-        when(memberRepository.findByEmail(member.getEmail())).thenReturn(Optional.ofNullable(member));
         memberDto.setPassword(member.getPassword());
+        member.setPassword(this.mockPasswordEncoder.encode(member.getPassword()));
+        when(memberRepository.findByEmail(member.getEmail())).thenReturn(Optional.ofNullable(member));
         assertThat(memberService.login(memberDto)).isEqualTo(member);
+    }
+
+    private class MockPasswordEncoder implements PasswordEncoder {
+
+        @Override
+        public String encode(CharSequence rawPassword) {
+            return new StringBuilder(rawPassword).reverse().toString();
+        }
+
+        @Override
+        public boolean matches(CharSequence rawPassword, String encodedPassword) {
+            return encode(rawPassword).equals(encodedPassword);
+        }
     }
 }
