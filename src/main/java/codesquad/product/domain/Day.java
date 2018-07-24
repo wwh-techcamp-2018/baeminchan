@@ -1,4 +1,4 @@
-package codesquad.domain.product;
+package codesquad.product.domain;
 
 public enum Day {
     SUN,

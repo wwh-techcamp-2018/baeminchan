@@ -1,4 +1,4 @@
-package codesquad.domain.product;
+package codesquad.product.domain;
 
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package codesquad.domain.promotion;
+package codesquad.promotion.domain;
 
 public class Promotion {
     private String id;

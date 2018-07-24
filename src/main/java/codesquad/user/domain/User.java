@@ -1,4 +1,4 @@
-package codesquad.domain.user;
+package codesquad.user.domain;
 
 public class User {
     private String uuid;

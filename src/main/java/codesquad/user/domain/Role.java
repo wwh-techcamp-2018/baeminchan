@@ -1,4 +1,4 @@
-package codesquad.domain.user;
+package codesquad.user.domain;
 
 public enum Role {
     ADMIN,
