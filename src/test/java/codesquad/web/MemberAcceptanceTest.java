@@ -1,9 +1,8 @@
 package codesquad.web;
 
 import codesquad.domain.Member;
-import codesquad.domain.MemberRepository;
 import codesquad.dto.MemberDto;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import codesquad.service.MemberService;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,9 +16,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.MultiValueMap;
-
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,7 +27,7 @@ public class MemberAcceptanceTest {
     private TestRestTemplate template;
 
     @Autowired
-    private MemberRepository memberRepository;
+    private MemberService memberService;
 
     @Test
     public void memberCreateTest() {
@@ -41,7 +37,7 @@ public class MemberAcceptanceTest {
                 new MemberDto(email, "1234", "pobi","01012341234"), Member.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-        assertThat(memberRepository.findByEmail(email).isPresent()).isTrue();
+        assertThat(memberService.findByEmail(email)).isNotNull();
     }
 
     @Test

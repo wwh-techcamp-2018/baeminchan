@@ -1,9 +1,8 @@
 package codesquad.web;
 
 import codesquad.domain.Member;
-import codesquad.domain.MemberRepository;
 import codesquad.dto.MemberDto;
-import codesquad.support.exception.UnAuthenticationException;
+import codesquad.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +21,14 @@ import javax.validation.Valid;
 public class MemberController {
     public static final Logger log =  LoggerFactory.getLogger(MemberController.class);
     @Autowired
-    private MemberRepository memberRepository;
+    private MemberService memberService;
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody MemberDto memberDto, HttpSession session) {
-        Member member = memberRepository.findByEmail(memberDto.getEmail())
-                .filter(m -> m.matchPassword(memberDto.getPassword()))
-                .orElseThrow(() -> new UnAuthenticationException("유저 정보를 찾을 수 없습니다."));
-        session.setAttribute("member", member);
+        session.setAttribute("member", memberService.login(memberDto));
         return ResponseEntity.ok().build();
     }
     @PostMapping
     public ResponseEntity<Member> create(@RequestBody @Valid MemberDto memberDto) {
-        log.debug("member dto, {}", memberDto);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(memberRepository.save(memberDto.toEntity()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(memberService.save(memberDto));
     }
 }
