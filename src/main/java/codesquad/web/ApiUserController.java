@@ -2,6 +2,7 @@ package codesquad.web;
 
 import codesquad.domain.User;
 import codesquad.service.UserService;
+import codesquad.support.ErrorResponse;
 import codesquad.support.JsonResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +21,14 @@ public class ApiUserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public JsonResponse create(@Valid @RequestBody User user){
+    public Object create(@Valid @RequestBody User user, @RequestBody String repeatPassword){
+        log.debug("repeatPassword {}", repeatPassword);
         log.debug("newUser {}", user);
+        if(repeatPassword == null || repeatPassword.equals(user.getPassword())){
+            ErrorResponse response = new ErrorResponse();
+            response.registErrorMessage("비밀번호 확인이 달라여");
+            return response;
+        }
         userService.create(user);
         return new JsonResponse("/");
     }

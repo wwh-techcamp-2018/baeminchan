@@ -3,10 +3,7 @@ package codesquad.atdd;
 import codesquad.domain.User;
 import codesquad.support.ErrorResponse;
 import codesquad.support.JsonResponse;
-import org.assertj.core.api.SoftAssertions;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
@@ -19,15 +16,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class ApiUserAcceptanceTest extends AcceptanceTest {
-     private static final Logger log = LoggerFactory.getLogger(ApiUserAcceptanceTest.class);
+    private static final Logger log = LoggerFactory.getLogger(ApiUserAcceptanceTest.class);
 
     private final static String BASE_URI = "/api/users";
+
     private URI createURI(String uri) {
         log.debug("Create URI {}", BASE_URI);
 
         try {
             return new URI(BASE_URI + uri);
-        } catch(URISyntaxException e){
+        } catch (URISyntaxException e) {
             log.debug("Create URI Error! : {}", e.getMessage());
         }
         return null;
@@ -42,7 +40,7 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
 
     @Test
     public void createUser() {
-        User newUser = new User("ID@abcde.com", "PASSWORD123", "이름", "010-123-1234");
+        User newUser = new User("ID@abcde.com", "PASSWORD123", "PASSWORD123","이름", "010-123-1234");
         RequestEntity<User> requestEntity = RequestEntity.post(createURI("")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(newUser);
         ResponseEntity<JsonResponse> responseEntity = template().exchange(requestEntity, JsonResponse.class);
 
@@ -50,6 +48,8 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
     }
+
+
 
     @Test
     public void createUser_실패() {
