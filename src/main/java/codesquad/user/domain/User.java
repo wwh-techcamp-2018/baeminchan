@@ -1,7 +1,7 @@
 package codesquad.user.domain;
 
-import org.hibernate.annotations.GenericGenerator;
 import codesquad.support.domain.BaseTimeEntity;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
