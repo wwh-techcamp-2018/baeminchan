@@ -21,14 +21,8 @@ public class ApiUserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Object create(@Valid @RequestBody User user, @RequestBody String repeatPassword){
-        log.debug("repeatPassword {}", repeatPassword);
+    public Object create(@Valid @RequestBody User user){
         log.debug("newUser {}", user);
-        if(repeatPassword == null || repeatPassword.equals(user.getPassword())){
-            ErrorResponse response = new ErrorResponse();
-            response.registErrorMessage("비밀번호 확인이 달라여");
-            return response;
-        }
         userService.create(user);
         return new JsonResponse("/");
     }
