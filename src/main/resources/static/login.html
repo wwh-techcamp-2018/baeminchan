@@ -10,8 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="naver-site-verification" content="e543b30ae873355f2c556f58b48ae7c95c1cea05">
     <title>배민찬 - 모바일 넘버원 반찬가게</title>
-    <link rel="stylesheet" type="text/css" href="common.css">
-
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <script src="/js/script.js"></script>
     <body>
         <!--  skip navi -->
         <a href="#container" id="skip_navigation">본문 바로가기</a>
@@ -55,7 +55,7 @@
             <div id="login">
                 <div class="login-box">
                     <h2 class="h2_tlt"> 로그인</h2>
-                    <form method="post" action="/member/login.exe.php" target="hidden1529395934" onsubmit="return checkLoginFrm(this);">
+                    <form>
                         <input type="hidden" name="rURL" value="https://www.baeminchan.com/">
                         <input type="hidden" name="chkignore" value="N">
 
@@ -72,7 +72,7 @@
                                     <input type="password" name="pwd" id="pwd" class="input" placeholder="비밀번호" maxlength="25">
                                 </li>
                             </ul>
-                            <button class="btn btn_mint btn_login">
+                            <button class="btn btn_mint btn_login" onclick="loginHandler(event)">
                                 <span>로그인</span>
                             </button>
 

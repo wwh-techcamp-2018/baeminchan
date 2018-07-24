@@ -1,0 +1,2 @@
+INSERT INTO user (uid, email, encrypted_password, name, phone_no, is_admin) values (1, 'a@naver.com', '$2a$10$FeSspuHJEc6mJfAj31SSteOFDbeovPFEQOCnMCZS2Oj7iDuVr7lgy', '자바지기', '000-0000-0000', false);
+INSERT INTO user (uid, email, encrypted_password, name, phone_no) values (2, 'b@naver.com', '$2a$10$FeSspuHJEc6mJfAj31SSteOFDbeovPFEQOCnMCZS2Oj7iDuVr7lgy', '자바지기2', '000-0000-0000');
