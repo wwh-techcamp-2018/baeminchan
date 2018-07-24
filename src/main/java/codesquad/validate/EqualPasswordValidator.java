@@ -13,7 +13,6 @@ public class EqualPasswordValidator implements ConstraintValidator<EqualPassword
 
     @Override
     public boolean isValid(SignupDto dto, ConstraintValidatorContext context) {
-
         return dto.validatePassword();
     }
 }

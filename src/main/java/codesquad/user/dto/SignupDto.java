@@ -1,16 +1,23 @@
 package codesquad.user.dto;
 
+import codesquad.user.domain.Role;
+import codesquad.user.domain.User;
 import codesquad.validate.EqualPasswords;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+@ToString
 @EqualPasswords
 @NoArgsConstructor
+@Getter
 @Setter
 public class SignupDto {
 
@@ -24,6 +31,7 @@ public class SignupDto {
     @Pattern(message = "영문 및 숫자를 포함한 8자 이상 16자 이하로 입력해주세요.",
             regexp = "^.*(?=^.{8,16}$)(?=.*\\d)(?=.*[a-zA-Z]).*$")
     private String password;
+
     private String confirmPassword;
 
     @NotNull(message = "이름을 입력해주세요.")
@@ -51,14 +59,13 @@ public class SignupDto {
         return password.equals(confirmPassword);
     }
 
-    @Override
-    public String toString() {
-        return "SignupDto{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", confirmPassword='" + confirmPassword + '\'' +
-                ", name='" + name + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+    public User toEntity(PasswordEncoder encoder) {
+        return User.builder()
+                .email(email)
+                .password(encoder.encode(password))
+                .name(name)
+                .phoneNumber(phoneNumber)
+                .role(Role.USER)
+                .build();
     }
 }
