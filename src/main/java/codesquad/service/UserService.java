@@ -4,6 +4,8 @@ import codesquad.domain.User;
 import codesquad.domain.UserRepository;
 import codesquad.dto.JoinUserDto;
 import codesquad.dto.LoginUserDto;
+import codesquad.exception.LoginFailedException;
+import codesquad.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,8 +28,16 @@ public class UserService {
     }
 
     public User login(LoginUserDto loginUserDto) {
-        User user = userRepository.findByEmail(loginUserDto.getEmail()).get();
-        user.isMatchPassword(loginUserDto);
-        return user;
+        try {
+            User user = findByEmail(loginUserDto.getEmail());
+            user.isMatchPassword(loginUserDto, passwordEncoder);
+            return user;
+        }catch (UserNotFoundException e){
+            throw new LoginFailedException();
+        }
+    }
+
+    public User findByEmail(String email){
+        return userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
     }
 }

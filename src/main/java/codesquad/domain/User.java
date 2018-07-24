@@ -2,12 +2,15 @@ package codesquad.domain;
 
 import codesquad.dto.JoinUserDto;
 import codesquad.dto.LoginUserDto;
+import codesquad.exception.LoginFailedException;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
+@Slf4j
 @Getter
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -46,9 +49,9 @@ public class User {
         return user;
     }
 
-    public void isMatchPassword(LoginUserDto loginUserDto) {
-        if (!this.encryptedPassword.equals(loginUserDto.getPassword())) {
-            throw new IllegalArgumentException();
+    public void isMatchPassword(LoginUserDto loginUserDto, PasswordEncoder passwordEncoder) {
+        if (!passwordEncoder.matches(loginUserDto.getPassword(),encryptedPassword)) {
+            throw new LoginFailedException();
         }
     }
 

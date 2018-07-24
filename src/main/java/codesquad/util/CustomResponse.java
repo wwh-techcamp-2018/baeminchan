@@ -1,13 +1,12 @@
 package codesquad.util;
 
-import codesquad.validate.ValidationErrorList;
 import lombok.Getter;
 
 @Getter
 public class CustomResponse<T> {
 
     public enum ERROR_MSG {
-        VALIDATION_ERROR("valid_error");
+        VALIDATION_ERROR("valid_error"), LOGIN_FAILED_ERROR("login_failed");
 
         final private String msg;
 

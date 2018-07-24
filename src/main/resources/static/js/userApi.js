@@ -4,25 +4,49 @@ function $(selector) {
 
 document.addEventListener("DOMContentLoaded", () => {
     initEvents();
+    loginInitEvents();
 })
 
 function initEvents() {
-    const answerBtn = $(".join_form_box .btn_area .btn");
-    if(answerBtn === null) return;
-    answerBtn.addEventListener("click", registerUserHandler);
+    const joinBtn = $(".join_form_box .btn_area .btn");
+    if(joinBtn === null) return;
+    joinBtn.addEventListener("click", registerUserHandler);
 }
 
-function fetchManager({ url, method, body, headers}) {
+function loginInitEvents(){
+    const loginBtn = $("#login_btn");
+    console.log("222222"+loginBtn);
+    if(loginBtn === null) return;
+    loginBtn.addEventListener("click", loginHandler);
+}
+
+
+
+function registerFetchManager({ url, method, body, headers}) {
     fetch(url, {method,body,headers,credentials: "same-origin"})
         .then((response) => {
         if(response.status === 201){
-            console.log(response)
             window.location.replace("http://localhost:8080/")
             return
         }
         return response.json()
     }).then((result) => {
         alert(result.data.validationErrorList[0].errorMessage);
+    })
+}
+
+function loginFetchManager({ url, method, body, headers}) {
+    fetch(url, {method,body,headers,credentials: "same-origin"})
+        .then((response) => {
+        if(response.status === 200){
+            console.log(response);
+            window.location.replace("http://localhost:8080/");
+            return
+        }
+        return response.json()
+    }).then((result) => {
+        console.log(result);
+        alert(result.message);
     })
 }
 
@@ -38,11 +62,28 @@ function registerUserHandler(evt) {
     $("#pw2").value = "";
     
 
-    fetchManager({
+    registerFetchManager({
         url: '/api/users',
         method: 'POST',
         headers: { 'content-type': 'application/json'},
         body: JSON.stringify({email,password,passwordConfirm,name,phoneNo})
+    })
+}
+
+function loginHandler(evt) {
+    evt.preventDefault();
+    const email = $("#member_id").value;
+    const password = $("#pwd").value;
+    
+    $("#pwd").value = "";
+
+    
+
+    loginFetchManager({
+        url: '/api/users/login',
+        method: 'POST',
+        headers: { 'content-type': 'application/json'},
+        body: JSON.stringify({email,password})
     })
 }
 

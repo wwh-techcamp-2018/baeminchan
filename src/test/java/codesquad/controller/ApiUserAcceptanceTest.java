@@ -2,6 +2,7 @@ package codesquad.controller;
 
 import codesquad.domain.UserTest;
 import codesquad.dto.JoinUserDto;
+import codesquad.dto.LoginUserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
@@ -18,10 +19,19 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
         JoinUserDto joinUserDto = UserTest.CYS;
         ResponseEntity<Void> response = template().postForEntity("/api/users", joinUserDto, Void.class);
 
-        log.info("aaaaaaaaaaaa"+response);
-
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
         assertThat(findByEmail(joinUserDto.getEmail()).getEmail()).isEqualTo("chldbtjd2272@naver.com");
+    }
+
+    @Test
+    public void login() {
+        JoinUserDto joinUserDto = UserTest.CYS;
+        ResponseEntity<Void> response = template().postForEntity("/api/users", joinUserDto, Void.class);
+
+        LoginUserDto loginUserDto = new LoginUserDto("chldbtjd2272@naver.com","password!2");
+        response = template().postForEntity("/api/users/login", loginUserDto, Void.class);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 }
