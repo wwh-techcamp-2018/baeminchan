@@ -18,9 +18,13 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(length = 320, nullable = false, unique = true)
     private String email;
+    @Column(length = 200, nullable = false)
     private String password;
+    @Column(length = 30, nullable = false)
     private String username;
+    @Column(length = 11, nullable = false)
     private String phoneNumber;
     @ElementCollection
     private Set<Role> roles = new HashSet<>(Arrays.asList(Role.DEFAULT));
