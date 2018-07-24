@@ -93,9 +93,30 @@ public class MemberAcceptanceTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
+    @Test
+    public void loginTest() {
+        MemberDto memberDto = new MemberDto();
+        memberDto.setEmail("javajigi@naver.com");
+        memberDto.setPassword("123123");
+        ResponseEntity<String> response = template.postForEntity("/members/login", memberDto, String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+    @Test
+    public void loginFailTest() {
+        MemberDto memberDto = new MemberDto();
+        memberDto.setEmail("javajigi@kakao.com");
+        memberDto.setPassword("123123");
+        ResponseEntity<String> response = template.postForEntity("/members/login", memberDto, String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
+    }
+
     private String getErrorMessageFromJsonString(String jsonText) throws JSONException {
         JSONObject jsonObject = new JSONObject(jsonText);
         JSONArray myResponse = jsonObject.getJSONArray("errors");
         return ((JSONObject)myResponse.get(0)).getString("defaultMessage");
     }
+
+
+
 }

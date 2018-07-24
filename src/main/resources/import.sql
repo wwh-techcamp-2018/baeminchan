@@ -1,0 +1,1 @@
+insert into member (email, password, username, phone_number) VALUES ('javajigi@naver.com', '123123', 'pobi', '01012345678');

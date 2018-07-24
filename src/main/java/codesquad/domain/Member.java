@@ -35,4 +35,8 @@ public class Member {
         this.username = username;
         this.phoneNumber = phoneNumber;
     }
+
+    public boolean matchPassword(String password) {
+        return this.password.equals(password);
+    }
 }
