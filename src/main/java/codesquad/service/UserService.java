@@ -5,6 +5,8 @@ import codesquad.domain.UserRepository;
 import codesquad.dto.JoinUserDto;
 import codesquad.dto.LoginUserDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,8 +18,11 @@ public class UserService {
     @Resource(name = "userRepository")
     UserRepository userRepository;
 
-    public void add(JoinUserDto joinUserDto){
-        userRepository.save(User.createUserByJoinUserDto(joinUserDto));
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    public User add(JoinUserDto joinUserDto) {
+        return userRepository.save(User.createUserByJoinUserDto(joinUserDto, passwordEncoder));
     }
 
     public User login(LoginUserDto loginUserDto) {

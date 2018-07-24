@@ -1,4 +1,4 @@
-package codesquad;
+package codesquad.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

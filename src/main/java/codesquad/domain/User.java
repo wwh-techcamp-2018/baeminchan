@@ -2,14 +2,13 @@ package codesquad.domain;
 
 import codesquad.dto.JoinUserDto;
 import codesquad.dto.LoginUserDto;
-import lombok.Data;
+import lombok.Getter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.*;
 
-@Data
+@Getter
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -35,18 +34,23 @@ public class User {
     @Column(nullable = false)
     private boolean isAdmin = false;
 
-    public static User createUserByJoinUserDto(JoinUserDto joinUserDto){
-        User user = new User();
-        user.setEmail(joinUserDto.getEmail());
-        user.setEncryptedPassword(joinUserDto.getPassword());
-        user.setName(joinUserDto.getName());
-        user.setPhoneNo(joinUserDto.getPhoneNo());
+    public User() {
+    }
 
+    private User(JoinUserDto joinUserDto, PasswordEncoder passwordEncoder) {
+        this.name = joinUserDto.getName();
+        this.phoneNo = joinUserDto.getPhoneNo();
+        this.encryptedPassword = passwordEncoder.encode(joinUserDto.getPassword());
+        this.email = joinUserDto.getEmail();
+    }
+
+    public static User createUserByJoinUserDto(JoinUserDto joinUserDto, PasswordEncoder passwordEncoder) {
+        User user = new User(joinUserDto, passwordEncoder);
         return user;
     }
 
     public void isMatchPassword(LoginUserDto loginUserDto) {
-        if(!this.encryptedPassword.equals(loginUserDto.getPassword())){
+        if (!this.encryptedPassword.equals(loginUserDto.getPassword())) {
             throw new IllegalArgumentException();
         }
     }

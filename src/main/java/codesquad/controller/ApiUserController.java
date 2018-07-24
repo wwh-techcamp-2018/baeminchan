@@ -4,6 +4,7 @@ import codesquad.domain.User;
 import codesquad.dto.JoinUserDto;
 import codesquad.dto.LoginUserDto;
 import codesquad.service.UserService;
+import codesquad.util.SessionUtil;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,9 +30,8 @@ public class ApiUserController {
             @ApiResponse(code = 400, message = "잘못된 요청")
     })
     @PostMapping("")
-    public ResponseEntity<User> create(@RequestBody JoinUserDto joinUserDto){
-        //TODO 유효성 검사
-        userService.add(joinUserDto);
+    public ResponseEntity<User> create(@Valid @RequestBody JoinUserDto joinUserDto, HttpSession session) {
+        session.setAttribute(SessionUtil.SESSTION_KEY, userService.add(joinUserDto));
         return ResponseEntity.created(URI.create("/api/users")).body(null);
     }
 
@@ -42,9 +42,8 @@ public class ApiUserController {
             @ApiResponse(code = 400, message = "잘못된 요청")
     })
     @PostMapping("/login")
-    public ResponseEntity<User> login(HttpSession session,@Valid @RequestBody LoginUserDto loginUserDto){
-        //TODO 세션키 바꾸기
-        session.setAttribute("KEY",userService.login(loginUserDto));
+    public ResponseEntity<User> login(HttpSession session, @RequestBody LoginUserDto loginUserDto) {
+        session.setAttribute(SessionUtil.SESSTION_KEY, userService.login(loginUserDto));
         return ResponseEntity.ok(null);
     }
 
