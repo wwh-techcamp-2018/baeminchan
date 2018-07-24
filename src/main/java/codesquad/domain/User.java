@@ -21,6 +21,11 @@ public class User extends AbstractEntity {
     @Size(min = 8, max = 20)
     private String password;
 
+    @Pattern(regexp = "^[a-zA-Z0-9]*$")
+    @Size(min = 8, max = 20)
+    private String passwordCheck;
+
+
     @Pattern(regexp = "^[가-힣]*$")
     @Size(min = 2, max = 4)
     private String name;
@@ -31,9 +36,18 @@ public class User extends AbstractEntity {
     public User() {
     }
 
+
     public User(String email, String password, String name, String phoneNumber) {
         this.email = email;
         this.password = password;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public User(String email, String password, String passwordCheck, String name, String phoneNumber) {
+        this.email = email;
+        this.password = password;
+        this.passwordCheck = passwordCheck;
         this.name = name;
         this.phoneNumber = phoneNumber;
     }
@@ -52,6 +66,14 @@ public class User extends AbstractEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPasswordCheck() {
+        return passwordCheck;
+    }
+
+    public void setPasswordCheck(String passwordCheck) {
+        this.passwordCheck = passwordCheck;
     }
 
     public String getName() {
@@ -91,6 +113,10 @@ public class User extends AbstractEntity {
     public int hashCode() {
 
         return Objects.hash(email);
+    }
+
+    public boolean isEqualPassword(){
+        return password.equals(passwordCheck);
     }
 
 
