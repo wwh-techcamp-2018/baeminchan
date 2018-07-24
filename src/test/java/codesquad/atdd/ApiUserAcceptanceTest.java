@@ -52,11 +52,13 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
 
     @Test
     public void createUser_실패(){
-        User newUser = new User("IDabcde.com", "P", "PASSWORD123","이름", "123456-123-1234");
+        User newUser = new User("daaa@cde.com", "PPASSWORD123", "PASSWORD123","이름", "010-123-1234");
         RequestEntity<User> requestEntity = RequestEntity.post(createURI("")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(newUser);
         ResponseEntity<ErrorResponse> responseEntity = template().exchange(requestEntity, ErrorResponse.class);
         log.debug("response body : {}", responseEntity.getBody());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(responseEntity.getBody().getError().get(0))
+                .contains("입력된 비밀번호가 일치하지 않습니다.");
     }
 
 
