@@ -1,0 +1,1 @@
+INSERT INTO role (type) VALUES ('GENERAL_USER');
