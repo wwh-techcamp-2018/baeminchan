@@ -50,10 +50,9 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
     }
 
 
-
     @Test
-    public void createUser_실패() {
-        User newUser = new User("IDabcde.com", "P", "이름", "123456-123-1234");
+    public void createUser_실패(){
+        User newUser = new User("IDabcde.com", "P", "PASSWORD123","이름", "123456-123-1234");
         RequestEntity<User> requestEntity = RequestEntity.post(createURI("")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(newUser);
         ResponseEntity<ErrorResponse> responseEntity = template().exchange(requestEntity, ErrorResponse.class);
         log.debug("response body : {}", responseEntity.getBody());

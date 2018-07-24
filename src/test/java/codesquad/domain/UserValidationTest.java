@@ -20,7 +20,7 @@ public class UserValidationTest {
 
     private static Validator validator;
     private User user;
-    SoftAssertions softAssertions;
+    SoftAssertions softly;
 
     @BeforeClass
     public static void setup() {
@@ -32,7 +32,7 @@ public class UserValidationTest {
     @Before
     public void setUp() {
         user = new User("abcde@gmail.com", "password15", "password15","가나다", "010-123-1234");
-        softAssertions = new SoftAssertions();
+        softly = new SoftAssertions();
     }
     @Test
     public void validation_성공(){
@@ -47,42 +47,42 @@ public class UserValidationTest {
     @Test
     public void email_검사_fail() {
         user.setEmail("a@a!sdf.com");
-        softAssertions.assertThat(validator.validate(user).size()).isEqualTo(1).as("특수문자 _ 제외");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("특수문자 _ 제외");
         user.setEmail("asdfa.com");
-        softAssertions.assertThat(validator.validate(user).size()).isEqualTo(1).as("@ 없을 때");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("@ 없을 때");
 
         user.setEmail("a@asdfafacom");
-        softAssertions.assertThat(validator.validate(user).size()).isEqualTo(1).as(". 없을 때");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as(". 없을 때");
 
-        softAssertions.assertAll();
+        softly.assertAll();
 
     }
 
     @Test
     public void phoneNumber_검사_fail() {
         user.setPhoneNumber("110-4333-4441");
-        softAssertions.assertThat(validator.validate(user).size()).isEqualTo(1).as("01*로 시작안함");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("01*로 시작안함");
         user.setPhoneNumber("01*-1234-1234");
-        softAssertions.assertThat(validator.validate(user).size()).isEqualTo(1).as("틀수문자포함");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("틀수문자포함");
         user.setPhoneNumber("011-12340-1234");
-        softAssertions.assertThat(validator.validate(user).size()).isEqualTo(1).as("중간값갯수맞지않음");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("중간값갯수맞지않음");
         user.setPhoneNumber("010-12341234");
-        softAssertions.assertThat(validator.validate(user).size()).isEqualTo(1).as("하이픈없음");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("하이픈없음");
 
-        softAssertions.assertAll();
+        softly.assertAll();
 
     }
 
     @Test
     public void password_검사_fail() {
         user.setPassword("1239dfhhf!@#");
-        softAssertions.assertThat(validator.validate(user).size()).isEqualTo(1).as("특수문자있음");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("특수문자있음");
         user.setPassword("a1e3");
-        softAssertions.assertThat(validator.validate(user).size()).isEqualTo(1).as("길이 짧은것");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("길이 짧은것");
         user.setPassword("zcvbnmqwertyuiop12378950");
-        softAssertions.assertThat(validator.validate(user).size()).isEqualTo(1).as("길이긴것");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("길이긴것");
 
-        softAssertions.assertAll();
+        softly.assertAll();
 
     }
 
@@ -90,22 +90,22 @@ public class UserValidationTest {
     public void name_검사_fail() {
 
         user.setName("kyt");
-        softAssertions.assertThat(validator.validate(user).size()).isEqualTo(1).as("한글아닐때");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("한글아닐때");
         user.setName("연");
-        softAssertions.assertThat(validator.validate(user).size()).isEqualTo(1).as("짧을때");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("짧을때");
         user.setName("김연태입니다");
-        softAssertions.assertThat(validator.validate(user).size()).isEqualTo(1).as("길 때");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("길 때");
 
-        softAssertions.assertAll();
+        softly.assertAll();
 
     }
 
     @Test
     public void password일치_실패() {
-        softAssertions.assertThat(user.isEqualPassword()).isTrue().as("비밀번호 같음");
+        softly.assertThat(user.isEqualPassword()).isTrue().as("비밀번호 같음");
         user.setPassword("1239dfhhf");
         user.setPasswordCheck("1239df");
-        softAssertions.assertThat(user.isEqualPassword()).isFalse().as("비밀번호 다름");
-        softAssertions.assertAll();
+        softly.assertThat(user.isEqualPassword()).isFalse().as("비밀번호 다름");
+        softly.assertAll();
     }
 }
