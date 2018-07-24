@@ -1,5 +1,6 @@
 package codesquad.security;
 
+import codesquad.exception.NotMatchException;
 import codesquad.exception.UnAuthenticationException;
 import codesquad.web.UserController;
 import org.slf4j.Logger;
@@ -17,5 +18,10 @@ public class SecurityControllerAdvice {
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     public void unAuthentication() {
         log.debug("UnAuthenticationException is happened!");
+    }
+    @ExceptionHandler(NotMatchException.class)
+    @ResponseStatus(value = HttpStatus.FORBIDDEN)
+    public void notMatch() {
+        log.debug("NotMatchException is happened!");
     }
 }
