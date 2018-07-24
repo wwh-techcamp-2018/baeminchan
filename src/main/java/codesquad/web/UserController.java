@@ -1,15 +1,29 @@
 package codesquad.web;
 
+import codesquad.dto.LoginDto;
+import codesquad.dto.SignupDto;
 import codesquad.service.UserService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import codesquad.util.SessionUtil;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
     @Resource(name = "userService")
-    private UserService service;
+    private UserService userService;
+
+    @PostMapping("/signup")
+    public void signup(@RequestBody @Valid SignupDto signupDto) {
+        userService.signup(signupDto);
+    }
+
+    @PostMapping("/login")
+    public void login(@RequestBody @Valid LoginDto loginDto, HttpSession session) {
+        SessionUtil.setUserSession(session, userService.login(loginDto));
+    }
 }

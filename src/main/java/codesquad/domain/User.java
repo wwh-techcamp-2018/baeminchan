@@ -1,5 +1,9 @@
 package codesquad.domain;
 
+import codesquad.BadRequestException;
+import codesquad.dto.SignupDto;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -13,81 +17,73 @@ public class User {
     private long id;
 
     @NotBlank
-    @Pattern(regexp="^[_0-9a-zA-Z-]+@[0-9a-zA-Z]+(.[0-9a-zA-Z-]+)*$")
-    @Column(length=40, unique=true, nullable=false, updatable=false)
+    @Pattern(regexp = "[._0-9a-zA-Z-]+@[0-9a-zA-Z]+.([0-9a-zA-Z]+)")
+    @Column(length = 40, unique = true, nullable = false, updatable = false)
     private String email;
 
-    @NotBlank
-    @Pattern(regexp="[0-9a-zA-Z]*$")
-    @Size(min=8, max=16)
-    @Column(length=16, nullable = false)
+    @Column(nullable = false)
     private String password;
 
-    @NotBlank
-    @Pattern(regexp="[0-9a-zA-Z]*$")
-    @Size(min=8, max=16)
-    @Transient
-    private String passwordConfirm;
-
-    @NotBlank
-    @Size(min=1, max=10)
-    @Column(length=10, nullable = false)
+    @Size(min = 1, max = 10)
+    @Column(length = 10, nullable = false)
     private String name;
 
-    @NotBlank
-    @Size(min=4, max=14)
-    @Column(length=14, nullable = false)
+    @Size(min = 4, max = 14)
+    @Pattern(regexp = "[0-9]+-[0-9]+-[0-9]+")
+    @Column(length = 14, nullable = false)
     private String phoneNumber;
 
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
     private UserPermissions permissions;
 
-    public long getId() {
-        return id;
+    public User() {
+        this.permissions = UserPermissions.NORMAL;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public User(String email, String password, String name, String phoneNumber, UserPermissions permissions) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.permissions = permissions;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public static User of(SignupDto signupDto, PasswordEncoder passwordEncoder) {
+        if (!signupDto.getPassword().equals(signupDto.getPasswordConfirm()))
+            throw new BadRequestException(DomainField.USER_PASSWORD.getFieldName(), "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+
+        return new User(
+                signupDto.getEmail(),
+                passwordEncoder.encode(signupDto.getPassword()),
+                signupDto.getName(),
+                signupDto.getPhoneNumber(),
+                UserPermissions.NORMAL
+        );
+    }
+
+    public void checkPassword(String loginPassword, PasswordEncoder encoder) {
+        if (!encoder.matches(loginPassword, password))
+            throw new BadRequestException(DomainField.USER_PASSWORD.getFieldName(), "아이디와 비밀번호가 일치하지 않습니다.");
     }
 }

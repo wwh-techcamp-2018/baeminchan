@@ -1,0 +1,24 @@
+package codesquad.util;
+
+import codesquad.domain.User;
+
+import javax.servlet.http.HttpSession;
+import java.util.Optional;
+
+public class SessionUtil {
+
+    private static final String SESSION_KEY = "loginedUser";
+
+    public static void setUserSession(HttpSession session, User user) {
+        session.setAttribute(SESSION_KEY, user);
+    }
+
+    public static User getUserSession(HttpSession session) {
+        Optional<User> maybeUser = Optional.ofNullable((User) session.getAttribute(SESSION_KEY));
+        // TODO: Exception ! customize
+        if (!maybeUser.isPresent())
+            throw new RuntimeException();
+
+        return maybeUser.get();
+    }
+}
