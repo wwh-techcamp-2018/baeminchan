@@ -396,7 +396,7 @@ a:focus {
   position: absolute;
   top: 1px;
   right: 1px;
-  background: url(./img/spr-icon-search.png) no-repeat center 0;
+  background: url(../img/spr-icon-search.png) no-repeat center 0;
   width: 38px;
   height: 38px;
   border: none;
@@ -616,7 +616,7 @@ a:focus {
   margin: 0 auto -3px;
   width: 50px;
   height: 50px;
-  background-image: url(./img/spr-quick-menu.png);
+  background-image: url(../img/spr-quick-menu.png);
   background-repeat: no-repeat;
 }
 
@@ -867,11 +867,11 @@ a:focus {
 }
 
 #footer .social .naver-blog {
-  background: url(./img/icon-sns-blog.png) no-repeat 0 0;
+  background: url(../img/icon-sns-blog.png) no-repeat 0 0;
 }
 
 #footer .social .facebook {
-  background: url(./img/icon-sns-facebook.png) no-repeat 0 0;
+  background: url(../img/icon-sns-facebook.png) no-repeat 0 0;
 }
 
 /** ================================================
@@ -893,7 +893,7 @@ a:focus {
 }
 
 .bm-icon[class*="spr-bullet-arrow-down"] {
-  background-image: url(./img/spr-bullet-arrow-down.png);
+  background-image: url(../img/spr-bullet-arrow-down.png);
   width: 10px;
   height: 6px;
 }
@@ -911,7 +911,7 @@ a:focus {
 }
 
 .bm-icon[class*="spr-btn-arrow-main-slide"] {
-  background-image: url(./img/spr-btn-arrow-main-slide.png);
+  background-image: url(../img/spr-btn-arrow-main-slide.png);
   width: 55px;
   height: 90px;
 }
@@ -925,7 +925,7 @@ a:focus {
 }
 
 .bm-icon[class*="spr-btn-arrow-sliding-list"] {
-  background-image: url(./img/spr-btn-arrow-sliding-list.png);
+  background-image: url(../img/spr-btn-arrow-sliding-list.png);
   width: 30px;
   height: 50px;
 }
@@ -965,14 +965,14 @@ a:focus {
 .bm-icon.btn-arrow-more {
   width: 6px;
   height: 12px;
-  background-image: url(./img/btn-arrow-more.png);
+  background-image: url(../img/btn-arrow-more.png);
   background-position: 0 0;
 }
 
 .bm-icon.btn-txt-more {
   width: 48px;
   height: 23px;
-  background-image: url(./img/btn-txt-more.gif);
+  background-image: url(../img/btn-txt-more.gif);
   background-position: 0 0;
 }
 
@@ -994,7 +994,7 @@ a:focus {
   display: block;
   width: 5px;
   height: 5px;
-  background: url(./img/spr-bullet-square.png) no-repeat -5px -5px;
+  background: url(../img/spr-bullet-square.png) no-repeat -5px -5px;
 }
 
 .bm-list.green li::after {
@@ -1393,12 +1393,12 @@ a:focus {
 }
 
 #main .banner-1 {
-  background-image: url(./img/img-banner-01.jpg);
+  background-image: url(../img/img-banner-01.jpg);
   background-color: #e6dcd2;
 }
 
 #main .banner-2 {
-  background-image: url(./img/img-banner-02.jpg);
+  background-image: url(../img/img-banner-02.jpg);
   background-color: #dad8d3;
 }
 
@@ -1433,23 +1433,23 @@ a:focus {
 }
 
 #main-visual .img-box .img-1 {
-  background-image: url(./img/img-main-visual-slide_1.jpg);
+  background-image: url(../img/img-main-visual-slide_1.jpg);
 }
 
 #main-visual .img-box .img-2 {
-  background-image: url(./img/img-main-visual-slide_2.jpg);
+  background-image: url(../img/img-main-visual-slide_2.jpg);
 }
 
 #main-visual .img-box .img-3 {
-  background-image: url(./img/img-main-visual-slide_3.jpg);
+  background-image: url(../img/img-main-visual-slide_3.jpg);
 }
 
 #main-visual .img-box .img-4 {
-  background-image: url(./img/img-main-visual-slide_4.jpg);
+  background-image: url(../img/img-main-visual-slide_4.jpg);
 }
 
 #main-visual .img-box .img-5 {
-  background-image: url(./img/img-main-visual-slide_5.jpg);
+  background-image: url(../img/img-main-visual-slide_5.jpg);
 }
 
 #main-visual .direction-btn-box {
