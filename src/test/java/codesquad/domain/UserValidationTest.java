@@ -23,12 +23,13 @@ public class UserValidationTest {
     private static Validator validator;
     private UserDTO user;
     private Set annotationSet;
+
     @Before
     public void setUp() throws Exception {
         annotationSet = new HashSet();
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         validator = validatorFactory.getValidator();
-        user = new UserDTO("javajigi@tech.com", "12345678","12345678","javajigi","010-1234-5678");
+        user = new UserDTO("javajigi@tech.com", "12345678", "12345678", "javajigi", "010-1234-5678");
     }
 
     @Test
@@ -39,7 +40,7 @@ public class UserValidationTest {
 
     private void logValidationInfo(UserDTO user, Set annotationSet) {
         Set<ConstraintViolation<UserDTO>> constraintViolations = validator.validate(user);
-        for(ConstraintViolation<UserDTO> constraintViolation : constraintViolations){
+        for (ConstraintViolation<UserDTO> constraintViolation : constraintViolations) {
             assertThat(annotationSet.contains(constraintViolation.getConstraintDescriptor().getAnnotation().annotationType()), is(true));
             log.debug("validation error message : {}", constraintViolation.getMessage());
             log.debug("validation error invalidValue : {}", constraintViolation.getInvalidValue());
@@ -47,7 +48,7 @@ public class UserValidationTest {
     }
 
     @Test
-    public void emailNotBlank(){
+    public void emailNotBlank() {
         user.setEmail("");
         annotationSet.add(NotBlank.class);
         annotationSet.add(Pattern.class);
@@ -55,7 +56,7 @@ public class UserValidationTest {
     }
 
     @Test
-    public void emailInvalidValue(){
+    public void emailInvalidValue() {
         user.setEmail("abcabc.com");
         annotationSet.add(Pattern.class);
         logValidationInfo(user, annotationSet);

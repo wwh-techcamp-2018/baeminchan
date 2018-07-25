@@ -16,7 +16,7 @@ public class UserTest {
     @Before
     public void setUp() throws Exception {
         passwordEncoder = new BCryptPasswordEncoder();
-        user = new User("javajigi@tech.com", passwordEncoder.encode("12345678"),"javajigi","010-1234-5678");
+        user = new User("javajigi@tech.com", passwordEncoder.encode("12345678"), "javajigi", "010-1234-5678");
     }
 
     @Test(expected = UserVerificationException.class)

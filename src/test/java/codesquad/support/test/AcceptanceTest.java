@@ -13,6 +13,8 @@ public class AcceptanceTest {
     @Autowired
     private TestRestTemplate template;
 
-    public TestRestTemplate template(){ return template;}
+    public TestRestTemplate template() {
+        return template;
+    }
 }
 

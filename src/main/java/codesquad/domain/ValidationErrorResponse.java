@@ -10,12 +10,19 @@ public class ValidationErrorResponse {
         this.errors = new ArrayList<>();
     }
 
-    public ValidationErrorResponse addError(ValidationError error){
+    public ValidationErrorResponse addError(ValidationError error) {
         this.errors.add(error);
         return this;
     }
 
     public List<ValidationError> getErrors() {
         return errors;
+    }
+
+    @Override
+    public String toString() {
+        return "ValidationErrorResponse{" +
+                "errors=" + errors +
+                '}';
     }
 }

@@ -9,8 +9,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class UserDTOTest {
-
-
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     UserDTO user;
 
@@ -22,6 +20,7 @@ public class UserDTOTest {
     @Test
     public void passwordConfirm() {
         assertThat(user.passwordConfirm(), is(true));
+
         user.setPasswordConfirm("1234");
         assertThat(user.passwordConfirm(), is(false));
     }

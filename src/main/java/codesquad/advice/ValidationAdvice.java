@@ -3,7 +3,6 @@ package codesquad.advice;
 
 import codesquad.domain.ValidationError;
 import codesquad.domain.ValidationErrorResponse;
-import codesquad.exception.UnauthenticationException;
 import codesquad.exception.UserVerificationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +36,6 @@ public class ValidationAdvice {
             FieldError fieldError = (FieldError)objectError;
             response.addError(new ValidationError(fieldError.getField(), getErrorMessage(fieldError)));
         }
-
         return response;
     }
 

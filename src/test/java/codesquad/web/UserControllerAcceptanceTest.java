@@ -1,10 +1,6 @@
 package codesquad.web;
 
-import codesquad.domain.LoginDTO;
-import codesquad.domain.UserDTO;
-import codesquad.domain.ValidationError;
-import codesquad.domain.ValidationErrorResponse;
-import codesquad.service.UserService;
+import codesquad.domain.*;
 import codesquad.support.test.AcceptanceTest;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -22,11 +18,11 @@ import java.util.Set;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class UserControllerAcceptanceTest extends AcceptanceTest {
-    
+
     private static final Logger log = LoggerFactory.getLogger(UserControllerAcceptanceTest.class);
 
-    private final String SIGNUP_URL = "/users/signup";
-    private final String LOGIN_URL = "/users/login";
+    public static final String SIGNUP_URL = "/users/signup";
+    public static final String LOGIN_URL = "/users/login";
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -35,44 +31,44 @@ public class UserControllerAcceptanceTest extends AcceptanceTest {
 
     @Test
     public void signup() throws Exception {
-        user = new UserDTO("javajigi@tech.com", "12345678","12345678","javajigi","010-1234-5678");
-        requestSuccessProcess(SIGNUP_URL,user);
+        user = new UserDTO("javajigi@tech.com", "12345678", "12345678", "javajigi", "010-1234-5678");
+        requestSuccessProcess(SIGNUP_URL, user);
     }
 
     @Test
-    public void signupAssertPassword(){
-        user = new UserDTO("javajigi@tech.com", "12345678","12345679","javajigi","010-1234-5678");
+    public void signupAssertPassword() {
+        user = new UserDTO("javajigi@tech.com", "12345678", "12345679", "javajigi", "010-1234-5678");
         requestFailProcess(SIGNUP_URL, user, Arrays.asList(
-                UserService.FIELD_NAME_PASSWORD
+                User.FIELD_NAME_PASSWORD
         ));
     }
 
     @Test
     public void signupInvalidUserDTO() {
-        user = new UserDTO("javajigitech.com", "123456","12345679","javajigi","010-1234-5678");
-        ResponseEntity<ValidationErrorResponse> responseEntity = template().postForEntity("/users/signup", user,ValidationErrorResponse.class);
+        user = new UserDTO("javajigitech.com", "123456", "12345679", "javajigi", "010-1234-5678");
+        ResponseEntity<ValidationErrorResponse> responseEntity = template().postForEntity("/users/signup", user, ValidationErrorResponse.class);
         requestFailProcess(SIGNUP_URL, user, Arrays.asList(
-                UserService.FIELD_NAME_PASSWORD,
-                UserService.FIELD_NAME_EMAIL
+                User.FIELD_NAME_PASSWORD,
+                User.FIELD_NAME_EMAIL
         ));
     }
 
     @Test
-    public void duplicateSignup(){
+    public void duplicateSignup() {
 
-        user = new UserDTO("intae@tech.com", "12345678","12345678","intae","010-1234-5678");
+        user = new UserDTO("intae@tech.com", "12345678", "12345678", "intae", "010-1234-5678");
         requestFailProcess(SIGNUP_URL, user, Arrays.asList(
-                UserService.FIELD_NAME_EMAIL
+                User.FIELD_NAME_EMAIL
         ));
     }
 
     @Test
-    public void login(){
+    public void login() {
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setEmail("intae@tech.com");
         loginDTO.setPassword("12345678");
 
-        requestSuccessProcess(LOGIN_URL,loginDTO);
+        requestSuccessProcess(LOGIN_URL, loginDTO);
     }
 
     @Test
@@ -81,7 +77,7 @@ public class UserControllerAcceptanceTest extends AcceptanceTest {
         loginDTO.setEmail("something");
         loginDTO.setPassword("12345678");
         requestFailProcess(LOGIN_URL, loginDTO, Arrays.asList(
-                UserService.FIELD_NAME_EMAIL
+                User.FIELD_NAME_EMAIL
         ));
 
     }
@@ -92,33 +88,33 @@ public class UserControllerAcceptanceTest extends AcceptanceTest {
         loginDTO.setEmail("intae@tech.com");
         loginDTO.setPassword("somethingwrong");
         requestFailProcess(LOGIN_URL, loginDTO, Arrays.asList(
-                UserService.FIELD_NAME_PASSWORD
+                User.FIELD_NAME_PASSWORD
         ));
     }
 
 
     private void requestFailProcess(String url, Object body, List<String> fieldNames) {
-        ResponseEntity<ValidationErrorResponse> responseEntity = template().postForEntity(url, body,ValidationErrorResponse.class);
+        ResponseEntity<ValidationErrorResponse> responseEntity = template().postForEntity(url, body, ValidationErrorResponse.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getErrors().size()).isEqualTo(fieldNames.size());
 
         Set<String> fieldNameSet = new HashSet<>();
-        for(ValidationError validationError : responseEntity.getBody().getErrors()) {
+        for (ValidationError validationError : responseEntity.getBody().getErrors()) {
             fieldNameSet.add(validationError.getFieldName());
             log.debug("errorMessage : {}", validationError.getErrorMessage());
         }
-        for(String fieldName : fieldNames){
+        for (String fieldName : fieldNames) {
             assertThat(fieldNameSet.contains(fieldName)).isEqualTo(true);
         }
     }
 
-    private void requestSuccessProcess(String url, Object body){
+    private void requestSuccessProcess(String url, Object body) {
         ResponseEntity<Void> responseEntity = template().postForEntity(url, body, Void.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
-    private void logErrorsInfo(List<ValidationError> errors){
-        for(ValidationError error : errors) {
+    private void logErrorsInfo(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
             log.debug("field name : {}", error.getFieldName());
             log.debug("error message : {}", error.getErrorMessage());
         }

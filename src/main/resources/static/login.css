@@ -1,0 +1,15 @@
+.login-box{
+    position: relative;
+}
+
+.error-message-holder {
+    position: absolute;
+    width: 320px;
+    right: -320px;
+    top:0px;
+    padding-left: 80px;
+    box-sizing: border-box;
+    color: red;
+    line-height: 30px;
+    font-size: 14px;
+}

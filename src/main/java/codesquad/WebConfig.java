@@ -27,7 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public MessageSourceAccessor messageSourceAccessor(){
+    public MessageSourceAccessor messageSourceAccessor() {
         return new MessageSourceAccessor(messageSource());
     }
 

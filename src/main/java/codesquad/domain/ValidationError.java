@@ -8,6 +8,7 @@ public class ValidationError {
     public ValidationError() {
 
     }
+
     public ValidationError(String fieldName, String errorMessage) {
         this.fieldName = fieldName;
         this.errorMessage = errorMessage;
@@ -19,5 +20,13 @@ public class ValidationError {
 
     public String getErrorMessage() {
         return errorMessage;
+    }
+
+    @Override
+    public String toString() {
+        return "ValidationError{" +
+                "fieldName='" + fieldName + '\'' +
+                ", errorMessage='" + errorMessage + '\'' +
+                '}';
     }
 }
