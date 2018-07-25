@@ -3,11 +3,13 @@ package codesquad.validate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValidationErrorsResponse extends RestStatus{
+public class ValidationErrorsResponse {
+
+    private boolean status;
     private List<ValidationError> errors;
 
     public ValidationErrorsResponse() {
-        super(false);
+        status = false;
         errors = new ArrayList<>();
     }
 
@@ -17,5 +19,10 @@ public class ValidationErrorsResponse extends RestStatus{
 
     public List<ValidationError> getErrors() {
         return errors;
+    }
+
+    @Override
+    public String toString() {
+        return "ValidationErrorsResponse [status=" + status + "]";
     }
 }
