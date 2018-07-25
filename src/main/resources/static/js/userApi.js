@@ -3,50 +3,23 @@ function $(selector) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    initEvents();
-    loginInitEvents();
+    initEvents(".join_form_box .btn_area .btn",registerUserHandler);
+    initEvents("#login_btn",loginHandler);
 })
 
-function initEvents() {
-    const joinBtn = $(".join_form_box .btn_area .btn");
-    if(joinBtn === null) return;
-    joinBtn.addEventListener("click", registerUserHandler);
+function initEvents(btnSelector,handler) {
+    const initBtn = $(btnSelector);
+    if(initBtn === null) return;
+    initBtn.addEventListener("click", handler);
 }
 
-function loginInitEvents(){
-    const loginBtn = $("#login_btn");
-    console.log("222222"+loginBtn);
-    if(loginBtn === null) return;
-    loginBtn.addEventListener("click", loginHandler);
-}
-
-
-
-function registerFetchManager({ url, method, body, headers}) {
+function fetchManager({ url, method, body, headers,callback}) {
     fetch(url, {method,body,headers,credentials: "same-origin"})
         .then((response) => {
-        if(response.status === 201){
-            window.location.replace("http://localhost:8080/")
-            return
-        }
-        return response.json()
-    }).then((result) => {
-        alert(result.data.validationErrorList[0].errorMessage);
-    })
-}
-
-function loginFetchManager({ url, method, body, headers}) {
-    fetch(url, {method,body,headers,credentials: "same-origin"})
-        .then((response) => {
-        if(response.status === 200){
-            console.log(response);
-            window.location.replace("http://localhost:8080/");
-            return
-        }
-        return response.json()
-    }).then((result) => {
-        console.log(result);
-        alert(result.message);
+        callback(response);
+    }).catch((e) => {
+        alert("예상치 못한 오류가 발생했습니다.");
+        window.location.href = "http://localhost:8080/";
     })
 }
 
@@ -61,12 +34,12 @@ function registerUserHandler(evt) {
     $("#pw1").value = "";
     $("#pw2").value = "";
     
-
-    registerFetchManager({
+    fetchManager({
         url: '/api/users',
         method: 'POST',
         headers: { 'content-type': 'application/json'},
-        body: JSON.stringify({email,password,passwordConfirm,name,phoneNo})
+        body: JSON.stringify({email,password,passwordConfirm,name,phoneNo}),
+        callback: joinCallback
     })
 }
 
@@ -77,14 +50,35 @@ function loginHandler(evt) {
     
     $("#pwd").value = "";
 
-    
-
-    loginFetchManager({
+    fetchManager({
         url: '/api/users/login',
         method: 'POST',
         headers: { 'content-type': 'application/json'},
-        body: JSON.stringify({email,password})
+        body: JSON.stringify({email,password}),
+        callback: loginCallback
     })
+}
+
+function joinCallback(response){
+    if(response.status === 201){
+        window.location.replace("http://localhost:8080/")
+        return
+    }
+    response.json().then((result) => {
+        if(result.message === "valid_error"){
+            alert(result.data.validationErrorList[0].errorMessage);
+            return;
+        }
+        alert("이미 존재하는 이메일입니다.");
+    })
+} 
+
+function loginCallback(response){
+    if(response.status === 200){
+        window.location.href = "http://localhost:8080/"
+        return
+    }
+    alert("로그인에 실패하였습니다.");
 }
 
 function goNext(evt){
