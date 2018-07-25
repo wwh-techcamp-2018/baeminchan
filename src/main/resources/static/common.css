@@ -1118,7 +1118,8 @@ input[type="checkbox"].bf {
 }
 
 .tb_join span.tb_in_txt.caution {
-    color: #f15858
+    display:none;
+    color: #f15858;
 }
 
 .tb_join a.reg_cancel {
