@@ -3,14 +3,10 @@ package codesquad.domain;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserDtoTest {
-
-    private static final Logger log = LoggerFactory.getLogger(UserDtoTest.class);
 
     private UserDto userDto;
 
@@ -35,5 +31,4 @@ public class UserDtoTest {
         userDto.setConfirmPassword("beaminchan1@");
         assertThat(userDto.matchPassword()).isFalse();
     }
-
 }
