@@ -124,6 +124,5 @@ public class SignupDto {
         public SignupDto build() {
             return new SignupDto(email, password, passwordConfirm, name, phoneNumber);
         }
-
     }
 }
