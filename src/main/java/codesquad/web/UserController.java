@@ -4,6 +4,7 @@ import codesquad.domain.User;
 import codesquad.dto.UserDto;
 import codesquad.exception.NotMatchException;
 import codesquad.exception.UnAuthenticationException;
+import codesquad.security.HttpSessionUtils;
 import codesquad.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.net.URI;
 
 @RestController
 @RequestMapping("/api/users")
@@ -28,12 +28,9 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody User user, HttpSession session) throws UnAuthenticationException {
-//        log.debug("userId : {}, password : {}", user.userId, password);
-//        System.out.println("userId : " + user.getUserId() + "password : " + user.getPassword());
-//        session.setAttribute(HttpSessionUtils.USER_SESSION_KEY, userService.login(userId, password));
-
-        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/")).build();
+    public ResponseEntity<Void> login(@RequestBody UserDto userDto, HttpSession session) throws UnAuthenticationException {
+        session.setAttribute(HttpSessionUtils.USER_SESSION_KEY, userService.login(userDto));
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PostMapping("")

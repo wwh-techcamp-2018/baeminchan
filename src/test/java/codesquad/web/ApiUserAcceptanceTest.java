@@ -5,8 +5,6 @@ import codesquad.domain.User;
 import codesquad.domain.UserRepository;
 import codesquad.dto.UserDto;
 import codesquad.exception.ErrorResponse;
-import codesquad.exception.NotMatchException;
-import codesquad.exception.UnAuthenticationException;
 import codesquad.service.UserService;
 import codesquad.validate.ValidationErrorsResponse;
 import org.junit.Before;
@@ -23,36 +21,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ApiUserAcceptanceTest extends AcceptanceTest {
     private static final Logger log = LoggerFactory.getLogger(ApiUserAcceptanceTest.class);
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
-    private UserService userService;
 
-    private User otherUser;
-    private UserDto newUser;
+    private UserDto defaultUser;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Before
     public void setUp() throws Exception {
-//        otherUser = new User("wngk@wngk.com", "12341234", "박주하", "01087562544", roleRepository.findByAuthority(Authority.NORMAL).orElseThrow(IllegalArgumentException::new));
-        newUser = new UserDto("javajigi@java.com", "1234qwer!", "자바지기", "010-4090-8370", "1234qwer!");
-    }
-
-    @Test
-    public void login() throws UnAuthenticationException {
-        ResponseEntity<Void> response = template().postForEntity("/api/users/login", defaultUser(), Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FOUND);
-        assertThat(response.getHeaders().getLocation().getPath()).startsWith("/");
-    }
-
-    @Test
-    public void create() throws NotMatchException {
-        ResponseEntity<Void> response = template().postForEntity("/api/users", newUser, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        defaultUser = new UserDto("javajigi@java.com", "1234qwer!", "자바지기", "010-4090-8370", "1234qwer!");
+        template().postForEntity("/api/users", defaultUser, Void.class);
     }
 
     /**
@@ -81,20 +59,57 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
      */
 
     @Test
-    public void create_비밀번호_불일치() {
-        newUser.setRePassword("1234qwer!!!");
+    public void create() {
+        ResponseEntity<Void> response = template().postForEntity("/api/users", defaultUser, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+    }
 
-        ResponseEntity<ErrorResponse> response = template().postForEntity("/api/users", newUser, ErrorResponse.class);
+    @Test
+    public void create_비밀번호_불일치() {
+        defaultUser.setRePassword("1234qwer!!!");
+
+        ResponseEntity<ErrorResponse> response = template().postForEntity("/api/users", defaultUser, ErrorResponse.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         log.debug("debug message : {}", response.getBody().getMessage());
     }
 
     @Test
     public void create_정규식_예외() {
-        newUser.setUserId("gusdk");
+        defaultUser.setUserId("gusdk");
 
-        ResponseEntity<ValidationErrorsResponse> response = template().postForEntity("/api/users", newUser, ValidationErrorsResponse.class);
+        ResponseEntity<ValidationErrorsResponse> response = template().postForEntity("/api/users", defaultUser, ValidationErrorsResponse.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         log.debug("\n\ndebug message : {}\n\n", response.getBody().getErrors().get(0).getErrorMessage());
+    }
+
+    /**
+     * Todo
+     *
+     * 로그인에 대한 테스트코드
+     * - 서버
+     * 2. @LoginUser 추가
+     *
+     * Done
+     * 1. 로그인 가능, 불가능 테스트 코드
+     *
+     * - 클라이언트
+     * 1. AJAX 구현
+     * 2. response 처리
+     * 3. 상단 로그인, 회원가입 메뉴 안보이게 하기
+     *
+     */
+
+    @Test
+    public void login_성공() {
+        ResponseEntity<Void> response = template().postForEntity("/api/users/login", defaultUser, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+    @Test
+    public void login_실패() {
+        defaultUser.setPassword("4321rewq!");
+        ResponseEntity<ErrorResponse> response = template().postForEntity("/api/users/login", defaultUser, ErrorResponse.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        log.debug("login_실패 :{}", response.getBody().getMessage());
     }
 }

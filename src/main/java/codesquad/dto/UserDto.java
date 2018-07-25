@@ -29,9 +29,6 @@ public class UserDto {
     @Pattern(regexp = "^\\d{2,3}-\\d{3,4}-\\d{4}$", message = "휴대 전화 번호 형식에 맞지 않습니다.")
     private String phoneNumber;
 
-
-
-
     public UserDto(String userId, String password, String name, String phoneNumber, String rePassword) {
         this.userId = userId;
         this.password = password;

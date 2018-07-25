@@ -4,6 +4,7 @@ import codesquad.converter.LocalDateTimeConverter;
 import codesquad.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Data
+@Getter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -47,10 +48,7 @@ public class User implements Serializable {
     }
 
     public User(String userId, String password, String name, String phoneNumber, Role role) {
-        this.userId = userId;
-        this.password = password;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
+        this(userId, password, name, phoneNumber);
         this.role = role;
     }
 

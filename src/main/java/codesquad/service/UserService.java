@@ -24,9 +24,9 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public User login(String userId, String password) throws UnAuthenticationException {
-        return userRepository.findByUserId(userId)
-                .filter(user -> user.matchPassword(password))
+    public User login(UserDto userDto) throws UnAuthenticationException {
+        return userRepository.findByUserId(userDto.getUserId())
+                .filter(user -> passwordEncoder.matches(userDto.getPassword(), user.getPassword()))
                 .orElseThrow(() -> new UnAuthenticationException("아이디 혹은 비밀번호가 맞지 않습니다."));
     }
 

@@ -64,7 +64,6 @@
                                         <label for="email">아이디 (이메일)</label>
                                     </th>
                                     <td>
-                                        <input type="hidden" id="userId" name="userId" value="">
                                         <input type="text" size="50" name="email_id" value="" id="email_id" class="join_input" autofocus="">
                                         <span class="block"> @ </span>
                                         <input type="text" size="50" name="email_domain" value="" id="email_domain" class="join_input">
@@ -137,7 +136,6 @@
                                         <label for="cell1">휴대 전화 번호</label>
                                     </th>
                                     <td>
-                                        <input type="hidden" id="phoneNumber" name="phoneNumber" value="">
                                         <input type="text" maxlength="3" size="10" name="cell[]" id="cell1" value="" title="휴대 전화 번호 앞자리" class="join_input small">
                                         <span class="block"> - </span>
                                         <input type="text" maxlength="4" size="10" name="cell[]" id="cell2" value="" title="휴대 전화 번호 중간자리" class="join_input small">
@@ -161,7 +159,7 @@
                     </fieldset>
 
                     <div class="btn_area center mt40">
-                        <button type="button" onclick="join(this.form);" class="btn btn_mint btn_big">
+                        <button type="button" onclick="onClickJoinButton(this.form);" class="btn btn_mint btn_big">
                             <span>가입 완료</span>
                         </button>
                     </div>

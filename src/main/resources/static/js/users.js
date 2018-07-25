@@ -1,9 +1,3 @@
-
-// TODO
-// 1. 값들 가져오기
-// 2. 이메일, 핸드폰번호 포맷 맞추기
-// 3. 전송하기
-// 4. response 처리하기
 function $(selector) {
     return document.querySelector(selector);
 }
@@ -21,7 +15,7 @@ function initEvents() {
 //    });
 }
 
-function fetchManager({ url, method, body, headers, callback }) {
+function fetchManager({ url, method, body, headers, errorFunction }) {
     fetch(url, {
         method,
         body,
@@ -35,29 +29,26 @@ function fetchManager({ url, method, body, headers, callback }) {
         }
         return response.json();
     }).then((result) => {
-        callback(result)
-    }).catch( (e) => {
-        console.log(e);
+        errorFunction(result)
     })
 }
 
-function join (form) {
+function onClickJoinButton (form) {
     if(!checkValid(form)) return;
 
-    form.userId.value = form.email_id.value + "@" + form.email_domain.value;
-    form.phoneNumber.value = form.cell1.value + "-" + form.cell2.value + "-" + form.cell3.value;
+    let userId = form.email_id.value + "@" + form.email_domain.value;
+    let phoneNumber = form.cell1.value + "-" + form.cell2.value + "-" + form.cell3.value;
 
-    console.log(form.userId.value, form.password.value, form.rePassword.value, form.name.value, form.phoneNumber.value);
     fetchManager({
         url: '/api/users',
         method: 'POST',
         headers: { 'content-type': 'application/json'},
         body: JSON.stringify({
-            "userId": form.userId.value,
+            "userId": userId,
             "password": form.password.value,
             "rePassword": form.rePassword.value,
             "name": form.name.value,
-            "phoneNumber": form.phoneNumber.value
+            "phoneNumber": phoneNumber
         }),
         callback: onJoinError
     })
