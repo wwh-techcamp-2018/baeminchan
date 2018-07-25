@@ -16,19 +16,15 @@ public class UserDto {
     @Email
     private String email;
 
-    @NonNull
     @Name
     private String name;
 
-    @NonNull
     @Password
     private String password;
 
-    @NonNull
     @Password
     private String confirmPassword;
 
-    @NonNull
     @Phone
     private String phone;
 
