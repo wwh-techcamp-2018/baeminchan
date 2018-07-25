@@ -1,0 +1,2 @@
+-- password1 is encrypted to $2a$10$PP4LOohJDx5pJSV.UR.YcuAWM31URSzZOQeilGkNJ5.dLov/mAeS.
+INSERT INTO USER (email, password, name, phone_number, permissions ) VALUES("aa@aa.com", "$2a$10$PP4LOohJDx5pJSV.UR.YcuAWM31URSzZOQeilGkNJ5.dLov/mAeS.",  "name", "00-00-00", 1) ;
