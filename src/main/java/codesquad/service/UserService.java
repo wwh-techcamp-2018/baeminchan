@@ -18,7 +18,6 @@ public class UserService {
 
     private static final Logger log = LoggerFactory.getLogger(User.class);
 
-
     @Autowired
     private RoleRepository roleRepository;
 

@@ -1,23 +1,23 @@
 package controller;
 
-import codesquad.domain.User;
 import codesquad.dto.UserDto;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import support.test.AcceptanceTest;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ApiUserControllerTest extends AcceptanceTest {
+
+    private static final Logger log = LoggerFactory.getLogger(ApiUserControllerTest.class);
     private static Validator validator;
 
     @Before
@@ -28,42 +28,68 @@ public class ApiUserControllerTest extends AcceptanceTest {
 
     @Test
     public void 회원가입_정상() throws Exception {
-        UserDto newUser = new UserDto("javajigi", "gmail.com", "test222##", "재성", "010-1111-2222");
-        ResponseEntity<Void> response = template().postForEntity("/api/users", newUser, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-    }
-
-    @Test
-    public void 회원가입_아이디비정상() throws Exception {
-        UserDto newUser = new UserDto("javajigi@", "gmail.com", "test222##","test222##", "재성", "010-1111-2222");
-        ResponseEntity<Void> response = template().postForEntity("/api/users", newUser, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-    }
-
-    @Test
-    public void 회원가입_비밀번호비정상() throws Exception {
-        UserDto newUser = new UserDto("javajigi", "gmail.com", "testt@est134","tes@ttest3332", "재성", "010-1111-2222");
-        ResponseEntity<Void> response = template().postForEntity("/api/users", newUser, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-    }
-    @Test
-    public void 회원가입_비밀번호비정상() throws Exception {
-        UserDto newUser = new UserDto("javajigi", "gmail.com", "testtest","testtest2", "재성", "010-1111-2222");
+        UserDto newUser = new UserDto("javajigi", "gmail.com", "testt@est134", "testt@est134", "재성", "010-1111-2222");
         Set<ConstraintViolation<UserDto>> constraintViolations = validator.validate(newUser);
-        System.out.println("size : " + constraintViolations.size());
+        assertThat(constraintViolations.isEmpty()).isTrue();
+    }
+
+    @Test
+    public void 회원가입_아이디부적절() throws Exception {
+        UserDto newUser = new UserDto("javajigi@", "gmail.com", "testt@est134", "testt@est134", "재성", "010-1111-2222");
+        Set<ConstraintViolation<UserDto>> constraintViolations = validator.validate(newUser);
+        for (ConstraintViolation<UserDto> constraintViolation : constraintViolations) {
+            log.info("test error msg : {}", constraintViolation.getMessage());
+        }
         assertThat(constraintViolations.size()).isEqualTo(1);
     }
+
     @Test
-    public void 회원가입_이름비정상() throws Exception {
-        UserDto newUser = new UserDto("javajigi", "gmail.com", "test222##", "쏭", "010-1111-2222");
-        ResponseEntity<Void> response = template().postForEntity("/api/users", newUser, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+    public void 회원가입_이메일_도메인_부적절() throws Exception {
+        UserDto newUser = new UserDto("javajigi", "asdfadsf", "testt@est134", "testt@est134", "재성", "010-1111-2222");
+        Set<ConstraintViolation<UserDto>> constraintViolations = validator.validate(newUser);
+        for (ConstraintViolation<UserDto> constraintViolation : constraintViolations) {
+            log.info("test error msg : {}", constraintViolation.getMessage());
+        }
+        assertThat(constraintViolations.size()).isEqualTo(2);
     }
 
     @Test
-    public void 회원가입_핸드폰번호비정상() throws Exception {
-        UserDto newUser = new UserDto("javajigi", "gmail.com", "test222##", "재성", "010-1111-22223");
-        ResponseEntity<Void> response = template().postForEntity("/api/users", newUser, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+    public void 회원가입_비밀번호_불일치() throws Exception {
+        UserDto newUser = new UserDto("javajigi", "gmail.com", "testt@est134", "tes@ttest3332", "재성", "010-1111-2222");
+        Set<ConstraintViolation<UserDto>> constraintViolations = validator.validate(newUser);
+        for (ConstraintViolation<UserDto> constraintViolation : constraintViolations) {
+            log.info("test error msg : {}", constraintViolation.getMessage());
+        }
+        assertThat(constraintViolations.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void 회원가입_이름_부적절() throws Exception {
+        UserDto newUser = new UserDto("javajigi", "gmail.com", "testt@ttest3332", "testt@ttest3332", "aaaa", "010-1111-2222");
+        Set<ConstraintViolation<UserDto>> constraintViolations = validator.validate(newUser);
+        for (ConstraintViolation<UserDto> constraintViolation : constraintViolations) {
+            log.info("test error msg : {}", constraintViolation.getMessage());
+        }
+        assertThat(constraintViolations.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void 회원가입_핸드폰번호_부적절1() throws Exception {
+        UserDto newUser = new UserDto("javajigi", "gmail.com", "tes@ttest3332", "tes@ttest3332", "재성", "999-1111-2222");
+        Set<ConstraintViolation<UserDto>> constraintViolations = validator.validate(newUser);
+        for (ConstraintViolation<UserDto> constraintViolation : constraintViolations) {
+            log.info("test error msg : {}", constraintViolation.getMessage());
+        }
+        assertThat(constraintViolations.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void 회원가입_핸드폰번호_부적절2() throws Exception {
+        UserDto newUser = new UserDto("javajigi", "gmail.com", "tes@ttest3332", "tes@ttest3332", "재성", "012-1111-2222");
+        Set<ConstraintViolation<UserDto>> constraintViolations = validator.validate(newUser);
+        for (ConstraintViolation<UserDto> constraintViolation : constraintViolations) {
+            log.info("test error msg : {}", constraintViolation.getMessage());
+        }
+        assertThat(constraintViolations.size()).isEqualTo(1);
     }
 }

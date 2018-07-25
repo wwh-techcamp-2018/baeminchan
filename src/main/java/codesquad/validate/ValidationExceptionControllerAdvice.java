@@ -1,19 +1,19 @@
 package codesquad.validate;
 
-        import org.slf4j.Logger;
-        import org.slf4j.LoggerFactory;
-        import org.springframework.context.support.MessageSourceAccessor;
-        import org.springframework.http.HttpStatus;
-        import org.springframework.validation.FieldError;
-        import org.springframework.validation.ObjectError;
-        import org.springframework.web.bind.MethodArgumentNotValidException;
-        import org.springframework.web.bind.annotation.ExceptionHandler;
-        import org.springframework.web.bind.annotation.ResponseStatus;
-        import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-        import javax.annotation.Resource;
-        import java.util.List;
-        import java.util.Optional;
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Optional;
 
 @RestControllerAdvice
 public class ValidationExceptionControllerAdvice {
@@ -25,14 +25,17 @@ public class ValidationExceptionControllerAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ValidationErrorsResponse handleValidationException(MethodArgumentNotValidException exception) {
-        log.warn("error : hello");
         List<ObjectError> errors = exception.getBindingResult().getAllErrors();
         ValidationErrorsResponse response = new ValidationErrorsResponse();
-        for (ObjectError objectError : errors) {
-            log.info("object error : {}", objectError);
-            FieldError fieldError = (FieldError) objectError;
+        for (ObjectError error : errors) {
+            if (error instanceof FieldError) {
+                FieldError fieldError = (FieldError) error;
+                response.addValidationError(new ValidationError(fieldError.getField(), getErrorMessage(fieldError)));
+                continue;
+            }
+            log.info("object error : {}", error.getDefaultMessage());
+            response.addValidationError(new ValidationError(error.getObjectName(), error.getDefaultMessage()));
 
-            response.addValidationError(new ValidationError(fieldError.getField(), getErrorMessage(fieldError)));
         }
         return response;
     }

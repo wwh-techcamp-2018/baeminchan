@@ -11,17 +11,18 @@ import java.lang.annotation.Target;
 
 
 @Constraint(validatedBy = FieldsValueMatchValidator.class)
-@Target({ ElementType.TYPE, ElementType.FIELD })
+@Target({ElementType.TYPE, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FieldsValueMatch {
 
     String message() default "Fields values don't match!";
 
-    Class<UserDto>[] groups() default {};
-    Class<UserDto>[] payload() default {};
-
     String field();
 
     String fieldMatch();
+
+    Class<UserDto>[] groups() default {};
+
+    Class<UserDto>[] payload() default {};
 }
 
