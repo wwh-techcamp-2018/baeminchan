@@ -60,6 +60,29 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
         assertThat(responseEntity.getBody().getError().get(0))
                 .contains("입력된 비밀번호가 일치하지 않습니다.");
     }
+    public User createTestUser(String email){
+        User newUser = new User(email, "PASSWORD123", "PASSWORD123","이름", "010-123-1234");
+        RequestEntity<User> requestEntity = RequestEntity.post(createURI("")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(newUser);
+        template().exchange(requestEntity, JsonResponse.class);
+        return newUser;
+    }
+    @Test
+    public void login_성공(){
+        User newUser = createTestUser("abc@mmm.com");
+        RequestEntity<User> requestEntity = RequestEntity.post(createURI("/login")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(newUser);
+        ResponseEntity<JsonResponse> responseEntity = template().exchange(requestEntity, JsonResponse.class);
 
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody().getUrl()).isEqualTo("/");
+    }
+    @Test
+    public void login_실패(){
+        User newUser = createTestUser("abc@mmm.com");
+        newUser.setPassword("ABCDEFS123");
+        RequestEntity<User> requestEntity = RequestEntity.post(createURI("/login")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(newUser);
+        ResponseEntity<ErrorResponse> responseEntity = template().exchange(requestEntity, ErrorResponse.class);
 
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(responseEntity.getBody().getError()).contains("ID / PW 를 확인해주십시오");
+    }
 }
