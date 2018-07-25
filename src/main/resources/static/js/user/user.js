@@ -18,8 +18,10 @@ function clearCautions(fields) {
     })
 }
 
-function addChangeListener(element, fieldName) {
-    element.addEventListener("input", function () {
-        clearCaution(fieldName);
-    })
+function addChangeListener(elements, fieldName) {
+    elements.forEach(function (element) {
+        element.addEventListener("input", function () {
+            clearCaution(fieldName);
+        })
+    });
 }

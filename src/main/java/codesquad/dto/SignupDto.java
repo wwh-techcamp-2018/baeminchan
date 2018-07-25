@@ -1,7 +1,6 @@
 package codesquad.dto;
 
 import codesquad.domain.User;
-import codesquad.domain.UserPermissions;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;

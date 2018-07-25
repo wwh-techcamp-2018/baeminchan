@@ -11,8 +11,8 @@ function onFailureLogin(response) {
 function login() {
     clearCautions(loginFields);
     const body = {
-        email: $("#member_id").value,
-        password: $("#pwd").value
+        email: $_value("#member_id"),
+        password: $_value("#pwd")
     };
 
     fetchManager({
@@ -30,8 +30,8 @@ function init() {
         evt.preventDefault();
         login();
     });
-    addChangeListener($("#member_id"), "email");
-    addChangeListener($("#pwd"), "password");
+    addChangeListener($_all("#member_id"), "email");
+    addChangeListener($_all("#pwd"), "password");
 }
 
 initialize(init);

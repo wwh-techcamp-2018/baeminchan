@@ -17,4 +17,8 @@ public class SessionUtil {
         return Optional.ofNullable((User) session.getAttribute(SESSION_KEY))
                 .orElseThrow(RuntimeException::new);
     }
+
+    public static void removeUserSession(HttpSession session) {
+        session.removeAttribute(SESSION_KEY);
+    }
 }
