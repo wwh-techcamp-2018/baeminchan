@@ -1,5 +1,6 @@
 package codesquad.advice;
 
+import codesquad.exception.ConflictException;
 import codesquad.support.dto.ResponseModel;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.HttpStatus;
@@ -29,9 +30,9 @@ public class GlobalAdvice {
             ResponseModel.Error error;
             if (rawError instanceof FieldError) {
                 FieldError fieldError = (FieldError) rawError;
-                error = new ResponseModel.Error(fieldError.getField(), getErrorMessage(fieldError));
+                error = ResponseModel.Error.of(fieldError.getField(), getErrorMessage(fieldError));
             } else {
-                error = new ResponseModel.Error(null, rawError.getDefaultMessage());
+                error = ResponseModel.Error.of(null, rawError.getDefaultMessage());
             }
             response.addError(error);
         }
@@ -40,12 +41,9 @@ public class GlobalAdvice {
     }
 
     private String getErrorMessage(FieldError fieldError) {
-        Optional<String> code = getFirstCode(fieldError);
-        if (!code.isPresent()) {
-            return null;
-        }
-
-        return msa.getMessage(code.get(), fieldError.getArguments(), fieldError.getDefaultMessage());
+        return getFirstCode(fieldError)
+                .map(s -> msa.getMessage(s, fieldError.getArguments(), fieldError.getDefaultMessage()))
+                .orElse(null);
     }
 
     private Optional<String> getFirstCode(FieldError fieldError) {
@@ -54,5 +52,11 @@ public class GlobalAdvice {
             return Optional.empty();
         }
         return Optional.of(codes[0]);
+    }
+
+    @ExceptionHandler({ConflictException.class})
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseModel handleConflictException(ConflictException e) {
+        return ResponseModel.ofErrors(ResponseModel.Error.of(e.getFieldName(), e.getMessage()));
     }
 }

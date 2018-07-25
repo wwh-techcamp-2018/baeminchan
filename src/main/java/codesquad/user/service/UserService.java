@@ -1,5 +1,6 @@
 package codesquad.user.service;
 
+import codesquad.exception.ConflictException;
 import codesquad.user.domain.User;
 import codesquad.user.domain.UserRepository;
 import codesquad.user.dto.SignupDto;
@@ -19,7 +20,14 @@ public class UserService {
 
     @Transactional
     public User signup(SignupDto dto) {
+        if (userRepository.existsByEmail(dto.getEmail())) {
+            throw new ConflictException("email", "이메일");
+        }
+
+        if (userRepository.existsByPhoneNumber(dto.getPhoneNumber())) {
+            throw new ConflictException("phoneNumber", "전화번호");
+        }
+
         return userRepository.save(dto.toEntity(passwordEncoder));
     }
-
 }

@@ -40,4 +40,22 @@ public class UserAcceptanceTest extends AcceptanceTest {
         });
         assertThat(response.getBody().getErrors()).isNotEmpty();
     }
+
+    @Test
+    public void 회원가입때_이메일_중복() {
+        signupDto.setEmail(defaultUser().getEmail());
+        ResponseEntity<ResponseModel<Void>> response = jsonRequest("/api/users", HttpMethod.POST, signupDto, new ParameterizedTypeReference<ResponseModel<Void>>() {
+        });
+        logger.debug("{}", response);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
+    }
+
+    @Test
+    public void 회원가입때_전화번호_중복() {
+        signupDto.setPhoneNumber(defaultUser().getPhoneNumber());
+        ResponseEntity<ResponseModel<Void>> response = jsonRequest("/api/users", HttpMethod.POST, signupDto, new ParameterizedTypeReference<ResponseModel<Void>>() {
+        });
+        logger.debug("{}", response);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
+    }
 }

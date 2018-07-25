@@ -18,6 +18,18 @@ public class ResponseModel<T> {
     private String message;
     private List<ResponseModel.Error> errors;
 
+    public static <T> ResponseModel<T> ofSuccess(T data, String message) {
+        return new ResponseModel<T>(data, message);
+    }
+
+    public static ResponseModel ofErrors(Error... errors) {
+        ResponseModel responseModel = new ResponseModel();
+        for (Error error : errors) {
+            responseModel.addError(error);
+        }
+        return responseModel;
+    }
+
     @ToString
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Getter
@@ -26,9 +38,13 @@ public class ResponseModel<T> {
         private String field;
         private String message;
 
-        public Error(String field, String message) {
+        private Error(String field, String message) {
             this.field = field;
             this.message = message;
+        }
+
+        public static Error of(String field, String message) {
+            return new Error(field, message);
         }
     }
 

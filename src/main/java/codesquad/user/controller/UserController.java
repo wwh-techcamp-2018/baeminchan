@@ -22,6 +22,6 @@ public class UserController {
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseModel signup(@Valid @RequestBody SignupDto dto) {
-        return new ResponseModel<>(userService.signup(dto), "회원가입에 성공했습니다.");
+        return ResponseModel.ofSuccess(userService.signup(dto), "회원가입에 성공했습니다.");
     }
 }
