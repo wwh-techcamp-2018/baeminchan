@@ -12,11 +12,11 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberDto {
-    @Size(min = 3, max = 200)
+    @Size(min = 3, max = 100)
     private String email;
 
-    @Size(min = 7, max = 200)
-    @Pattern(regexp = "((?=.*\\d)(?=.*[a-zA-Z]).{8,15})", message = "Invalid Password")
+    @Size(min = 7, max = 100)
+//    @Pattern(regexp = "((?=.*\\d)(?=.*[a-zA-Z]).{8,15})", message = "Invalid Password")
     private String password;
 
     @Size(min = 3, max = 30)
@@ -25,7 +25,7 @@ public class MemberDto {
     @Size(min = 9, max = 11)
     private String phoneNumber;
 
-    public Member toMember() {
+    public Member toEntity() {
         return new Member(email, password, username, phoneNumber);
     }
 

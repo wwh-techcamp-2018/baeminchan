@@ -2,6 +2,7 @@ package codesquad.web;
 
 import codesquad.domain.Member;
 import codesquad.dto.MemberDto;
+import codesquad.security.HttpSessionUtils;
 import codesquad.service.MemberService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.net.URI;
 
@@ -27,5 +29,14 @@ public class ApiMemberController {
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create("/"));
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Void> login(@Valid @RequestBody MemberDto memberDto, HttpSession session) {
+        Member loginMember = memberService.login(memberDto);
+        HttpSessionUtils.setMemberToSession(loginMember, session);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("/"));
+        return new ResponseEntity<Void>(headers, HttpStatus.FOUND);
     }
 }

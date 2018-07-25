@@ -1,30 +1,32 @@
 package codesquad.domain;
 
-import lombok.Data;
+import lombok.Getter;
 import support.domain.Role;
 
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(length = 100, nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    // TODO password 암호화 이후 길이 바꾸기
+    @Column(length = 100, nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(length = 30, nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    @Column(length = 11, nullable = false)
     private String phoneNumber;
 
     @ElementCollection
@@ -32,10 +34,37 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>(Arrays.asList(Role.DEFAULT));
 
+    public Member(long id, String email, String password, String username, String phoneNumber) {
+        this(email, password, username, phoneNumber);
+        this.id = id;
+    }
+
     public Member(String email, String password, String username, String phoneNumber) {
         this.email = email;
         this.password = password;
         this.username = username;
         this.phoneNumber = phoneNumber;
+    }
+
+    public boolean matchPassword(String password) {
+        return this.password.equals(password);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return id == member.id &&
+                Objects.equals(email, member.email) &&
+                Objects.equals(password, member.password) &&
+                Objects.equals(username, member.username) &&
+                Objects.equals(phoneNumber, member.phoneNumber) &&
+                Objects.equals(roles, member.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email, password, username, phoneNumber, roles);
     }
 }
