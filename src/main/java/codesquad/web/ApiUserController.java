@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,7 +25,7 @@ public class ApiUserController {
     private UserService userService;
 
     @PostMapping("")
-    public ResponseEntity<Void> join(@RequestBody JoinUserDTO joinUserDTO, HttpSession session) {
+    public ResponseEntity<Void> join(@Valid @RequestBody JoinUserDTO joinUserDTO, HttpSession session) {
         log.debug("[가입 시도] email: {} password: {} passwordConfirm: {} name: {} phoneNo: {}",
                 joinUserDTO.getEmail(), joinUserDTO.getPassword(), joinUserDTO.getPasswordConfirm(),
                 joinUserDTO.getName(), joinUserDTO.getPhoneNo());
