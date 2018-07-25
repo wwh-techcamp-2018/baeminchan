@@ -1,11 +1,13 @@
 package codesquad.atdd;
 
 import codesquad.domain.User;
+import codesquad.repository.UserRepository;
 import codesquad.support.ErrorResponse;
 import codesquad.support.JsonResponse;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 
 import java.net.URI;
@@ -83,5 +85,13 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getError()).contains("ID / PW 를 확인해주십시오");
+    }
+    @Autowired UserRepository userRepository;
+    @Test
+    public void aaa(){
+        User newUser = createTestUser("abc@mmm.com");
+        newUser.setName(null);
+        userRepository.save(newUser);
+
     }
 }

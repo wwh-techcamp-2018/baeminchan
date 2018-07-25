@@ -23,7 +23,7 @@ public class BeanInjectionTest {
 
     @Before
     public void setUp(){
-        user = new User("abcde@gmail.com", "password15", "가나다", "010-123-1234");
+        user = new User("abcde@gmail.com", "password15", "password15", "가나다", "010-123-1234");
     }
 
     @Test
