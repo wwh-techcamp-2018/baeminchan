@@ -28,11 +28,4 @@ public class SecurityControllerAdvice {
         log.debug("NotMatchException is happened!");
         return new ResponseEntity<ErrorResponse>(ErrorResponse.ofString(exception.getMessage()), HttpStatus.BAD_REQUEST);
     }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ErrorResponse> methodArgumentNotValid() {
-        log.debug("NotMatchException is happened!");
-        return new ResponseEntity<ErrorResponse>(ErrorResponse.ofString("정규식 표현에 맞지 않습니다."), HttpStatus.BAD_REQUEST);
-    }
 }

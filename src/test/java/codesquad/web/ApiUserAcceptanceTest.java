@@ -1,4 +1,4 @@
-package codesquad.service;
+package codesquad.web;
 
 import codesquad.domain.RoleRepository;
 import codesquad.domain.User;
@@ -7,6 +7,8 @@ import codesquad.dto.UserDto;
 import codesquad.exception.ErrorResponse;
 import codesquad.exception.NotMatchException;
 import codesquad.exception.UnAuthenticationException;
+import codesquad.service.UserService;
+import codesquad.validate.ValidationErrorsResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -19,8 +21,8 @@ import support.test.AcceptanceTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class UserServiceTest extends AcceptanceTest {
-    private static final Logger log = LoggerFactory.getLogger(UserServiceTest.class);
+public class ApiUserAcceptanceTest extends AcceptanceTest {
+    private static final Logger log = LoggerFactory.getLogger(ApiUserAcceptanceTest.class);
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -59,7 +61,7 @@ public class UserServiceTest extends AcceptanceTest {
      *
      * - 서버
      * 4. error message 파일 만들기
-     * 5. 유효성체크 테스트 코드 별도의 파일로 분리
+     *
      *
      * Done
      *  1. SLF4J logging 설정
@@ -67,17 +69,19 @@ public class UserServiceTest extends AcceptanceTest {
      *  2-1. 예외처리 메시지 확인 테스트
      *  3. 비밀번호 암호화 BCrypt
      *
+     *  5. 유효성체크 테스트 코드 별도의 파일로 분리
+     *
      * - 클라이언트
-     * 2. 전송 데이터 포맷 맞추는 함수 구현(ex. 전화번호)
-     * 3. response 처리
      *
      * Done
      * 1. AJAX 구현
+     * 2. 전송 데이터 포맷 맞추는 함수 구현(ex. 전화번호)
+     * 3. response 처리
      *
      */
 
     @Test
-    public void create_비밀번호_불일치() throws NotMatchException {
+    public void create_비밀번호_불일치() {
         newUser.setRePassword("1234qwer!!!");
 
         ResponseEntity<ErrorResponse> response = template().postForEntity("/api/users", newUser, ErrorResponse.class);
@@ -86,11 +90,11 @@ public class UserServiceTest extends AcceptanceTest {
     }
 
     @Test
-    public void create_정규식_예외() throws NotMatchException {
+    public void create_정규식_예외() {
         newUser.setUserId("gusdk");
 
-        ResponseEntity<ErrorResponse> response = template().postForEntity("/api/users", newUser, ErrorResponse.class);
+        ResponseEntity<ValidationErrorsResponse> response = template().postForEntity("/api/users", newUser, ValidationErrorsResponse.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        log.debug("\n\ndebug message : {}\n\n", response.getBody().getMessage());
+        log.debug("\n\ndebug message : {}\n\n", response.getBody().getErrors().get(0).getErrorMessage());
     }
 }
