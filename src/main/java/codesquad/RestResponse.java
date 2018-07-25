@@ -1,7 +1,6 @@
 package codesquad;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -76,9 +75,13 @@ public class RestResponse<T> {
 
     @Getter
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class Error {
         private String field;
         private String message;
+
+        public Error(String field, String message) {
+            this.field = field;
+            this.message = message;
+        }
     }
 }

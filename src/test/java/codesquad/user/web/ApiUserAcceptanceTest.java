@@ -3,6 +3,7 @@ package codesquad.user.web;
 import codesquad.RestResponse;
 import codesquad.user.domain.UserRepository;
 import codesquad.user.dto.UserSignupDto;
+import codesquad.user.dto.UserSignupDtoTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,13 +19,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ApiUserAcceptanceTest {
-    private static final String PASSWORD = "password12345";
     @Autowired
     private TestRestTemplate template;
-
-    public TestRestTemplate template() {
-        return template;
-    }
 
     @Autowired
     private UserRepository repository;
@@ -36,7 +32,7 @@ public class ApiUserAcceptanceTest {
 
     @Test
     public void create() {
-        UserSignupDto dto = createUserSignupDto(PASSWORD);
+        UserSignupDto dto = UserSignupDtoTest.validDtoBuilder().build();
 
         ResponseEntity<RestResponse<?>> responseEntity = createPostResponseEntity("/api/users", dto);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
@@ -44,22 +40,13 @@ public class ApiUserAcceptanceTest {
 
     @Test
     public void create_fail_not_match_password() {
-        UserSignupDto dto = createUserSignupDto(PASSWORD + 1);
+        UserSignupDto dto = UserSignupDtoTest.validDtoBuilder()
+                .passwordCheck(UserSignupDtoTest.PASSWORD + 1)
+                .build();
 
         ResponseEntity<RestResponse<?>> responseEntity = createPostResponseEntity("/api/users", dto);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getError().get(0).getField()).isEqualTo("password");
-        assertThat(responseEntity.getBody().getError().get(0).getMessage()).isEqualTo("not match password");
-    }
-
-    private UserSignupDto createUserSignupDto(String passwordCheck) {
-        return UserSignupDto.builder()
-                .email("tester@gmail.com")
-                .password(PASSWORD)
-                .passwordCheck(passwordCheck)
-                .name("tester")
-                .phoneNumber("010-1234-5678")
-                .build();
     }
 
     private <T> ResponseEntity<RestResponse<?>> createPostResponseEntity(String path, T dto) {
@@ -69,10 +56,11 @@ public class ApiUserAcceptanceTest {
         HttpEntity<T> request = new HttpEntity<>(dto, headers);
 
 
-        return template()
+        return template
                 .exchange(path,
                         HttpMethod.POST,
                         request,
-                        new ParameterizedTypeReference<RestResponse<?>>() {});
+                        new ParameterizedTypeReference<RestResponse<?>>() {
+                        });
     }
 }

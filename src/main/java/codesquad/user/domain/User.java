@@ -1,21 +1,17 @@
 package codesquad.user.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 
 @Getter
 @Builder
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -40,6 +36,15 @@ public class User {
     @Column
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
+
+    public User(String uuid, String name, String email, String password, String phoneNumber, Role role) {
+        this.uuid = uuid;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.role = role;
+    }
 
     public void encodePassword(PasswordEncoder passwordEncoder) {
         this.password = passwordEncoder.encode(password);

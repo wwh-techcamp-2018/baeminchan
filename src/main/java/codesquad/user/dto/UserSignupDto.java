@@ -3,9 +3,12 @@ package codesquad.user.dto;
 
 import codesquad.user.domain.Role;
 import codesquad.user.domain.User;
-import lombok.*;
+import codesquad.util.Regex;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -15,31 +18,37 @@ import javax.validation.constraints.Size;
 @Setter
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class UserSignupDto {
     @NotNull
     @Size(min = 2, max = 20)
     private String name;
 
     @NotNull
-    @Pattern(regexp = "\\p{Alnum}+[.\\p{Alnum}]+@\\p{Alnum}+\\.\\p{Alpha}+[.]?\\p{Alpha}+")
+    @Pattern(regexp = Regex.EMAIL)
     private String email;
 
     @NotNull
     @Size(min = 8, max = 16)
-    @Pattern(regexp = "^.*(?=.*\\d)(?=.*\\p{Alpha}).*$")
+    @Pattern(regexp = Regex.PASSWORD)
     private String password;
 
     @NotNull
     @Size(min = 8, max = 16)
-    @Pattern(regexp = "^.*(?=.*\\d)(?=.*\\p{Alpha}).*$")
+    @Pattern(regexp = Regex.PASSWORD)
     private String passwordCheck;
 
     @NotNull
     @Size(min = 12, max = 13)
-    @Pattern(regexp = "^\\d{3}-\\d{3,4}-\\d{4}$")
+    @Pattern(regexp = Regex.PHONE_NUM)
     private String phoneNumber;
 
+    public UserSignupDto(String name, String email, String password, String passwordCheck, String phoneNumber) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.passwordCheck = passwordCheck;
+        this.phoneNumber = phoneNumber;
+    }
 
     public User toEntity() {
         return User.builder()

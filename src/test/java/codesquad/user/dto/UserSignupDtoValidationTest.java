@@ -8,8 +8,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
 import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -28,60 +28,32 @@ public class UserSignupDtoValidationTest {
 
     @Before
     public void setUp() throws Exception {
-        builder = UserSignupDto.builder()
-                .name("javajigi")
-                .password("123456qwerA")
-                .passwordCheck("123456qwerA")
-                .phoneNumber("010-1234-5678")
-                .email("tester@gmail.com");
-
+        builder = UserSignupDtoTest.validDtoBuilder();
     }
 
     @Test
     public void validDto() {
-        UserSignupDto dto = builder.build();
-
-        assertConstraintViolations(dto, 0);
+        assertConstraintViolations(builder.build(), 0);
     }
 
     @Test
     public void password_only_alphabet() {
-        UserSignupDto dto = builder
-                .password("password")
-                .passwordCheck("password")
-                .build();
-
-        assertConstraintViolations(dto, 2);
+        assertConstraintViolations(createDtoPasswordPairBy("password"), 2);
     }
 
     @Test
     public void password_only_integer() {
-        UserSignupDto dto = builder
-                .password("12345678")
-                .passwordCheck("12345678")
-                .build();
-
-        assertConstraintViolations(dto, 2);
+        assertConstraintViolations(createDtoPasswordPairBy("12345678"), 2);
     }
 
     @Test
     public void password_under_min_size() {
-        UserSignupDto dto = builder
-                .password("pass123")
-                .passwordCheck("pass123")
-                .build();
-
-        assertConstraintViolations(dto, 2);
+        assertConstraintViolations(createDtoPasswordPairBy("pass123"), 2);
     }
 
     @Test
     public void password_over_max_size() {
-        UserSignupDto dto = builder
-                .password("password123456789")
-                .passwordCheck("password123456789")
-                .build();
-
-        assertConstraintViolations(dto, 2);
+        assertConstraintViolations(createDtoPasswordPairBy("password123456789"), 2);
     }
 
     @Test
@@ -104,17 +76,20 @@ public class UserSignupDtoValidationTest {
     @Test
     public void name_invalid() {
         UserSignupDto dto = builder
-                .name("안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요")
+                .name("스무글자가넘는이름을테스트하고있습니다람쥐")
                 .build();
         assertConstraintViolations(dto, 1);
     }
 
+    private UserSignupDto createDtoPasswordPairBy(String password) {
+        return builder
+                .password(password)
+                .passwordCheck(password)
+                .build();
+    }
+
     private void assertConstraintViolations(UserSignupDto dto, int size) {
         Set<ConstraintViolation<UserSignupDto>> constraintViolations = validator.validate(dto);
-        for (ConstraintViolation<UserSignupDto> constraintViolation : constraintViolations) {
-            log.debug("violation error message : {}", constraintViolation.getMessage());
-        }
-
         assertThat(constraintViolations.size(), is(size));
     }
 
