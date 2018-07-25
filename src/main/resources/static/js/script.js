@@ -106,12 +106,7 @@ function joinHandler(evt) {
     }
 
     joinForm.email = joinForm.email_id + '@' + joinForm.email_domain;
-    delete joinForm.email_id;
-    delete joinForm.email_domain;
     joinForm.phoneNo = joinForm.cell1 + '-' + joinForm.cell2 + '-' + joinForm.cell3;
-    delete joinForm.cell1;
-    delete joinForm.cell2;
-    delete joinForm.cell3;
 
     fetchManager({
         url: '/api/users',
