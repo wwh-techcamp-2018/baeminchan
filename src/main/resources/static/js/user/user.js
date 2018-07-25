@@ -15,9 +15,12 @@ function initEvents() {
 function fetchManager({ url, method, body, headers, callback }) {
     fetch(url, {method,body,headers,credentials: "same-origin"})
         .then((response) => {
-        return response.json()
-    }).then((result) => {
-        callback(result)
+            if(response.status == 201) {
+                alert("회원가입을 축하드립니다!");
+                location.href = '/'
+                return
+            }
+        return callback(response.json());
     })
 }
 
@@ -45,10 +48,16 @@ function registerUserHandler(evt) {
             "name" : name,
             "phoneNumber" : phoneNumber
             }),
-        callback: appendAnswer
+        callback: alertError
     })
 }
 
-function appendAnswer() {
-    alert('성공');
+function alertError(result) {
+    result.then((response) => {
+    let errorMessage = "";
+        for (let error of response.errors) {
+          errorMessage += error.errorMessage + "\n";
+        }
+    alert(errorMessage);
+    })
 }

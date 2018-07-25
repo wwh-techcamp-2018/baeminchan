@@ -32,6 +32,7 @@ public class ApiUserController {
         log.info("userDto : {}", userDto);
         User user = userService.join(userDto);
 
-        return new ResponseEntity<Void>(new HttpHeaders(), HttpStatus.CREATED);
+        return new ResponseEntity(new HttpHeaders(), HttpStatus.CREATED);
+//        return new ResponseEntity<User>(user, HttpStatus.CREATED);
     }
 }
