@@ -38,8 +38,7 @@
                         </a>
                     </li>
                 </ul>
-                <form name="joinFrm" id="joinFrm" class="join_form_box" method="post" action="/api/users" target="hidden1529398405"
-                    onsubmit="return checkRegMember(this)">
+                <form name="joinFrm" id="joinFrm" class="join_form_box" method="post" action="/api/users" target="hidden1529398405">
                     <input type="hidden" name="rURL" id="rURL" value="">
                     <input type="hidden" name="return_url" value="/member/join.exe.php">
                     <input type="hidden" name="nick_checked" id="nick_checked" value="0">
@@ -65,13 +64,14 @@
                                         <label for="email">아이디 (이메일)</label>
                                     </th>
                                     <td>
+                                        <input type="hidden" id="userId" name="userId" value="">
                                         <input type="text" size="50" name="email_id" value="" id="email_id" class="join_input" autofocus="">
                                         <span class="block"> @ </span>
                                         <input type="text" size="50" name="email_domain" value="" id="email_domain" class="join_input">
                                         <div class="selectric-wrapper join w100">
-                                            <div class="selectric-wrapper selectric-selectric">
-                                                <div class="selectric-hide-select">
-                                                    <select class="selectric" id="email_domain_select" tabindex="0">
+                                            <div class="selectric-wrapper selectric-selectric" >
+                                                <div class="selectric-select">
+                                                    <select class="selectric" id="email_domain_select" tabindex="0" onchange="this.form.email_domain.value=this[this.selectedIndex].value">
                                                         <option value="0">직접입력</option>
                                                         <option value="naver.com">naver.com</option>
                                                         <option value="gmail.com">gmail.com</option>
@@ -92,34 +92,6 @@
                                                         <option value="passmail.to">passmail.to</option>
                                                     </select>
                                                 </div>
-                                                <div class="selectric">
-                                                    <p class="label">직접입력</p>
-                                                    <i class="button">▾</i>
-                                                </div>
-                                                <div class="selectric-items" tabindex="-1">
-                                                    <div class="selectric-scroll">
-                                                        <ul>
-                                                            <li data-index="0" class="selected">직접입력</li>
-                                                            <li data-index="1" class="">naver.com</li>
-                                                            <li data-index="2" class="">gmail.com</li>
-                                                            <li data-index="3" class="">hanmail.net</li>
-                                                            <li data-index="4" class="">daum.net</li>
-                                                            <li data-index="5" class="">nate.com</li>
-                                                            <li data-index="6" class="">hotmail.com</li>
-                                                            <li data-index="7" class="">yahoo.co.kr</li>
-                                                            <li data-index="8" class="">paran.com</li>
-                                                            <li data-index="9" class="">empal.com</li>
-                                                            <li data-index="10" class="">chollian.net</li>
-                                                            <li data-index="11" class="">hanafos.com</li>
-                                                            <li data-index="12" class="">dreamwiz.com</li>
-                                                            <li data-index="13" class="">kornet.net</li>
-                                                            <li data-index="14" class="">korea.com</li>
-                                                            <li data-index="15" class="">lycos.co.kr</li>
-                                                            <li data-index="16" class="">orgio.net</li>
-                                                            <li data-index="17" class="last">passmail.to</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
                                                 <input class="selectric-input" tabindex="0">
                                             </div>
                                         </div>
@@ -131,10 +103,10 @@
 
                                 <tr>
                                     <th>
-                                        <label for="pw1">비밀번호</label>
+                                        <label for="password">비밀번호</label>
                                     </th>
                                     <td>
-                                        <input type="password" size="30" name="password" id="pw1" class="join_input" maxlength="25" placeholder="8-16자리 영문,숫자 조합">
+                                        <input type="password" size="30" name="password" id="password" class="join_input" maxlength="25" placeholder="8-16자리 영문,숫자,특수문자 조합">
                                         <p class="tb_txt1">
                                             <span id="join_check_password" class="tb_in_txt caution"></span>
                                         </p>
@@ -142,10 +114,10 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        <label for="pw2">비밀번호 확인</label>
+                                        <label for="rePassword">비밀번호 확인</label>
                                     </th>
                                     <td>
-                                        <input type="password" size="30" name="rePassword" id="pw2" class="join_input" maxlength="25" placeholder="비밀번호 확인">
+                                        <input type="password" size="30" name="rePassword" id="rePassword" class="join_input" maxlength="25" placeholder="비밀번호 확인">
                                         <p class="tb_txt1">
                                             <span id="join_check_password2" class="tb_in_txt caution"></span>
                                         </p>
@@ -165,14 +137,12 @@
                                         <label for="cell1">휴대 전화 번호</label>
                                     </th>
                                     <td>
-                                        <input type="text" maxlength="3" size="10" name="cell[]" id="cell1" value="" title="휴대 전화 번호 앞자리" class="join_input small"
-                                            onkeyup="goNext(this,3,'cell2')">
+                                        <input type="hidden" id="phoneNumber" name="phoneNumber" value="">
+                                        <input type="text" maxlength="3" size="10" name="cell[]" id="cell1" value="" title="휴대 전화 번호 앞자리" class="join_input small">
                                         <span class="block"> - </span>
-                                        <input type="text" maxlength="4" size="10" name="cell[]" id="cell2" value="" title="휴대 전화 번호 중간자리" class="join_input small"
-                                            onkeyup="goNext(this,4,'cell3')">
+                                        <input type="text" maxlength="4" size="10" name="cell[]" id="cell2" value="" title="휴대 전화 번호 중간자리" class="join_input small">
                                         <span class="block"> - </span>
-                                        <input type="text" maxlength="4" size="10" name="cell[]" id="cell3" value="" title="휴대 전화 번호 뒷자리" class="join_input small"
-                                            onkeyup="goNext(this,4,'m_auth')">
+                                        <input type="text" maxlength="4" size="10" name="cell[]" id="cell3" value="" title="휴대 전화 번호 뒷자리" class="join_input small">
                                         <input type="radio" name="unique" value="2" id="unique_phone" onclick="selectRegMode(2)" style="display: none;">
                                         <div class="comment_box login" id="duplicate_phone" style="display:none;">
                                             <span class="tb_in_txt caution clear" id="duplicate_id"></span>
@@ -191,7 +161,7 @@
                     </fieldset>
 
                     <div class="btn_area center mt40">
-                        <button type="submit" class="btn btn_mint btn_big">
+                        <button type="button" onclick="join(this.form);" class="btn btn_mint btn_big">
                             <span>가입 완료</span>
                         </button>
                     </div>
@@ -202,7 +172,8 @@
 {{/partial}}
 
 {{#partial "footer"}}
-    {{> include/component/company-info }}
+    {{> include/component/join-footer }}
+    <script src="/js/users.js"></script>
 {{/partial}}
 
 {{> base }}

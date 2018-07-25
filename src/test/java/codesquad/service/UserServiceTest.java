@@ -68,9 +68,11 @@ public class UserServiceTest extends AcceptanceTest {
      *  3. 비밀번호 암호화 BCrypt
      *
      * - 클라이언트
-     * 1. AJAX 구현
      * 2. 전송 데이터 포맷 맞추는 함수 구현(ex. 전화번호)
      * 3. response 처리
+     *
+     * Done
+     * 1. AJAX 구현
      *
      */
 

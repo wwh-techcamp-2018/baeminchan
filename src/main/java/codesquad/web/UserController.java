@@ -37,9 +37,10 @@ public class UserController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Void> create(@Valid @RequestBody UserDto userDto) throws NotMatchException {
+    public ResponseEntity<User> create(@Valid @RequestBody UserDto userDto) throws NotMatchException {
+        log.debug("create : {}", userDto);
         userService.create(userDto);
-        return ResponseEntity.status(HttpStatus.CREATED).location(URI.create("/login")).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }

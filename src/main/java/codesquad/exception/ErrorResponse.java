@@ -1,5 +1,6 @@
 package codesquad.exception;
 
+
 import lombok.Data;
 
 @Data

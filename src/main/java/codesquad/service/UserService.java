@@ -7,14 +7,11 @@ import codesquad.domain.UserRepository;
 import codesquad.dto.UserDto;
 import codesquad.exception.NotMatchException;
 import codesquad.exception.UnAuthenticationException;
-import codesquad.web.UserController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 @Service
 public class UserService {
@@ -34,8 +31,8 @@ public class UserService {
     }
 
     public void create(UserDto user) throws NotMatchException {
-        User newUSer = user.toUser(passwordEncoder.encode(user.getPassword()));
-        newUSer.init(roleRepository.findByAuthority(Authority.NORMAL).orElseThrow(IllegalArgumentException::new));
-        userRepository.save(newUSer);
+        User newUser = user.toUser(passwordEncoder.encode(user.getPassword()));
+        newUser.init(roleRepository.findByAuthority(Authority.NORMAL).orElseThrow(IllegalArgumentException::new));
+        userRepository.save(newUser);
     }
 }
