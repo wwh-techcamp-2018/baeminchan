@@ -31,5 +31,7 @@ dependencies {
     runtime('com.h2database:h2')
     runtime('net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.apache.httpcomponents:httpclient:4.5.6')
+    compileOnly 'org.projectlombok:lombok:1.18.0'
     testCompile('org.assertj:assertj-core:3.10.0')
 }

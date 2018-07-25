@@ -44,7 +44,7 @@ die ( ) {
     exit 1
 }
 
-# OS specific support (must be 'true' or 'false').
+# OS specific codesquad.support (must be 'true' or 'false').
 cygwin=false
 msys=false
 darwin=false
@@ -123,7 +123,7 @@ if $cygwin ; then
         SEP="|"
     done
     OURCYGPATTERN="(^($ROOTDIRS))"
-    # Add a user-defined pattern to the cygpath arguments
+    # Add a codesquad.user-defined pattern to the cygpath arguments
     if [ "$GRADLE_CYGPATTERN" != "" ] ; then
         OURCYGPATTERN="$OURCYGPATTERN|($GRADLE_CYGPATTERN)"
     fi

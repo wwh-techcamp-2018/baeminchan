@@ -46,7 +46,7 @@ if [ -z "$MAVEN_SKIP_RC" ] ; then
 
 fi
 
-# OS specific support.  $var _must_ be set to either true or false.
+# OS specific codesquad.support.  $var _must_ be set to either true or false.
 cygwin=false;
 darwin=false;
 mingw=false
