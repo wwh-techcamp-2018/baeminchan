@@ -1,8 +1,10 @@
 package codesquad.user.service;
 
 import codesquad.exception.ConflictException;
+import codesquad.exception.UnauthenticatedException;
 import codesquad.user.domain.User;
 import codesquad.user.domain.UserRepository;
+import codesquad.user.dto.LoginDto;
 import codesquad.user.dto.SignupDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,5 +31,12 @@ public class UserService {
         }
 
         return userRepository.save(dto.toEntity(passwordEncoder));
+    }
+
+    @Transactional(readOnly = true)
+    public User login(LoginDto dto) {
+        return userRepository.findByEmail(dto.getEmail())
+                .filter(user -> user.matchPassword(dto.getPassword(), passwordEncoder))
+                .orElseThrow(UnauthenticatedException::new);
     }
 }

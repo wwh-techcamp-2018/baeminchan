@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -44,6 +45,10 @@ public class User extends BaseTimeEntity {
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.role = role;
+    }
+
+    public boolean matchPassword(String password, PasswordEncoder encoder) {
+        return encoder.matches(password, this.password);
     }
 
     @Override

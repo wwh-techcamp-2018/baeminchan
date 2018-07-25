@@ -3,6 +3,7 @@ package codesquad.user.controller;
 import codesquad.support.dto.ResponseModel;
 import codesquad.support.test.AcceptanceTest;
 import codesquad.user.domain.User;
+import codesquad.user.dto.LoginDto;
 import codesquad.user.dto.SignupDto;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,10 +18,12 @@ public class UserAcceptanceTest extends AcceptanceTest {
     private static final Logger logger = LoggerFactory.getLogger(UserAcceptanceTest.class);
 
     private SignupDto signupDto;
+    private LoginDto loginDto;
 
     @Before
     public void setUp() {
         signupDto = new SignupDto("email@email.com", "password1234", "password1234", "윤찬명", "010-5114-6224");
+        loginDto = new LoginDto("sanjigi@slipp.net", "password2");
     }
 
     @Test
@@ -57,5 +60,31 @@ public class UserAcceptanceTest extends AcceptanceTest {
         });
         logger.debug("{}", response);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
+    }
+
+    @Test
+    public void 로그인_성공() {
+        ResponseEntity<ResponseModel<Void>> response = jsonRequest("/api/users/login", HttpMethod.POST, loginDto, new ParameterizedTypeReference<ResponseModel<Void>>() {
+        });
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+    @Test
+    public void 로그인_계정_없음() {
+        loginDto.setEmail("test@test.com");
+        ResponseEntity<ResponseModel<Void>> response = jsonRequest("/api/users/login", HttpMethod.POST, loginDto, new ParameterizedTypeReference<ResponseModel<Void>>() {
+        });
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+    }
+
+    @Test
+    public void 로그인_비밀번호_불일치() {
+        loginDto.setPassword("otherpassword123");
+        ResponseEntity<ResponseModel<Void>> response = jsonRequest("/api/users/login", HttpMethod.POST, loginDto, new ParameterizedTypeReference<ResponseModel<Void>>() {
+        });
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
     }
 }

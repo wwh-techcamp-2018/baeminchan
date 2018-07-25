@@ -1,6 +1,7 @@
 package codesquad.advice;
 
 import codesquad.exception.ConflictException;
+import codesquad.exception.UnauthenticatedException;
 import codesquad.support.dto.ResponseModel;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.HttpStatus;
@@ -58,5 +59,11 @@ public class GlobalAdvice {
     @ResponseStatus(HttpStatus.CONFLICT)
     public ResponseModel handleConflictException(ConflictException e) {
         return ResponseModel.ofErrors(ResponseModel.Error.of(e.getFieldName(), e.getMessage()));
+    }
+
+    @ExceptionHandler({UnauthenticatedException.class})
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ResponseModel handleUnauthenticatedException(UnauthenticatedException e) {
+        return ResponseModel.ofErrors(ResponseModel.Error.of(null, e.getMessage()));
     }
 }
