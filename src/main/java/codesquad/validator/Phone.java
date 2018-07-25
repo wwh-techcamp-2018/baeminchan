@@ -7,11 +7,11 @@ import java.lang.annotation.*;
 
 
 @Documented
-@Constraint(validatedBy = UserNameValidator.class)
+@Constraint(validatedBy = PhoneValidator.class)
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UserName {
-    String message() default "Invalid username";
+public @interface Phone {
+    String message() default "Invalid phone";
 
     Class<?>[] groups() default {};
 

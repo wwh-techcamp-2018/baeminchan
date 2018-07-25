@@ -1,19 +1,15 @@
 package codesquad.domain;
 
 import codesquad.validator.EmailValidator;
+import codesquad.validator.PasswordValidator;
+import codesquad.validator.PhoneValidator;
 import codesquad.validator.UserNameValidator;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserValidationTest {
-    private static Validator validator;
-
     private EmailValidator emailValidator;
 
     private UserNameValidator userNameValidator;
@@ -22,14 +18,12 @@ public class UserValidationTest {
 
     @Before
     public void setUp() throws Exception {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
         user = User.builder()
                 .email("a@b.com")
-                .name("username")
-                .password("password")
+                .name("이혁진")
+                .password("gurwls0808#$")
                 .confirmPassword("password")
-                .phone("000-0000-0000")
+                .phone("010-1234-5678")
                 .build();
     }
 
@@ -78,5 +72,59 @@ public class UserValidationTest {
         user.setName("김$이혁진");
         userNameValidator = new UserNameValidator();
         assertThat(userNameValidator.isValid(user.getName(), null)).isFalse();
+    }
+
+    @Test
+    public void password_올바른형식() {
+        PasswordValidator passwordValidator = new PasswordValidator();
+        assertThat(passwordValidator.isValid(user.getPassword(), null)).isTrue();
+    }
+
+    @Test
+    public void password_틀린형식_최대_길이_초과() {
+        user.setPassword("wlgkfjdkvu!@#231412414213");
+        userNameValidator = new UserNameValidator();
+        assertThat(userNameValidator.isValid(user.getPassword(), null)).isFalse();
+    }
+
+    @Test
+    public void password_틀린형식_최소_길이_미만() {
+        user.setPassword("w!3");
+        userNameValidator = new UserNameValidator();
+        assertThat(userNameValidator.isValid(user.getPassword(), null)).isFalse();
+    }
+
+    @Test
+    public void password_특수문자_없음() {
+        user.setPassword("wfhjd3333");
+        userNameValidator = new UserNameValidator();
+        assertThat(userNameValidator.isValid(user.getPassword(), null)).isFalse();
+    }
+
+    @Test
+    public void password_숫자_없음() {
+        user.setPassword("wfhjd!!!!");
+        userNameValidator = new UserNameValidator();
+        assertThat(userNameValidator.isValid(user.getPassword(), null)).isFalse();
+    }
+
+    @Test
+    public void phone_올바른형식() {
+        PhoneValidator phoneValidator = new PhoneValidator();
+        assertThat(phoneValidator.isValid(user.getPhone(), null)).isTrue();
+    }
+
+    @Test
+    public void phone_틀린_기지국_번호() {
+        user.setPhone("000-1234-5678");
+        PhoneValidator phoneValidator = new PhoneValidator();
+        assertThat(phoneValidator.isValid(user.getPhone(), null)).isFalse();
+    }
+
+    @Test
+    public void phone_숫자가아님() {
+        user.setPhone("000-1234-567a");
+        PhoneValidator phoneValidator = new PhoneValidator();
+        assertThat(phoneValidator.isValid(user.getPhone(), null)).isFalse();
     }
 }

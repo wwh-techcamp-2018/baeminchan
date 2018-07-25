@@ -1,17 +1,15 @@
 package codesquad.validator;
 
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
-
 @Documented
-@Constraint(validatedBy = UserNameValidator.class)
+@Constraint(validatedBy = PasswordValidator.class)
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UserName {
-    String message() default "Invalid username";
+public @interface Password {
+    String message() default "Invalid password";
 
     Class<?>[] groups() default {};
 
