@@ -49,4 +49,8 @@ public class User {
     public void encodePassword(PasswordEncoder passwordEncoder) {
         this.password = passwordEncoder.encode(password);
     }
+
+    public boolean matchPassword(User user, PasswordEncoder passwordEncoder) {
+        return passwordEncoder.matches(user.password, this.password);
+    }
 }
