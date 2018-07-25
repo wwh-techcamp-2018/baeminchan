@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -21,7 +22,7 @@ public class ApiUserController {
     private UserService userService;
 
     @PostMapping("")
-    public ResponseEntity<RestResponse<?>> create(@RequestBody UserSignupDto dto) {
+    public ResponseEntity<RestResponse<?>> create(@Valid @RequestBody UserSignupDto dto) {
         User user = userService.add(dto.toEntity());
 
         if (!dto.matchPassword()) {

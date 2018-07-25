@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ApiUserAcceptanceTest {
-    private static final String PASSWORD = "password";
+    private static final String PASSWORD = "password12345";
     @Autowired
     private TestRestTemplate template;
 

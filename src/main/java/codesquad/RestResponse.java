@@ -35,6 +35,10 @@ public class RestResponse<T> {
         return new RestResponse<T>(data, "");
     }
 
+    public static ErrorResponseBuilder error() {
+        return new ErrorResponseBuilder();
+    }
+
     public static ErrorResponseBuilder error(String field, String errorMessage) {
         return new ErrorResponseBuilder(new Error(field, errorMessage));
     }
@@ -46,6 +50,10 @@ public class RestResponse<T> {
 
     public static class ErrorResponseBuilder {
         private List<Error> errors = new ArrayList<>();
+
+        public ErrorResponseBuilder() {
+        }
+
         private ErrorResponseBuilder(Error error) {
             errors.add(error);
         }

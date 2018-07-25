@@ -54,18 +54,8 @@
                         </a>
                     </li>
                 </ul>
-                <form name="joinFrm" id="joinFrm" class="join_form_box" method="post" action="/member/join.exe.php" target="hidden1529398405"
+                <form name="joinFrm" id="joinFrm" class="join_form_box" method="post" action="/api/users" target="hidden1529398405"
                     onsubmit="return checkRegMember(this)">
-                    <input type="hidden" name="rURL" id="rURL" value="">
-                    <input type="hidden" name="return_url" value="/member/join.exe.php">
-                    <input type="hidden" name="nick_checked" id="nick_checked" value="0">
-                    <input type="hidden" name="site_code" value="">
-                    <input type="hidden" name="unique" value="">
-                    <input type="hidden" name="exec" value="">
-                    <input type="hidden" name="mode" value="join">
-                    <input type="hidden" name="reg_code_checked" id="reg_code_checked" value="0">
-                    <input type="hidden" name="session_id" value="n125miq6k70eh3kqu128c086f7">
-                    <input type="hidden" name="member_id" id="member_id" value="">
                     <input type="hidden" name="email" id="email" value="">
                     <fieldset>
                         <legend class="blind">회원가입 정보입력폼</legend>
@@ -298,6 +288,8 @@
 
     <iframe name="hidden1529398405" id="hidden1529398405" src="about:blank" width="0" height="0" scrolling="no" frameborder="0"
         style="display:none;"></iframe>
+
+    <script src="./js/join.js" type="javascript"/>
 </body>
 
 </html>
