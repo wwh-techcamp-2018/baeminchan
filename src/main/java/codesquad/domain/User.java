@@ -5,11 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Map;
 
-@Data
+@Getter
 @Builder
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 public class User {
 
     @Id
