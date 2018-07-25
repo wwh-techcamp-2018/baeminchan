@@ -35,14 +35,13 @@ public class ApiUserController {
         log.info("userDto : {}", userDto);
         User user = userService.join(userDto);
 
-        return new ResponseEntity(new HttpHeaders(), HttpStatus.CREATED);
-//        return new ResponseEntity<User>(user, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/login")
     public ResponseEntity<Void> login(@RequestBody Map<String, String> newUser, HttpSession session) throws IllegalAccessException {
         User loginUser = userService.login(newUser.get("userId"), newUser.get("password"));
         session.setAttribute(SESSIONED_USER, loginUser);
-        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/")).build();
+        return ResponseEntity.status(HttpStatus.FOUND).build();
     }
 }
