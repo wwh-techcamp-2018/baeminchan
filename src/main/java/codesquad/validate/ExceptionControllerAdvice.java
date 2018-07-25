@@ -2,6 +2,7 @@ package codesquad.validate;
 
 import codesquad.support.ErrorResponse;
 import codesquad.support.JsonResponse;
+import codesquad.support.NotExistException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -39,8 +40,8 @@ public class ExceptionControllerAdvice {
         return errorResponse;
     }
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ErrorResponse handleIllegalArgumentException(IllegalArgumentException exception){
+    @ExceptionHandler( {IllegalArgumentException.class, NotExistException.class} )
+    public ErrorResponse handleIllegalArgumentException(RuntimeException exception){
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.registErrorMessage(exception.getMessage());
         return errorResponse;

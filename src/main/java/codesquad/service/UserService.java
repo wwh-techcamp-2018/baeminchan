@@ -2,6 +2,7 @@ package codesquad.service;
 
 import codesquad.domain.User;
 import codesquad.repository.UserRepository;
+import codesquad.support.NotExistException;
 import org.aspectj.weaver.BCException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,8 +25,11 @@ public class UserService {
         //newUser.encrypt();
         return userRepository.save(newUser);
     }
-
-    public User find(long id){
-        return userRepository.findById(id).get();
+    public User login(String email, String rawPassword){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new NotExistException("ID / PW 를 확인해주십시오"));
+        if(!user.matchEncodedPassword(encoder, rawPassword))
+            throw new NotExistException("ID / PW 를 확인해주십시오");
+        return user;
     }
 }
