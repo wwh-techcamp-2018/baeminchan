@@ -1,7 +1,6 @@
 package codesquad.validate;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -15,10 +14,9 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Optional;
 
-
+@Slf4j
 @RestControllerAdvice
 public class ValidationExceptionControllerAdvice {
-    private static final Logger log = LoggerFactory.getLogger(ValidationExceptionControllerAdvice.class);
 
     @Resource(name = "messageSourceAccessor")
     private MessageSourceAccessor msa;
@@ -37,21 +35,17 @@ public class ValidationExceptionControllerAdvice {
     }
 
     private String getErrorMessage(FieldError fieldError) {
-        Optional<String> code = getFirstCode(fieldError);
-        if (!code.isPresent()) {
-            return null;
-        }
-
-        String errorMessage = msa.getMessage(code.get(), fieldError.getArguments(), fieldError.getDefaultMessage());
-        log.info("error message: {}", errorMessage);
-        return errorMessage;
+        return getFirstCode(fieldError)
+        .map(code -> {
+            String errorMessage = msa.getMessage(code, fieldError.getArguments(), fieldError.getDefaultMessage());
+            log.info("error message: {}", errorMessage);
+            return errorMessage;
+        }).orElseGet(null);
     }
 
     private Optional<String> getFirstCode(FieldError fieldError) {
-        String[] codes = fieldError.getCodes();
-        if (codes == null || codes.length == 0) {
-            return Optional.empty();
-        }
-        return Optional.of(codes[0]);
+        return Optional.ofNullable(fieldError.getCodes())
+                .filter(codes -> codes.length > 0)
+                .map(codes -> codes[0]);
     }
 }
