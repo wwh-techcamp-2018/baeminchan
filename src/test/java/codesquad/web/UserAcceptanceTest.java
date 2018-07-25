@@ -56,7 +56,7 @@ public class UserAcceptanceTest extends AcceptanceTest {
 
         List<Error> errors = responseEntity.getBody().getErrors();
         assertThat(new Error(DomainField.USER_PASSWORD.getFieldName(), "password 형식에 맞게 입력해주세요.")).isIn(errors);
-        assertThat(new Error(DomainField.USER_PHONENUBER.getFieldName(), "전화번호는 숫자만 입력해주세요.")).isIn(errors);
+        assertThat(new Error(DomainField.USER_PHONENUMBER.getFieldName(), "전화번호는 숫자만 입력해주세요.")).isIn(errors);
         assertThat(new Error(DomainField.USER_NAME.getFieldName(), "이름은 1 에서 10 사이의 길이로 입력해주세요.")).isIn(errors);
 
 
@@ -65,7 +65,7 @@ public class UserAcceptanceTest extends AcceptanceTest {
     @Test
     public void login() {
         LoginDto loginDto = new LoginDto("aa@aa.com", "password1");
-        ResponseEntity<Void> responseEntity = template().postForEntity("/users/login", loginDto, Void.class);
+        ResponseEntity<Void> responseEntity = template().postForEntity("/users/signup", loginDto, Void.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
@@ -73,7 +73,7 @@ public class UserAcceptanceTest extends AcceptanceTest {
     @Test
     public void loginEmailNotExist() {
         LoginDto loginDto = new LoginDto("aa_new@aa.com", "password1");
-        ResponseEntity<ErrorResult> responseEntity = template().postForEntity("/users/login", loginDto, ErrorResult.class);
+        ResponseEntity<ErrorResult> responseEntity = template().postForEntity("/users/signup", loginDto, ErrorResult.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getErrors()).contains(new Error(DomainField.USER_EMAIL.getFieldName(), "존재하지 않는 아이디입니다."));
@@ -82,7 +82,7 @@ public class UserAcceptanceTest extends AcceptanceTest {
     @Test
     public void loginEmailPasswordNotMatch() {
         LoginDto loginDto = new LoginDto("aa@aa.com", "password122");
-        ResponseEntity<ErrorResult> responseEntity = template().postForEntity("/users/login", loginDto, ErrorResult.class);
+        ResponseEntity<ErrorResult> responseEntity = template().postForEntity("/users/signup", loginDto, ErrorResult.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getErrors()).contains(new Error(DomainField.USER_PASSWORD.getFieldName(), "아이디와 비밀번호가 일치하지 않습니다."));

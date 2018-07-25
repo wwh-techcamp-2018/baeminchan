@@ -76,7 +76,7 @@ public class User {
 
     public static User of(SignupDto signupDto, PasswordEncoder passwordEncoder) {
         if (!signupDto.isPasswordMatched())
-            throw new BadRequestException(DomainField.USER_PASSWORD.getFieldName(), "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+            throw new BadRequestException(DomainField.USER_PASSWORD_CONFIRM.getFieldName(), "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 
         return new User(
                 signupDto.getEmail(),

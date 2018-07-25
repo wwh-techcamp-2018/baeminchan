@@ -38,7 +38,5 @@ public class BaeminchanConfig implements WebMvcConfigurer {
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 
         registry.addViewController("/").setViewName("index");
-        registry.addViewController("/users/login").setViewName("/user/login");
-        registry.addViewController("/users/signup").setViewName("/user/join");
     }
 }
