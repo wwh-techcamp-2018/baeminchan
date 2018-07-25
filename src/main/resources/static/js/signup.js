@@ -29,11 +29,11 @@ function displayErrors(result) {
         window.location.href = "/users/login";
     }
 
-    $(".error-message-holder").innerHTML = "";
+    let appendText = "";
     for(message of result.errors) {
-        $(".error-message-holder").innerHTML += message.errorMessage.trim('"') + "<br />";
+        appendText += message.errorMessage + "<br />";
     }
-
+    $(".error-message-holder").innerHTML = appendText;
 }
 
 function getEmail() {

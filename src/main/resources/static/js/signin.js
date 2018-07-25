@@ -23,11 +23,13 @@ function displayErrors(result) {
     if(!result) {
         window.location.href = "/";
     }
-
+    let appendText = "";
     $(".error-message-holder").innerHTML = ""
     for(message of result.errors) {
-        $(".error-message-holder").innerHTML += message.errorMessage.trim('"') + "<br />";
+        appendText += message.errorMessage + "<br />";
+
     }
+    $(".error-message-holder").innerHTML = appendText;
 
 }
 

@@ -7,10 +7,10 @@ import javax.validation.constraints.Size;
 public class UserDTO {
 
     @NotBlank
-    @Pattern(regexp = "^[_0-9a-zA-Z-]+@[0-9a-zA-Z]+(.[0-9a-zA-Z-]+)$", message = "email 형식을 정확히 입력해 주세요.")
+    @Pattern(regexp = "^[_0-9a-zA-Z-]+@[0-9a-zA-Z]+(.[0-9a-zA-Z-]+)$")
     private String email;
 
-    @Pattern(regexp = "[0-9a-zA-Z]*$", message = "숫자와 영문으로만 구성된 비밀번호를 입력하시오.")
+    @Pattern(regexp = "[0-9a-zA-Z]*$")
     @Size(min = 8, max = 16)
     private String password;
 
@@ -21,7 +21,7 @@ public class UserDTO {
     private String name;
 
     @NotBlank
-    @Pattern(regexp = "[0-9]+-[0-9]+-[0-9]+", message = "phoneNumber 형식을 따라주세요.")
+    @Pattern(regexp = "[0-9]+-[0-9]+-[0-9]+")
     @Size(min = 4, max = 14)
     private String phoneNumber;
 
