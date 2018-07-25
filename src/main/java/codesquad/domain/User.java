@@ -1,17 +1,13 @@
 package codesquad.domain;
 
-import codesquad.converter.LocalDateTimeConverter;
 import codesquad.service.UserService;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -50,10 +46,6 @@ public class User implements Serializable {
     public User(String userId, String password, String name, String phoneNumber, Role role) {
         this(userId, password, name, phoneNumber);
         this.role = role;
-    }
-
-    public boolean matchPassword(String password) {
-        return this.password.equals(password);
     }
 
     public void init(Role role) {

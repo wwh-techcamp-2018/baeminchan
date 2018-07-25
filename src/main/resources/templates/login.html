@@ -52,7 +52,7 @@
             <div id="login">
                 <div class="login-box">
                     <h2 class="h2_tlt"> 로그인</h2>
-                    <form method="post" action="/api/users/login" target="hidden1529395934" onsubmit="return checkLoginFrm(this);">
+                    <form method="post" action="/api/users/login" target="hidden1529395934">
                         <input type="hidden" name="rURL" value="https://www.baeminchan.com/">
                         <input type="hidden" name="chkignore" value="N">
 
@@ -60,16 +60,16 @@
                             <legend class="hidden">로그인폼</legend>
                             <ul>
                                 <li>
-                                    <label for="member_id" style="display: inline;">
+                                    <label for="userId" style="display: inline;">
                                     </label>
-                                    <input type="text" name="userId" value="" id="member_id" class="input" placeholder="아이디(이메일)" style="ime-mode:inactive; width: 100%">
+                                    <input type="text" name="userId" value="" id="userId" class="input" placeholder="아이디(이메일)" style="ime-mode:inactive; width: 100%">
                                 </li>
                                 <li>
-                                    <label for="pwd"></label>
-                                    <input type="password" name="password" id="pwd" class="input" placeholder="비밀번호" maxlength="25" style="width: 100%">
+                                    <label for="password"></label>
+                                    <input type="password" name="password" id="password" class="input" placeholder="비밀번호" maxlength="25" style="width: 100%">
                                 </li>
                             </ul>
-                            <button class="btn btn_mint btn_login">
+                            <button type="button" class="btn btn_mint btn_login" onclick="onClickLoginButton(this.form);">
                                 <span>로그인</span>
                             </button>
 
@@ -177,5 +177,9 @@
                 <div id="popup_view" class="popup_view"></div>
             </div>
         </div>
+{{/partial}}
+{{#partial "footer"}}
+<script src="/js/utils.js"></script>
+<script src="/js/users.js"></script>
 {{/partial}}
 {{> base }}

@@ -12,7 +12,6 @@ public class StaticMappingController {
     private static final Logger log = LoggerFactory.getLogger(StaticMappingController.class);
     @GetMapping("")
     public String home() {
-        log.debug("gigigi12gi");
         return "index";
     }
 

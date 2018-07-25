@@ -1,11 +1,7 @@
 package codesquad.web;
 
-import codesquad.domain.RoleRepository;
-import codesquad.domain.User;
-import codesquad.domain.UserRepository;
 import codesquad.dto.UserDto;
 import codesquad.exception.ErrorResponse;
-import codesquad.service.UserService;
 import codesquad.validate.ValidationErrorsResponse;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,7 +56,8 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
 
     @Test
     public void create() {
-        ResponseEntity<Void> response = template().postForEntity("/api/users", defaultUser, Void.class);
+        UserDto newUser = new UserDto("sanjigi@java.com", "1234qwer!@", "산지기", "010-1234-1234", "1234qwer!@");
+        ResponseEntity<Void> response = template().postForEntity("/api/users", newUser, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
@@ -70,7 +67,6 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
 
         ResponseEntity<ErrorResponse> response = template().postForEntity("/api/users", defaultUser, ErrorResponse.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        log.debug("debug message : {}", response.getBody().getMessage());
     }
 
     @Test
@@ -79,7 +75,6 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
 
         ResponseEntity<ValidationErrorsResponse> response = template().postForEntity("/api/users", defaultUser, ValidationErrorsResponse.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        log.debug("\n\ndebug message : {}\n\n", response.getBody().getErrors().get(0).getErrorMessage());
     }
 
     /**
@@ -93,6 +88,8 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
      * 1. 로그인 가능, 불가능 테스트 코드
      *
      * - 클라이언트
+     *
+     * Done
      * 1. AJAX 구현
      * 2. response 처리
      * 3. 상단 로그인, 회원가입 메뉴 안보이게 하기
@@ -110,6 +107,5 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
         defaultUser.setPassword("4321rewq!");
         ResponseEntity<ErrorResponse> response = template().postForEntity("/api/users/login", defaultUser, ErrorResponse.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        log.debug("login_실패 :{}", response.getBody().getMessage());
     }
 }

@@ -8,12 +8,19 @@
         </a>
 
         <ul class="menu">
+            {{^loginedUser}}
             <li>
                 <a href="/login">로그인</a>
             </li>
             <li>
                 <a href="/join">회원가입</a>
             </li>
+            {{/loginedUser}}
+            {{#loginedUser}}
+            <li>
+                <a href="#">로그아웃</a>
+            </li>
+            {{/loginedUser}}
             <li>
                 <a href="#">
                     마이페이지
