@@ -1,6 +1,7 @@
-package codesquad;
+package codesquad.validation;
 
 
+import codesquad.RestResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.MessageSourceAccessor;

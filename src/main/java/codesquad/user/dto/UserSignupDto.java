@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -42,6 +43,11 @@ public class UserSignupDto {
     @Pattern(regexp = Regex.PHONE_NUM)
     private String phoneNumber;
 
+    @AssertTrue(message = "")
+    private boolean isMatchPassword() {
+        return password.equals(passwordCheck);
+    }
+
     public UserSignupDto(String name, String email, String password, String passwordCheck, String phoneNumber) {
         this.name = name;
         this.email = email;
@@ -58,9 +64,5 @@ public class UserSignupDto {
                 .phoneNumber(phoneNumber)
                 .role(Role.USER)
                 .build();
-    }
-
-    public boolean matchPassword() {
-        return password.equals(passwordCheck);
     }
 }

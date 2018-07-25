@@ -44,9 +44,10 @@ public class ApiUserAcceptanceTest {
                 .passwordCheck(UserSignupDtoTest.PASSWORD + 1)
                 .build();
 
+
         ResponseEntity<RestResponse<?>> responseEntity = createPostResponseEntity("/api/users", dto);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        assertThat(responseEntity.getBody().getError().get(0).getField()).isEqualTo("password");
+        assertThat(responseEntity.getBody().getError().get(0).getField()).isEqualTo("matchPassword");
     }
 
     private <T> ResponseEntity<RestResponse<?>> createPostResponseEntity(String path, T dto) {
