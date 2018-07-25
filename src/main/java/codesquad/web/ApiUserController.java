@@ -26,9 +26,7 @@ public class ApiUserController {
 
     @PostMapping("")
     public ResponseEntity<Void> join(@Valid @RequestBody JoinUserDTO joinUserDTO, HttpSession session) {
-        log.debug("[가입 시도] email: {} password: {} passwordConfirm: {} name: {} phoneNo: {}",
-                joinUserDTO.getEmail(), joinUserDTO.getPassword(), joinUserDTO.getPasswordConfirm(),
-                joinUserDTO.getName(), joinUserDTO.getPhoneNo());
+        log.debug("[가입 시도] {}", joinUserDTO.toString());
         User loginUser = userService.login(userService.join(joinUserDTO));
         session.setAttribute(HttpSessionUtils.USER_SESSION_KEY, loginUser);
         log.debug("[가입 성공] email: {} 응답 코드: 200 OK", joinUserDTO.getEmail());
@@ -48,11 +46,10 @@ public class ApiUserController {
 
     @PostMapping("/login")
     public ResponseEntity<Void> login(@RequestBody LoginUserDTO loginUserDTO, HttpSession session) {
-        log.debug("[로그인 시도] email: {} password: {}", loginUserDTO.getEmail(), loginUserDTO.getPassword());
+        log.debug("[로그인 시도] {}", loginUserDTO.toString());
         User loginUser = userService.login(loginUserDTO);
         log.debug("[로그인 성공] email: {} 응답 코드: 200 OK", loginUserDTO.getEmail());
         session.setAttribute(HttpSessionUtils.USER_SESSION_KEY, loginUser);
-        // TODO: 2018. 7. 24. SetLocation을 통해서 여기서 redirect URI를 지정해줄 수 있지 않을까?
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 }
