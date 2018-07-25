@@ -26,22 +26,24 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Builder.Default
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String phone;
 
 //    @Column()
 //    private Map<String, Role> roles;
 
-    @Column
-    @Builder.Default
-    private boolean deleted = false;
+    @Column(columnDefinition = "tinyint(1) default 0")
+    private boolean deleted;
 
 }
