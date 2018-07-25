@@ -21,18 +21,22 @@
             </a>
 
             <ul class="menu">
+                {{^loginedUser}}
                 <li>
                     <a href="/users/login">로그인</a>
                 </li>
                 <li>
                     <a href="/users/signup">회원가입</a>
                 </li>
+                {{/loginedUser}}
+                {{#loginedUser}}
                 <li>
                     <a href="#">
                         마이페이지
                         <i class="bm-icon spr-bullet-arrow-down black"></i>
                     </a>
                 </li>
+                {{/loginedUser}}
                 <li>
                     <a href="#">
                         고객센터
