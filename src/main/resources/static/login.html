@@ -55,7 +55,7 @@
             <div id="login">
                 <div class="login-box">
                     <h2 class="h2_tlt"> 로그인</h2>
-                    <form method="post" action="/member/login.exe.php" target="hidden1529395934" onsubmit="return checkLoginFrm(this);">
+                    <form name="loginFrm" id="loginFrm" class="login_form_box">
                         <input type="hidden" name="rURL" value="https://www.baeminchan.com/">
                         <input type="hidden" name="chkignore" value="N">
 
@@ -180,6 +180,8 @@
                 <div id="popup_view" class="popup_view"></div>
             </div>
         </div>
+        <!-- script references -->
+        <script src="/js/login.js"></script>
     </body>
 
 </html>
