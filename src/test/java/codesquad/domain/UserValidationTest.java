@@ -47,13 +47,22 @@ public class UserValidationTest {
     }
     @Test
     public void email_검사_fail() {
-        user.setEmail("a@a!sdf.com");
-        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("특수문자 _ 제외");
-        user.setEmail("asdfa.com");
+
+        user.setEmail("aasdfafacom");
         softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("@ 없을 때");
 
-        user.setEmail("a@asdfafacom");
-        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as(". 없을 때");
+        user.setEmail("aasdfafac@o@m");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("@ 여러개");
+
+        user.setEmail("a”b(c)d,e:f;g<h>i[j\\k]l@example.com");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("email 앞부분에 허용되지 않은 특수문자");
+
+        user.setEmail("ab@asd faacom");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("스페이스 포함");
+
+        user.setEmail("1234567890123456789012345678901234567890123456789012345678901234+x@example.com");
+        softly.assertThat(validator.validate(user).size()).isEqualTo(1).as("아이디 64글자 이상");
+
 
         softly.assertAll();
 

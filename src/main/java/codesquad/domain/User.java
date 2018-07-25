@@ -13,51 +13,48 @@ import java.util.Objects;
 
 @Entity
 public class User extends AbstractEntity {
+    public static final String PASSWORD = "^[a-zA-Z0-9]*$";
+    public static final String NAME = "^[가-힣]*$";
+    public static final String PHONE_NUMBER = "^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$";
 
     @NotNull
     @Column(unique = true)
-    @Pattern(regexp = "(?:[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")
+    @Email
     private String email;
 
     @Transient
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z0-9]*$")
+    @Pattern(regexp = PASSWORD)
     @Size(min = 8, max = 20)
     private String password;
 
     @Transient
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z0-9]*$")
+    @Pattern(regexp = PASSWORD)
     @Size(min = 8, max = 20)
     private String passwordCheck;
 
-
+    @Column( nullable = false)
     private String encodedPassword;
 
     @NotNull
-    @Pattern(regexp = "^[가-힣]*$")
+    @Pattern(regexp = NAME)
     @Size(min = 2, max = 4)
     private String name;
 
     @NotNull
-    @Pattern(regexp = "^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$")
+    @Pattern(regexp = PHONE_NUMBER)
     private String phoneNumber;
 
-    @Enumerated(EnumType.ORDINAL)
-    private UserAuthority userAuthority = UserAuthority.GENERAL_USER;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserAuthority userAuthority = UserAuthority.GENERAL;
 
 
 
     public User() {
     }
 
-
-    public User(String email, String password, String name, String phoneNumber) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-    }
 
     public User(String email, String password, String passwordCheck, String name, String phoneNumber) {
         this.email = email;
@@ -166,6 +163,6 @@ public class User extends AbstractEntity {
     }
 
     public boolean isAdmin(){
-        return this.userAuthority == UserAuthority.ADMIN_USER;
+        return this.userAuthority == UserAuthority.ADMIN;
     }
 }
