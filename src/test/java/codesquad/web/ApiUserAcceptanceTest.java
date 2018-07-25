@@ -1,6 +1,7 @@
 package codesquad.web;
 
 import codesquad.domain.User;
+import codesquad.dto.UserDto;
 import org.junit.Before;
 import org.junit.Test;
 import codesquad.support.AcceptanceTest;
@@ -16,16 +17,16 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
 
     private static final Logger log = LoggerFactory.getLogger(ApiUserAcceptanceTest.class);
 
-    private User user;
+    private UserDto user;
 
     @Before
     public void setUp() throws Exception {
-        user = User.builder()
+        user = UserDto.builder()
                 .email("a@b.com")
-                .name("username")
-                .password("password")
-                .confirmPassword("password")
-                .phone("000-0000-0000")
+                .name("이혁진")
+                .password("gkgkgk123!")
+                .confirmPassword("gkgkgk123!")
+                .phone("010-1234-5678")
                 .build();
     }
 

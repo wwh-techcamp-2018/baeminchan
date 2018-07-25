@@ -3,10 +3,15 @@ package codesquad.domain;
 
 //import codesquad.validator.Email;
 import codesquad.validator.Email;
+import codesquad.validator.Password;
+import codesquad.validator.Phone;
 import codesquad.validator.UserName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -16,6 +21,7 @@ import java.util.Map;
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -23,38 +29,19 @@ public class User {
     @Builder.Default
     private Long id;
 
-    @Column()
-    @Email()
     private String email;
 
-    @Column()
-    @UserName
     private String name;
 
-    @Column()
     private String password;
 
-    @Transient
-    private String confirmPassword;
-
-    @Column()
     private String phone;
 
 //    @Column()
 //    private Map<String, Role> roles;
 
-    @Column()
+    @Column
     @Builder.Default
     private boolean deleted = false;
 
-    public User() {
-    }
-
-    public User(String email, String name, String password, String confirmPassword, String phone) {
-        this.email = email;
-        this.name = name;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
-        this.phone = phone;
-    }
 }
