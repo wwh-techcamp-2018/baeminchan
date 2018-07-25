@@ -11,6 +11,8 @@
     <meta name="naver-site-verification" content="e543b30ae873355f2c556f58b48ae7c95c1cea05">
     <title>배민찬 - 모바일 넘버원 반찬가게</title>
     <link rel="stylesheet" type="text/css" href="common.css">
+    <script src="/js/join.js"></script>
+    <script src="/js/util.js"></script>
 </head>
 
 <body>
@@ -54,7 +56,7 @@
                         </a>
                     </li>
                 </ul>
-                <form name="joinFrm" id="joinFrm" class="join_form_box" method="post" action="/member/join.exe.php" target="hidden1529398405"
+                <form name="joinFrm" id="joinFrm" class="join_form_box" method="post" target="hidden1529398405"
                     onsubmit="return checkRegMember(this)">
                     <input type="hidden" name="rURL" id="rURL" value="">
                     <input type="hidden" name="return_url" value="/member/join.exe.php">
@@ -152,7 +154,7 @@
                                     <td>
                                         <input type="password" size="30" name="pwd[]" id="pw1" class="join_input" maxlength="25" placeholder="8-16자리 영문,숫자 조합">
                                         <p class="tb_txt1">
-                                            <span id="join_check_password" class="tb_in_txt caution"></span>
+                                            <span id="password_caution" class="tb_in_txt caution"></span>
                                         </p>
                                     </td>
                                 </tr>
@@ -173,7 +175,7 @@
                                     </th>
                                     <td>
                                         <input type="text" size="24" name="name" value="" id="name" class="join_input">
-                                        <span class="tb_in_txt caution"></span>
+                                        <span class="tb_in_txt caution" id="username_caution"></span>
                                     </td>
                                 </tr>
                                 <tr class="phone">
@@ -189,9 +191,10 @@
                                         <span class="block"> - </span>
                                         <input type="text" maxlength="4" size="10" name="cell[]" id="cell3" value="" title="휴대 전화 번호 뒷자리" class="join_input small"
                                             onkeyup="goNext(this,4,'m_auth')">
+                                        <span class="tb_in_txt caution" id="phoneNumber_caution"></span>
                                         <input type="radio" name="unique" value="2" id="unique_phone" onclick="selectRegMode(2)" style="display: none;">
                                         <div class="comment_box login" id="duplicate_phone" style="display:none;">
-                                            <span class="tb_in_txt caution clear" id="duplicate_id"></span>
+                                            <span class="tb_in_txt caution clear" id="duplicate_id">dd</span>
                                             <br class="clear">
                                             <span class="tb_in_txt">기존 아이디로 로그인하거나 비밀번호를 찾으려면?</span>
                                             <br class="clear">
@@ -207,7 +210,7 @@
                     </fieldset>
 
                     <div class="btn_area center mt40">
-                        <button type="submit" class="btn btn_mint btn_big">
+                        <button type="submit" class="submit-btn btn btn_mint btn_big">
                             <span>가입 완료</span>
                         </button>
                     </div>
