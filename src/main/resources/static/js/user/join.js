@@ -9,29 +9,8 @@ function onFailureJoin(response) {
     response.json().then(handleErrors);
 }
 
-function handleErrors(body) {
-    const errors = body.errors;
-    errors.forEach(function (error) {
-        const cautionField = $("#" + error.fieldName + "_caution");
-        cautionField.style.display = "inline";
-        cautionField.innerText = error.errorMessage;
-
-    });
-
-}
-
-function clearCaution(fieldName) {
-    $("#" + fieldName + "_caution").style.display = "none";
-}
-
-function clearAllCaution() {
-    joinFields.forEach(function (field) {
-        clearCaution(field);
-    })
-}
-
 function signup() {
-    clearAllCaution();
+    clearCautions(joinFields);
     const body = {
         email: $("#email_id").value + "@" + $("#email_domain").value,
         password: $("#pw1").value,
@@ -50,12 +29,6 @@ function signup() {
     })
 }
 
-function addChangeListener(element, fieldName) {
-    element.addEventListener("input", function () {
-        clearCaution(fieldName);
-    })
-
-}
 
 function init() {
     $('#join-button').addEventListener("click", function (evt) {
