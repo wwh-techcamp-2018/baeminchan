@@ -1,5 +1,7 @@
 package codesquad.dto;
 
+import codesquad.domain.User;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -7,11 +9,12 @@ import javax.validation.constraints.Size;
 public class LoginDto {
 
     @NotBlank
-    @Pattern(regexp = "^[._0-9a-zA-Z-]+@[0-9a-zA-Z]+(.[0-9a-zA-Z-]+)+$", message = "이메일 형식이 올바르지 않습니다.")
+    @Pattern(regexp = User.EMAIL_PATTERN)
     private String email;
 
+    @NotBlank
     @Size(min = 8, max = 16)
-    @Pattern(regexp = "^[0-9a-zA-Z]+", message = "비밀번호 형식이 올바르지 않습니다.")
+    @Pattern(regexp = User.PASSWORD_PATTERN)
     private String password;
 
     public LoginDto() {

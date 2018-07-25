@@ -28,9 +28,9 @@ dependencies {
     compile('org.springframework.security:spring-security-core:5.0.6.RELEASE')
 
     compile('mysql:mysql-connector-java')
+    compile('pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0')
 
     compile('org.hibernate:hibernate-java8')
-    runtime('com.h2database:h2')
     runtime('net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.assertj:assertj-core:3.10.0')

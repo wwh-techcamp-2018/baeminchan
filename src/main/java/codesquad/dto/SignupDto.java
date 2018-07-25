@@ -1,5 +1,8 @@
 package codesquad.dto;
 
+import codesquad.domain.User;
+import codesquad.domain.UserPermissions;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -7,20 +10,23 @@ import javax.validation.constraints.Size;
 public class SignupDto {
 
     @NotBlank
-    @Pattern(regexp = "^[._0-9a-zA-Z-]+@[0-9a-zA-Z]+(.[0-9a-zA-Z-]+)+$", message = "이메일 형식이 올바르지 않습니다.")
+    @Pattern(regexp = User.EMAIL_PATTERN)
     private String email;
 
+    @NotBlank
     @Size(min = 8, max = 16)
-    @Pattern(regexp = "^[0-9a-zA-Z]+", message = "비밀번호 형식이 올바르지 않습니다.")
+    @Pattern(regexp = User.PASSWORD_PATTERN)
     private String password;
 
     private String passwordConfirm;
 
+    @NotBlank
     @Size(min = 1, max = 10)
     private String name;
 
+    @NotBlank
     @Size(min = 4, max = 14)
-    @Pattern(regexp = "[0-9]+-[0-9]+-[0-9]+", message = "숫자만 입력해주세요.")
+    @Pattern(regexp = User.PHONENUMBER_PATTERN)
     private String phoneNumber;
 
     public SignupDto() {
@@ -73,5 +79,51 @@ public class SignupDto {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public boolean isPasswordMatched() {
+        return password.equals(passwordConfirm);
+    }
+
+    public static class SignupDtoBuilder {
+        private String email;
+        private String name;
+        private String password;
+        private String passwordConfirm;
+        private String phoneNumber;
+
+        public SignupDtoBuilder() {
+
+        }
+
+        public SignupDtoBuilder withEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public SignupDtoBuilder withPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public SignupDtoBuilder withPasswordConfirm(String passwordConfirm) {
+            this.passwordConfirm = passwordConfirm;
+            return this;
+        }
+
+        public SignupDtoBuilder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public SignupDtoBuilder withPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public SignupDto build() {
+            return new SignupDto(email, password, passwordConfirm, name, phoneNumber);
+        }
+
     }
 }

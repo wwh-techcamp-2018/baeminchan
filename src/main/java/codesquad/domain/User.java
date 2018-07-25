@@ -11,25 +11,30 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class User {
+    public static final String EMAIL_PATTERN = "[._0-9a-zA-Z-]+@[0-9a-zA-Z]+.([0-9a-zA-Z]+)";
+    public static final String PHONENUMBER_PATTERN = "[0-9]+-[0-9]+-[0-9]+";
+    public static final String PASSWORD_PATTERN = "^[0-9a-zA-Z]+";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank
-    @Pattern(regexp = "[._0-9a-zA-Z-]+@[0-9a-zA-Z]+.([0-9a-zA-Z]+)")
+    @Pattern(regexp = EMAIL_PATTERN)
     @Column(length = 40, unique = true, nullable = false, updatable = false)
     private String email;
 
     @Column(nullable = false)
     private String password;
 
+    @NotBlank
     @Size(min = 1, max = 10)
     @Column(length = 10, nullable = false)
     private String name;
 
+    @NotBlank
     @Size(min = 4, max = 14)
-    @Pattern(regexp = "[0-9]+-[0-9]+-[0-9]+")
+    @Pattern(regexp = PHONENUMBER_PATTERN)
     @Column(length = 14, nullable = false)
     private String phoneNumber;
 
@@ -70,7 +75,7 @@ public class User {
     }
 
     public static User of(SignupDto signupDto, PasswordEncoder passwordEncoder) {
-        if (!signupDto.getPassword().equals(signupDto.getPasswordConfirm()))
+        if (!signupDto.isPasswordMatched())
             throw new BadRequestException(DomainField.USER_PASSWORD.getFieldName(), "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 
         return new User(
@@ -82,8 +87,9 @@ public class User {
         );
     }
 
-    public void checkPassword(String loginPassword, PasswordEncoder encoder) {
+    public User checkPassword(String loginPassword, PasswordEncoder encoder) {
         if (!encoder.matches(loginPassword, password))
             throw new BadRequestException(DomainField.USER_PASSWORD.getFieldName(), "아이디와 비밀번호가 일치하지 않습니다.");
+        return this;
     }
 }

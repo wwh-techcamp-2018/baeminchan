@@ -37,10 +37,9 @@ public class UserService {
     }
 
     public User login(LoginDto loginDto) {
-        User user = userRepository.findByEmail(loginDto.getEmail())
-                .orElseThrow(() -> new BadRequestException(DomainField.USER_EMAIL.getFieldName(), "존재하지 않는 아이디입니다."));
-        user.checkPassword(loginDto.getPassword(), passwordEncoder);
-        return user;
+        return userRepository.findByEmail(loginDto.getEmail())
+                .orElseThrow(() -> new BadRequestException(DomainField.USER_EMAIL.getFieldName(), "존재하지 않는 아이디입니다."))
+                .checkPassword(loginDto.getPassword(), passwordEncoder);
     }
 
 }

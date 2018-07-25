@@ -14,11 +14,7 @@ public class SessionUtil {
     }
 
     public static User getUserSession(HttpSession session) {
-        Optional<User> maybeUser = Optional.ofNullable((User) session.getAttribute(SESSION_KEY));
-        // TODO: Exception ! customize
-        if (!maybeUser.isPresent())
-            throw new RuntimeException();
-
-        return maybeUser.get();
+        return Optional.ofNullable((User) session.getAttribute(SESSION_KEY))
+                .orElseThrow(RuntimeException::new);
     }
 }
