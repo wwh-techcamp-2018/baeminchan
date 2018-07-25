@@ -24,7 +24,6 @@ function fetchManager({ url, method, body, headers, callback }) {
     })
 }
 
-
 function registerUserHandler(evt) {
     evt.preventDefault();
     const joinTable = $(".tb_join");

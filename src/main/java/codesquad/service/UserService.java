@@ -33,4 +33,9 @@ public class UserService {
     }
 
 
+    public User login(String userId, String password) throws IllegalAccessException {
+        User savedUser = userRepository.findByUserId(userId).orElseThrow(IllegalAccessException::new);
+        savedUser.login(password, passwordEncoder);
+        return savedUser;
+    }
 }

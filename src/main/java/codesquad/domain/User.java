@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Entity
@@ -63,5 +64,12 @@ public class User {
     public User setJoinDate(LocalDateTime joinDate) {
         this.joinDate = joinDate;
         return this;
+    }
+
+    public boolean login(String password, PasswordEncoder passwordEncoder) throws IllegalAccessException {
+        if(!passwordEncoder.matches(password, this.password)) {
+            throw new IllegalAccessException();
+        }
+        return true;
     }
 }
