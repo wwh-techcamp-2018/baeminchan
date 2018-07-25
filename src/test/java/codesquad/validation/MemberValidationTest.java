@@ -1,6 +1,8 @@
 package codesquad.validation;
 
+import codesquad.dto.LoginDto;
 import codesquad.dto.MemberDto;
+import codesquad.support.MemberDtoBuilder;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -27,7 +29,7 @@ public class MemberValidationTest {
 
     @Test
     public void emailValidTest() {
-        MemberDto memberDto = new MemberDto("email@com", "1234", "pobi", "01012341234");
+        MemberDto memberDto = MemberDtoBuilder.builder().build();
         Set<ConstraintViolation<MemberDto>> constraintViolations = validator.validate(memberDto);
         log.debug("violations: {}", constraintViolations.toString());
         assertThat(constraintViolations.size()).isEqualTo(0);
@@ -35,7 +37,7 @@ public class MemberValidationTest {
 
     @Test
     public void emailBlankTest() {
-        MemberDto memberDto = new MemberDto("", "1234", "pobi", "01012341234");
+        MemberDto memberDto = MemberDtoBuilder.builder().email("").build();
         Set<ConstraintViolation<MemberDto>> constraintViolations = validator.validate(memberDto);
         log.debug("violations: {}", constraintViolations.toString());
         assertThat(constraintViolations.size()).isEqualTo(1);
@@ -44,7 +46,7 @@ public class MemberValidationTest {
 
     @Test
     public void emailInvalidFormatTest() {
-        MemberDto memberDto = new MemberDto("email", "1234", "pobi", "01012341234");
+        MemberDto memberDto = MemberDtoBuilder.builder().email("hi").build();
         Set<ConstraintViolation<MemberDto>> constraintViolations = validator.validate(memberDto);
         log.debug("violations: {}", constraintViolations.toString());
         assertThat(constraintViolations.size()).isEqualTo(1);
@@ -52,7 +54,7 @@ public class MemberValidationTest {
 
     @Test
     public void passwordValidTest() {
-        MemberDto memberDto = new MemberDto("email@com", "12345", "pobi", "01012341234");
+        MemberDto memberDto = MemberDtoBuilder.builder().build();
         Set<ConstraintViolation<MemberDto>> constraintViolations = validator.validate(memberDto);
         log.debug("violations: {}", constraintViolations.toString());
         assertThat(constraintViolations.size()).isEqualTo(0); // for length constraint checks whether it is at least 4 letters.
@@ -60,7 +62,7 @@ public class MemberValidationTest {
 
     @Test
     public void passwordBlankTest() {
-        MemberDto memberDto = new MemberDto("email@com", "", "pobi", "01012341234");
+        MemberDto memberDto = MemberDtoBuilder.builder().password("").build();
         Set<ConstraintViolation<MemberDto>> constraintViolations = validator.validate(memberDto);
         log.debug("violations: {}", constraintViolations.toString());
         assertThat(constraintViolations.size()).isEqualTo(2); // for length constraint checks whether it is at least 4 letters.
@@ -68,7 +70,7 @@ public class MemberValidationTest {
 
     @Test
     public void passwordShortTest() {
-        MemberDto memberDto = new MemberDto("email@com", "123", "pobi", "01012341234");
+        MemberDto memberDto = MemberDtoBuilder.builder().password("123").build();
         Set<ConstraintViolation<MemberDto>> constraintViolations = validator.validate(memberDto);
         log.debug("violations: {}", constraintViolations.toString());
         assertThat(constraintViolations.size()).isEqualTo(1);
@@ -76,7 +78,7 @@ public class MemberValidationTest {
 
     @Test
     public void passwordTooLongTest() {
-        MemberDto memberDto = new MemberDto("email@com", "1234567890123456789012345678901", "pobi", "01012341234");
+        MemberDto memberDto = MemberDtoBuilder.builder().password("1234567890123456789012345678901").build();
         Set<ConstraintViolation<MemberDto>> constraintViolations = validator.validate(memberDto);
         log.debug("violations: {}", constraintViolations.toString());
         assertThat(constraintViolations.size()).isEqualTo(1);
@@ -84,23 +86,23 @@ public class MemberValidationTest {
 
     @Test
     public void nameValidTest() {
-        MemberDto memberDto = new MemberDto("email@com", "1234", "pobi", "01012341234");
+        MemberDto memberDto = MemberDtoBuilder.builder().build();
         Set<ConstraintViolation<MemberDto>> constraintViolations = validator.validate(memberDto);
         log.debug("violations: {}", constraintViolations.toString());
         assertThat(constraintViolations.size()).isEqualTo(0);
     }
 
     @Test
-    public void nameBlankTest() {
-        MemberDto memberDto = new MemberDto("email@com", "1234", "", "01012341234");
+    public void usernameBlankTest() {
+        MemberDto memberDto = MemberDtoBuilder.builder().username("").build();
         Set<ConstraintViolation<MemberDto>> constraintViolations = validator.validate(memberDto);
         log.debug("violations: {}", constraintViolations.toString());
         assertThat(constraintViolations.size()).isEqualTo(1);
     }
 
     @Test
-    public void nameTooLongTest() {
-        MemberDto memberDto = new MemberDto("email@com", "1234", "pobi1pobi1pobi1pobi1pobi1pobi1pobi1", "01012341234");
+    public void usernameTooLongTest() {
+        MemberDto memberDto = MemberDtoBuilder.builder().username("1234512345123451234512345123451234512345").build();
         Set<ConstraintViolation<MemberDto>> constraintViolations = validator.validate(memberDto);
         log.debug("violations: {}", constraintViolations.toString());
         assertThat(constraintViolations.size()).isEqualTo(1);
@@ -108,7 +110,7 @@ public class MemberValidationTest {
 
     @Test
     public void phoneNumberValidTest() {
-        MemberDto memberDto = new MemberDto("email@com", "1234", "pobi", "01012341234");
+        MemberDto memberDto = MemberDtoBuilder.builder().build();
         Set<ConstraintViolation<MemberDto>> constraintViolations = validator.validate(memberDto);
         log.debug("violations: {}", constraintViolations.toString());
         assertThat(constraintViolations.size()).isEqualTo(0);
@@ -116,7 +118,7 @@ public class MemberValidationTest {
 
     @Test
     public void phoneNumberBlankTest() {
-        MemberDto memberDto = new MemberDto("email@com", "1234", "pobi", "");
+        MemberDto memberDto = MemberDtoBuilder.builder().phoneNumber("").build();
         Set<ConstraintViolation<MemberDto>> constraintViolations = validator.validate(memberDto);
         log.debug("violations: {}", constraintViolations.toString());
         assertThat(constraintViolations.size()).isEqualTo(2);
@@ -124,7 +126,7 @@ public class MemberValidationTest {
 
     @Test
     public void phoneNumberInvalidFormatTest() {
-        MemberDto memberDto = new MemberDto("email@com", "1234", "pobi", "010123a1!3b");
+        MemberDto memberDto = MemberDtoBuilder.builder().phoneNumber("010123a1!3b").build();
         Set<ConstraintViolation<MemberDto>> constraintViolations = validator.validate(memberDto);
         log.debug("violations: {}", constraintViolations.toString());
         assertThat(constraintViolations.size()).isEqualTo(1);
@@ -132,18 +134,72 @@ public class MemberValidationTest {
 
     @Test
     public void phoneNumberShortTest() {
-        MemberDto memberDto = new MemberDto("email@com", "1234", "pobi", "01012334");
+        MemberDto memberDto = MemberDtoBuilder.builder().phoneNumber("01012334").build();
         Set<ConstraintViolation<MemberDto>> constraintViolations = validator.validate(memberDto);
         log.debug("violations: {}", constraintViolations.toString());
         assertThat(constraintViolations.size()).isEqualTo(1);
     }
     @Test
     public void phoneNumberTooLongTest() {
-        MemberDto memberDto = new MemberDto("email@com", "1234", "pobi", "010123341234123");
+        MemberDto memberDto = MemberDtoBuilder.builder().phoneNumber("010123341234123").build();
         Set<ConstraintViolation<MemberDto>> constraintViolations = validator.validate(memberDto);
         log.debug("violations: {}", constraintViolations.toString());
         assertThat(constraintViolations.size()).isEqualTo(1);
     }
 
+    @Test
+    public void loginEmailValidTest() {
+        LoginDto loginDto = new LoginDto("valid@email", "123123");
+        Set<ConstraintViolation<LoginDto>> constraintViolations = validator.validate(loginDto);
+        log.debug("violations: {}", constraintViolations.toString());
+        assertThat(constraintViolations.size()).isEqualTo(0);
+    }
 
+    @Test
+    public void loginEmailBlankTest() {
+        LoginDto loginDto = new LoginDto("", "123123");
+        Set<ConstraintViolation<LoginDto>> constraintViolations = validator.validate(loginDto);
+        log.debug("violations: {}", constraintViolations.toString());
+        assertThat(constraintViolations.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void loginEmailInvalidFormatTest() {
+        LoginDto loginDto = new LoginDto("hi", "123123");
+        Set<ConstraintViolation<LoginDto>> constraintViolations = validator.validate(loginDto);
+        log.debug("violations: {}", constraintViolations.toString());
+        assertThat(constraintViolations.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void loginPasswordValidTest() {
+        LoginDto loginDto = new LoginDto("hi@com", "123123");
+        Set<ConstraintViolation<LoginDto>> constraintViolations = validator.validate(loginDto);
+        log.debug("violations: {}", constraintViolations.toString());
+        assertThat(constraintViolations.size()).isEqualTo(0);
+    }
+
+    @Test
+    public void loginPasswordBlankTest() {
+        LoginDto loginDto = new LoginDto("hi@com", "");
+        Set<ConstraintViolation<LoginDto>> constraintViolations = validator.validate(loginDto);
+        log.debug("violations: {}", constraintViolations.toString());
+        assertThat(constraintViolations.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void loginPasswordShortTest() {
+        LoginDto loginDto = new LoginDto("hi@com", "123");
+        Set<ConstraintViolation<LoginDto>> constraintViolations = validator.validate(loginDto);
+        log.debug("violations: {}", constraintViolations.toString());
+        assertThat(constraintViolations.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void loginPasswordTooLongTest() {
+        LoginDto loginDto = new LoginDto("hi@com", "1234567890123456789012345678901");
+        Set<ConstraintViolation<LoginDto>> constraintViolations = validator.validate(loginDto);
+        log.debug("violations: {}", constraintViolations.toString());
+        assertThat(constraintViolations.size()).isEqualTo(1);
+    }
 }

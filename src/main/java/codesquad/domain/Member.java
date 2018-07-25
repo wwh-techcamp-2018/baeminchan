@@ -1,9 +1,9 @@
 package codesquad.domain;
 
+import codesquad.dto.MemberDto;
 import codesquad.support.Role;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Arrays;
@@ -11,9 +11,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
+@Getter
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,8 +36,10 @@ public class Member {
         this.username = username;
         this.phoneNumber = phoneNumber;
     }
+    public static Member fromDto(MemberDto inputMemberDto, PasswordEncoder bCryptPasswordEncoder) {
+        MemberDto memberDto = new MemberDto(inputMemberDto);
+        memberDto.setPassword(bCryptPasswordEncoder.encode(memberDto.getPassword()));
+        return memberDto.toEntity();
 
-    public boolean matchPassword(String password) {
-        return this.password.equals(password);
     }
 }

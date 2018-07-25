@@ -4,7 +4,6 @@ package codesquad.dto;
 import codesquad.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -12,7 +11,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class MemberDto {
     @NotBlank(message = "메일을 작성해주세요.")
@@ -28,9 +26,15 @@ public class MemberDto {
     @Pattern(regexp = "[0-9]{10,11}", message = "10~11자리의 숫자만 입력가능합니다")
     private String phoneNumber;
 
+    public MemberDto() {
+
+    }
+    public MemberDto(MemberDto member) {
+        this(member.getEmail(), member.getPassword(), member.getUsername(), member.getPhoneNumber());
+    }
+
     public Member toEntity() {
         //TODO: password encryption should be added
         return new Member(email, password, username, phoneNumber);
     }
-
 }

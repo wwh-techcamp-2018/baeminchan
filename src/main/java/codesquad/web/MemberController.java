@@ -1,6 +1,7 @@
 package codesquad.web;
 
 import codesquad.domain.Member;
+import codesquad.dto.LoginDto;
 import codesquad.dto.MemberDto;
 import codesquad.service.MemberService;
 import org.slf4j.Logger;
@@ -23,8 +24,8 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody MemberDto memberDto, HttpSession session) {
-        session.setAttribute("member", memberService.login(memberDto));
+    public ResponseEntity login(@RequestBody @Valid LoginDto loginDto, HttpSession session) {
+        session.setAttribute("member", memberService.login(loginDto));
         return ResponseEntity.ok().build();
     }
     @PostMapping

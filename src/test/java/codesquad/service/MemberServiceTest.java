@@ -2,7 +2,9 @@ package codesquad.service;
 
 import codesquad.domain.Member;
 import codesquad.domain.MemberRepository;
+import codesquad.dto.LoginDto;
 import codesquad.dto.MemberDto;
+import codesquad.support.MemberDtoBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -31,22 +33,20 @@ public class MemberServiceTest {
 
     @Test
     public void createTest() {
-        MemberDto memberDto = new MemberDto("pobi@naver.com", "1234", "pobi","01012341234");
+        MemberDto memberDto = MemberDtoBuilder.builder().build();
         memberService.save(memberDto);
-        Member member  = memberDto.toEntity();
-        member.setPassword(mockPasswordEncoder.encode(member.getPassword()));
+        Member member = Member.fromDto(memberDto, mockPasswordEncoder);
         verify(memberRepository).save(member);
     }
 
     @Test
     public void loginTest() {
-        Member member = new Member("javajigi@naver.com", "123123", "pobi", "01012341234");
+        String password = "123123";
+        Member member = new Member("javajigi@naver.com", mockPasswordEncoder.encode(password), "pobi", "01012341234");
         MemberDto memberDto = new MemberDto();
-        memberDto.setEmail(member.getEmail());
-        memberDto.setPassword(member.getPassword());
-        member.setPassword(this.mockPasswordEncoder.encode(member.getPassword()));
+        LoginDto loginDto = new LoginDto(member.getEmail(), password);
         when(memberRepository.findByEmail(member.getEmail())).thenReturn(Optional.ofNullable(member));
-        assertThat(memberService.login(memberDto)).isEqualTo(member);
+        assertThat(memberService.login(loginDto)).isEqualTo(member);
     }
 
     private class MockPasswordEncoder implements PasswordEncoder {
