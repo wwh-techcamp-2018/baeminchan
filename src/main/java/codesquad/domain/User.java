@@ -31,6 +31,7 @@ public class User extends AbstractEntity {
     @Size(min = 8, max = 20)
     private String passwordCheck;
 
+
     private String encodedPassword;
 
     @NotNull
