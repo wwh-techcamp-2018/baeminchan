@@ -4,7 +4,6 @@ import codesquad.domain.Member;
 import codesquad.dto.LoginDto;
 import codesquad.dto.MemberDto;
 import codesquad.service.MemberService;
-import codesquad.support.MemberDtoBuilder;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,7 +34,7 @@ public class MemberAcceptanceTest {
     public void memberCreateTest() {
         String email = "pobi@naver.com";
 
-        ResponseEntity<Member> response = template.postForEntity("/members", MemberDtoBuilder.builder().email(email).build(), Member.class);
+        ResponseEntity<Member> response = template.postForEntity("/members", MemberDto.defaultMemberDto().setEmail(email), Member.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(memberService.findByEmail(email)).isNotNull();
@@ -44,7 +43,7 @@ public class MemberAcceptanceTest {
     @Test
     public void memberCreateFailTest() throws JSONException {
         ResponseEntity<String> response = template.postForEntity("/members",
-                MemberDtoBuilder.builder().email("123").build(), String.class);
+                MemberDto.defaultMemberDto().setEmail("123"), String.class);
         String errorMessage = getErrorMessageFromJsonString(response.getBody());
 
         assertThat(errorMessage).isEqualTo("메일의 양식을 지켜주세요.");
@@ -57,7 +56,7 @@ public class MemberAcceptanceTest {
         String password = "123123";
 
         ResponseEntity<Member> response = template.postForEntity("/members",
-                MemberDtoBuilder.builder().email(email).password(password).build(), Member.class);
+                MemberDto.defaultMemberDto().setEmail(email).setPassword(password), Member.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(memberService.findByEmail(email)).isNotNull();

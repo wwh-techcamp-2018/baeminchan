@@ -19,4 +19,19 @@ public class LoginDto {
     @NotBlank
     @Size(min = 4, max = 30)
     private String password;
+
+
+    public static LoginDto defaultLoginDto() {
+        return new LoginDto("javajigi@kakao.com", "123123");
+    }
+
+    public LoginDto setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public LoginDto setPassword(String password) {
+        this.password = password;
+        return this;
+    }
 }

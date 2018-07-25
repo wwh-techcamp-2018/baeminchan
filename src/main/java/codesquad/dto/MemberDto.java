@@ -37,4 +37,28 @@ public class MemberDto {
         //TODO: password encryption should be added
         return new Member(email, password, username, phoneNumber);
     }
+
+    public static MemberDto defaultMemberDto() {
+        return new MemberDto("pobi@naver.com", "1234", "pobi", "01012341234");
+    }
+
+    public MemberDto setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public MemberDto setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public MemberDto setUsername(String username) {
+        this.username = username;
+        return this;
+    }
+
+    public MemberDto setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
 }

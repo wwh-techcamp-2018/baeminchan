@@ -4,7 +4,6 @@ import codesquad.domain.Member;
 import codesquad.domain.MemberRepository;
 import codesquad.dto.LoginDto;
 import codesquad.dto.MemberDto;
-import codesquad.support.MemberDtoBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -33,7 +32,7 @@ public class MemberServiceTest {
 
     @Test
     public void createTest() {
-        MemberDto memberDto = MemberDtoBuilder.builder().build();
+        MemberDto memberDto = MemberDto.defaultMemberDto();
         memberService.save(memberDto);
         Member member = Member.fromDto(memberDto, mockPasswordEncoder);
         verify(memberRepository).save(member);
