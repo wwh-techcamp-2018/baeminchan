@@ -1,6 +1,8 @@
 package codesquad.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import support.domain.Role;
 
 import javax.persistence.*;
@@ -11,6 +13,7 @@ import java.util.Set;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,8 +49,8 @@ public class Member {
         this.phoneNumber = phoneNumber;
     }
 
-    public boolean matchPassword(String password) {
-        return this.password.equals(password);
+    public boolean matchPassword(String rawPassword, PasswordEncoder bcryptPasswordEncoder) {
+        return bcryptPasswordEncoder.matches(rawPassword, this.password);
     }
 
     @Override

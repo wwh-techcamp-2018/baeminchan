@@ -25,7 +25,7 @@ public class ApiMemberController {
 
     @PostMapping
     public ResponseEntity<Void> create(@Valid @RequestBody MemberDto memberDto) {
-        Member member = memberService.add(memberDto);
+        memberService.add(memberDto);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create("/"));
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);

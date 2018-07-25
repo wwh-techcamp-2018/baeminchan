@@ -10,7 +10,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,21 +29,15 @@ public class MemberServiceTest {
     @InjectMocks
     private MemberService memberService;
 
+    @Spy
+    private PasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
 
-//    @Test
-//    public void add() {
-//        memberService = new MemberService();
-//        MemberDto memberDto = new MemberDto();
-//
-//        //TODO 입력한 내용의 validation check
-//        memberService.add()
-//    }
 
     @Test
     public void login_success() {
         MemberDto testMemberDto = MemberDtoTest.newMemberDto("dooho@woowahan.com", "1234password");
 
-        Member dbMember = MemberTest.newMember("dooho@woowahan.com", "1234password");
+        Member dbMember = MemberTest.newMember("dooho@woowahan.com", bcryptPasswordEncoder.encode("1234password"));
         when(memberRepository.findByEmail(testMemberDto.getEmail())).thenReturn(Optional.of(dbMember));
         Member loginMember = memberService.login(testMemberDto);
 
@@ -48,7 +45,7 @@ public class MemberServiceTest {
     }
 
     @Test(expected = UnAuthenticationException.class)
-    public void login_fail_wrong_password() {
+    public void login_fail_when_not_match_password() {
         MemberDto testMemberDto = MemberDtoTest.newMemberDto("dooho@woowahan.com", "1234wrong");
 
         Member dbMember = MemberTest.newMember("dooho@woowahan.com", "1234password");
@@ -57,7 +54,7 @@ public class MemberServiceTest {
     }
 
     @Test(expected = UnAuthenticationException.class)
-    public void findByEmail_not_found() {
+    public void login_fail_when_not_exit_email() {
         memberService.findByEmail("dooho@woowahan.com");
     }
 }

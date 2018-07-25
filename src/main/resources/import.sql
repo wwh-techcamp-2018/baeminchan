@@ -1,2 +1,2 @@
-INSERT INTO member (id, email, password, username, phone_number) values (1, "doy@woowahan.com", "1234password", "doy", "01012345678");
-INSERT INTO member (id, email, password, username, phone_number) values (2, "dooho@woowahan.com", "5678password", "dooho", "01012345678");
+--INSERT INTO member (id, email, password, username, phone_number) values (1, "doy@woowahan.com", "1234password", "doy", "01012345678");
+--INSERT INTO member (id, email, password, username, phone_number) values (2, "dooho@woowahan.com", "5678password", "dooho", "01012345678");

@@ -4,24 +4,27 @@ import codesquad.domain.Member;
 import codesquad.dto.MemberDto;
 import codesquad.exception.UnAuthenticationException;
 import codesquad.repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
 @Service("memberService")
 public class MemberService {
-
     @Resource
     private MemberRepository memberRepository;
 
+    @Autowired
+    private PasswordEncoder bcryptPasswordEncoder;
+
     public Member add(MemberDto memberDto) {
-        //TODO memberDTO validation 체크하는 부분
-        return memberRepository.save(memberDto.toEntity());
+        return memberRepository.save(memberDto.toEntity(bcryptPasswordEncoder));
     }
 
     public Member login(MemberDto memberDto) {
         Member dbMember = findByEmail(memberDto.getEmail());
-        if (!dbMember.matchPassword(memberDto.getPassword())) {
+        if (!dbMember.matchPassword(memberDto.getPassword(), bcryptPasswordEncoder)) {
             throw new UnAuthenticationException(UnAuthenticationException.NOT_MATCH_PASSWORD);
         }
         return dbMember;
