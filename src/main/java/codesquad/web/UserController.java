@@ -1,16 +1,12 @@
 package codesquad.web;
 
 import codesquad.domain.User;
-import codesquad.domain.UserRepository;
 import codesquad.dto.UserDto;
 import codesquad.exception.NotMatchException;
 import codesquad.exception.UnAuthenticationException;
-import codesquad.security.HttpSessionUtils;
 import codesquad.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -33,17 +30,16 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<Void> login(@RequestBody User user, HttpSession session) throws UnAuthenticationException {
 //        log.debug("userId : {}, password : {}", user.userId, password);
-        System.out.println("userId : " + user.getUserId() + "password : " + user.getPassword());
+//        System.out.println("userId : " + user.getUserId() + "password : " + user.getPassword());
 //        session.setAttribute(HttpSessionUtils.USER_SESSION_KEY, userService.login(userId, password));
 
         return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/")).build();
     }
 
     @PostMapping("")
-    public ResponseEntity<Void> create(@RequestBody UserDto userDto) throws NotMatchException {
-        System.out.println("userDto : " + userDto);
-        userService.create(userDto.toUser());
-        return ResponseEntity.status(HttpStatus.CREATED).location(URI.create("/member/login.php")).build();
+    public ResponseEntity<Void> create(@Valid @RequestBody UserDto userDto) throws NotMatchException {
+        userService.create(userDto);
+        return ResponseEntity.status(HttpStatus.CREATED).location(URI.create("/login")).build();
     }
 
 }

@@ -1,11 +1,13 @@
 package codesquad.security;
 
+import codesquad.exception.ErrorResponse;
 import codesquad.exception.NotMatchException;
 import codesquad.exception.UnAuthenticationException;
-import codesquad.web.UserController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -15,13 +17,22 @@ public class SecurityControllerAdvice {
     private static final Logger log = LoggerFactory.getLogger(SecurityControllerAdvice.class);
 
     @ExceptionHandler(UnAuthenticationException.class)
-    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-    public void unAuthentication() {
+    public ResponseEntity<ErrorResponse> unAuthentication(Exception exception) {
         log.debug("UnAuthenticationException is happened!");
+        return new ResponseEntity<ErrorResponse>(ErrorResponse.ofString(exception.getMessage()), HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(NotMatchException.class)
-    @ResponseStatus(value = HttpStatus.FORBIDDEN)
-    public void notMatch() {
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> notMatch(Exception exception) {
         log.debug("NotMatchException is happened!");
+        return new ResponseEntity<ErrorResponse>(ErrorResponse.ofString(exception.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> methodArgumentNotValid() {
+        log.debug("NotMatchException is happened!");
+        return new ResponseEntity<ErrorResponse>(ErrorResponse.ofString("정규식 표현에 맞지 않습니다."), HttpStatus.BAD_REQUEST);
     }
 }

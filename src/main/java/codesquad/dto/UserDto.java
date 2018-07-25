@@ -4,6 +4,10 @@ import codesquad.domain.User;
 import codesquad.exception.NotMatchException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -11,6 +15,8 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 public class UserDto {
+    private static final Logger log = LoggerFactory.getLogger(UserDto.class);
+
     @Pattern(regexp = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$")
     private String userId;
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$")
@@ -26,6 +32,8 @@ public class UserDto {
     private String phoneNumber;
 
 
+
+
     public UserDto(String userId, String password, String name, String phoneNumber, String rePassword) {
         this.userId = userId;
         this.password = password;
@@ -34,9 +42,10 @@ public class UserDto {
         this.rePassword = rePassword;
     }
 
-    public User toUser() throws NotMatchException {
-        if (!matchPassword()) throw new NotMatchException();
-        return new User(userId, password, name, phoneNumber);
+    public User toUser(String encodedPassword) throws NotMatchException {
+        if (!matchPassword()) throw new NotMatchException("비밀번호가 일치하지 않습니다.");
+
+        return new User(userId, encodedPassword, name, phoneNumber);
     }
 
     private boolean matchPassword() {
