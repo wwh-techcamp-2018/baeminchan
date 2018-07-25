@@ -1,0 +1,13 @@
+fieldset {
+    position: relative;
+}
+
+.error-message-holder {
+    color: red;
+    position: absolute;
+    width: 320px;
+    right: 0px;
+    top: 0px;
+    line-height: 30px;
+    font-size: 14px;
+}
