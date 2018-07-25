@@ -1,5 +1,8 @@
 package codesquad.security;
 
+import lombok.Getter;
+
+@Getter
 public class ValidationError {
     private String fieldName;
 
@@ -8,14 +11,6 @@ public class ValidationError {
     public ValidationError(String fieldName, String errorMessage) {
         this.fieldName = fieldName;
         this.errorMessage = errorMessage;
-    }
-
-    public String getFieldName() {
-        return fieldName;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
     }
 
     @Override

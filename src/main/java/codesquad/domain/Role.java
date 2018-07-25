@@ -11,18 +11,13 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column()
     private String name;
 
-    @Column()
     private boolean read;
 
-    @Column()
     private boolean write;
 
-    @Column()
     private boolean update;
 
-    @Column()
     private boolean delete;
 }

@@ -1,25 +1,16 @@
 package codesquad.domain;
 
 
-//import codesquad.validator.Email;
-import codesquad.validator.Email;
-import codesquad.validator.Password;
-import codesquad.validator.Phone;
-import codesquad.validator.UserName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
-import java.util.Map;
 
 @Entity
-@Data
 @Builder
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
@@ -40,7 +31,6 @@ public class User {
     @Column(nullable = false)
     private String phone;
 
-//    @Column()
 //    private Map<String, Role> roles;
 
     @Column(columnDefinition = "tinyint(1) default 0")

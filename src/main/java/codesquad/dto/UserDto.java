@@ -4,6 +4,7 @@ import codesquad.validator.Email;
 import codesquad.validator.Password;
 import codesquad.validator.Phone;
 import codesquad.validator.UserName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +25,7 @@ public class UserDto {
     private String password;
 
     @Password
+    @JsonProperty("password-check")
     private String confirmPassword;
 
     @Phone
