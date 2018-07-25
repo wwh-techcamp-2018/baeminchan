@@ -9,6 +9,7 @@ import java.util.Map;
 @Builder
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -30,6 +31,4 @@ public class User {
     //private Map<String, Role> roles;
 
     private boolean deleted;
-
-
 }

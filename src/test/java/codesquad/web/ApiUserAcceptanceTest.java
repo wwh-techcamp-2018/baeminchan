@@ -1,5 +1,6 @@
 package codesquad.web;
 
+import codesquad.domain.LoginDto;
 import codesquad.domain.UserDto;
 import codesquad.validate.ValidationErrorsResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,7 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
-    public void creat_invalid_argument() {
+    public void create_invalid_argument() {
         userDto.setEmail("emailFail");
         userDto.setPhone("phoneFail");
 
@@ -45,4 +46,18 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
+
+
+    @Test
+    public void login() {
+        LoginDto loginDto = LoginDto.builder()
+                .email("sample@woowahan.com")
+                .password("123456a!")
+                .build();
+
+        ResponseEntity<Void> response = template.postForEntity("/users/login", loginDto, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+    // TODO login-fail-case 2
 }
