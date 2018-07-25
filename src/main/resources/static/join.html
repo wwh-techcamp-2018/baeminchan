@@ -141,7 +141,7 @@
                                         <input class="selectric-input" tabindex="0">
                                     </div>
                                 </div>
-                                <span class="tb_in_txt caution" style="display:none;" id="email_caution">이메일 형식을 확인해 주세요.</span>
+                                <span class="tb_in_txt caution" id="email_valid">이메일 형식을 확인해 주세요.</span>
                             </td>
                         </tr>
 
@@ -154,7 +154,7 @@
                                 <input type="password" size="30" name="pwd[]" id="pw1" class="join_input" maxlength="25"
                                        placeholder="8-16자리 영문,숫자 조합">
                                 <p class="tb_txt1">
-                                    <span id="join_check_password" class="tb_in_txt caution"></span>
+                                    <span id="password_valid" class="tb_in_txt caution">8-16자리 영문,숫자 조합을 확인해주세요.</span>
                                 </p>
                             </td>
                         </tr>
@@ -166,7 +166,7 @@
                                 <input type="password" size="30" name="pwd[]" id="pw2" class="join_input" maxlength="25"
                                        placeholder="비밀번호 확인">
                                 <p class="tb_txt1">
-                                    <span id="join_check_password2" class="tb_in_txt caution"></span>
+                                    <span id="confirmPassword_valid" class="tb_in_txt caution">패스워드와 확인패스워드가 다릅니다.</span>
                                 </p>
                             </td>
                         </tr>
@@ -176,7 +176,7 @@
                             </th>
                             <td>
                                 <input type="text" size="24" name="name" value="" id="name" class="join_input">
-                                <span class="tb_in_txt caution"></span>
+                                <span id = "name_valid"class="tb_in_txt caution">2자 이상의 이름을 작성해주세요.</span>
                             </td>
                         </tr>
                         <tr class="phone">
@@ -197,15 +197,14 @@
                                        onkeyup="goNext(this,4,'m_auth')">
                                 <input type="radio" name="unique" value="2" id="unique_phone" onclick="selectRegMode(2)"
                                        style="display: none;">
-                                <div class="comment_box login" id="duplicate_phone" style="display:none;">
+                                <span id="phoneNo_valid" class="tb_in_txt caution">휴대전화번호 양식을 확인해주세요.</span>
+                                <div class="comment_box login" id="duplicate_email" style="display:none;">
                                     <span class="tb_in_txt caution clear" id="duplicate_id"></span>
                                     <br class="clear">
                                     <span class="tb_in_txt">기존 아이디로 로그인하거나 비밀번호를 찾으려면?</span>
                                     <br class="clear">
-                                    <a href="/member/login.php">로그인</a>|
+                                    <a href="/login.html">로그인</a>|
                                     <a href="/member/find_step1.php">비밀번호 찾기</a>
-                                    <p class="tb_in_txt" id="duplicate_continue" style="margin-top: 30px">이 번호를 사용하시려면,
-                                        인증 해주세요.</p>
                                 </div>
                             </td>
                         </tr>

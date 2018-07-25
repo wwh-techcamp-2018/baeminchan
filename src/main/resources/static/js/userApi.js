@@ -17,9 +17,6 @@ function fetchManager({ url, method, body, headers,callback}) {
     fetch(url, {method,body,headers,credentials: "same-origin"})
         .then((response) => {
         callback(response);
-    }).catch((e) => {
-        alert("예상치 못한 오류가 발생했습니다.");
-        window.location.href = "http://localhost:8080/";
     })
 }
 
@@ -60,18 +57,29 @@ function loginHandler(evt) {
 }
 
 function joinCallback(response){
+    clearJoinError();
     if(response.status === 201){
         window.location.replace("http://localhost:8080/")
         return
     }
     response.json().then((result) => {
         if(result.message === "valid_error"){
-            alert(result.data.validationErrorList[0].errorMessage);
+            result.data.validationErrorList.forEach(error => {
+                $("#"+error.fieldName+"_valid").style.display = "block";
+            });
             return;
         }
         alert("이미 존재하는 이메일입니다.");
+        $("#duplicate_email").style.display = "block";
     })
 } 
+
+function clearJoinError(){
+    document.querySelectorAll(".tb_join span.tb_in_txt.caution").forEach(element =>{
+        element.style.display = "none";
+    })
+    $("#duplicate_email").style.display = "none";
+}
 
 function loginCallback(response){
     if(response.status === 200){

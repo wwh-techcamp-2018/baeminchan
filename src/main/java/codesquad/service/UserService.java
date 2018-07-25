@@ -40,7 +40,7 @@ public class UserService {
         }
     }
 
-    private void checkExistsEmail(String email){
+    private void checkExistsEmail(String email) {
         try {
             findByEmail(email);
         }catch (UserNotFoundException e){

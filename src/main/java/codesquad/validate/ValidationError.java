@@ -1,8 +1,10 @@
 package codesquad.validate;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.ObjectError;
 
+@Slf4j
 @Getter
 public class ValidationError {
     private String fieldName;
@@ -14,6 +16,7 @@ public class ValidationError {
     }
 
     public static ValidationError createValidationError(ObjectError error){
-        return new ValidationError(error.getObjectName(),error.getDefaultMessage());
+        String fieldName = error.getCodes()[1].split("\\.")[1];
+        return new ValidationError(fieldName,error.getDefaultMessage());
     }
 }
