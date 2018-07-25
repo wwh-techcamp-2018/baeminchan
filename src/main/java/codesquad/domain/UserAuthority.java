@@ -2,5 +2,5 @@ package codesquad.domain;
 
 
 public enum UserAuthority {
-    GENERAL, ADMIN
+    GENERAL_USER, ADMIN_USER
 }

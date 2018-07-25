@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.Resource;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Objects;
 
@@ -43,6 +41,9 @@ public class User extends AbstractEntity {
     @NotNull
     @Pattern(regexp = "^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$")
     private String phoneNumber;
+
+    @Enumerated(EnumType.ORDINAL)
+    private UserAuthority userAuthority = UserAuthority.GENERAL_USER;
 
 
 
@@ -112,6 +113,14 @@ public class User extends AbstractEntity {
         this.phoneNumber = phoneNumber;
     }
 
+    public UserAuthority getUserAuthority() {
+        return userAuthority;
+    }
+
+    public void setUserAuthority(UserAuthority userAuthority) {
+        this.userAuthority = userAuthority;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -121,6 +130,7 @@ public class User extends AbstractEntity {
                 ", encodedPassword='" + encodedPassword + '\'' +
                 ", name='" + name + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", userAuthority= '" + userAuthority + '\'' +
                 '}';
     }
 
@@ -152,5 +162,9 @@ public class User extends AbstractEntity {
 
     public boolean matchEncodedPassword(PasswordEncoder passwordEncoder, String rawPassword){
         return passwordEncoder.matches(rawPassword, this.encodedPassword);
+    }
+
+    public boolean isAdmin(){
+        return this.userAuthority == UserAuthority.ADMIN_USER;
     }
 }
