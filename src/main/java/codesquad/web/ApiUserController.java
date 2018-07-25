@@ -25,8 +25,8 @@ public class ApiUserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Object create(@Valid @RequestBody User user){
-        log.debug("newUser {}", user);
-        userService.create(user);
+        User savedUser = userService.create(user);
+        log.debug("savedUser : {}", savedUser);
         return new JsonResponse("/");
     }
 

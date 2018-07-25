@@ -46,7 +46,6 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
 
         log.debug("response body : {}", responseEntity.getBody());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-
     }
 
 
