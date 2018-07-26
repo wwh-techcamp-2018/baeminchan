@@ -17,11 +17,6 @@
 <a href="#container" id="skip_navigation">본문 바로가기</a>
 <!--  skip navi -->
 
-<body>
-<!--  skip navi -->
-<a href="#container" id="skip_navigation">본문 바로가기</a>
-<!--  skip navi -->
-
 <div id="wrapper">
 
     <!--  상단 배너 -->
@@ -77,7 +72,7 @@
                             <input type="password" name="pwd" id="pwd" class="input" placeholder="비밀번호" maxlength="25">
                         </li>
                     </ul>
-                    <button class="btn btn_mint btn_login">
+                    <button type="button" id="login_btn" class="btn btn_mint btn_login">
                         <span>로그인</span>
                     </button>
 
@@ -88,7 +83,7 @@
                                 <label for="id_save">아이디 저장</label>
                             </span>
 
-                    <p class="err_msg">로그인이 필요한 서비스입니다. 회원이 아니시면 회원가입을 해주세요.</p>
+                    <p class="err_msg" style="visibility:hidden;">로그인이 필요한 서비스입니다. 회원이 아니시면 회원가입을 해주세요.</p>
 
                     <div class="btn_area">
                         <button type="button" class="btn btn_kakao btn_login" id="kakao_rest">
@@ -185,6 +180,33 @@
         <div id="popup_view" class="popup_view"></div>
     </div>
 </div>
+
+<script>
+
+
+    $('#login_btn').click(function(){
+
+        const data = {
+            email : $('#member_id').val(),
+            password : $('#pwd').val(),
+        }
+
+        $.ajax({
+            type : 'POST',
+            url : '/api/users/login',
+            data : JSON.stringify(data),
+            success : function(response){
+                document.location = response.url;
+            },
+            error : function(response){
+                alert(response.responseJSON.error);
+            },
+            dataType : 'json',
+            contentType : 'application/json'
+        });
+    })
+
+</script>
 </body>
 
 </html>
