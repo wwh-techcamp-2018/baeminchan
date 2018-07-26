@@ -41,10 +41,10 @@ public class ApiUserController {
         return new ResponseEntity<Void>(headers, HttpStatus.OK);
     }
 
-//    @GetMapping("/logout")
-//    public ResponseEntity<Void> logout(HttpSession session){
-//        HttpSessionUtils.removeSessionID(session);
-//        return new ResponseEntity<Void>(header)
-//    }
+    @GetMapping("/logout")
+    public ResponseEntity<Void> logout(HttpSession session){
+        HttpSessionUtils.removeSessionID(session);
+        return new ResponseEntity<Void>(new HttpHeaders(), HttpStatus.OK);
+    }
 
 }

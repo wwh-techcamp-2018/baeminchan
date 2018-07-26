@@ -11,4 +11,8 @@ public class HttpSessionUtils {
     public static void setUserSessionKey(HttpSession session, User user) {
         session.setAttribute(USER_SESSION_KEY, user.getId());
     }
+
+    public static void removeSessionID(HttpSession session) {
+        session.removeAttribute(USER_SESSION_KEY);
+    }
 }
