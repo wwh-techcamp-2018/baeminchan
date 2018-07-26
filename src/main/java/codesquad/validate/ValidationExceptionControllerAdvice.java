@@ -10,7 +10,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +33,7 @@ public class ValidationExceptionControllerAdvice {
                 continue;
             }
             log.info("object error : {}", error.getDefaultMessage());
-            response.addValidationError(new ValidationError(error.getObjectName(), error.getDefaultMessage()));
+            response.addValidationError(new ValidationError(error.getObjectName(), msa.getMessage(error.getCode(), null, "입력값이 올바르지 않습니다.")));
 
         }
         return response;

@@ -2,7 +2,6 @@ package codesquad.validate;
 
 public class ValidationError {
     private String fieldName;
-
     private String errorMessage;
 
     public ValidationError(String fieldName, String errorMessage) {

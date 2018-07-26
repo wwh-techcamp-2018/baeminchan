@@ -5,18 +5,12 @@ import codesquad.domain.RoleRepository;
 import codesquad.domain.User;
 import codesquad.domain.UserRepository;
 import codesquad.dto.UserDto;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Slf4j
 @Service
 public class UserService {
-
-    private static final Logger log = LoggerFactory.getLogger(User.class);
 
     @Autowired
     private RoleRepository roleRepository;
@@ -27,11 +21,10 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public User join(UserDto userDto) {
+    public void join(UserDto userDto) {
         Role role = roleRepository.findById(1L).get();
-        return userRepository.save(userDto.toUser(role, passwordEncoder));
+        userRepository.save(userDto.toUser(role, passwordEncoder));
     }
-
 
     public User login(String userId, String password) throws IllegalAccessException {
         User savedUser = userRepository.findByUserId(userId).orElseThrow(IllegalAccessException::new);

@@ -2,7 +2,6 @@ package codesquad.validate;
 
 import codesquad.annotation.FieldsValueMatch;
 import org.springframework.beans.BeanWrapperImpl;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
