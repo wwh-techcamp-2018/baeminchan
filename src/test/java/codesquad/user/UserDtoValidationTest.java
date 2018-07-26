@@ -1,5 +1,6 @@
-package codesquad.domain;
+package codesquad.user;
 
+import codesquad.user.dto.UserDto;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
