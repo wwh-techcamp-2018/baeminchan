@@ -1,9 +1,8 @@
-package codesquad.domain;
+package codesquad.user.domain;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Map;
 
 @Getter
 @Builder

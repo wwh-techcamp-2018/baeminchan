@@ -1,6 +1,6 @@
 package codesquad.security;
 
-import codesquad.domain.User;
+import codesquad.user.domain.User;
 
 import javax.servlet.http.HttpSession;
 

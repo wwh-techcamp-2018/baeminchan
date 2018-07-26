@@ -1,4 +1,4 @@
-package codesquad.domain;
+package codesquad.user.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
