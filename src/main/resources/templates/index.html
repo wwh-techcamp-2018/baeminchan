@@ -1,0 +1,37 @@
+  {{#partial "header"}}
+  <title>배민푸드 메인페이지</title>
+  {{/partial}}
+
+  {{#partial "top"}}
+  {{> include/top }}
+  {{/partial}}
+
+  {{#partial "contents"}}
+  <!-- main-container -->
+  <main id="main">
+    {{> include/component/promotion }}
+
+    {{> include/component/best-side-dish }}
+
+    {{> include/component/side-dish }}
+
+    <div class="banner banner-1">
+      <a href="#">맛있고 간편한 반찬을 찾으신다면? 배민찬이 만드는 집밥의 완성</a>
+    </div>
+
+    {{> include/component/main-side-dish }}
+
+    <div class="banner banner-2">
+      <a href="#">판교에서 가장 핫한 반찬가게! 대접하는 마음으로, 소중한 식사</a>
+    </div>
+
+    {{> include/component/soup }}
+
+  </main>
+  <!-- // main-container -->
+  {{/partial}}
+  {{#partial "footer"}}
+  {{> include/footer }}
+  {{/partial}}
+
+{{> base }}

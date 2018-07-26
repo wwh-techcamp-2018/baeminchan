@@ -1,0 +1,49 @@
+<nav id="snb">
+    <div class="inner-wrapper">
+        <h3 class="blind">사이드 메뉴</h3>
+
+        <a class="app-download" href="#">
+            배민찬 앱 다운로드
+            <i class="bm-icon spr-bullet-arrow-down black"></i>
+        </a>
+
+        <ul class="menu">
+            {{^loginedUser}}
+            <li>
+                <a href="/login">로그인</a>
+            </li>
+            <li>
+                <a href="/join">회원가입</a>
+            </li>
+            {{/loginedUser}}
+            {{#loginedUser}}
+            <li>
+                <a href="#">로그아웃</a>
+            </li>
+            {{/loginedUser}}
+            <li>
+                <a href="#">
+                    마이페이지
+                    <i class="bm-icon spr-bullet-arrow-down black"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    고객센터
+                    <i class="bm-icon spr-bullet-arrow-down black"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#">새벽배송 지역검색</a>
+            </li>
+            <li>
+                <a href="#">이벤트 게시판</a>
+            </li>
+            <li class="cart">
+                <a href="#">
+                    <strong>장바구니</strong>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
