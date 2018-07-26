@@ -16,41 +16,35 @@ function fetchManager({ url, method, body, headers, callback }) {
 }
 
 function initEvents(){
-    const signUpBtn = $("#submitSignUp");
-    signUpBtn.addEventListener("click",signUpHandler);
+    const loginBtn = $("#submitLogin");
+    loginBtn.addEventListener("click",loginHandler);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     initEvents();
 })
 
-function signUpHandler(evt){
+function loginHandler(evt){
     evt.preventDefault();
 
-    const email = $("#email_id").value +'@'+ $("#email_domain").value;
-    const password = $("#password").value;
-    const confirmPassword = $("#confirmPassword").value;
-    const name = $("#name").value;
-    const phone = $("#cell1").value + '-' + $("#cell2").value + '-' + $("#cell3").value;
+    const email = $("#member_id").value;
+    const password = $("#pwd").value;
 
     fetchManager({
-        url: "/users",
+        url: "/users/login",
         method: "post",
         headers: { 'content-type': 'application/json; charset=utf-8' },
         body: JSON.stringify({
             "email": email,
             "password": password,
-            "confirmPassword": confirmPassword,
-            "name": name,
-            "phone": phone
         }),
-        callback: signResult
+        callback: loginResult
     })
 }
 
-function signResult(response){
+function loginResult(response){
     console.log(response);
-    if(response.status == 201) {
+    if(response.status == 200) {
         location.href = '/'
     }
     // TODO error 처리
