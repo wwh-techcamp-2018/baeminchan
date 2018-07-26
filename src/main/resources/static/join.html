@@ -11,6 +11,7 @@
     <meta name="naver-site-verification" content="e543b30ae873355f2c556f58b48ae7c95c1cea05">
     <title>배민찬 - 모바일 넘버원 반찬가게</title>
     <link rel="stylesheet" type="text/css" href="common.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -54,163 +55,173 @@
                     </a>
                 </li>
             </ul>
-            <form name="joinFrm" id="joinFrm" class="join_form_box" method="post" action="/member/join.exe.php" target="hidden1529398405"
-                  onsubmit="return checkRegMember(this)">
-                <input type="hidden" name="rURL" id="rURL" value="">
-                <input type="hidden" name="return_url" value="/member/join.exe.php">
-                <input type="hidden" name="nick_checked" id="nick_checked" value="0">
-                <input type="hidden" name="site_code" value="">
-                <input type="hidden" name="unique" value="">
-                <input type="hidden" name="exec" value="">
-                <input type="hidden" name="mode" value="join">
-                <input type="hidden" name="reg_code_checked" id="reg_code_checked" value="0">
-                <input type="hidden" name="session_id" value="n125miq6k70eh3kqu128c086f7">
-                <input type="hidden" name="member_id" id="member_id" value="">
-                <input type="hidden" name="email" id="email" value="">
-                <fieldset>
-                    <legend class="blind">회원가입 정보입력폼</legend>
-                    <table border="1" class="tb_join">
-                        <caption>회원가입 입력 테이블</caption>
-                        <colgroup>
-                            <col width="180px">
-                            <col width="*">
-                        </colgroup>
-                        <tbody>
-                        <tr>
-                            <th>
-                                <label for="email">아이디 (이메일)</label>
-                            </th>
-                            <td>
-                                <input type="text" size="50" name="email_id" value="" id="email_id" class="join_input" autofocus="">
-                                <span class="block"> @ </span>
-                                <input type="text" size="50" name="email_domain" value="" id="email_domain" class="join_input">
-                                <div class="selectric-wrapper join w100">
-                                    <div class="selectric-wrapper selectric-selectric">
-                                        <div class="selectric-hide-select">
-                                            <select class="selectric" id="email_domain_select" tabindex="0">
-                                                <option value="0">직접입력</option>
-                                                <option value="naver.com">naver.com</option>
-                                                <option value="gmail.com">gmail.com</option>
-                                                <option value="hanmail.net">hanmail.net</option>
-                                                <option value="daum.net">daum.net</option>
-                                                <option value="nate.com">nate.com</option>
-                                                <option value="hotmail.com">hotmail.com</option>
-                                                <option value="yahoo.co.kr">yahoo.co.kr</option>
-                                                <option value="paran.com">paran.com</option>
-                                                <option value="empal.com">empal.com</option>
-                                                <option value="chollian.net">chollian.net</option>
-                                                <option value="hanafos.com">hanafos.com</option>
-                                                <option value="dreamwiz.com">dreamwiz.com</option>
-                                                <option value="kornet.net">kornet.net</option>
-                                                <option value="korea.com">korea.com</option>
-                                                <option value="lycos.co.kr">lycos.co.kr</option>
-                                                <option value="orgio.net">orgio.net</option>
-                                                <option value="passmail.to">passmail.to</option>
-                                            </select>
-                                        </div>
-                                        <div class="selectric">
-                                            <p class="label">직접입력</p>
-                                            <i class="button">▾</i>
-                                        </div>
-                                        <div class="selectric-items" tabindex="-1">
-                                            <div class="selectric-scroll">
-                                                <ul>
-                                                    <li data-index="0" class="selected">직접입력</li>
-                                                    <li data-index="1" class="">naver.com</li>
-                                                    <li data-index="2" class="">gmail.com</li>
-                                                    <li data-index="3" class="">hanmail.net</li>
-                                                    <li data-index="4" class="">daum.net</li>
-                                                    <li data-index="5" class="">nate.com</li>
-                                                    <li data-index="6" class="">hotmail.com</li>
-                                                    <li data-index="7" class="">yahoo.co.kr</li>
-                                                    <li data-index="8" class="">paran.com</li>
-                                                    <li data-index="9" class="">empal.com</li>
-                                                    <li data-index="10" class="">chollian.net</li>
-                                                    <li data-index="11" class="">hanafos.com</li>
-                                                    <li data-index="12" class="">dreamwiz.com</li>
-                                                    <li data-index="13" class="">kornet.net</li>
-                                                    <li data-index="14" class="">korea.com</li>
-                                                    <li data-index="15" class="">lycos.co.kr</li>
-                                                    <li data-index="16" class="">orgio.net</li>
-                                                    <li data-index="17" class="last">passmail.to</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <input class="selectric-input" tabindex="0">
+            <form name="joinFrm" id="joinFrm" class="join_form_box" method="post" action="/member/join.exe.php"
+                  target="hidden1529398405"
+            <!--onsubmit="return checkRegMember(this)"-->>
+            <input type="hidden" name="rURL" id="rURL" value="">
+            <input type="hidden" name="return_url" value="/member/join.exe.php">
+            <input type="hidden" name="nick_checked" id="nick_checked" value="0">
+            <input type="hidden" name="site_code" value="">
+            <input type="hidden" name="unique" value="">
+            <input type="hidden" name="exec" value="">
+            <input type="hidden" name="mode" value="join">
+            <input type="hidden" name="reg_code_checked" id="reg_code_checked" value="0">
+            <input type="hidden" name="session_id" value="n125miq6k70eh3kqu128c086f7">
+            <input type="hidden" name="member_id" id="member_id" value="">
+            <input type="hidden" name="email" id="email" value="">
+            <fieldset>
+                <legend class="blind">회원가입 정보입력폼</legend>
+                <table border="1" class="tb_join">
+                    <caption>회원가입 입력 테이블</caption>
+                    <colgroup>
+                        <col width="180px">
+                        <col width="*">
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th>
+                            <label for="email">아이디 (이메일)</label>
+                        </th>
+                        <td>
+                            <input type="text" size="50" name="email_id" value="" id="email_id" class="join_input"
+                                   autofocus="">
+                            <span class="block"> @ </span>
+                            <input type="text" size="50" name="email_domain" value="" id="email_domain"
+                                   class="join_input">
+                            <div class="selectric-wrapper join w100">
+                                <div class="selectric-wrapper selectric-selectric">
+                                    <div class="selectric-hide-select">
+                                        <select class="selectric" id="email_domain_select" tabindex="0">
+                                            <option value="0">직접입력</option>
+                                            <option value="naver.com">naver.com</option>
+                                            <option value="gmail.com">gmail.com</option>
+                                            <option value="hanmail.net">hanmail.net</option>
+                                            <option value="daum.net">daum.net</option>
+                                            <option value="nate.com">nate.com</option>
+                                            <option value="hotmail.com">hotmail.com</option>
+                                            <option value="yahoo.co.kr">yahoo.co.kr</option>
+                                            <option value="paran.com">paran.com</option>
+                                            <option value="empal.com">empal.com</option>
+                                            <option value="chollian.net">chollian.net</option>
+                                            <option value="hanafos.com">hanafos.com</option>
+                                            <option value="dreamwiz.com">dreamwiz.com</option>
+                                            <option value="kornet.net">kornet.net</option>
+                                            <option value="korea.com">korea.com</option>
+                                            <option value="lycos.co.kr">lycos.co.kr</option>
+                                            <option value="orgio.net">orgio.net</option>
+                                            <option value="passmail.to">passmail.to</option>
+                                        </select>
                                     </div>
+                                    <div class="selectric">
+                                        <p class="label">직접입력</p>
+                                        <i class="button">▾</i>
+                                    </div>
+                                    <div class="selectric-items" tabindex="-1">
+                                        <div class="selectric-scroll">
+                                            <ul>
+                                                <li data-index="0" class="selected">직접입력</li>
+                                                <li data-index="1" class="">naver.com</li>
+                                                <li data-index="2" class="">gmail.com</li>
+                                                <li data-index="3" class="">hanmail.net</li>
+                                                <li data-index="4" class="">daum.net</li>
+                                                <li data-index="5" class="">nate.com</li>
+                                                <li data-index="6" class="">hotmail.com</li>
+                                                <li data-index="7" class="">yahoo.co.kr</li>
+                                                <li data-index="8" class="">paran.com</li>
+                                                <li data-index="9" class="">empal.com</li>
+                                                <li data-index="10" class="">chollian.net</li>
+                                                <li data-index="11" class="">hanafos.com</li>
+                                                <li data-index="12" class="">dreamwiz.com</li>
+                                                <li data-index="13" class="">kornet.net</li>
+                                                <li data-index="14" class="">korea.com</li>
+                                                <li data-index="15" class="">lycos.co.kr</li>
+                                                <li data-index="16" class="">orgio.net</li>
+                                                <li data-index="17" class="last">passmail.to</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <input class="selectric-input" tabindex="0">
                                 </div>
-                                <span class="tb_in_txt caution" style="display:none;" id="email_caution">이메일 형식을 확인해 주세요.</span>
-                            </td>
-                        </tr>
+                            </div>
+                            <span class="tb_in_txt caution" style="display:none;"
+                                  id="email_caution">이메일 형식을 확인해 주세요.</span>
+                        </td>
+                    </tr>
 
 
+                    <tr>
+                        <th>
+                            <label for="pw1">비밀번호</label>
+                        </th>
+                        <td>
+                            <input type="password" size="30" name="pwd[]" id="pw1" class="join_input" maxlength="25"
+                                   placeholder="8-16자리 영문,숫자 조합">
+                            <p class="tb_txt1">
+                                <span id="join_check_password" class="tb_in_txt caution"></span>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="pw2">비밀번호 확인</label>
+                        </th>
+                        <td>
+                            <input type="password" size="30" name="pwd[]" id="pw2" class="join_input" maxlength="25"
+                                   placeholder="비밀번호 확인">
+                            <p class="tb_txt1">
+                                <span id="join_check_password2" class="tb_in_txt caution"></span>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="name">이름</label>
+                        </th>
+                        <td>
+                            <input type="text" size="24" name="name" value="" id="name" class="join_input">
+                            <span class="tb_in_txt caution"></span>
+                        </td>
+                    </tr>
+                    <tr class="phone">
+                        <th>
+                            <label for="cell1">휴대 전화 번호</label>
+                        </th>
+                        <td>
+                            <input type="text" maxlength="3" size="10" name="cell[]" id="cell1" value=""
+                                   title="휴대 전화 번호 앞자리" class="join_input small"
+                            >
+                            <span class="block"> - </span>
+                            <input type="text" maxlength="4" size="10" name="cell[]" id="cell2" value=""
+                                   title="휴대 전화 번호 중간자리" class="join_input small"
+                            >
+                            <span class="block"> - </span>
+                            <input type="text" maxlength="4" size="10" name="cell[]" id="cell3" value=""
+                                   title="휴대 전화 번호 뒷자리" class="join_input small"
+                            >
+                            <input type="radio" name="unique" value="2" id="unique_phone" onclick="selectRegMode(2)"
+                                   style="display: none;">
+                            <div class="comment_box login" id="duplicate_phone" style="display:none;">
+                                <span class="tb_in_txt caution clear" id="duplicate_id"></span>
+                                <br class="clear">
+                                <span class="tb_in_txt">기존 아이디로 로그인하거나 비밀번호를 찾으려면?</span>
+                                <br class="clear">
+                                <a href="/member/login.php">로그인</a>|
+                                <a href="/member/find_step1.php">비밀번호 찾기</a>
+                                <p class="tb_in_txt" id="duplicate_continue" style="margin-top: 30px">이 번호를 사용하시려면,
+                                    인증 해주세요.</p>
+                            </div>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <th>
-                                <label for="pw1">비밀번호</label>
-                            </th>
-                            <td>
-                                <input type="password" size="30" name="pwd[]" id="pw1" class="join_input" maxlength="25" placeholder="8-16자리 영문,숫자 조합">
-                                <p class="tb_txt1">
-                                    <span id="join_check_password" class="tb_in_txt caution"></span>
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label for="pw2">비밀번호 확인</label>
-                            </th>
-                            <td>
-                                <input type="password" size="30" name="pwd[]" id="pw2" class="join_input" maxlength="25" placeholder="비밀번호 확인">
-                                <p class="tb_txt1">
-                                    <span id="join_check_password2" class="tb_in_txt caution"></span>
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label for="name">이름</label>
-                            </th>
-                            <td>
-                                <input type="text" size="24" name="name" value="" id="name" class="join_input">
-                                <span class="tb_in_txt caution"></span>
-                            </td>
-                        </tr>
-                        <tr class="phone">
-                            <th>
-                                <label for="cell1">휴대 전화 번호</label>
-                            </th>
-                            <td>
-                                <input type="text" maxlength="3" size="10" name="cell[]" id="cell1" value="" title="휴대 전화 번호 앞자리" class="join_input small"
-                                       onkeyup="goNext(this,3,'cell2')">
-                                <span class="block"> - </span>
-                                <input type="text" maxlength="4" size="10" name="cell[]" id="cell2" value="" title="휴대 전화 번호 중간자리" class="join_input small"
-                                       onkeyup="goNext(this,4,'cell3')">
-                                <span class="block"> - </span>
-                                <input type="text" maxlength="4" size="10" name="cell[]" id="cell3" value="" title="휴대 전화 번호 뒷자리" class="join_input small"
-                                       onkeyup="goNext(this,4,'m_auth')">
-                                <input type="radio" name="unique" value="2" id="unique_phone" onclick="selectRegMode(2)" style="display: none;">
-                                <div class="comment_box login" id="duplicate_phone" style="display:none;">
-                                    <span class="tb_in_txt caution clear" id="duplicate_id"></span>
-                                    <br class="clear">
-                                    <span class="tb_in_txt">기존 아이디로 로그인하거나 비밀번호를 찾으려면?</span>
-                                    <br class="clear">
-                                    <a href="/member/login.php">로그인</a>|
-                                    <a href="/member/find_step1.php">비밀번호 찾기</a>
-                                    <p class="tb_in_txt" id="duplicate_continue" style="margin-top: 30px">이 번호를 사용하시려면, 인증 해주세요.</p>
-                                </div>
-                            </td>
-                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
 
-                        </tbody>
-                    </table>
-                </fieldset>
-
-                <div class="btn_area center mt40">
-                    <button type="submit" class="btn btn_mint btn_big">
-                        <span>가입 완료</span>
-                    </button>
-                </div>
+            <div class="btn_area center mt40">
+                <button type="button" id="btn_submit" class="btn btn_mint btn_big">
+                    <span>가입 완료</span>
+                </button>
+            </div>
             </form>
         </div>
     </div>
@@ -230,7 +241,8 @@
                         <a href="/content/corporate.php">단체구매문의</a>
                     </li>
                     <li>
-                        <a href="/board/?db=notice&amp;no=26&amp;mari_mode=view%40view&amp;cate=&amp;page=1">이메일 무단 수집거부</a>
+                        <a href="/board/?db=notice&amp;no=26&amp;mari_mode=view%40view&amp;cate=&amp;page=1">이메일 무단
+                            수집거부</a>
                     </li>
                     <li>
                         <a href="/rules/service.php">이용약관</a>
@@ -251,7 +263,8 @@
                     <li>(주)우아한신선들</li>
                     <li>대표이사 : 박일한</li>
                     <li>사업자등록번호 : 110-81-97233 [
-                        <a href="http://www.ftc.go.kr/info/bizinfo/communicationViewPopup.jsp?wrkr_no=1108197233 " target="_blank">
+                        <a href="http://www.ftc.go.kr/info/bizinfo/communicationViewPopup.jsp?wrkr_no=1108197233 "
+                           target="_blank">
                             <span>사업자 정보확인</span>
                         </a>]
                     </li>
@@ -267,7 +280,8 @@
                     </li>
                     <li class="last">고객센터 : 1899-2468</li>
                     <li class="last">고객님의 안전거래를 위해 현금 등으로 결제 시 LG U+의 구매안전 서비스를 이용하실 수 있습니다. [
-                        <a href="https://pgweb.dacom.net/pg/wmp/mertadmin/jsp/mertservice/s_escrowYn.jsp?mertid=ws_dummerce" target="_blank">
+                        <a href="https://pgweb.dacom.net/pg/wmp/mertadmin/jsp/mertservice/s_escrowYn.jsp?mertid=ws_dummerce"
+                           target="_blank">
                             <span>서비스 가입사실 확인</span>
                         </a>]
                     </li>
@@ -296,8 +310,39 @@
 
 </div>
 
-<iframe name="hidden1529398405" id="hidden1529398405" src="about:blank" width="0" height="0" scrolling="no" frameborder="0"
+<iframe name="hidden1529398405" id="hidden1529398405" src="about:blank" width="0" height="0" scrolling="no"
+        frameborder="0"
         style="display:none;"></iframe>
+
+<script>
+$(document).ready(function() {
+    $('#btn_submit').click(function(){
+        const data = {
+            email : $('#email_id').val() + '@' + $('#email_domain').val(),
+            password : $('#pw1').val(),
+            passwordCheck : $('#pw2').val(),
+            name : $('#name').val(),
+            phoneNumber : $('#cell1').val() + '-' + $('#cell2').val() + '-' + $('#cell3').val(),
+        }
+
+        $.ajax({
+            type : 'POST',
+            url : '/api/users',
+            data : JSON.stringify(data),
+            success : function(result){
+                document.location = result.url;
+            },
+            error : function(result) {
+                alert(result.responseJSON.error.join('\n'));
+            },
+            dataType : 'json',
+            contentType : 'application/json',
+        });
+
+    });
+});
+
+</script>
 </body>
 
 </html>
