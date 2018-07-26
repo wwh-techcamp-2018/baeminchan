@@ -1,18 +1,17 @@
 package codesquad.domain;
 
-import lombok.Data;
+import lombok.Getter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 
 @Entity
-@Data
+@Getter
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,38 +35,20 @@ public class User {
     @Column
     private LocalDateTime joinDate;
 
-    public User setUserId(String userId) {
+    public User() {
+    }
+
+    public User(String userId, String password, @Size(min = 2, max = 16) String name, String phoneNumber, Role role, LocalDateTime joinDate) {
         this.userId = userId;
-        return this;
-    }
-
-    public User setPassword(String password) {
         this.password = password;
-        return this;
-    }
-
-    public User setName(String name) {
         this.name = name;
-        return this;
-    }
-
-    public User setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-        return this;
-    }
-
-    public User setRole(Role role) {
         this.role = role;
-        return this;
-    }
-
-    public User setJoinDate(LocalDateTime joinDate) {
         this.joinDate = joinDate;
-        return this;
     }
 
     public boolean login(String password, PasswordEncoder passwordEncoder) throws IllegalAccessException {
-        if(!passwordEncoder.matches(password, this.password)) {
+        if (!passwordEncoder.matches(password, this.password)) {
             throw new IllegalAccessException();
         }
         return true;

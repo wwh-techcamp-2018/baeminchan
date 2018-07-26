@@ -24,6 +24,16 @@ function fetchManager({ url, method, body, headers, callback }) {
     })
 }
 
+function checkBlank(joinTable, selectors) {
+    for(let selector of selectors) {
+        let target = joinTable.querySelector(selector).value;
+        if(target === '') {
+            alert('빈칸을 채워주세요.'); joinTable.querySelector(selector).focus(); return false;
+        }
+    }
+    return true;
+}
+
 function registerUserHandler(evt) {
     evt.preventDefault();
     const joinTable = $(".tb_join");
@@ -34,6 +44,13 @@ function registerUserHandler(evt) {
     let password2 = joinTable.querySelector('#pw2').value;
     let name = joinTable.querySelector('#name').value;
     let phoneNumber = joinTable.querySelector('#cell1').value +'-'+ joinTable.querySelector('#cell2').value + '-'+ joinTable.querySelector('#cell3').value;
+
+    const selectors = ['#email_id', '#email_domain', '#pw1', '#pw2', '#name', '#cell1', '#cell2', '#cell3'];
+
+    if(!checkBlank(joinTable, selectors)) {
+        return;
+    }
+
 
     fetchManager({
         url: '/api/users',
