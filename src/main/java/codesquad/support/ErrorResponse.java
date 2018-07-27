@@ -4,21 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ErrorResponse {
-    List<String> error;
+    List<ValidationError> error;
 
-    public ErrorResponse(){
-        error = new ArrayList<>();
+    public ErrorResponse() {
+        this.error = new ArrayList<>();
     }
 
-    public List<String> getError() {
+    public List<ValidationError> getError() {
         return error;
     }
 
-    public void setError(List<String> error) {
+    public void setError(List<ValidationError> error) {
         this.error = error;
     }
 
-    public void registErrorMessage(String message){
-        error.add(message);
+    public void registErrorMessage(ValidationError validationError){
+        error.add(validationError);
     }
+
 }

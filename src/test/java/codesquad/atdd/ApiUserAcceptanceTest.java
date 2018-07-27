@@ -1,13 +1,13 @@
 package codesquad.atdd;
 
 import codesquad.domain.User;
-import codesquad.repository.UserRepository;
 import codesquad.support.ErrorResponse;
 import codesquad.support.JsonResponse;
+import codesquad.support.ValidationError;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 
 import java.net.URI;
@@ -58,8 +58,8 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
         ResponseEntity<ErrorResponse> responseEntity = template().exchange(requestEntity, ErrorResponse.class);
         log.debug("response body : {}", responseEntity.getBody());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        assertThat(responseEntity.getBody().getError().get(0))
-                .contains("입력된 비밀번호가 일치하지 않습니다.");
+        assertThat(responseEntity.getBody().getError().get(0).getMessage())
+                .isEqualTo("입력된 비밀번호가 일치하지 않습니다.");
     }
     public User createTestUser(String email){
         User newUser = new User(email, "PASSWORD123", "PASSWORD123","이름", "010-123-1234");
@@ -84,14 +84,20 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
         ResponseEntity<ErrorResponse> responseEntity = template().exchange(requestEntity, ErrorResponse.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        assertThat(responseEntity.getBody().getError()).contains("ID / PW 를 확인해주십시오");
+        assertThat(responseEntity.getBody().getError().get(0).getMessage()).isEqualTo("ID / PW 를 확인해주십시오");
     }
-    @Autowired UserRepository userRepository;
-    @Test
-    public void aaa(){
-        User newUser = createTestUser("abc@mmm.com");
-        newUser.setName(null);
-        userRepository.save(newUser);
 
+    @Test
+    public void createUser_2개이상실패() {
+        SoftAssertions softly = new SoftAssertions();
+
+        User newUser = new User("daaa@cde.com", "PPASSWORD123", "PASSWORD123","abcd", "110-123-1234");
+        RequestEntity<User> requestEntity = RequestEntity.post(createURI("")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(newUser);
+        ResponseEntity<ErrorResponse> responseEntity = template().exchange(requestEntity, ErrorResponse.class);
+        log.debug("response body : {}", responseEntity.getBody());
+        softly.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        softly.assertThat(responseEntity.getBody().getError())
+                .containsExactlyInAnyOrder( new ValidationError("정규 표현식 \"^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$\" 패턴과 일치해야 합니다.","phoneNumber"),
+                        new ValidationError("정규 표현식 \"^[가-힣]*$\" 패턴과 일치해야 합니다.", "name"));
     }
 }
