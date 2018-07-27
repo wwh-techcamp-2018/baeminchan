@@ -143,8 +143,8 @@
                                     <input class="selectric-input" tabindex="0">
                                 </div>
                             </div>
-                            <span class="tb_in_txt caution" style="display:none;"
-                                  id="email_caution">이메일 형식을 확인해 주세요.</span>
+                            <span class="tb_in_txt caution"
+                                  id="join_check_email">이메일 형식을 확인해 주세요.</span>
                         </td>
                     </tr>
 
@@ -154,7 +154,7 @@
                             <label for="pw1">비밀번호</label>
                         </th>
                         <td>
-                            <input type="password" size="30" name="pwd[]" id="pw1" class="join_input" maxlength="25"
+                            <input type="password" size="30" name="password" id="pw1" class="join_input" maxlength="25"
                                    placeholder="8-16자리 영문,숫자 조합">
                             <p class="tb_txt1">
                                 <span id="join_check_password" class="tb_in_txt caution"></span>
@@ -166,7 +166,7 @@
                             <label for="pw2">비밀번호 확인</label>
                         </th>
                         <td>
-                            <input type="password" size="30" name="pwd[]" id="pw2" class="join_input" maxlength="25"
+                            <input type="password" size="30" name="passwordCheck" id="pw2" class="join_input" maxlength="25"
                                    placeholder="비밀번호 확인">
                             <p class="tb_txt1">
                                 <span id="join_check_password2" class="tb_in_txt caution"></span>
@@ -179,7 +179,7 @@
                         </th>
                         <td>
                             <input type="text" size="24" name="name" value="" id="name" class="join_input">
-                            <span class="tb_in_txt caution"></span>
+                            <span class="tb_in_txt caution" id="join_check_name"></span>
                         </td>
                     </tr>
                     <tr class="phone">
@@ -200,6 +200,7 @@
                             >
                             <input type="radio" name="unique" value="2" id="unique_phone" onclick="selectRegMode(2)"
                                    style="display: none;">
+                            <span class="tb_in_txt caution" id="join_check_phoneNumber">기존 아이디로 로그인하거나 비밀번호를 찾으려면?</span>
                             <div class="comment_box login" id="duplicate_phone" style="display:none;">
                                 <span class="tb_in_txt caution clear" id="duplicate_id"></span>
                                 <br class="clear">
@@ -317,6 +318,7 @@
 <script>
 $(document).ready(function() {
     $('#btn_submit').click(function(){
+        $('#joinFrm .tb_in_txt.caution').text('');
         const data = {
             email : $('#email_id').val() + '@' + $('#email_domain').val(),
             password : $('#pw1').val(),
@@ -333,7 +335,7 @@ $(document).ready(function() {
                 document.location = result.url;
             },
             error : function(result) {
-                alert(result.responseJSON.error.join('\n'));
+                result.responseJSON.error.forEach(function(e) {$('#join_check_' + e.field).text(e.message);})
             },
             dataType : 'json',
             contentType : 'application/json',
