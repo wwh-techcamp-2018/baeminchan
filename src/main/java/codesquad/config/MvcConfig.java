@@ -39,5 +39,4 @@ public class MvcConfig implements WebMvcConfigurer {
         messageSource.setCacheSeconds(30);
         return messageSource;
     }
-
 }

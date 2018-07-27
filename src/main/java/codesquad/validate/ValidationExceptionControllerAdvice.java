@@ -34,7 +34,6 @@ public class ValidationExceptionControllerAdvice {
             }
             log.info("object error : {}", error.getDefaultMessage());
             response.addValidationError(new ValidationError(error.getObjectName(), msa.getMessage(error.getCode(), null, "입력값이 올바르지 않습니다.")));
-
         }
         return response;
     }

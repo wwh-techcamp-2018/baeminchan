@@ -62,6 +62,4 @@ public class ApiUserControllerTest extends AcceptanceTest {
         ResponseEntity<Void> response = template().postForEntity("/api/users", newUser, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
-
-
 }

@@ -17,7 +17,6 @@ function alertError(response) {
     alert(response.message);
 }
 
-
 function loginUserHandler(evt) {
     evt.preventDefault();
     const userId = $("input#member_id").value;
