@@ -180,8 +180,10 @@
         <div id="popup_view" class="popup_view"></div>
     </div>
 </div>
-
+<script src="./js/common.js"></script>
 <script>
+$(document).ready(function() {
+
     $('#login_btn').click(function(){
 
         const data = {
@@ -189,22 +191,15 @@
             password : $('#pwd').val(),
         }
 
-        $.ajax({
-            type : 'POST',
-            url : '/api/users/login',
-            data : JSON.stringify(data),
-            success : function(response){
-                document.location = response.url;
-            },
-            error : function(response){
+        customAjax('/api/users/login', data)
+            .done( function(result){
+                document.location = result.url;
+            }).fail( function(result){
                 $('.err_msg').css('visibility','visible');
-                $('.err_msg').text(response.responseJSON.error.map( function(e){ return e.message}).join("\n"));
-            },
-            dataType : 'json',
-            contentType : 'application/json'
-        });
-    })
-
+                $('.err_msg').text(result.responseJSON.error.map( function(e){ return e.message}).join("\n"));
+            });
+    });
+})
 </script>
 </body>
 
