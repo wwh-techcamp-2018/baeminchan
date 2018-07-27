@@ -1,8 +1,7 @@
-package codesquad.support.dto;
+package codesquad.support.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -16,36 +15,18 @@ import java.util.List;
 public class ResponseModel<T> {
     private T data;
     private String message;
-    private List<ResponseModel.Error> errors;
+    private List<ResponseError> errors;
 
     public static <T> ResponseModel<T> ofSuccess(T data, String message) {
-        return new ResponseModel<T>(data, message);
+        return new ResponseModel<>(data, message);
     }
 
-    public static ResponseModel ofErrors(Error... errors) {
+    public static ResponseModel ofErrors(ResponseError... errors) {
         ResponseModel responseModel = new ResponseModel();
-        for (Error error : errors) {
+        for (ResponseError error : errors) {
             responseModel.addError(error);
         }
         return responseModel;
-    }
-
-    @ToString
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Getter
-    @NoArgsConstructor
-    public static class Error {
-        private String field;
-        private String message;
-
-        private Error(String field, String message) {
-            this.field = field;
-            this.message = message;
-        }
-
-        public static Error of(String field, String message) {
-            return new Error(field, message);
-        }
     }
 
     public ResponseModel() {
@@ -57,7 +38,7 @@ public class ResponseModel<T> {
         this.message = message;
     }
 
-    public void addError(Error error) {
+    public void addError(ResponseError error) {
         errors.add(error);
     }
 }

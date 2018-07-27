@@ -1,6 +1,6 @@
 package codesquad.support.test;
 
-import codesquad.support.dto.ResponseModel;
+import codesquad.support.dto.response.ResponseModel;
 import codesquad.user.domain.User;
 import codesquad.user.domain.UserRepository;
 import org.junit.runner.RunWith;

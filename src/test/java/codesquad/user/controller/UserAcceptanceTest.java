@@ -1,6 +1,6 @@
 package codesquad.user.controller;
 
-import codesquad.support.dto.ResponseModel;
+import codesquad.support.dto.response.ResponseModel;
 import codesquad.support.test.AcceptanceTest;
 import codesquad.user.domain.User;
 import codesquad.user.dto.LoginDto;
