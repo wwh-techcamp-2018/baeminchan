@@ -8,8 +8,8 @@ function failJoin(response) {
         el.style.display = 'none';
     });
     errors.forEach((error) => {
-        let errorMessage = error.defaultMessage;
-        let errorEl = $('#' + error.field + '_caution');
+        let errorMessage = error.errorMessage;
+        let errorEl = $('#' + error.fieldName + '_caution');
         errorEl.innerHTML = errorMessage;
         errorEl.style.display = 'block';
     });
@@ -39,7 +39,7 @@ function registerMemberHandler(evt) {
     const phoneNumber = $('#cell1').value +  $('#cell2').value +  $('#cell3').value;
 
     fetchManager({
-        url: '/members',
+        url: '/api//members',
         method: 'POST',
         headers: { 'content-type': 'application/json'},
         body: JSON.stringify({

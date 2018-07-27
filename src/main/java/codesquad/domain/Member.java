@@ -6,6 +6,7 @@ import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,9 +20,9 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 320, nullable = false, unique = true)
+    @Column(length = 100, nullable = false, unique = true)
     private String email;
-    @Column(length = 200, nullable = false)
+    @Column(length = 100, nullable = false)
     private String password;
     @Column(length = 30, nullable = false)
     private String username;

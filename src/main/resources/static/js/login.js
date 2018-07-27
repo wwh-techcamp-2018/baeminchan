@@ -3,7 +3,6 @@ function successLogin(response) {
 }
 
 function failLogin(response) {
-    const errors = response.errors;
     $('.err_msg').innerHTML = '로그인에 실패했습니다. 아이디와 비밀번호를 다시 확인하세요.';
     $('#member_id').value = '';
     $('#pwd').value = '';
@@ -21,7 +20,7 @@ function loginHandler(evt) {
     }
 
     fetchManager({
-        url: '/members/login',
+        url: '/api/members/login',
         method: 'POST',
         headers: { 'content-type': 'application/json'},
         body: JSON.stringify({
