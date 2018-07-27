@@ -1,6 +1,7 @@
 package codesquad.validation;
 
 import codesquad.BadRequestException;
+import codesquad.UnAuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -27,6 +28,17 @@ public class ExceptionAdvisor {
     @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResult handleBadRequest(BadRequestException exception) {
+        log.debug("handleBadRequest is called");
+        ErrorResult errorResult = new ErrorResult();
+        errorResult.add(exception.of());
+
+        return errorResult;
+    }
+
+    @ExceptionHandler(UnAuthenticationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResult handleUnAuthenticationException(UnAuthenticationException exception) {
+        log.debug("handleBadRequest is called");
         ErrorResult errorResult = new ErrorResult();
         errorResult.add(exception.of());
 
@@ -36,10 +48,12 @@ public class ExceptionAdvisor {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResult handleValidationException(MethodArgumentNotValidException exception) {
+        log.debug("handleValidationException is called");
         List<ObjectError> errors = exception.getBindingResult().getAllErrors();
         ErrorResult errorResult = new ErrorResult();
         for (ObjectError objectError : errors) {
             FieldError fieldError = (FieldError) objectError;
+            log.debug("field: {}, message: {}", fieldError.getField(), getErrorMessage(fieldError));
             errorResult.add(new Error(fieldError.getField(), getErrorMessage(fieldError)));
         }
 
