@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
-    @Resource(name = "bcryptPasswordEncoder")
+    @Resource(name = "bCryptPasswordEncoder")
     private PasswordEncoder bCryptPasswordEncoder;
 
     public Member save(MemberDto memberDto) {

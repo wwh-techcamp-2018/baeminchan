@@ -4,6 +4,8 @@ import codesquad.domain.Member;
 import codesquad.dto.LoginDto;
 import codesquad.dto.MemberDto;
 import codesquad.service.MemberService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,7 +36,7 @@ public class MemberAcceptanceTest {
     public void memberCreateTest() {
         String email = "pobi@naver.com";
 
-        ResponseEntity<Member> response = template.postForEntity("/members", MemberDto.defaultMemberDto().setEmail(email), Member.class);
+        ResponseEntity<Member> response = template.postForEntity("/api/members", MemberDto.defaultMemberDto().setEmail(email), Member.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(memberService.findByEmail(email)).isNotNull();
@@ -42,7 +44,7 @@ public class MemberAcceptanceTest {
 
     @Test
     public void memberCreateFailTest() throws JSONException {
-        ResponseEntity<String> response = template.postForEntity("/members",
+        ResponseEntity<String> response = template.postForEntity("/api/members",
                 MemberDto.defaultMemberDto().setEmail("123"), String.class);
         String errorMessage = getErrorMessageFromJsonString(response.getBody());
 
@@ -51,33 +53,53 @@ public class MemberAcceptanceTest {
     }
 
     @Test
-    public void loginTest() {
+    public void memberUsernameTooLongTest() throws JSONException {
+        ResponseEntity<String> response = template.postForEntity("/api/members",
+                MemberDto.defaultMemberDto().setUsername("123456123456123456123456123456123456123456"), String.class);
+        String errorMessage = getErrorMessageFromJsonString(response.getBody());
+
+        assertThat(errorMessage).isEqualTo("이름은 30자 이하이어야 합니다.");
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+    }
+
+    @Test
+    public void loginTest() throws JsonProcessingException {
         String email = "javajigi@naver.com";
         String password = "123123";
 
-        ResponseEntity<Member> response = template.postForEntity("/members",
+        ResponseEntity<Member> response = template.postForEntity("/api/members",
                 MemberDto.defaultMemberDto().setEmail(email).setPassword(password), Member.class);
-
+        ObjectMapper objectMapper = new ObjectMapper();
+        log.info("log {}", objectMapper.writeValueAsString(response.getBody().toString()));
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(memberService.findByEmail(email)).isNotNull();
 
         LoginDto loginDto = new LoginDto(email, password);
-        ResponseEntity<String> loginResponse = template.postForEntity("/members/login", loginDto, String.class);
+        ResponseEntity<String> loginResponse = template.postForEntity("/api/members/login", loginDto, String.class);
         assertThat(loginResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     @Test
     public void loginFailTest() {
         LoginDto loginDto = new LoginDto("javajigi@kakao.com", "123123");
-        ResponseEntity<String> response = template.postForEntity("/members/login", loginDto, String.class);
+        ResponseEntity<String> response = template.postForEntity("/api/members/login", loginDto, String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
         assertThat(response.getBody()).isEqualTo("유저 정보를 찾을 수 없습니다.");
+    }
+
+    @Test
+    public void loginFailShortEmailBlankTest() throws JSONException {
+        LoginDto loginDto = new LoginDto("", "12123");
+        ResponseEntity<String> response = template.postForEntity("/api/members/login", loginDto, String.class);
+        log.info("validation, {}", response.getBody());
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(getErrorMessageFromJsonString(response.getBody())).isEqualTo("메일을 입력하세요.");
     }
 
     private String getErrorMessageFromJsonString(String jsonText) throws JSONException {
         JSONObject jsonObject = new JSONObject(jsonText);
         JSONArray myResponse = jsonObject.getJSONArray("errors");
-        return ((JSONObject) myResponse.get(0)).getString("defaultMessage");
+        return ((JSONObject) myResponse.get(0)).getString("errorMessage");
     }
 
 
