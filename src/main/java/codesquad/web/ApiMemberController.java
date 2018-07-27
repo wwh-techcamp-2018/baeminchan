@@ -1,7 +1,8 @@
 package codesquad.web;
 
 import codesquad.domain.Member;
-import codesquad.dto.MemberDto;
+import codesquad.dto.MemberJoinDto;
+import codesquad.dto.MemberLoginDto;
 import codesquad.security.HttpSessionUtils;
 import codesquad.service.MemberService;
 import org.springframework.http.HttpHeaders;
@@ -24,15 +25,14 @@ public class ApiMemberController {
     private MemberService memberService;
 
     @PostMapping
-    public ResponseEntity<Void> create(@Valid @RequestBody MemberDto memberDto) {
+    public ResponseEntity<Void> create(@Valid @RequestBody MemberJoinDto memberDto) {
         memberService.add(memberDto);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(URI.create("/"));
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
+
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@Valid @RequestBody MemberDto memberDto, HttpSession session) {
+    public ResponseEntity<Void> login(@Valid @RequestBody MemberLoginDto memberDto, HttpSession session) {
         Member loginMember = memberService.login(memberDto);
         HttpSessionUtils.setMemberToSession(loginMember, session);
         HttpHeaders headers = new HttpHeaders();
