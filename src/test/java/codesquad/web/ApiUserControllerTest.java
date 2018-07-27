@@ -55,58 +55,8 @@ public class ApiUserControllerTest extends ApiAcceptanceTest {
     }
 
     @Test
-    public void 회원가입_이메일_형식() {
-        joinUserDTO.setEmail("a@naver");
-        ResponseEntity<Void> response = template().postForEntity("/api/users", joinUserDTO, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    @Test
-    public void 회원가입_이미가입된_이메일() {
+    public void 회원가입_중복된_이메일() {
         joinUserDTO.setEmail("a@naver.com");
-        ResponseEntity<Void> response = template().postForEntity("/api/users", joinUserDTO, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    @Test
-    public void 회원가입_비밀번호_형식_길이짧음() {
-        joinUserDTO.setPassword("test145");
-        ResponseEntity<Void> response = template().postForEntity("/api/users", joinUserDTO, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    @Test
-    public void 회원가입_비밀번호_형식_숫자만() {
-        joinUserDTO.setPassword("11111111111");
-        ResponseEntity<Void> response = template().postForEntity("/api/users", joinUserDTO, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    @Test
-    public void 회원가입_비밀번호_형식_문자만() {
-        joinUserDTO.setPassword("ttttttttttt");
-        ResponseEntity<Void> response = template().postForEntity("/api/users", joinUserDTO, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    @Test
-    public void 회원가입_비밀번호_확인_다름() {
-        joinUserDTO.setPassword("test1451");
-        joinUserDTO.setPasswordConfirm("test14513");
-        ResponseEntity<Void> response = template().postForEntity("/api/users", joinUserDTO, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    @Test
-    public void 회원가입_전화번호_형식_앞자리() {
-        joinUserDTO.setPhoneNo("02-000-0000");
-        ResponseEntity<Void> response = template().postForEntity("/api/users", joinUserDTO, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    @Test
-    public void 회원가입_전화번호_형식_숫자아닌_값() {
-        joinUserDTO.setPhoneNo("010-a00-0000");
         ResponseEntity<Void> response = template().postForEntity("/api/users", joinUserDTO, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
