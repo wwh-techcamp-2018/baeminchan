@@ -35,16 +35,12 @@ public class UserDto {
     @Pattern(regexp = Regex.PHONE, message = "Invalid phone number")
     private String phone;
 
-
     public boolean matchPassword() {
         return password.equals(confirmPassword);
     }
 
-    public User toEntity(PasswordEncoder passwordEncoder) throws UnAuthenticationException {
-        if (!matchPassword()) {
-            // TODO fix fieldName hard-coding..
-            throw new UnAuthenticationException("password", "비밀번호가 일치하지 않습니다.");
-        }
+    public User toEntity(PasswordEncoder passwordEncoder) {
+
         return User.builder()
                 .name(name)
                 .password(passwordEncoder.encode(password))

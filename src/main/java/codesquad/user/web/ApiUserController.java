@@ -26,19 +26,15 @@ public class ApiUserController {
 
     @PostMapping
     public ResponseEntity<Void> create(@Valid @RequestBody UserDto userDto) throws UnAuthenticationException {
-        Long userId = userService.save(userDto);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(URI.create("/users/" + userId));
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        User user = userService.save(userDto);
+        return ResponseEntity.created(URI.create("/users/" + user.getId())).build();
     }
 
     @PostMapping("/login")
     public ResponseEntity<Void> login(@Valid @RequestBody LoginDto loginDto, HttpSession session) throws UnAuthenticationException {
         User user = userService.login(loginDto);
         HttpSessionUtils.setUserSessionKey(session, user);
-
-        HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<Void>(headers, HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/logout")

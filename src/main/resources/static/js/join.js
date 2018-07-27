@@ -1,30 +1,14 @@
-function $(selector) {
-    return document.querySelector(selector);
-}
-
-function fetchManager({ url, method, body, headers, callback }) {
-    fetch(url, {
-        method,
-        body,
-        headers,
-        credentials: "same-origin"
-    }).then((response) => {
-        return response
-    }).then((result) => {
-        callback(result)
-    })
-}
 
 function initEvents(){
     const signUpBtn = $("#submitSignUp");
-    signUpBtn.addEventListener("click",signUpHandler);
+    signUpBtn.addEventListener("click", handleSignUp);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     initEvents();
 })
 
-function signUpHandler(evt){
+function handleSignUp(evt){
     evt.preventDefault();
 
     const email = $("#email_id").value +'@'+ $("#email_domain").value;
@@ -44,14 +28,19 @@ function signUpHandler(evt){
             "name": name,
             "phone": phone
         }),
-        callback: signResult
+        success: signSuccess,
+        error: signFailed
     })
 }
 
-function signResult(response){
+function signSuccess(response){
     console.log(response);
     if(response.status == 201) {
         location.href = '/'
     }
     // TODO error 처리
+}
+
+function signFailed(error){
+    alert(error);
 }
