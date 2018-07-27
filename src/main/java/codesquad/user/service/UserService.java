@@ -3,7 +3,7 @@ package codesquad.user.service;
 import codesquad.user.domain.User;
 import codesquad.user.domain.UserRepository;
 import codesquad.user.exception.UnAuthenticationException;
-import codesquad.util.Message;
+import codesquad.constant.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.security.crypto.password.PasswordEncoder;
