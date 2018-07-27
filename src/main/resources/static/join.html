@@ -144,7 +144,7 @@
                                 </div>
                             </div>
                             <span class="tb_in_txt caution"
-                                  id="join_check_email">이메일 형식을 확인해 주세요.</span>
+                                  id="join_check_email"></span>
                         </td>
                     </tr>
 
@@ -166,7 +166,8 @@
                             <label for="pw2">비밀번호 확인</label>
                         </th>
                         <td>
-                            <input type="password" size="30" name="passwordCheck" id="pw2" class="join_input" maxlength="25"
+                            <input type="password" size="30" name="passwordCheck" id="pw2" class="join_input"
+                                   maxlength="25"
                                    placeholder="비밀번호 확인">
                             <p class="tb_txt1">
                                 <span id="join_check_password2" class="tb_in_txt caution"></span>
@@ -200,7 +201,8 @@
                             >
                             <input type="radio" name="unique" value="2" id="unique_phone" onclick="selectRegMode(2)"
                                    style="display: none;">
-                            <span class="tb_in_txt caution" id="join_check_phoneNumber">기존 아이디로 로그인하거나 비밀번호를 찾으려면?</span>
+                            <span class="tb_in_txt caution"
+                                  id="join_check_phoneNumber">기존 아이디로 로그인하거나 비밀번호를 찾으려면?</span>
                             <div class="comment_box login" id="duplicate_phone" style="display:none;">
                                 <span class="tb_in_txt caution clear" id="duplicate_id"></span>
                                 <br class="clear">
@@ -314,7 +316,7 @@
 <iframe name="hidden1529398405" id="hidden1529398405" src="about:blank" width="0" height="0" scrolling="no"
         frameborder="0"
         style="display:none;"></iframe>
-
+<script src="./js/common.js"></script>
 <script>
 $(document).ready(function() {
     $('#btn_submit').click(function(){
@@ -327,22 +329,15 @@ $(document).ready(function() {
             phoneNumber : $('#cell1').val() + '-' + $('#cell2').val() + '-' + $('#cell3').val(),
         }
 
-        $.ajax({
-            type : 'POST',
-            url : '/api/users',
-            data : JSON.stringify(data),
-            success : function(result){
+        customAjax('/api/users', data)
+            .done( function(result){
                 document.location = result.url;
-            },
-            error : function(result) {
+            }).fail( function(result){
                 result.responseJSON.error.forEach(function(e) {$('#join_check_' + e.field).text(e.message);})
-            },
-            dataType : 'json',
-            contentType : 'application/json',
-        });
-
+            });
     });
 });
+
 
 </script>
 </body>

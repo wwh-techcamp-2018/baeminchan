@@ -22,7 +22,7 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ErrorResponse handleValidationException(MethodArgumentNotValidException exception) {
         log.debug("ErrorResponse CALL! + {}" , exception.toString());
-
+        log.debug("MethodArgumentNotValidException.class occured" );
         List<ObjectError> errors = exception.getBindingResult().getAllErrors();
         ErrorResponse errorResponse = new ErrorResponse();
         for (ObjectError objectError : errors) {
@@ -36,6 +36,7 @@ public class ExceptionControllerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler( {IllegalArgumentException.class, NotExistException.class} )
     public ErrorResponse handleIllegalArgumentException(RuntimeException exception){
+        log.debug("IllegalArgumentException.class, NotExistException.class occured" );
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.registErrorMessage(new ValidationError(exception.getMessage()));
         return errorResponse;
