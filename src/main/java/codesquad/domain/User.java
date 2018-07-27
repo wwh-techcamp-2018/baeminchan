@@ -6,14 +6,12 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-
 @Entity
 @Getter
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column(nullable = false, length = 30, unique = true, updatable = false)
     private String userId;
     @Column(nullable = false)

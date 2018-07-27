@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 
 
 @Constraint(validatedBy = FieldsValueMatchValidator.class)
-@Target({ElementType.TYPE, ElementType.FIELD})
+@Target({ ElementType.TYPE, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FieldsValueMatch {
 
@@ -24,5 +24,6 @@ public @interface FieldsValueMatch {
     Class<UserDto>[] groups() default {};
 
     Class<UserDto>[] payload() default {};
+
 }
 

@@ -58,5 +58,4 @@ public class ApiUserControllerTest extends AcceptanceTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
-
 }

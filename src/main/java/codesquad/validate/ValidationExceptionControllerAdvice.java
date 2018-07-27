@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Optional;
-
 @RestControllerAdvice
 public class ValidationExceptionControllerAdvice {
     private static final Logger log = LoggerFactory.getLogger(ValidationExceptionControllerAdvice.class);
@@ -34,7 +33,6 @@ public class ValidationExceptionControllerAdvice {
             }
             log.info("object error : {}", error.getDefaultMessage());
             response.addValidationError(new ValidationError(error.getObjectName(), msa.getMessage(error.getCode(), null, "입력값이 올바르지 않습니다.")));
-
         }
         return response;
     }
