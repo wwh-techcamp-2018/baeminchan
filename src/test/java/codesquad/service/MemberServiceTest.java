@@ -2,8 +2,7 @@ package codesquad.service;
 
 import codesquad.domain.Member;
 import codesquad.domain.MemberTest;
-import codesquad.dto.MemberDto;
-import codesquad.dto.MemberDtoTest;
+import codesquad.dto.MemberLoginDto;
 import codesquad.exception.UnAuthenticationException;
 import codesquad.repository.MemberRepository;
 import org.junit.Test;
@@ -35,7 +34,7 @@ public class MemberServiceTest {
 
     @Test
     public void login_success() {
-        MemberDto testMemberDto = MemberDtoTest.newMemberDto("dooho@woowahan.com", "1234password");
+        MemberLoginDto testMemberDto = new MemberLoginDto("dooho@woowahan.com", "1234password");
 
         Member dbMember = MemberTest.newMember("dooho@woowahan.com", bcryptPasswordEncoder.encode("1234password"));
         when(memberRepository.findByEmail(testMemberDto.getEmail())).thenReturn(Optional.of(dbMember));
@@ -46,15 +45,17 @@ public class MemberServiceTest {
 
     @Test(expected = UnAuthenticationException.class)
     public void login_fail_when_not_match_password() {
-        MemberDto testMemberDto = MemberDtoTest.newMemberDto("dooho@woowahan.com", "1234wrong");
+        MemberLoginDto testMemberDto = new MemberLoginDto("dooho@woowahan.com", "1234wrong");
 
         Member dbMember = MemberTest.newMember("dooho@woowahan.com", "1234password");
         when(memberRepository.findByEmail(testMemberDto.getEmail())).thenReturn(Optional.of(dbMember));
-        Member loginMember = memberService.login(testMemberDto);
+        memberService.login(testMemberDto);
     }
 
     @Test(expected = UnAuthenticationException.class)
     public void login_fail_when_not_exit_email() {
         memberService.findByEmail("dooho@woowahan.com");
     }
+
+
 }

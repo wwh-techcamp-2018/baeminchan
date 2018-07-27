@@ -37,11 +37,6 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>(Arrays.asList(Role.DEFAULT));
 
-    public Member(long id, String email, String password, String username, String phoneNumber) {
-        this(email, password, username, phoneNumber);
-        this.id = id;
-    }
-
     public Member(String email, String password, String username, String phoneNumber) {
         this.email = email;
         this.password = password;

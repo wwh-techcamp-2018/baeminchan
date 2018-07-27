@@ -8,18 +8,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MemberDtoTest {
-    public static final MemberDto DOY = new MemberDto("doy@woowahan.com", "1234password", "doy",
+public class MemberJoinDtoTest {
+    public static final MemberJoinDto DOY = new MemberJoinDto("doy@woowahan.com", "1234password", "doy",
             "01012345678");
-    public static final MemberDto DOOHO = new MemberDto("dooho@woowahan.com", "5678password", "dooho",
+    public static final MemberJoinDto DOOHO = new MemberJoinDto("dooho@woowahan.com", "5678password", "dooho",
             "01012345678");
 
-    public static MemberDto newMemberDto(String email) {
+    public static MemberJoinDto newMemberDto(String email) {
         return newMemberDto(email, "1234password");
     }
 
-    public static MemberDto newMemberDto(String email, String password) {
-        return new MemberDto(email, password, "name", "01012345678");
+    public static MemberJoinDto newMemberDto(String email, String password) {
+        return new MemberJoinDto(email, password, "name", "01012345678");
     }
 
     private PasswordEncoder bcryptPasswordEncoder;

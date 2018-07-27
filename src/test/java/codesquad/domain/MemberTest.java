@@ -7,7 +7,7 @@ public class MemberTest {
     }
 
     public static Member newMember(String email, String password) {
-        return new Member(1L, email, password, "dooho", "01012345678");
+        return new Member(email, password, "dooho", "01012345678");
     }
 
 }
