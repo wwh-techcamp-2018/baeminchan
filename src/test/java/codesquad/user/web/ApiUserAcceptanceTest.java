@@ -76,7 +76,7 @@ public class ApiUserAcceptanceTest {
                 .build();
 
         ResponseEntity<RestResponse<?>> responseEntity = createPostResponseEntity("/api/users/login", dto);
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
         assertThat(responseEntity.getBody().getError()).hasSize(1);
     }
 
@@ -91,7 +91,7 @@ public class ApiUserAcceptanceTest {
                 .build();
 
         ResponseEntity<RestResponse<?>> responseEntity = createPostResponseEntity("/api/users/login", dto);
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
         assertThat(responseEntity.getBody().getError()).hasSize(1);
     }
 

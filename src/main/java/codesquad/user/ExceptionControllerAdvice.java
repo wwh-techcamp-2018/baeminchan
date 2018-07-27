@@ -14,7 +14,7 @@ public class ExceptionControllerAdvice {
     private static final Logger log = LoggerFactory.getLogger(ExceptionControllerAdvice.class);
 
     @ExceptionHandler(UnAuthenticationException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     public RestResponse<?> unAuthentication(UnAuthenticationException e) {
         return RestResponse.error(e.getMessage()).build();
     }
