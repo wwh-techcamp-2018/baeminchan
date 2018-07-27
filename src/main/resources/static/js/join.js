@@ -39,7 +39,7 @@ function registerMemberHandler(evt) {
     const phoneNumber = $('#cell1').value +  $('#cell2').value +  $('#cell3').value;
 
     fetchManager({
-        url: '/api//members',
+        url: '/api/members',
         method: 'POST',
         headers: { 'content-type': 'application/json'},
         body: JSON.stringify({
