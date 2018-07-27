@@ -1,5 +1,6 @@
 package codesquad.validate;
 
+import codesquad.support.CustomFieldError;
 import codesquad.support.ErrorResponse;
 import codesquad.support.JsonResponse;
 import codesquad.support.NotExistException;
@@ -35,7 +36,9 @@ public class ExceptionControllerAdvice {
         for (ObjectError objectError : errors) {
             log.debug("object error : {}", objectError);
             FieldError fieldError = (FieldError) objectError;
-            errorResponse.registErrorMessage(fieldError.getField() + fieldError.getDefaultMessage());
+            log.debug("field error : {}", fieldError);
+            log.debug("contents : {} {}", fieldError.getField(), fieldError.getDefaultMessage());
+            errorResponse.registErrorMessage(new CustomFieldError(fieldError.getField(),fieldError.getDefaultMessage()));
         }
         return errorResponse;
     }
@@ -43,7 +46,7 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler( {IllegalArgumentException.class, NotExistException.class} )
     public ErrorResponse handleIllegalArgumentException(RuntimeException exception){
         ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.registErrorMessage(exception.getMessage());
+        errorResponse.registErrorMessage(new CustomFieldError(null, exception.getMessage()));
         return errorResponse;
     }
 }

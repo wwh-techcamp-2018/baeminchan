@@ -4,21 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ErrorResponse {
-    List<String> error;
+    List<CustomFieldError> errors;
 
     public ErrorResponse(){
-        error = new ArrayList<>();
+        errors = new ArrayList<>();
     }
 
-    public List<String> getError() {
-        return error;
+    public List<CustomFieldError> getError() {
+        return errors;
     }
 
-    public void setError(List<String> error) {
-        this.error = error;
+    public void setError(List<CustomFieldError> error) {
+        this.errors = error;
     }
 
-    public void registErrorMessage(String message){
-        error.add(message);
+    public void registErrorMessage(CustomFieldError message){
+        errors.add(message);
+    }
+
+    @Override
+    public String toString() {
+        return "ErrorResponse{" +
+                "errors=" + errors +
+                '}';
     }
 }
