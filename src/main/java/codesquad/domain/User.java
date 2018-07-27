@@ -1,5 +1,6 @@
 package codesquad.domain;
 
+import codesquad.exception.UnAuthenticationException;
 import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.*;
@@ -41,9 +42,9 @@ public class User {
         this.joinDate = joinDate;
     }
 
-    public boolean login(String password, PasswordEncoder passwordEncoder) throws IllegalAccessException {
+    public boolean login(String password, PasswordEncoder passwordEncoder) throws UnAuthenticationException {
         if (!passwordEncoder.matches(password, this.password)) {
-            throw new IllegalAccessException();
+            throw new UnAuthenticationException("비밀번호가 일치하지 않습니다.");
         }
         return true;
     }

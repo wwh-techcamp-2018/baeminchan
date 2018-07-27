@@ -1,7 +1,3 @@
-function $(selector) {
-    return document.querySelector(selector);
-}
-
 document.addEventListener("DOMContentLoaded", () => {
     initEvents();
 })
@@ -18,16 +14,9 @@ function emailDomainHandler(event) {
     $(".tb_join").querySelector('#email_domain').value = event.target.value;
 }
 
-function fetchManager({ url, method, body, headers, callback }) {
-    fetch(url, {method,body,headers,credentials: "same-origin"})
-        .then((response) => {
-            if(response.status == 201) {
-                alert("회원가입을 축하드립니다!");
-                location.href = '/'
-                return
-            }
-        return callback(response.json());
-    })
+function onSuccess() {
+    alert("회원가입을 축하드립니다!");
+    location.href = '/';
 }
 
 function checkBlank(joinTable, selectors) {
@@ -68,7 +57,8 @@ function registerUserHandler(evt) {
             "name" : name,
             "phoneNumber" : phoneNumber
             }),
-        callback: alertError
+        callback: onSuccess,
+        errCallback: alertError
     })
 }
 

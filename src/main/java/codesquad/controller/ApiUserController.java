@@ -37,6 +37,6 @@ public class ApiUserController {
     public ResponseEntity<Void> login(@RequestBody Map<String, String> newUser, HttpSession session) throws IllegalAccessException {
         User loginUser = userService.login(newUser.get("userId"), newUser.get("password"));
         session.setAttribute(SESSIONED_USER, loginUser);
-        return ResponseEntity.status(HttpStatus.FOUND).build();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
