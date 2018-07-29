@@ -56,8 +56,8 @@
                 </li>
             </ul>
             <form name="joinFrm" id="joinFrm" class="join_form_box" method="post" action="/member/join.exe.php"
-                  target="hidden1529398405"
-            <!--onsubmit="return checkRegMember(this)"-->>
+                  target="hidden1529398405">
+            <!--onsubmit="return checkRegMember(this)"-->
             <input type="hidden" name="rURL" id="rURL" value="">
             <input type="hidden" name="return_url" value="/member/join.exe.php">
             <input type="hidden" name="nick_checked" id="nick_checked" value="0">
@@ -68,7 +68,7 @@
             <input type="hidden" name="reg_code_checked" id="reg_code_checked" value="0">
             <input type="hidden" name="session_id" value="n125miq6k70eh3kqu128c086f7">
             <input type="hidden" name="member_id" id="member_id" value="">
-            <input type="hidden" name="email" id="email" value="">
+            <input type="hidden" name="email" id="email_input" value="">
             <fieldset>
                 <legend class="blind">회원가입 정보입력폼</legend>
                 <table border="1" class="tb_join">
@@ -160,7 +160,7 @@
                                 <input type="password" size="30" name="pwd[]" id="pw1" class="join_input" maxlength="25"
                                        placeholder="8-16자리 영문,숫자 조합">
                                 <p class="tb_txt1">
-                                    <span id="join_check_password" class="tb_in_txt caution" style="display:none">비밀 번호 형식을 확인해 주세요.</span>
+                                    <span class="tb_in_txt caution" style="display:none" id="password_caution">비밀 번호 형식을 확인해 주세요.</span>
                                 </p>
                             </div>
                         </td>
@@ -174,7 +174,7 @@
                                 <input type="password" size="30" name="pwd[]" id="pw2" class="join_input" maxlength="25"
                                        placeholder="비밀번호 확인">
                                 <p class="tb_txt1">
-                                    <span id="join_check_password2" class="tb_in_txt caution" style="display:none">비밀 번호 형식을 확인해 주세요.</span>
+                                    <span class="tb_in_txt caution" style="display:none" id="passwordCheck_caution">비밀 번호 형식을 확인해 주세요.</span>
                                 </p>
                             </div>
                         </td>
@@ -186,7 +186,7 @@
                         <td>
                             <div id="name">
                                 <input type="text" size="24" name="name" value="" id="name_input" class="join_input">
-                                <span class="tb_in_txt caution" style="display:none">이름 형식을 확인해주세요.</span>
+                                <span class="tb_in_txt caution" style="display:none" id="name_caution">이름 형식을 확인해주세요.</span>
                             </div>
                         </td>
                     </tr>
@@ -207,10 +207,12 @@
                                 <input type="text" maxlength="4" size="10" name="cell[]" id="cell3" value=""
                                        title="휴대 전화 번호 뒷자리" class="join_input small"
                                 >
+                                <span class="tb_in_txt caution clear" id="phoneNumber_caution" style="display: none;">휴대 전화 번호 양식을 확인해주세요.</span>
                                 <input type="radio" name="unique" value="2" id="unique_phone" onclick="selectRegMode(2)"
                                        style="display: none;">
+
                                 <div class="comment_box login" id="duplicate_phone" style="display:none;">
-                                    <span class="tb_in_txt caution clear" id="duplicate_id">휴대 전화 번호 양식을 확인해주세요.</span>
+
                                     <br class="clear">
                                     <span class="tb_in_txt">기존 아이디로 로그인하거나 비밀번호를 찾으려면?</span>
                                     <br class="clear">
@@ -324,44 +326,8 @@
         frameborder="0"
         style="display:none;"></iframe>
 
-<script>
-    $(document).ready(function () {
-        $('#btn_submit').click(() => {
-            const data = {
-                email: $('#email_id').val() + '@' + $('#email_domain').val(),
-                password: $('#pw1').val(),
-                passwordCheck: $('#pw2').val(),
-                name: $('#name_input').val(),
-                phoneNumber: $('#cell1').val() + '-' + $('#cell2').val() + '-' + $('#cell3').val(),
-            }
-
-            $.ajax({
-            type: 'POST',
-            url: '/api/users',
-            data: JSON.stringify(data),
-            success: function (result) {
-                document.location = result.url;
-            },
-            error: function (result) {
-                const errors = result.responseJSON.error;
-                console.log(errors);
-                errors.forEach((error) => {
-                    const field = error.field;
-                $('#' + field + '> .caution').css("display", "block")
-
-            })
-                ;
-                alert(result.responseJSON.error.join('\n'));
-            },
-            dataType: 'json',
-            contentType: 'application/json',
-        });
-
-    })
-        ;
-    });
-
-</script>
+<script src="js/util.js" type="text/javascript" defer></script>
+<script src="js/join.js" type="text/javascript" defer></script>
 </body>
 
 </html>
