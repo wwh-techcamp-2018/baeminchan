@@ -15,14 +15,15 @@ function loginHandler(evt) {
     fetch('/users/login', {
         method: 'post',
         headers: {'content-type': 'application/json'},
+        credentials: 'same-origin',
         body: JSON.stringify({
             email,
-            password,
+            password
         })
     })
     .then(response => {
         if (!response.ok) {
-            location.reload();
+            return location.href = "/login.html";
         }
         alert("로그인을 축하합니다!");
         location.href = "/";

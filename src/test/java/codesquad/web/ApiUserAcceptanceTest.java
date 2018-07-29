@@ -1,6 +1,7 @@
 package codesquad.web;
 
-import codesquad.dto.UserDto;
+import codesquad.user.dto.LoginDto;
+import codesquad.user.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,5 +38,25 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
         user.setEmail("ab"); // sample invalid argument
         ResponseEntity<Void> response = template().postForEntity("/users", user, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST); // 400
+    }
+
+    @Test
+    public void login(){
+        LoginDto loginDto= LoginDto.builder()
+                                    .email("javajigi@gmail.com")
+                                    .password("haha123!")
+                                    .build();
+        ResponseEntity<Void> response = template().postForEntity("/users/login",loginDto, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+    @Test
+    public void login_실패(){
+        LoginDto loginDto= LoginDto.builder()
+                .email("javajigi@gmail.com")
+                .password("haha123!!!")
+                .build();
+        ResponseEntity<Void> response = template().postForEntity("/users/login",loginDto, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
     }
 }

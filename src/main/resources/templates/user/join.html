@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="naver-site-verification" content="e543b30ae873355f2c556f58b48ae7c95c1cea05">
     <title>배민찬 - 모바일 넘버원 반찬가게</title>
-    <link rel="stylesheet" type="text/css" href="common.css">
+    <link rel="stylesheet" type="text/css" href="/common.css">
 </head>
 
 <body>
@@ -54,8 +54,7 @@
                         </a>
                     </li>
                 </ul>
-                <form name="joinFrm" id="joinFrm" class="join_form_box" method="post" action="/member/join.exe.php" target="hidden1529398405"
-                    onsubmit="return checkRegMember(this)">
+                <form name="joinFrm" id="joinFrm" class="join_form_box">
                     <input type="hidden" name="rURL" id="rURL" value="">
                     <input type="hidden" name="return_url" value="/member/join.exe.php">
                     <input type="hidden" name="nick_checked" id="nick_checked" value="0">
@@ -150,7 +149,7 @@
                                         <label for="pw1">비밀번호</label>
                                     </th>
                                     <td>
-                                        <input type="password" size="30" name="pwd[]" id="pw1" class="join_input" maxlength="25" placeholder="8-16자리 영문,숫자 조합">
+                                        <input type="password" size="30" name="pwd[]" id="pw1" class="join_input" maxlength="16" placeholder="8-16자리 영문,숫자,특수문자 조합">
                                         <p class="tb_txt1">
                                             <span id="join_check_password" class="tb_in_txt caution"></span>
                                         </p>
@@ -161,7 +160,7 @@
                                         <label for="pw2">비밀번호 확인</label>
                                     </th>
                                     <td>
-                                        <input type="password" size="30" name="pwd[]" id="pw2" class="join_input" maxlength="25" placeholder="비밀번호 확인">
+                                        <input type="password" size="30" name="pwd[]" id="pw2" class="join_input" maxlength="16" placeholder="비밀번호 확인">
                                         <p class="tb_txt1">
                                             <span id="join_check_password2" class="tb_in_txt caution"></span>
                                         </p>
@@ -298,6 +297,10 @@
 
     <iframe name="hidden1529398405" id="hidden1529398405" src="about:blank" width="0" height="0" scrolling="no" frameborder="0"
         style="display:none;"></iframe>
+    <!-- script references -->
+    <script src="/js/join.js"></script>
+
 </body>
+
 
 </html>
