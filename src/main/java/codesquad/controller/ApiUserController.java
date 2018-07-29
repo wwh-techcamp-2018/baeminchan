@@ -1,8 +1,8 @@
 package codesquad.controller;
 
-import codesquad.domain.User;
-import codesquad.dto.JoinUserDto;
-import codesquad.dto.LoginUserDto;
+import codesquad.domain.user.User;
+import codesquad.dto.user.JoinUserDto;
+import codesquad.dto.user.LoginUserDto;
 import codesquad.service.UserService;
 import codesquad.util.SessionUtil;
 import io.swagger.annotations.*;

@@ -1,4 +1,4 @@
-package codesquad.dto;
+package codesquad.dto.user;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

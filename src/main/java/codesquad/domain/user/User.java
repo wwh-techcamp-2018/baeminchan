@@ -1,7 +1,7 @@
-package codesquad.domain;
+package codesquad.domain.user;
 
-import codesquad.dto.JoinUserDto;
-import codesquad.dto.LoginUserDto;
+import codesquad.dto.user.JoinUserDto;
+import codesquad.dto.user.LoginUserDto;
 import codesquad.exception.LoginFailedException;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package codesquad.domain;
+package codesquad.domain.user;
 
 
 public class AdminUser extends User {

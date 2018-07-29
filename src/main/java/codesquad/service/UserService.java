@@ -1,14 +1,13 @@
 package codesquad.service;
 
-import codesquad.domain.User;
-import codesquad.domain.UserRepository;
-import codesquad.dto.JoinUserDto;
-import codesquad.dto.LoginUserDto;
+import codesquad.domain.user.User;
+import codesquad.domain.user.UserRepository;
+import codesquad.dto.user.JoinUserDto;
+import codesquad.dto.user.LoginUserDto;
 import codesquad.exception.AlreadyExistsUserException;
 import codesquad.exception.LoginFailedException;
 import codesquad.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.h2.jdbc.JdbcSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
