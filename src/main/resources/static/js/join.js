@@ -1,39 +1,3 @@
-// $(document).ready(function () {
-//     $('#btn_submit').click(() => {
-//         const data = {
-//             email: $('#email_id').val() + '@' + $('#email_domain').val(),
-//             password: $('#pw1').val(),
-//             passwordCheck: $('#pw2').val(),
-//             name: $('#name_input').val(),
-//             phoneNumber: $('#cell1').val() + '-' + $('#cell2').val() + '-' + $('#cell3').val(),
-//         }
-//
-//         $.ajax({
-//             type: 'POST',
-//             url: '/api/users',
-//             data: JSON.stringify(data),
-//             success: function (result) {
-//                 document.location = result.url;
-//             },
-//             error: function (result) {
-//                 const errors = result.responseJSON.error;
-//                 console.log(errors);
-//                 errors.forEach((error) => {
-//                     const field = error.field;
-//                     $('#' + field + '> .caution').css("display", "block")
-//
-//                 })
-//                 ;
-//                 alert(result.responseJSON.error.join('\n'));
-//             },
-//             dataType: 'json',
-//             contentType: 'application/json',
-//         });
-//
-//     })
-//     ;
-// });
-
 const inputElements = {
     emailID : 'email_id',
     emailDomain : 'email_domain',
@@ -43,7 +7,7 @@ const inputElements = {
     phoneNumber1 : 'cell1',
     phoneNumber2 : 'cell2',
     phoneNumber3 : 'cell3',
-}
+};
 
 const requestForm = (url, method, body, callback) => {
     return {
@@ -53,11 +17,11 @@ const requestForm = (url, method, body, callback) => {
         body : JSON.stringify(body),
         callback : callback,
     }
-}
+};
 
 const success = (result) => {
     document.location = result.url;
-}
+};
 
 const error = (result) => {
     const errors = result.error;
@@ -73,7 +37,7 @@ const error = (result) => {
         console.log(field);
         $(idString(field)+'_caution').style.display = 'block';
     });
-}
+};
 
 
 $(idString('btn_submit')).onclick = (event) => {
@@ -91,7 +55,7 @@ $(idString('btn_submit')).onclick = (event) => {
         data,
         resultProcess,
         ));
-}
+};
 
 const resultProcess = (status, data) => {
     if(status === 201){
@@ -99,4 +63,4 @@ const resultProcess = (status, data) => {
     } else {
         error(data);
     }
-}
+};

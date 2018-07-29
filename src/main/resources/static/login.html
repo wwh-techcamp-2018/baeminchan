@@ -82,8 +82,9 @@
                                 <input id="id_save" type="checkbox" name="id_save" value="Y" class="bf hidden_chk">
                                 <label for="id_save">아이디 저장</label>
                             </span>
-
+                    <p class="err_msg" style="display:none" id="login_caution"></p>
                     <p class="err_msg" style="visibility:hidden;">로그인이 필요한 서비스입니다. 회원이 아니시면 회원가입을 해주세요.</p>
+
 
                     <div class="btn_area">
                         <button type="button" class="btn btn_kakao btn_login" id="kakao_rest">
@@ -181,32 +182,8 @@
     </div>
 </div>
 
-<script>
-
-
-    $('#login_btn').click(function(){
-
-        const data = {
-            email : $('#member_id').val(),
-            password : $('#pwd').val(),
-        }
-
-        $.ajax({
-            type : 'POST',
-            url : '/api/users/login',
-            data : JSON.stringify(data),
-            success : function(response){
-                document.location = response.url;
-            },
-            error : function(response){
-                alert(response.responseJSON.error);
-            },
-            dataType : 'json',
-            contentType : 'application/json'
-        });
-    })
-
-</script>
+<script src="js/util.js" type="text/javascript" defer></script>
+<script src="js/login.js" type="text/javascript" defer></script>
 </body>
 
 </html>
