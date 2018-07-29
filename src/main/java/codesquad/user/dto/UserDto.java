@@ -1,6 +1,7 @@
 package codesquad.user.dto;
 
 import codesquad.exception.UnAuthenticationException;
+import codesquad.user.domain.Role;
 import codesquad.user.domain.User;
 import codesquad.utils.Regex;
 import lombok.*;
@@ -46,6 +47,7 @@ public class UserDto {
                 .password(passwordEncoder.encode(password))
                 .email(email)
                 .phone(phone)
+                .role(Role.DEFAULT)
                 .build();
 
     }

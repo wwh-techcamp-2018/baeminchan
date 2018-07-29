@@ -27,7 +27,9 @@ public class User {
     @NonNull
     private String phone;
 
-    //private Map<String, Role> roles;
+    @NonNull
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.DEFAULT;
 
     private boolean deleted;
 }
