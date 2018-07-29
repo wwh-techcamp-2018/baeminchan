@@ -1,24 +1,32 @@
-$(idString('login_btn')).onclick = (event) => {
-    const login_input = {
-        email : getElementValue($, idString, 'member_id'),
-        password : getElementValue($, idString, 'pwd'),
+const requestURL = {
+    login: '/api/users/login',
+};
+
+const inputElements = {
+    email: 'member_id',
+    password: 'pwd',
+};
+
+getElement($, idString, 'login_btn').onclick = () => {
+    const loginInput = {
+        email: getElement($, idString, inputElements.email).value,
+        password: getElement($, idString, inputElements.password).value,
     };
 
     fetchManager({
-        url : '/api/users/login',
-        method : 'POST',
-        body : JSON.stringify(login_input),
-        headers : {'content-type': 'application/json'},
-        callback : resultProcess,
+        url: requestURL.login,
+        method: METHOD.POST,
+        body: JSON.stringify(loginInput),
+        headers: ContentType.JSON,
+        callback: resultProcess,
     });
 };
 
 const resultProcess = (status, data) => {
-    if(status === 400){
-        $(idString('login_caution')).style.display = 'block';
-        $(idString('login_caution')).innerHTML = data.error[0].message;
-    }
-    else{
-        document.location = data.url;
+    if (status === 400) {
+        getElement($, idString, 'login_caution').style.display = 'block';
+        getElement($, idString, 'login_caution').innerHTML = data.error[0].message;
+    } else {
+        redirect(data.url);
     }
 };

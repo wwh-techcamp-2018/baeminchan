@@ -1,66 +1,68 @@
+const requestURL = {
+    users: '/api/users',
+};
+
 const inputElements = {
-    emailID : 'email_id',
-    emailDomain : 'email_domain',
-    password : 'pw1',
-    passwordCheck : 'pw2',
-    name : 'name_input',
-    phoneNumber1 : 'cell1',
-    phoneNumber2 : 'cell2',
-    phoneNumber3 : 'cell3',
+    emailID: 'email_id',
+    emailDomain: 'email_domain',
+    password: 'pw1',
+    passwordCheck: 'pw2',
+    name: 'name_input',
+    phoneNumber1: 'cell1',
+    phoneNumber2: 'cell2',
+    phoneNumber3: 'cell3',
 };
 
 const requestForm = (url, method, body, callback) => {
     return {
         url: url,
         method: method,
-        headers: {'content-type': 'application/json'},
-        body : JSON.stringify(body),
-        callback : callback,
+        headers: ContentType.JSON,
+        body: JSON.stringify(body),
+        callback: callback,
     }
 };
 
-const success = (result) => {
-    document.location = result.url;
-};
-
-const error = (result) => {
-    const errors = result.error;
-    document.querySelectorAll(classString('caution'))
-        .forEach((caution) => {
-            console.log(caution);
-            caution.style.display = 'none';
-
-        });
-    console.log(errors);
-    errors.forEach((error) => {
-        const field = error.field;
-        console.log(field);
-        $(idString(field)+'_caution').style.display = 'block';
-    });
-};
-
-
-$(idString('btn_submit')).onclick = (event) => {
+getElement($, idString, 'btn_submit').onclick = () => {
     const data = {
-        email: getElementValue($, idString, inputElements.emailID) + '@' + getElementValue($, idString, inputElements.emailDomain),
-        password: getElementValue($, idString, inputElements.password),
-        passwordCheck: getElementValue($, idString, inputElements.passwordCheck),
-        name: getElementValue($, idString, inputElements.name),
-        phoneNumber: getElementValue($, idString, inputElements.phoneNumber1) + '-' + getElementValue($, idString, inputElements.phoneNumber2)  + '-' + getElementValue($, idString, inputElements.phoneNumber3),
-    }
-    console.log(data);
-
-    fetchManager(requestForm('/api/users',
-        'POST',
+        email: getElement($, idString, inputElements.emailID).value
+                + '@' + getElement($, idString, inputElements.emailDomain).value,
+        password: getElement($, idString, inputElements.password).value,
+        passwordCheck: getElement($, idString, inputElements.passwordCheck).value,
+        name: getElement($, idString, inputElements.name).value,
+        phoneNumber: getElement($, idString, inputElements.phoneNumber1).value
+                + '-' + getElement($, idString, inputElements.phoneNumber2).value
+                + '-' + getElement($, idString, inputElements.phoneNumber3).value,
+    };
+    fetchManager(requestForm(requestURL.users,
+        METHOD.POST,
         data,
         resultProcess,
-        ));
+    ));
 };
 
 const resultProcess = (status, data) => {
-    if(status === 201){
+    if (status === 201) {
         success(data);
     } else {
         error(data);
     }
 };
+
+const success = (result) => {
+    redirect(result.url);
+};
+
+const error = (result) => {
+    const errors = result.error;
+    getElement($All, classString, 'caution')
+        .forEach((caution) => {
+            caution.style.display = 'none';
+        });
+    errors.forEach((error) => {
+        $(postfixMaker(idString, error.field, '_caution')).style.display = 'block';
+    });
+};
+
+
+
