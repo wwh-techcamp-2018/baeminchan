@@ -37,6 +37,12 @@ public class CategoryServiceTest {
     }
 
     @Test
+    public void rootCategories() {
+        categoryService.getRootCategories();
+        verify(categoryRepository, times(1)).findByParentNull();
+    }
+
+    @Test
     public void update() {
         when(categoryRepository.findById((long) 1)).thenReturn(Optional.ofNullable(originalCategory));
         categoryService.update((long) 1, Category.valueOf("update Category"));
@@ -47,5 +53,14 @@ public class CategoryServiceTest {
     public void assertExistCategory() {
         when(categoryRepository.findById((long) 1)).thenReturn(Optional.empty());
         categoryService.update((long) 1, Category.valueOf("update Category"));
+    }
+
+
+    @Test
+    public void delete() {
+        when(categoryRepository.findById(1L)).thenReturn(Optional.ofNullable(originalCategory));
+        categoryService.delete(1L);
+        verify(categoryRepository, times(1)).findById(any());
+        verify(categoryRepository, times(1)).delete(any());
     }
 }

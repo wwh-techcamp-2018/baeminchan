@@ -4,8 +4,8 @@ INSERT INTO USER (email, password, name, phone_number, permissions ) VALUES("adm
 
 
 INSERT INTO CATEGORY (title, parent_id) VALUES("밑반찬", NULL);
-INSERT INTO CATEGORY (title, parent_id) VALUES("국 * 찌개", NULL);
-INSERT INTO CATEGORY (title, parent_id) VALUES("메인반찬", NULL);
+INSERT INTO CATEGORY (title, parent_id) VALUES("국 * 찌개", 1);
+INSERT INTO CATEGORY (title, parent_id) VALUES("메인반찬", 2);
 INSERT INTO CATEGORY (title, parent_id) VALUES("아이반찬", NULL);
 INSERT INTO CATEGORY (title, parent_id) VALUES("정기식단", NULL);
 INSERT INTO CATEGORY (title, parent_id) VALUES("간편식", NULL);

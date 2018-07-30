@@ -7,6 +7,8 @@ import codesquad.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryService {
 
@@ -23,10 +25,22 @@ public class CategoryService {
         categoryRepository.save(category);
     }
 
+    public List<Category> getRootCategories() {
+        return categoryRepository.findByParentNull();
+    }
+
+    public Category category(Long id) {
+        return findExistCategory(id);
+    }
+
     public void update(Long id, Category updateCategory) {
         Category originalCategory = findExistCategory(id);
         originalCategory.update(updateCategory);
         categoryRepository.save(originalCategory);
+    }
+
+    public void delete(Long id) {
+        categoryRepository.delete(findExistCategory(id));
     }
 
     private Category findExistCategory(Long id) {

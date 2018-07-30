@@ -1,10 +1,13 @@
 package codesquad.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Set;
 
 
@@ -21,11 +24,11 @@ public class Category {
     private String title;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     private Category parent;
 
-    @OneToMany(mappedBy = "parent")
-    private Set<Category> children;
+    @OneToMany(mappedBy = "parent", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Category> children;
 
     public Category() {
 
@@ -36,6 +39,10 @@ public class Category {
         this.title = title;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -44,7 +51,7 @@ public class Category {
         this.parent = parent;
     }
 
-    public void setChildren(Set<Category> children) {
+    public void setChildren(List<Category> children) {
         this.children = children;
     }
 
@@ -60,17 +67,17 @@ public class Category {
         return parent;
     }
 
-    public Set<Category> getChildren() {
+    public List<Category> getChildren() {
         return children;
     }
 
 
-    public static Category valueOf(String title){
-        return valueOf(null,title);
+    public static Category valueOf(String title) {
+        return valueOf(null, title);
     }
 
-    public static Category valueOf(Long id, String title){
-        return new Category(id,title);
+    public static Category valueOf(Long id, String title) {
+        return new Category(id, title);
     }
 
     public void update(Category updateCategory) {

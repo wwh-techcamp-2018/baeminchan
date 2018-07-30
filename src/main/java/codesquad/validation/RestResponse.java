@@ -1,14 +1,23 @@
 package codesquad.validation;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class ErrorResult {
+public class RestResponse<T> {
+
+    private T data;
 
     private List<Error> errors = new ArrayList<>();
 
-    public ErrorResult add(Error error) {
+    public RestResponse() {
+
+    }
+
+    public RestResponse(T data) {
+        this.data = data;
+    }
+
+    public RestResponse add(Error error) {
         errors.add(error);
         return this;
     }
@@ -19,5 +28,9 @@ public class ErrorResult {
 
     public void setErrors(List<Error> errors) {
         this.errors = errors;
+    }
+
+    public T getData() {
+        return data;
     }
 }

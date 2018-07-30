@@ -4,7 +4,7 @@ import codesquad.domain.DomainField;
 import codesquad.dto.LoginDto;
 import codesquad.dto.SignupDto;
 import codesquad.validation.Error;
-import codesquad.validation.ErrorResult;
+import codesquad.validation.RestResponse;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +30,7 @@ public class UserAcceptanceTest extends AcceptanceTest {
     @Test
     public void signupEmailExist() {
         SignupDto signupDto = new SignupDto("aa@aa.com", "password1", "password1", "name", "00-00-00");
-        ResponseEntity<ErrorResult> responseEntity = template().postForEntity(SIGNUP_URL, signupDto, ErrorResult.class);
+        ResponseEntity<RestResponse> responseEntity = template().postForEntity(SIGNUP_URL, signupDto, RestResponse.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getErrors()).contains(new Error(DomainField.USER_EMAIL.getFieldName(), "이미 존재하는 아이디입니다."));
@@ -39,7 +39,7 @@ public class UserAcceptanceTest extends AcceptanceTest {
     @Test
     public void signupPasswordNotMatch() {
         SignupDto signupDto = new SignupDto("aanew@aa.com", "password1", "password12", "name", "00-00-00");
-        ResponseEntity<ErrorResult> responseEntity = template().postForEntity(SIGNUP_URL, signupDto, ErrorResult.class);
+        ResponseEntity<RestResponse> responseEntity = template().postForEntity(SIGNUP_URL, signupDto, RestResponse.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getErrors()).contains(new Error(DomainField.USER_PASSWORD_CONFIRM.getFieldName(), "비밀번호와 비밀번호 확인이 일치하지 않습니다."));
@@ -48,7 +48,7 @@ public class UserAcceptanceTest extends AcceptanceTest {
     @Test
     public void signupPatternNotMatch() {
         SignupDto signupDto = new SignupDto("aanew@aa.com", "password1@", "password1@", "", "00-00-00안녕");
-        ResponseEntity<ErrorResult> responseEntity = template().postForEntity(SIGNUP_URL, signupDto, ErrorResult.class);
+        ResponseEntity<RestResponse> responseEntity = template().postForEntity(SIGNUP_URL, signupDto, RestResponse.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
 
@@ -69,7 +69,7 @@ public class UserAcceptanceTest extends AcceptanceTest {
     @Test
     public void loginEmailNotExist() {
         LoginDto loginDto = new LoginDto("aa_new@aa.com", "password1");
-        ResponseEntity<ErrorResult> responseEntity = template().postForEntity(LOGIN_URL, loginDto, ErrorResult.class);
+        ResponseEntity<RestResponse> responseEntity = template().postForEntity(LOGIN_URL, loginDto, RestResponse.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getErrors()).contains(new Error(DomainField.USER_EMAIL.getFieldName(), "존재하지 않는 아이디입니다."));
@@ -78,7 +78,7 @@ public class UserAcceptanceTest extends AcceptanceTest {
     @Test
     public void loginEmailPasswordNotMatch() {
         LoginDto loginDto = new LoginDto("aa@aa.com", "password122");
-        ResponseEntity<ErrorResult> responseEntity = template().postForEntity(LOGIN_URL, loginDto, ErrorResult.class);
+        ResponseEntity<RestResponse> responseEntity = template().postForEntity(LOGIN_URL, loginDto, RestResponse.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getErrors()).contains(new Error(DomainField.USER_PASSWORD.getFieldName(), "아이디와 비밀번호가 일치하지 않습니다."));
