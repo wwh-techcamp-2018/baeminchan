@@ -1,7 +1,7 @@
 package codesquad.user.dto;
 
-import codesquad.user.domain.User;
 import codesquad.constant.Regex;
+import codesquad.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
