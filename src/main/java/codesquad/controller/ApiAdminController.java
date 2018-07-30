@@ -2,7 +2,7 @@ package codesquad.controller;
 
 
 import codesquad.domain.category.Category;
-import codesquad.dto.category.ChildCategoryDto;
+import codesquad.dto.category.CategoryDto;
 import codesquad.service.CategoryService;
 import codesquad.util.CustomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class ApiAdminController {
 
     @PostMapping("/category")
     @ResponseStatus(HttpStatus.CREATED)
-    public CustomResponse<Category> createCategory(@RequestBody ChildCategoryDto childCategoryDto){
-        return new CustomResponse<Category>(null,categoryService.addChild(childCategoryDto));
+    public CustomResponse<Category> createCategory(@RequestBody CategoryDto categoryDto){
+        return new CustomResponse<Category>(CustomResponse.MSG.OK, categoryService.add(categoryDto));
     }
 }

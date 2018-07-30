@@ -5,7 +5,10 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ChildCategoryDto {
+public class CategoryDto {
     private Long parentId;
-    private String childTitle;
+    private String title;
+
+    public CategoryDto() {
+    }
 }

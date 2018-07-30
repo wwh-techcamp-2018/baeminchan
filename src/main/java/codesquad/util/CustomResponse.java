@@ -6,7 +6,8 @@ import lombok.Getter;
 public class CustomResponse<T> {
 
     public enum MSG {
-        VALIDATION_ERROR("valid_error"), LOGIN_FAILED_ERROR("login_failed"), ALREADT_EXISTS_USER_ERROR("already_exists_user");
+        VALIDATION_ERROR("valid_error"), LOGIN_FAILED_ERROR("login_failed"), ALREADT_EXISTS_USER_ERROR("already_exists_user"),
+        OK("success");
 
 
         final private String msg;

@@ -1,6 +1,8 @@
 package codesquad.domain.category;
 
 
+import codesquad.dto.category.CategoryDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -21,14 +23,22 @@ public class Category {
 
     @ManyToOne()
     @JoinColumn(name = "parentId")
+    @JsonIgnore
     private Category parent;
 
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "parentId")
     private List<Category> children = new ArrayList<>();
 
+    public Category() {
+    }
+
     public Category(String title) {
         this.title = title;
+    }
+
+    public static boolean isRoot(CategoryDto categoryDto) {
+        return categoryDto.getParentId() == null;
     }
 
     public void addChild(Category childCategory) {
