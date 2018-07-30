@@ -1,11 +1,13 @@
 package codesquad.controller;
 
-import codesquad.domain.User;
-import codesquad.dto.JoinUserDto;
-import codesquad.dto.LoginUserDto;
+import codesquad.domain.user.User;
+import codesquad.dto.user.JoinUserDto;
+import codesquad.dto.user.LoginUserDto;
 import codesquad.service.UserService;
 import codesquad.util.SessionUtil;
-import io.swagger.annotations.*;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

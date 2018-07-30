@@ -1,4 +1,4 @@
-package codesquad.dto;
+package codesquad.dto.user;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -15,5 +15,6 @@ public class LoginUserDto {
     @ApiModelProperty(value = "password", dataType = "string", required = true)
     private String password;
 
-    public LoginUserDto(){}
+    public LoginUserDto() {
+    }
 }

@@ -23,6 +23,6 @@ public class ValidationExceptionControllerAdvice {
         for (ObjectError error : errors) {
             validationErrorList.addValidationError(ValidationError.createValidationError(error));
         }
-        return new CustomResponse<ValidationErrorList>(CustomResponse.ERROR_MSG.VALIDATION_ERROR, validationErrorList);
+        return new CustomResponse<ValidationErrorList>(CustomResponse.MSG.VALIDATION_ERROR, validationErrorList);
     }
 }

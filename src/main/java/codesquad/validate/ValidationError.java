@@ -10,13 +10,13 @@ public class ValidationError {
     private String fieldName;
     private String errorMessage;
 
-    private ValidationError(String fieldName,String errorMessage){
+    private ValidationError(String fieldName, String errorMessage) {
         this.fieldName = fieldName;
         this.errorMessage = errorMessage;
     }
 
-    public static ValidationError createValidationError(ObjectError error){
+    public static ValidationError createValidationError(ObjectError error) {
         String fieldName = error.getCodes()[1].split("\\.")[1];
-        return new ValidationError(fieldName,error.getDefaultMessage());
+        return new ValidationError(fieldName, error.getDefaultMessage());
     }
 }

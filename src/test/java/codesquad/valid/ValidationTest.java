@@ -1,8 +1,7 @@
 package codesquad.valid;
 
-import codesquad.domain.User;
 import codesquad.domain.UserTest;
-import codesquad.dto.JoinUserDto;
+import codesquad.dto.user.JoinUserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.BeforeClass;

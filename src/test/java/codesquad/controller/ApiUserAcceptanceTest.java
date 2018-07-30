@@ -1,8 +1,8 @@
 package codesquad.controller;
 
 import codesquad.domain.UserTest;
-import codesquad.dto.JoinUserDto;
-import codesquad.dto.LoginUserDto;
+import codesquad.dto.user.JoinUserDto;
+import codesquad.dto.user.LoginUserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
