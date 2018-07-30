@@ -1,26 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    initEvents();
+    addClickEvent('#joinFrm .btn_area .btn', registerJoinEventHandler);
 });
-
-function initEvents() {
-    const joinBtn = $('#joinFrm .btn_area .btn');
-
-    if (joinBtn == null) {
-        return;
-    }
-
-    joinBtn.addEventListener('click', registerJoinEventHandler);
-}
 
 function registerJoinEventHandler(evt) {
     evt.preventDefault();
     
     const request = {
-        email: $_value('#email_id') + '@' + $_value('#email_domain'),
-        password: $_value('#pw1'),
-        passwordCheck: $_value('#pw2'),
-        name: $_value('#name'),
-        phoneNumber: `${$_value('#cell1')}-${$_value('#cell2')}-${$_value('#cell3')}`,
+        email: `${valueOf('#email_id')}@${valueOf('#email_domain')}`,
+        password: valueOf('#pw1'),
+        passwordCheck: valueOf('#pw2'),
+        name: valueOf('#name'),
+        phoneNumber: `${valueOf('#cell1')}-${valueOf('#cell2')}-${valueOf('#cell3')}`,
     }
 
     new FetchManager({
@@ -32,8 +22,8 @@ function registerJoinEventHandler(evt) {
         location.href = '/login.html';
     })
     .onFailed(errors => {
-        errors.error.forEach((item) => {
-            alert(item);
+        errors.error.forEach(item => {
+            alert(item.message);
         });
     })
     .fetch();

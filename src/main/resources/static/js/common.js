@@ -2,8 +2,18 @@ function $(selector) {
     return document.querySelector(selector);
 }
 
-function $_value(selector) {
+function valueOf(selector) {
     return $(selector).value;
+}
+
+function addClickEvent(selector, handler) {
+    const loginBtn = $(selector);
+
+    if (loginBtn == null) {
+        return;
+    }
+
+    loginBtn.addEventListener('click', handler);
 }
 
 class FetchManager {
