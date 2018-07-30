@@ -31,6 +31,11 @@ public class Category {
 
     }
 
+    private Category(Long id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -57,5 +62,18 @@ public class Category {
 
     public Set<Category> getChildren() {
         return children;
+    }
+
+
+    public static Category valueOf(String title){
+        return valueOf(null,title);
+    }
+
+    public static Category valueOf(Long id, String title){
+        return new Category(id,title);
+    }
+
+    public void update(Category updateCategory) {
+        title = updateCategory.title;
     }
 }

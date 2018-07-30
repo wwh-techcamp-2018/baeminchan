@@ -1,6 +1,7 @@
 package codesquad.domain;
 
 public enum  DomainField {
+    ID("id"),
     USER_EMAIL("email"),
     USER_PASSWORD("password"),
     USER_PASSWORD_CONFIRM("passwordConfirm"),

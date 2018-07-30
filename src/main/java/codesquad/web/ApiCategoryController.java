@@ -3,22 +3,28 @@ package codesquad.web;
 import codesquad.domain.Category;
 import codesquad.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/admin/categories")
 public class ApiCategoryController {
 
     @Autowired
-    CategoryService categoryService;
+    private CategoryService categoryService;
 
-    @PostMapping("")
+    @PostMapping("/admin/categories")
     public void save(@Valid @RequestBody Category category) {
         categoryService.save(category);
+    }
+
+    @PostMapping("/admin/categories/{parentId}")
+    public void saveWithParent(@PathVariable Long parentId, @Valid @RequestBody Category category) {
+        categoryService.saveWithParent(parentId, category);
+    }
+
+    @PutMapping("/admin/categories/{id}")
+    public void update(@PathVariable Long id, @Valid @RequestBody Category category) {
+        categoryService.update(id, category);
     }
 }

@@ -19,33 +19,59 @@ public class ApiCategoryAcceptanceTest extends AcceptanceTest {
     private final String ADMIN_CATEGORIES = "/admin/categories";
 
     private Category category;
-    private RequestEntity entityForCreate;
+
+    private RequestEntity.Builder entityBuilderForCreate;
+    private RequestEntity.Builder entityBuilderForUpdate;
 
     @Before
     public void setup() {
         category = new Category();
-        category.setTitle("맛반aaaa");
-        entityForCreate = new RequestEntity.Builder()
+        category.setTitle("original맛반");
+
+        entityBuilderForCreate = new RequestEntity.Builder()
                 .withUrl(ADMIN_CATEGORIES)
                 .withMethod(HttpMethod.POST)
                 .withBody(category)
-                .withReturnType(Void.class)
-                .build();
+                .withReturnType(Void.class);
+
+        entityBuilderForUpdate = new RequestEntity.Builder()
+                .withUrl(ADMIN_CATEGORIES + "/" + 1)
+                .withMethod(HttpMethod.PUT)
+                .withBody(category)
+                .withReturnType(Void.class);
     }
 
     @Test
     public void save() {
-        assertThat(basicAuthRequest(entityForCreate, ADMIN_USER).getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(basicAuthRequest(entityBuilderForCreate.build(), ADMIN_USER).getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
+    @Test
+    public void saveParentNotExist() {
+        assertThat(
+                basicAuthRequest(entityBuilderForCreate.withUrl(ADMIN_CATEGORIES + "/0").build(), ADMIN_USER).getStatusCode()
+        ).isEqualTo(HttpStatus.BAD_REQUEST);
+    }
 
     @Test
     public void saveGuestUser() {
-        assertThat(request(template(), entityForCreate).getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(request(template(), entityBuilderForCreate.build()).getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
     @Test
     public void saveInvalidUser() {
-        assertThat(basicAuthRequest(entityForCreate, DEFAULT_USER).getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+        assertThat(basicAuthRequest(entityBuilderForCreate.build(), DEFAULT_USER).getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+    }
+
+    @Test
+    public void update() {
+        assertThat(basicAuthRequest(entityBuilderForUpdate.build(), ADMIN_USER).getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+    @Test
+    public void updateNotExistsCategory() {
+        assertThat(
+                basicAuthRequest(entityBuilderForUpdate.withUrl(ADMIN_CATEGORIES +"/0").build(), ADMIN_USER).getStatusCode()
+        ).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 }
