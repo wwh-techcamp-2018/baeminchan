@@ -22,7 +22,7 @@ public class LoginDto {
 
 
     public static LoginDto defaultLoginDto() {
-        return new LoginDto("javajigi@kakao.com", "123123");
+        return new LoginDto("pobi@naver.com", "1234");
     }
 
     public LoginDto setEmail(String email) {

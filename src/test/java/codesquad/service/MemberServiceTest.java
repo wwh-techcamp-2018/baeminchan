@@ -42,14 +42,12 @@ public class MemberServiceTest {
     public void loginTest() {
         String password = "123123";
         Member member = new Member("javajigi@naver.com", mockPasswordEncoder.encode(password), "pobi", "01012341234");
-        MemberDto memberDto = new MemberDto();
         LoginDto loginDto = new LoginDto(member.getEmail(), password);
         when(memberRepository.findByEmail(member.getEmail())).thenReturn(Optional.ofNullable(member));
         assertThat(memberService.login(loginDto)).isEqualTo(member);
     }
 
     private class MockPasswordEncoder implements PasswordEncoder {
-
         @Override
         public String encode(CharSequence rawPassword) {
             return new StringBuilder(rawPassword).reverse().toString();
