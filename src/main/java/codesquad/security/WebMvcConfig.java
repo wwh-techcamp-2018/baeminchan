@@ -1,4 +1,4 @@
-package codesquad.congifure;
+package codesquad.security;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-public class Config {
+public class WebMvcConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -28,4 +28,10 @@ public class Config {
     public MessageSourceAccessor messageSourceAccessor(MessageSource messageSource) {
         return new MessageSourceAccessor(messageSource);
     }
+
+    @Bean
+    public BasicAuthInterceptor adminInterceptor() {
+        return new BasicAuthInterceptor();
+    }
+
 }
