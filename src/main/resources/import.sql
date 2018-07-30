@@ -1,2 +1,63 @@
 INSERT INTO User (id, email, password, name, phone, role, deleted) values (1, 'admin@gmail.com', '$2a$10$mz6I2CR3WFud4wYpjdGoIeizrttQPlvO5wb0B/9N0A7kgj8SWNpMa', '관리자', '010-1234-4567','ADMIN',false);
 INSERT INTO User (id, email, password, name, phone, role, deleted) values (2, 'javajigi@gmail.com', '$2a$10$mz6I2CR3WFud4wYpjdGoIeizrttQPlvO5wb0B/9N0A7kgj8SWNpMa', '자바지기', '010-8545-6858','DEFAULT',false);
+
+INSERT INTO Category (id, name, parent_id) VALUES (0, 'ROOT', null);
+INSERT INTO Category (id, name, parent_id) VALUES (1, '밑반찬', 0);
+INSERT INTO Category (id, name, parent_id) VALUES (2, '국・찌개', 0);
+INSERT INTO Category (id, name, parent_id) VALUES (3, '메인반찬', 0);
+INSERT INTO Category (id, name, parent_id) VALUES (4, '아이반찬', 0);
+INSERT INTO Category (id, name, parent_id) VALUES (5, '정기식단', 0);
+INSERT INTO Category (id, name, parent_id) VALUES (6, '신선・가공', 0);
+INSERT INTO Category (id, name, parent_id) VALUES (7, '간식', 0);
+INSERT INTO Category (id, name, parent_id) VALUES (8, '브랜드관', 0);
+
+INSERT INTO Category (name, parent_id) VALUES ('무침', 1);
+INSERT INTO Category (name, parent_id) VALUES ('나물무침', 1);
+INSERT INTO Category (name, parent_id) VALUES ('볶음', 1);
+INSERT INTO Category (name, parent_id) VALUES ('조림', 1);
+INSERT INTO Category (name, parent_id) VALUES ('김치', 1);
+INSERT INTO Category (name, parent_id) VALUES ('전', 1);
+INSERT INTO Category (name, parent_id) VALUES ('장아찌·피클', 1);
+INSERT INTO Category (name, parent_id) VALUES ('젓갈·장·소스', 1);
+INSERT INTO Category (name, parent_id) VALUES ('세트', 1);
+INSERT INTO Category (name, parent_id) VALUES ('국', 2);
+INSERT INTO Category (name, parent_id) VALUES ('찌개', 2);
+INSERT INTO Category (name, parent_id) VALUES ('탕', 2);
+INSERT INTO Category (name, parent_id) VALUES ('전골', 2);
+INSERT INTO Category (name, parent_id) VALUES ('세트', 2);
+INSERT INTO Category (name, parent_id) VALUES ('고기반찬', 3);
+INSERT INTO Category (name, parent_id) VALUES ('해산물반찬', 3);
+INSERT INTO Category (name, parent_id) VALUES ('생선반찬', 3);
+INSERT INTO Category (name, parent_id) VALUES ('덮밥', 3);
+INSERT INTO Category (name, parent_id) VALUES ('튀김', 3);
+INSERT INTO Category (name, parent_id) VALUES ('면', 3);
+INSERT INTO Category (name, parent_id) VALUES ('양식', 3);
+INSERT INTO Category (name, parent_id) VALUES ('아시아식', 3);
+INSERT INTO Category (name, parent_id) VALUES ('분식', 3);
+INSERT INTO Category (name, parent_id) VALUES ('죽', 3);
+INSERT INTO Category (name, parent_id) VALUES ('세트', 3);
+INSERT INTO Category (name, parent_id) VALUES ('이유식 초기/중기', 4);
+INSERT INTO Category (name, parent_id) VALUES ('이유식 후기/완료기', 4);
+INSERT INTO Category (name, parent_id) VALUES ('아이반찬', 4);
+INSERT INTO Category (name, parent_id) VALUES ('어린이반찬', 4);
+INSERT INTO Category (name, parent_id) VALUES ('간식·음료', 4);
+INSERT INTO Category (name, parent_id) VALUES ('1~2인', 5);
+INSERT INTO Category (name, parent_id) VALUES ('3~4인', 5);
+INSERT INTO Category (name, parent_id) VALUES ('아이반찬', 5);
+INSERT INTO Category (name, parent_id) VALUES ('간편반찬', 6);
+INSERT INTO Category (name, parent_id) VALUES ('간편국찌개', 6);
+INSERT INTO Category (name, parent_id) VALUES ('간편식품', 6);
+INSERT INTO Category (name, parent_id) VALUES ('베이커리', 7);
+INSERT INTO Category (name, parent_id) VALUES ('과일', 7);
+INSERT INTO Category (name, parent_id) VALUES ('주스', 7);
+INSERT INTO Category (name, parent_id) VALUES ('스무디', 7);
+INSERT INTO Category (name, parent_id) VALUES ('유제품·커피', 7);
+INSERT INTO Category (name, parent_id) VALUES ('기타간식', 7);
+INSERT INTO Category (name, parent_id) VALUES ('반찬가게', 8);
+INSERT INTO Category (name, parent_id) VALUES ('반찬장인', 8);
+INSERT INTO Category (name, parent_id) VALUES ('셰프의요리', 8);
+INSERT INTO Category (name, parent_id) VALUES ('전국맛집', 8);
+INSERT INTO Category (name, parent_id) VALUES ('키즈관', 8);
+
+
+
