@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class ApiCategoryAcceptanceTest extends ApiAcceptanceTest {
 
         for (Category main : categories) {
             for (int i = 0; i < 2; i++) {
-                Category child = categoryRepository.save(Category.builder().title("Child " + i).build());
+                Category child = categoryRepository.save(Category.builder().title("Child " + i).parentCategory(main).build());
                 main.addChildCategory(child);
             }
         }
@@ -46,11 +47,25 @@ public class ApiCategoryAcceptanceTest extends ApiAcceptanceTest {
 
     @Test
     public void mainCategory() {
-        ResponseEntity<RestResponse<List<Category>>> response = getResponseEntityList("/api/categories", new ParameterizedTypeReference<RestResponse<List<Category>>>() {
-        });
+        ResponseEntity<RestResponse<List<Category>>> response = getResponseEntityList("/api/categories", getCategoryListType());
         List<Category> responseCategories = response.getBody().getData();
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(responseCategories).containsAll(categories);
+        assertThat(responseCategories).isEqualTo(categories);
+    }
+
+
+    @Test
+    public void subCategory() {
+        Category mainCategory = categories.get(0);
+        ResponseEntity<RestResponse<List<Category>>> response = getResponseEntityList("/api/categories/" + mainCategory.getId(), getCategoryListType());
+        List<Category> responseCategories = response.getBody().getData();
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseCategories).isEqualTo(mainCategory.getChildCategories());
+    }
+
+    private ParameterizedTypeReference<RestResponse<List<Category>>> getCategoryListType() {
+        return new ParameterizedTypeReference<RestResponse<List<Category>>>() {};
     }
 }

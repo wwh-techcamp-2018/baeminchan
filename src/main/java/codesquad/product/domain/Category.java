@@ -26,7 +26,7 @@ public class Category {
     @JsonIgnore
     private Category parentCategory;
 
-    @OneToMany(mappedBy = "parentCategory", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parentCategory", fetch = FetchType.LAZY)
     private List<Category> childCategories = new ArrayList<>();
 
     public void addChildCategory(Category category) {
