@@ -4,11 +4,13 @@ import codesquad.domain.Member;
 import codesquad.domain.MemberRepository;
 import codesquad.dto.LoginDto;
 import codesquad.dto.MemberDto;
+import codesquad.support.Role;
 import codesquad.support.exception.UnAuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -33,5 +35,10 @@ public class MemberService {
         return memberRepository.findByEmail(loginDto.getEmail())
                 .filter(m -> bCryptPasswordEncoder.matches(loginDto.getPassword(), m.getPassword()))
                 .orElseThrow(() -> new UnAuthenticationException("유저 정보를 찾을 수 없습니다."));
+    }
+
+    public Member addRole(Member member, Role role) {
+        member.addRole(role);
+        return memberRepository.save(member);
     }
 }

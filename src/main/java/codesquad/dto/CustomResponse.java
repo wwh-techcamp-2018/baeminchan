@@ -1,13 +1,24 @@
 package codesquad.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class CustomResponse {
     private int status;
     private String message;
+    private Object body;
+
+    public CustomResponse() {
+    }
+
+    public CustomResponse(int status, String message) {
+        this.status = status;
+        this.message = message;
+    }
+
+    public CustomResponse(int status, String message, Object body) {
+        this.status = status;
+        this.message = message;
+        this.body = body;
+    }
 }

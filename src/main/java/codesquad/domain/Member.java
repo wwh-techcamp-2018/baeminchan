@@ -28,7 +28,7 @@ public class Member {
     private String username;
     @Column(length = 11, nullable = false)
     private String phoneNumber;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>(Arrays.asList(Role.DEFAULT));
 
     public Member(String email, String password, String username, String phoneNumber) {
@@ -37,10 +37,19 @@ public class Member {
         this.username = username;
         this.phoneNumber = phoneNumber;
     }
+
     public static Member fromDto(MemberDto inputMemberDto, PasswordEncoder bCryptPasswordEncoder) {
         MemberDto memberDto = new MemberDto(inputMemberDto);
         memberDto.setPassword(bCryptPasswordEncoder.encode(memberDto.getPassword()));
         return memberDto.toEntity();
 
+    }
+
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
+
+    public boolean isAuthorize(Role role) {
+        return roles.contains(role);
     }
 }
