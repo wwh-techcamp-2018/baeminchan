@@ -1,4 +1,4 @@
-package codesquad.web;
+package codesquad.user.web;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

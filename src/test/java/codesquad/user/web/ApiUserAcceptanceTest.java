@@ -1,4 +1,4 @@
-package codesquad.web;
+package codesquad.user.web;
 
 import codesquad.user.dto.LoginDto;
 import codesquad.user.dto.UserDto;
