@@ -72,7 +72,7 @@ public class OauthController {
 
         String responseBody = responseEntity.getBody();
 
-        log.debug("!!!!!!!!!!!body : {}",responseBody);
+        log.debug("body : {}",responseBody);
 
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -102,7 +102,7 @@ public class OauthController {
         postParams.add("code",autorize_code);
 
         String result = template.postForObject(requestUrl, postParams, String.class);
-        log.info("@@@@@@@@@@@@@@result : {}", result);
+        log.debug("result : {}", result);
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonNode = null;
         try {
