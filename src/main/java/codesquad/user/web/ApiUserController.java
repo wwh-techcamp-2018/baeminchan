@@ -27,7 +27,8 @@ public class ApiUserController {
     public ResponseEntity<RestResponse<?>> create(@Valid @RequestBody UserSignupDto dto) {
         User user = userService.add(dto.toEntity());
 
-        return ResponseEntity.created(URI.create(String.format("/api/users/%s", user.getUuid()))).build();
+        return ResponseEntity.created(URI.create(String.format("/api/users/%s", user.getUuid())))
+                .body(RestResponse.success());
     }
 
     @PostMapping("/login")
@@ -35,6 +36,6 @@ public class ApiUserController {
         User loginUser = userService.login(dto.toEntity());
         session.setAttribute(SessionUtil.USER_SESSION_KEY, loginUser);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(RestResponse.success());
     }
 }
