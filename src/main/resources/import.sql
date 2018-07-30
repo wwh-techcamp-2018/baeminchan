@@ -1,0 +1,2 @@
+INSERT INTO User (id, email, password, name, phone, role, deleted) values (1, 'admin@gmail.com', '$2a$10$mz6I2CR3WFud4wYpjdGoIeizrttQPlvO5wb0B/9N0A7kgj8SWNpMa', '관리자', '010-1234-4567','ADMIN',false);
+INSERT INTO User (id, email, password, name, phone, role, deleted) values (2, 'javajigi@gmail.com', '$2a$10$mz6I2CR3WFud4wYpjdGoIeizrttQPlvO5wb0B/9N0A7kgj8SWNpMa', '자바지기', '010-8545-6858','DEFAULT',false);

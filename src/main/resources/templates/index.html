@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <title>배민푸드 메인페이지</title>
-  <link rel="stylesheet" href="./main.css" />
+  <title>배민푸드 메인페이지1</title>
+  <link rel="stylesheet" href="/main.css" />
 </head>
 
 <body>
@@ -29,18 +29,25 @@
         </a>
 
         <ul class="menu">
+          {{#loginId}}
           <li>
-            <a href="./login.html">로그인</a>
+            <a href="#" id="logout" onclick="javascript:logoutHandler(); return false;">로그아웃</a>
           </li>
           <li>
-            <a href="./join.html">회원가입</a>
-          </li>
-          <li>
-            <a href="#">
+            <a href="/user/logout">
               마이페이지
               <i class="bm-icon spr-bullet-arrow-down black"></i>
             </a>
           </li>
+          {{/loginId}}
+          {{^loginId}}
+          <li>
+            <a href="/page/login">로그인</a>
+          </li>
+          <li>
+            <a href="/page/join">회원가입</a>
+          </li>
+          {{/loginId}}
           <li>
             <a href="#">
               고객센터
@@ -1033,8 +1040,10 @@
       </div>
     </section>
   </footer>
-  <!-- // footer -->
 
+  <!-- // footer -->
+  <!-- script references -->
+  <script src="/js/logout.js"></script>
 
 </body>
 
