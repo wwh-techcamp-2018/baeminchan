@@ -28,4 +28,8 @@ public class RedirectController {
         return "/index";
     }
 
+    @GetMapping("/categories")
+    public String categories() {
+        return "/categories";
+    }
 }

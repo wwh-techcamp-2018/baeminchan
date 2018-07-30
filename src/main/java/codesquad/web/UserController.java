@@ -35,5 +35,11 @@ public class UserController {
         SessionUtil.setUserInSession(session, loginUser);
     }
 
+    @RequestMapping("/logout")
+    @ResponseStatus(HttpStatus.OK)
+    public void logout(HttpSession session) {
+        SessionUtil.removeUserInSession(session);
+    }
+
 
 }
