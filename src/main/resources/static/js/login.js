@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    addClickEvent('.btn.btn_mint.btn_login', loginEventHandler);
+    addEvent('.btn.btn_mint.btn_login', 'click', loginEventHandler);
 });
 
 function loginEventHandler(evt) {

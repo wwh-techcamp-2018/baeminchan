@@ -6,14 +6,14 @@ function valueOf(selector) {
     return $(selector).value;
 }
 
-function addClickEvent(selector, handler) {
-    const loginBtn = $(selector);
+function addEvent(selector, event, handler) {
+    const btn = $(selector);
 
-    if (loginBtn == null) {
+    if (btn == null) {
         return;
     }
 
-    loginBtn.addEventListener('click', handler);
+    btn.addEventListener(event, handler);
 }
 
 class FetchManager {

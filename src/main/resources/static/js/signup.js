@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    addClickEvent('#joinFrm .btn_area .btn', registerJoinEventHandler);
+    addEvent('#joinFrm .btn_area .btn', 'click', registerJoinEventHandler);
 });
 
 function registerJoinEventHandler(evt) {
@@ -28,3 +28,4 @@ function registerJoinEventHandler(evt) {
     })
     .fetch();
 }
+
