@@ -1,5 +1,7 @@
 package codesquad.dto;
 
+import codesquad.domain.Authority;
+import codesquad.domain.Role;
 import codesquad.domain.User;
 import codesquad.exception.NotMatchException;
 import lombok.Data;
@@ -35,10 +37,9 @@ public class UserDto {
         this.rePassword = rePassword;
     }
 
-    public User toUser(String encodedPassword) throws NotMatchException {
+    public User toUser(String encodedPassword, Role role) throws NotMatchException {
         if (!matchPassword()) throw new NotMatchException("비밀번호가 일치하지 않습니다.");
-
-        return new User(userId, encodedPassword, name, phoneNumber);
+        return new User(userId, encodedPassword, name, phoneNumber, role);
     }
 
     private boolean matchPassword() {

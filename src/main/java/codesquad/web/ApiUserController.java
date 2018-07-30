@@ -21,8 +21,8 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
+public class ApiUserController {
+    private static final Logger log = LoggerFactory.getLogger(ApiUserController.class);
 
     @Resource
     private UserService userService;
@@ -35,7 +35,6 @@ public class UserController {
 
     @PostMapping("")
     public ResponseEntity<User> create(@Valid @RequestBody UserDto userDto) throws NotMatchException {
-        log.debug("create : {}", userDto);
         userService.create(userDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

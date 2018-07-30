@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
@@ -30,9 +31,9 @@ public class UserService {
                 .orElseThrow(() -> new UnAuthenticationException("아이디 혹은 비밀번호가 맞지 않습니다."));
     }
 
-    public void create(UserDto user) throws NotMatchException {
-        User newUser = user.toUser(passwordEncoder.encode(user.getPassword()));
-        newUser.init(roleRepository.findByAuthority(Authority.NORMAL).orElseThrow(IllegalArgumentException::new));
-        userRepository.save(newUser);
+    @Transactional
+    public void create(UserDto userDto) throws NotMatchException {
+        userRepository.save(userDto.toUser(passwordEncoder.encode(userDto.getPassword()),
+                roleRepository.findByAuthority(Authority.NORMAL).get()));
     }
 }
