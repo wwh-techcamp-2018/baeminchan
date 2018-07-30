@@ -18,7 +18,7 @@ public class ApiAdminController {
 
     @PostMapping("/category")
     @ResponseStatus(HttpStatus.CREATED)
-    public CustomResponse<Category> createCategory(@RequestBody CategoryDto categoryDto){
+    public CustomResponse<Category> createCategory(@RequestBody CategoryDto categoryDto) {
         return new CustomResponse<Category>(CustomResponse.MSG.OK, categoryService.add(categoryDto));
     }
 }

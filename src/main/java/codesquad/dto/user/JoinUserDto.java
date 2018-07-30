@@ -4,7 +4,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @AllArgsConstructor
 @Data
@@ -31,12 +33,12 @@ public class JoinUserDto {
     @ApiModelProperty(value = "phoneNo", dataType = "string", required = true)
     private String phoneNo;
 
+    public JoinUserDto() {
+    }
+
     @AssertTrue(message = "비밀번호와 비밀번호확인이 다릅니다.")
     public boolean isConfirmPassword() {
         return password.equals(passwordConfirm);
-    }
-
-    public JoinUserDto() {
     }
 
 }

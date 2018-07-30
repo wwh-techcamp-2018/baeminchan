@@ -1,7 +1,7 @@
 package codesquad.exception;
 
 public class AlreadyExistsUserException extends RuntimeException {
-    public AlreadyExistsUserException(){
+    public AlreadyExistsUserException() {
         super("user already exists");
     }
 }

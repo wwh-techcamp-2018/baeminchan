@@ -3,9 +3,10 @@ package codesquad.service;
 import codesquad.domain.category.Category;
 import codesquad.domain.category.CategoryRepository;
 import codesquad.dto.category.CategoryDto;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CategoryService {
@@ -15,13 +16,13 @@ public class CategoryService {
     public Category add(CategoryDto categoryDto) {
         // TODO: 2018. 7. 27. 카테고리가 없을 때 커스텀 에러를 만들어 주어야합니다.
 
-        if(Category.isRoot(categoryDto)){
+        if (Category.isRoot(categoryDto)) {
             return categoryRepository.save(new Category(categoryDto.getTitle()));
         }
 
         Category parent = categoryRepository
-                 .findById(categoryDto.getParentId())
-                 .orElseThrow(RuntimeException::new);
+                .findById(categoryDto.getParentId())
+                .orElseThrow(RuntimeException::new);
         parent.addChild(new Category(categoryDto.getTitle()));
         return categoryRepository.save(parent);
     }

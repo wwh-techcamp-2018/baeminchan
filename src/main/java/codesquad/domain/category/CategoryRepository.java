@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface CategoryRepository extends JpaRepository<Category,Long> {
+public interface CategoryRepository extends JpaRepository<Category, Long> {
     @Query(value = "SELECT * FROM CATEGORY where PARENT_ID IS NULL", nativeQuery = true)
     List<Category> findAllRootCategories();
 

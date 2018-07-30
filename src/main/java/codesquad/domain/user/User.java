@@ -29,11 +29,11 @@ public class User {
     @Column(nullable = false)
     private String encryptedPassword;
 
-    @Size(min=2)
+    @Size(min = 2)
     @Column(nullable = false)
     private String name;
 
-    @Size(min =10 ,max =11)
+    @Size(min = 10, max = 11)
     @Column(nullable = false)
     private String phoneNo;
 
@@ -43,7 +43,7 @@ public class User {
     private User(JoinUserDto joinUserDto, PasswordEncoder passwordEncoder) {
         this.name = joinUserDto.getName();
         this.phoneNo = joinUserDto.getPhoneNo();
-        this.encryptedPassword = encryptPassword(joinUserDto.getPassword(),passwordEncoder);
+        this.encryptedPassword = encryptPassword(joinUserDto.getPassword(), passwordEncoder);
         this.email = joinUserDto.getEmail();
     }
 
@@ -53,13 +53,13 @@ public class User {
     }
 
     public void isMatchPassword(LoginUserDto loginUserDto, PasswordEncoder passwordEncoder) {
-        if (!passwordEncoder.matches(loginUserDto.getPassword(),encryptedPassword)) {
+        if (!passwordEncoder.matches(loginUserDto.getPassword(), encryptedPassword)) {
             throw new LoginFailedException();
         }
     }
 
-    private String encryptPassword(String password,PasswordEncoder passwordEncoder){
-        return  passwordEncoder.encode(password);
+    private String encryptPassword(String password, PasswordEncoder passwordEncoder) {
+        return passwordEncoder.encode(password);
     }
 
     public boolean isAdmin() {

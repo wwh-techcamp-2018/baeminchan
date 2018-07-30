@@ -34,7 +34,7 @@ public class UserService {
             User user = findByEmail(loginUserDto.getEmail());
             user.isMatchPassword(loginUserDto, passwordEncoder);
             return user;
-        }catch (UserNotFoundException e){
+        } catch (UserNotFoundException e) {
             throw new LoginFailedException();
         }
     }
@@ -42,13 +42,13 @@ public class UserService {
     private void checkExistsEmail(String email) {
         try {
             findByEmail(email);
-        }catch (UserNotFoundException e){
+        } catch (UserNotFoundException e) {
             return;
         }
         throw new AlreadyExistsUserException();
     }
 
-    public User findByEmail(String email){
+    public User findByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
     }
 }

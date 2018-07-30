@@ -15,5 +15,6 @@ public class LoginUserDto {
     @ApiModelProperty(value = "password", dataType = "string", required = true)
     private String password;
 
-    public LoginUserDto(){}
+    public LoginUserDto() {
+    }
 }

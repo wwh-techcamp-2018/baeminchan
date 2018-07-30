@@ -19,7 +19,7 @@ public class ApiCategoryController {
 
 
     @GetMapping()
-    public CustomResponse<List<Category>> getCategoryList(){
+    public CustomResponse<List<Category>> getCategoryList() {
         return new CustomResponse<List<Category>>(CustomResponse.MSG.OK, categoryService.getCategoryList());
     }
 }
