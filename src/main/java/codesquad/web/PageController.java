@@ -20,4 +20,12 @@ public class PageController {
     public String login() {
         return "/user/login";
     }
+
+    @GetMapping("/page/admin/login")
+    public String adminLogin() {
+        return "/admin/login";
+    }
+
+    @GetMapping("/page/admin")
+    public String adminIndex() { return "/admin/index"; }
 }

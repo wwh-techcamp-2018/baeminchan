@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,15 @@ public class ExceptionControllerAdvice {
     public ErrorsResponse unAuthentication(UnAuthenticationException exception) {
         ErrorsResponse response = new ErrorsResponse();
         response.addError(new Error(exception.getFieldName(), exception.getMessage()));
+        return response;
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public ErrorsResponse entityNotFoundException(EntityNotFoundException exception) {
+        ErrorsResponse response = new ErrorsResponse();
+        // TODO : error handling..
+        //response.addError(new Error(exception.getFieldName(), exception.getMessage()));
         return response;
     }
 
