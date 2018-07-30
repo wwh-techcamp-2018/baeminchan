@@ -12,7 +12,7 @@ public class WebController {
     @GetMapping("/login")
     public String login(HttpSession session) {
         if (SessionUtil.isLoginUser(session)) {
-            return "/";
+            return "/index";
         }
 
         return "/login";
@@ -21,7 +21,7 @@ public class WebController {
     @GetMapping("/signup")
     public String signup(HttpSession session) {
         if (SessionUtil.isLoginUser(session)) {
-            return "/";
+            return "/index";
         }
 
         return "/join";
@@ -29,6 +29,6 @@ public class WebController {
 
     @GetMapping("/")
     public String index() {
-        return "/";
+        return "/index";
     }
 }
