@@ -1,4 +1,5 @@
 --— password1 is encrypted to $2a$10$PP4LOohJDx5pJSV.UR.YcuAWM31URSzZOQeilGkNJ5.dLov/mAeS.
+<<<<<<< HEAD
 INSERT INTO USER (email, password, name, phone_number, permissions ) VALUES("intae@tech.com", "$2a$10$SmlDTzhSsFL5xLBWunPH5.gO6pHfIyFL0dyy8WAIqpGIgxbyAW9Pa",  "intae", "010-1234-5678", 1) ;
 --— password1 is encrypted to $2a$10$PP4LOohJDx5pJSV.UR.YcuAWM31URSzZOQeilGkNJ5.dLov/mAeS.
 INSERT INTO USER (email, password, name, phone_number, permissions ) VALUES("yeon@tech.com", "$2a$10$SmlDTzhSsFL5xLBWunPH5.gO6pHfIyFL0dyy8WAIqpGIgxbyAW9Pa",  "yeon", "010-1234-5678", 0) ;

@@ -5,6 +5,7 @@ import codesquad.domain.ValidationError;
 import codesquad.domain.ValidationErrorResponse;
 import codesquad.exception.NotFoundException;
 import codesquad.exception.UnauthorizedException;
+
 import codesquad.exception.UserVerificationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

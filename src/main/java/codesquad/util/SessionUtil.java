@@ -4,7 +4,6 @@ import codesquad.domain.User;
 import codesquad.domain.UserPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 
 import javax.servlet.http.HttpSession;
 

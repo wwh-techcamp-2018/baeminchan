@@ -2,10 +2,13 @@ function $(selector) {
     return document.querySelector(selector);
 }
 
+<<<<<<< HEAD
 function $_all(selector) {
     return document.querySelectorAll(selector);
 }
 
+=======
+>>>>>>> upstream/team3_pair2
 function $_value(selector) {
     return $(selector).value;
 }
@@ -23,6 +26,7 @@ function fetchManager({url, method, body, headers, callback}) {
         }).then((result) => {
             callback(result);
     });
+<<<<<<< HEAD
 }
 
 function getManager({url, method, headers, callback}) {
@@ -33,4 +37,6 @@ function getManager({url, method, headers, callback}) {
         }).then((result) => {
         callback(result);
     });
+=======
+>>>>>>> upstream/team3_pair2
 }
