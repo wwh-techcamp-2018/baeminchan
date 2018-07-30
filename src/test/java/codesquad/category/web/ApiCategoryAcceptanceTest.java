@@ -1,4 +1,4 @@
-package codesquad.user.web;
+package codesquad.category.web;
 
 import codesquad.category.domain.Category;
 import lombok.extern.slf4j.Slf4j;
