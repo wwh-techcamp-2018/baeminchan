@@ -51,10 +51,4 @@ public class BaeminchanConfig implements WebMvcConfigurer {
         registry.addInterceptor(basicAuthInterceptor()).order(0);
         registry.addInterceptor(adminAuthInterceptor()).addPathPatterns("/admin/*").order(1);
     }
-
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        registry.addViewController("/").setViewName("index");
-    }
 }
