@@ -25,6 +25,7 @@ public class Category {
     private Category parent;
 
     @OneToMany(mappedBy = "parent")
+    @OrderBy("id ASC")
     private Set<Category> children;
 
     public Category(String name) {
