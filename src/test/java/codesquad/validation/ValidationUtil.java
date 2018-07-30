@@ -29,7 +29,6 @@ public class ValidationUtil {
         }
     }
 
-
     public static <T> void assertValidate(T object, List<Class> annotations) {
         assertValidate(object, new HashSet<>(annotations));
     }

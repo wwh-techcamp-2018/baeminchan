@@ -1,6 +1,6 @@
 package codesquad.security;
 
-import codesquad.UnAuthenticationException;
+import codesquad.exception.UnAuthenticationException;
 import codesquad.domain.User;
 import codesquad.dto.LoginDto;
 import codesquad.service.UserService;
@@ -20,7 +20,7 @@ public class BasicAuthInterceptor extends HandlerInterceptorAdapter {
     private static final Logger log = LoggerFactory.getLogger(BasicAuthInterceptor.class);
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

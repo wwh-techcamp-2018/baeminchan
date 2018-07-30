@@ -1,5 +1,6 @@
 package codesquad.configuration;
 
+import codesquad.security.AdminAuthInterceptor;
 import codesquad.security.BasicAuthInterceptor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -36,19 +37,24 @@ public class BaeminchanConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public BasicAuthInterceptor basicAuthInterceptor(){
+    public BasicAuthInterceptor basicAuthInterceptor() {
         return new BasicAuthInterceptor();
+    }
+
+    @Bean
+    public AdminAuthInterceptor adminAuthInterceptor() {
+        return new AdminAuthInterceptor();
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(basicAuthInterceptor());
+        registry.addInterceptor(basicAuthInterceptor()).order(0);
+        registry.addInterceptor(adminAuthInterceptor()).addPathPatterns("/admin/*").order(1);
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-
         registry.addViewController("/").setViewName("index");
     }
 }

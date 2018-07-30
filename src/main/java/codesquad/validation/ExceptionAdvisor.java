@@ -1,12 +1,14 @@
 package codesquad.validation;
 
-import codesquad.BadRequestException;
-import codesquad.UnAuthenticationException;
+import codesquad.exception.AbstractBaseException;
+import codesquad.exception.BadRequestException;
+import codesquad.exception.UnAuthenticationException;
+import codesquad.exception.UnAuthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.MessageSource;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -25,24 +27,10 @@ public class ExceptionAdvisor {
     @Resource(name = "messageSourceAccessor")
     private MessageSourceAccessor messageSourceAccessor;
 
-    @ExceptionHandler(BadRequestException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResult handleBadRequest(BadRequestException exception) {
-        log.debug("handleBadRequest is called");
-        ErrorResult errorResult = new ErrorResult();
-        errorResult.add(exception.of());
-
-        return errorResult;
-    }
-
-    @ExceptionHandler(UnAuthenticationException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResult handleUnAuthenticationException(UnAuthenticationException exception) {
-        log.debug("handleBadRequest is called");
-        ErrorResult errorResult = new ErrorResult();
-        errorResult.add(exception.of());
-
-        return errorResult;
+    @ExceptionHandler(AbstractBaseException.class)
+    public ResponseEntity<ErrorResult> handleException(AbstractBaseException exception) {
+        log.debug("handleException is called {}", exception);
+        return new ResponseEntity<ErrorResult>(new ErrorResult().add(exception.of()), exception.getStatus());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

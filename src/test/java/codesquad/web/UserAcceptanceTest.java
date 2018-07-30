@@ -1,7 +1,6 @@
 package codesquad.web;
 
 import codesquad.domain.DomainField;
-import codesquad.domain.UserRepository;
 import codesquad.dto.LoginDto;
 import codesquad.dto.SignupDto;
 import codesquad.validation.Error;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import support.test.AcceptanceTest;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,9 +18,6 @@ public class UserAcceptanceTest extends AcceptanceTest {
 
     private static final String SIGNUP_URL = "/users/signup";
     private static final String LOGIN_URL = "/users/login";
-
-    @Resource(name = "userRepository")
-    private UserRepository userRepository;
 
     @Test
     public void signup() {

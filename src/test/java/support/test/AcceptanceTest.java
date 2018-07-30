@@ -1,8 +1,9 @@
 package support.test;
 
-import codesquad.domain.User;
-import codesquad.domain.UserRepository;
+import codesquad.dto.LoginDto;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -13,38 +14,31 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public abstract class AcceptanceTest {
-    private static final String DEFAULT_LOGIN_USER = "aa@aa.com";
-    private static final String ADMIN_LOGIN_USER = "admin@admin.com";
+    private static final Logger log = LoggerFactory.getLogger(AcceptanceTest.class);
+
+    protected LoginDto DEFAULT_USER = new LoginDto("aa@aa.com", "password1");
+    protected LoginDto ADMIN_USER = new LoginDto("admin@admin.com", "password1");
 
     @Autowired
     private TestRestTemplate template;
-
-    @Autowired
-    private UserRepository userRepository;
 
     public TestRestTemplate template() {
         return template;
     }
 
-    public ResponseEntity basicAuthRequest(RequestEntity requestEntity, User user) {
-        template.withBasicAuth(user.getEmail(), user.getPassword());
-        return request(requestEntity);
+    protected ResponseEntity basicAuthRequest(RequestEntity requestEntity, LoginDto user) {
+
+        return request(
+                template.withBasicAuth(user.getEmail(), user.getPassword()), requestEntity
+        );
     }
 
-    public ResponseEntity request(RequestEntity requestEntity) {
+    protected ResponseEntity request(TestRestTemplate template, RequestEntity requestEntity) {
         return template.exchange(
                 requestEntity.getUrl(),
                 requestEntity.getMethod(),
                 requestEntity.getBody(),
                 requestEntity.getReturnType()
         );
-    }
-
-    protected User adminUser() {
-        return userRepository.findByEmail(ADMIN_LOGIN_USER).get();
-    }
-
-    protected User defaultUser() {
-        return userRepository.findByEmail(DEFAULT_LOGIN_USER).get();
     }
 }

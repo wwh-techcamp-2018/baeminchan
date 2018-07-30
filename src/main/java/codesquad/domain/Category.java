@@ -11,7 +11,6 @@ import java.util.Set;
 @Entity
 public class Category {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,15 +20,14 @@ public class Category {
     @Column(nullable = false)
     private String title;
 
-
     @JsonIgnore
-    @ManyToOne(fetch=FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Category parent;
 
-    @OneToMany(mappedBy="parent")
+    @OneToMany(mappedBy = "parent")
     private Set<Category> children;
 
-    public Category(){
+    public Category() {
 
     }
 
@@ -60,5 +58,4 @@ public class Category {
     public Set<Category> getChildren() {
         return children;
     }
-
 }

@@ -1,7 +1,7 @@
 package codesquad.service;
 
-import codesquad.BadRequestException;
-import codesquad.UnAuthenticationException;
+import codesquad.exception.BadRequestException;
+import codesquad.exception.UnAuthenticationException;
 import codesquad.domain.DomainField;
 import codesquad.domain.User;
 import codesquad.domain.UserRepository;
@@ -32,14 +32,14 @@ public class UserService {
     public User signup(SignupDto signupDto) {
         Optional<User> maybeUser = userRepository.findByEmail(signupDto.getEmail());
         if (maybeUser.isPresent())
-            throw new BadRequestException(DomainField.USER_EMAIL.getFieldName(), "이미 존재하는 아이디입니다.");
+            throw new BadRequestException(DomainField.USER_EMAIL, "이미 존재하는 아이디입니다.");
 
         return userRepository.save(User.of(signupDto, passwordEncoder));
     }
 
     public User login(LoginDto loginDto) {
         return userRepository.findByEmail(loginDto.getEmail())
-                .orElseThrow(() -> new UnAuthenticationException(DomainField.USER_EMAIL.getFieldName(), "존재하지 않는 아이디입니다."))
+                .orElseThrow(() -> new UnAuthenticationException(DomainField.USER_EMAIL, "존재하지 않는 아이디입니다."))
                 .checkPassword(loginDto.getPassword(), passwordEncoder);
     }
 

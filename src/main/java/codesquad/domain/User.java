@@ -1,6 +1,6 @@
 package codesquad.domain;
 
-import codesquad.BadRequestException;
+import codesquad.exception.BadRequestException;
 import codesquad.dto.SignupDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -11,6 +11,8 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class User {
+    public static final User GUEST_USER = new GuestUser();
+
     public static final String EMAIL_PATTERN = "[._0-9a-zA-Z-]+@[0-9a-zA-Z]+.([0-9a-zA-Z]+)";
     public static final String PHONENUMBER_PATTERN = "[0-9]+-[0-9]+-[0-9]+";
     public static final String PASSWORD_PATTERN = "^[0-9a-zA-Z]+";
@@ -76,7 +78,7 @@ public class User {
 
     public static User of(SignupDto signupDto, PasswordEncoder passwordEncoder) {
         if (!signupDto.isPasswordMatched())
-            throw new BadRequestException(DomainField.USER_PASSWORD_CONFIRM.getFieldName(), "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+            throw new BadRequestException(DomainField.USER_PASSWORD_CONFIRM, "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 
         return new User(
                 signupDto.getEmail(),
@@ -89,7 +91,23 @@ public class User {
 
     public User checkPassword(String loginPassword, PasswordEncoder encoder) {
         if (!encoder.matches(loginPassword, password))
-            throw new BadRequestException(DomainField.USER_PASSWORD.getFieldName(), "아이디와 비밀번호가 일치하지 않습니다.");
+            throw new BadRequestException(DomainField.USER_PASSWORD, "아이디와 비밀번호가 일치하지 않습니다.");
         return this;
+    }
+
+    public boolean isGuestUser() {
+        return false;
+    }
+
+    public boolean isAdmin() {
+        return permissions == UserPermissions.ADMIN;
+    }
+
+    static class GuestUser extends User {
+
+        @Override
+        public boolean isGuestUser() {
+            return true;
+        }
     }
 }
