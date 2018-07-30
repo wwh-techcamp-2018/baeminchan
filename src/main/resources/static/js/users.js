@@ -1,3 +1,26 @@
+function checkValidForJoin(form) {
+    if (form.email_id.value.trim() === "" || form.email_domain.value.trim() === "") {
+        alert("이메일을 확인해주세요");
+        return false;
+    }
+
+    if (form.password.value.trim() === "" || form.rePassword.value.trim() === "") {
+        alert("비밀번호를 확인해주세요");
+        return false;
+    }
+
+    if (form.name.value.trim() === "") {
+        alert("이름을 확인해주세요");
+        return false;
+    }
+
+    if (form.cell1.value.trim() === "" || form.cell2.value.trim() === "" || form.cell3.value.trim() === "") {
+        alert("휴대 전화 번호를 확인해주세요");
+        return false;
+    }
+    return true;
+}
+
 function onClickJoinButton(form) {
     if(!checkValidForJoin(form)) return;
 
@@ -20,28 +43,21 @@ function onClickJoinButton(form) {
     })
 }
 
-function checkValidForJoin(form) {
-    if (form.email_id.value.trim() === "" || form.email_domain.value.trim() === "") {
-        alert("이메일을 확인해주세요");
-        return false;
-    }
+function goHome() {
+    location.href = "/";
+}
 
-    if (form.password.value.trim() === "" || form.rePassword.value.trim() === "") {
-        alert("비밀번호를 확인해주세요");
-        return false;
-    }
+function onSuccessJoin() {
+    alert("어서와~ 배민찬은 처음이지?");
+    goHome();
+}
 
-    if (form.name.value.trim() === "") {
-        alert("이름을 확인해주세요");
-        return false;
+function onError(result) {
+    let message = result.message;
+    if (result.hasOwnProperty("errors")) {
+        message = result.errors[0].errorMessage;
     }
-
-    if (form.cell1.value.trim() === "" || form.cell2.value.trim() === "" || form.cell3.value.trim() === "") {
-        alert("휴대 전화 번호를 확인해주세요");
-        return false;
-    }
-
-    return true;
+    alert(message);
 }
 
 function checkValidForLogin(form) {
@@ -56,25 +72,7 @@ function checkValidForLogin(form) {
         form.password.focus();
         return false;
     }
-
     return true;
-}
-
-function onSuccessJoin() {
-    alert("어서와~ 배민찬은 처음이지?");
-    goHome();
-}
-
-function goHome() {
-    location.href = "/";
-}
-
-function onError(result) {
-    let message = result.message;
-    if (result.hasOwnProperty("errors")) {
-        message = result.errors[0].errorMessage;
-    }
-    alert(message);
 }
 
 function onClickLoginButton(form) {

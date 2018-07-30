@@ -35,7 +35,6 @@ public class ApiUserController {
 
     @PostMapping("")
     public ResponseEntity<User> create(@Valid @RequestBody UserDto userDto) throws NotMatchException {
-        log.debug("create : {}", userDto);
         userService.create(userDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

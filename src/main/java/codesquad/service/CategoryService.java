@@ -8,6 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class CategoryService {
@@ -15,10 +18,15 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Transactional
     public Category create(Long parentId, CategoryDto categoryDto, User loginUser) {
         if (parentId == null)
             return categoryRepository.save(categoryDto.toCategory(null));
 
         return categoryRepository.save(categoryDto.toCategory(categoryRepository.findById(parentId).get()));
+    }
+
+    public List<Category> getList(Long parentId) {
+        return categoryRepository.findByParentCategoryId(parentId);
     }
 }
