@@ -41,10 +41,31 @@ public class User {
         this.joinDate = joinDate;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public boolean login(String password, PasswordEncoder passwordEncoder) throws UnAuthenticationException {
         if (!passwordEncoder.matches(password, this.password)) {
             throw new UnAuthenticationException("비밀번호가 일치하지 않습니다.");
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userId='" + userId + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", role=" + role +
+                ", joinDate=" + joinDate +
+                '}';
     }
 }

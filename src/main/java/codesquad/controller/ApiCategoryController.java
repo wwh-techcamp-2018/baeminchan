@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/api/categories")
 public class ApiCategoryController {
 
     @Resource

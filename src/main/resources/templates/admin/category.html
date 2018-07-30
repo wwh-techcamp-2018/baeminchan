@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자-카테고리페이지</title>
+</head>
+<body>
+    <form name="category-form" id="category-form" method="post" action="/admin/categories">
+        <div class="selectric-wrapper join w100">
+            <div class="selectric-wrapper selectric-selectric">
+                <div class="selectric-select">
+                    <select class="selectric" id="category-type" tabindex="0">
+                        <option value="0">부모</option>
+                        <option value="1">자식</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="selectric-wrapper join w100" id="parent-select" style="display:none">
+            <div class="selectric-wrapper selectric-selectric">
+                <div class="selectric-select">
+                    <select class="selectric" id="parent-name" name="parentId" tabindex="0">
+
+                    </select>
+                </div>
+            </div>
+        </div>
+        <input type="text" name="name">
+        <button type="submit">확인</button>
+    </form>
+    <table id="category-table" style="text-align:center">
+        <tr>
+            <th>우선순위</th>
+            <th>부모이름</th>
+            <th>자식이름</th>
+            <th>작성자</th>
+            <th>생성날짜</th>
+        </tr>
+
+    </table>
+    <script src="/js/util.js"></script>
+    <script src="/js/admin/category.js"></script>
+</body>
+</html>

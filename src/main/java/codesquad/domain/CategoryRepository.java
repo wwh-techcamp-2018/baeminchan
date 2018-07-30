@@ -6,5 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CategoryRepository extends CrudRepository<Category, Long> {
-    Iterable<Category> findByParentCategoryIsNull();
+    Iterable<Category> findByParentCategoryIsNullOrderByPriorityAsc();
+
+    Optional<Category> findByName(String 테스트_카테고리);
 }

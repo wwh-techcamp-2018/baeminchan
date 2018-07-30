@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function initEvents() {
     fetchManager({
-        url: '/categories',
+        url: '/api/categories',
         method: 'GET',
         headers: { 'content-type': 'application/json'},
         callback: onSuccess,
@@ -13,9 +13,9 @@ function initEvents() {
 }
 
 function onSuccess(response) {
-    response.json().then((res) => {
-    console.log(res);
-        res.forEach((category) => {
+    response.json().then((response) => {
+    console.log(response);
+        response.forEach((category) => {
             // 추가
             const html1 = `<li>
                               <a href="./side-dishs.html">` + category.name + `</a>

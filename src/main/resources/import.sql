@@ -1,14 +1,14 @@
 INSERT INTO role (type) VALUES ('GENERAL_USER');
 INSERT INTO USER (user_id, password, name, phone_number, role_id) VALUES ('javajigi@naver.com', '$2a$10$7QwTvz1eoED4zuieO5Esp.Lo7tjRUbdxmAmy2jvS/IwjYTi3wMGYi', '재성', '010-1111-2222', 1);
 
-INSERT INTO category (parent_category_id, name) VALUES (null, '밑반찬');
-INSERT INTO category (parent_category_id, name) VALUES (null, '국, 찌개');
-INSERT INTO category (parent_category_id, name) VALUES (null, '메인반찬');
-INSERT INTO category (parent_category_id, name) VALUES (null, '아이반찬');
-INSERT INTO category (parent_category_id, name) VALUES (null, '정기식단');
-INSERT INTO category (parent_category_id, name) VALUES (null, '신선, 가공');
-INSERT INTO category (parent_category_id, name) VALUES (null, '간식');
-INSERT INTO category (parent_category_id, name) VALUES (null, '브랜드관');
+INSERT INTO category (parent_category_id, name ,priority) VALUES (null, '밑반찬', 1);
+INSERT INTO category (parent_category_id, name ,priority) VALUES (null, '국, 찌개', 2);
+INSERT INTO category (parent_category_id, name ,priority) VALUES (null, '메인반찬', 3);
+INSERT INTO category (parent_category_id, name ,priority) VALUES (null, '아이반찬', 4);
+INSERT INTO category (parent_category_id, name ,priority) VALUES (null, '정기식단', 5);
+INSERT INTO category (parent_category_id, name ,priority) VALUES (null, '신선, 가공', 6);
+INSERT INTO category (parent_category_id, name ,priority) VALUES (null, '간식', 7);
+INSERT INTO category (parent_category_id, name ,priority) VALUES (null, '브랜드관', 8);
 
 INSERT INTO category (parent_category_id, name) VALUES (1, '무침');
 INSERT INTO category (parent_category_id, name) VALUES (1, '나물무침');

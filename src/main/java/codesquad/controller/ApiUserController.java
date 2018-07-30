@@ -16,12 +16,13 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Map;
 
+import static codesquad.security.HttpSessionUtils.SESSIONED_USER;
+
 @RestController
 @RequestMapping("/api/users")
 public class ApiUserController {
 
     private static final Logger log = LoggerFactory.getLogger(ApiUserController.class);
-    private static final String SESSIONED_USER = "sessionedUser";
 
     @Autowired
     private UserService userService;
@@ -34,9 +35,12 @@ public class ApiUserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody Map<String, String> newUser, HttpSession session) throws IllegalAccessException {
+    public ResponseEntity<Void> login(@RequestBody Map<String, String> newUser, HttpSession session) {
         User loginUser = userService.login(newUser.get("userId"), newUser.get("password"));
+        log.info("login 완료 : {}", loginUser.toString());
+        log.info("login 완료 : {}", session);
         session.setAttribute(SESSIONED_USER, loginUser);
+        log.info("user : {}", session.getAttribute(SESSIONED_USER));
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
