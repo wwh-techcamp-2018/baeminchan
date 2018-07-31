@@ -1,7 +1,6 @@
 const joinFields = ["email", "password", "passwordConfirm", "name", "phoneNumber"];
 
 function onSuccessJoin(response) {
-    console.log(response);
     window.location.href = "/";
 }
 
