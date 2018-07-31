@@ -1,18 +1,19 @@
 package codesquad.category.domain;
 
+import codesquad.category.dto.CategoryDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Data
+@Builder
 @ToString(exclude = {"parent", "children"})
 @EqualsAndHashCode(exclude = {"parent", "children"})
+@NoArgsConstructor
+@AllArgsConstructor
 public class Category {
 
     public static final Long ROOT = 0L;
@@ -21,7 +22,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -31,4 +32,15 @@ public class Category {
     @OneToMany(mappedBy = "parent")
     @JsonIgnore
     private List<Category> children;
+
+    @Column(columnDefinition = "tinyint(1) default 0")
+    private boolean deleted;
+
+    public void update(CategoryDto categoryDto) {
+        this.name = categoryDto.getName();
+    }
+
+    public void delete() {
+        this.deleted = true;
+    }
 }

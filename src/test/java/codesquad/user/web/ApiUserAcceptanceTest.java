@@ -30,6 +30,7 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
     @Test
     public void create() {
         ResponseEntity<Void> response = template().postForEntity("/users", user, Void.class);
+//        adminTemplate().postForEntity("/users", user, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
