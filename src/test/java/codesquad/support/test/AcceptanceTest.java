@@ -1,6 +1,6 @@
 package codesquad.support.test;
 
-import codesquad.support.dto.ResponseModel;
+import codesquad.support.dto.response.ResponseModel;
 import codesquad.user.domain.User;
 import codesquad.user.domain.UserRepository;
 import org.junit.runner.RunWith;
@@ -45,4 +45,19 @@ public abstract class AcceptanceTest {
         headers.setContentType(MediaType.APPLICATION_JSON);
         return template.exchange(url, method, new HttpEntity<>(body, headers), parameterizedTypeReference);
     }
+
+    protected <T> ResponseEntity<ResponseModel<T>> basicUserRequest(String url, HttpMethod method, Object body, ParameterizedTypeReference<ResponseModel<T>> parameterizedTypeReference) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return template.withBasicAuth("sanjigi@slipp.net", "password2")
+                .exchange(url, method, new HttpEntity<>(body, headers), parameterizedTypeReference);
+    }
+
+    protected <T> ResponseEntity<ResponseModel<T>> basicAdminRequest(String url, HttpMethod method, Object body, ParameterizedTypeReference<ResponseModel<T>> parameterizedTypeReference) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return template.withBasicAuth("javajigi@slipp.net", "password1")
+                .exchange(url, method, new HttpEntity<>(body, headers), parameterizedTypeReference);
+    }
+
 }

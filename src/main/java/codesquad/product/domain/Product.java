@@ -1,5 +1,7 @@
 package codesquad.product.domain;
 
+import codesquad.category.domain.Category;
+
 import java.util.Set;
 
 public class Product {

@@ -65,4 +65,8 @@ public class User extends BaseTimeEntity {
 
         return Objects.hash(email, password);
     }
+
+    public boolean isAdmin() {
+        return role == Role.ADMIN;
+    }
 }
