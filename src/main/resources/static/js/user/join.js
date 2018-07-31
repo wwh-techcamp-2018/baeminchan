@@ -23,7 +23,6 @@ function signup() {
         url: "/users/signup",
         method: "POST",
         body: JSON.stringify(body),
-        headers: {"Content-type": "application/json"},
         onSuccess: onSuccessJoin,
         onFailure: onFailureJoin
     })

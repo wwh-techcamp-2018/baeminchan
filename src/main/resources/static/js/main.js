@@ -17,8 +17,8 @@ function initialize(init) {
     })
 }
 
-function fetchManager({url, method, body, headers, onSuccess, onFailure}) {
-    fetch(url, {method, body, headers, credentials: "same-origin"})
+function fetchManager({url, method, body, onSuccess, onFailure}) {
+    fetch(url, {method, body, headers: {"Content-type": "application/json"}, credentials: "same-origin"})
         .then((response) => {
             if (100 <= response.status && response.status < 400)
                 onSuccess(response);
