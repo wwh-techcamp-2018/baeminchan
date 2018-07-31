@@ -2,6 +2,7 @@ package codesquad.atdd;
 
 import codesquad.domain.Category;
 import codesquad.dto.CategoryDto;
+import codesquad.service.CategoryService;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,13 +57,18 @@ public class ApiCategoryAcceptanceTest extends AcceptanceTest {
     @Test
     public void delete_성공(){
         Category category = createCategory(1L);
-        Category subCategory = createCategory(category.getId());
         RequestEntity<Void> requestEntity = RequestEntity.delete(URI.create("/api/categories/"+category.getId())).accept(MediaType.APPLICATION_JSON).build();
         ResponseEntity<Category> response = template().exchange(requestEntity, Category.class);
         log.debug("response body : {}", response.getBody());
-        Category deletedCategory = response.getBody();
-        getAllCategoryJson();
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+    @Test
+    public void delete_Root_카테고리_실패(){
+        RequestEntity<Void> requestEntity = RequestEntity.delete(URI.create("/api/categories/"+ 0L)).accept(MediaType.APPLICATION_JSON).build();
+        ResponseEntity<Category> response = template().exchange(requestEntity, Category.class);
+        log.debug("response body : {}", response.getBody());
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
     private Category createCategory(Long parentId){
