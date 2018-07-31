@@ -36,7 +36,7 @@ public class CategoryServiceTest {
     @Test
     public void getMainCategories() {
         categoryService.getMainCategories();
-        verify(categoryRepository).findAllByParentCategoryId(null);
+        verify(categoryRepository).findAllByParentCategory(null);
     }
 
 
@@ -45,7 +45,7 @@ public class CategoryServiceTest {
         when(categoryRepository.findById(mainCategory.getId())).thenReturn(Optional.of(mainCategory));
 
         categoryService.getSubCategories(mainCategory.getId());
-        verify(categoryRepository).findAllByParentCategoryId(mainCategory.getId());
+        verify(categoryRepository).findAllByParentCategory(mainCategory);
     }
 
     @Test

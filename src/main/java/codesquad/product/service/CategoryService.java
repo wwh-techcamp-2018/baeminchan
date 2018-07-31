@@ -17,13 +17,13 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     public List<Category> getMainCategories() {
-        return categoryRepository.findAllByParentCategoryId(null);
+        return categoryRepository.findAllByParentCategory(null);
     }
 
     public List<Category> getSubCategories(Long id) {
         Category mainCategory = categoryRepository.findById(id).orElseThrow(EntityNotFoundException::new);
 
-        return categoryRepository.findAllByParentCategoryId(mainCategory.getId());
+        return categoryRepository.findAllByParentCategory(mainCategory);
     }
 
     public Category create(CategoryDto dto) {

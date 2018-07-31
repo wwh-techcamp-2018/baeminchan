@@ -37,7 +37,7 @@ public class ApiCategoryAcceptanceTest extends ApiAcceptanceTest {
     @Before
     public void setUp() throws Exception {
         userRepository.deleteAll();
-        categoryRepository.findAllByParentCategoryId(null).forEach(category -> categoryRepository.delete(category));
+        categoryRepository.findAllByParentCategory(null).forEach(category -> categoryRepository.delete(category));
 
         categories = Arrays.asList(
                 Category.builder().title("Main 1").build(),
@@ -168,7 +168,7 @@ public class ApiCategoryAcceptanceTest extends ApiAcceptanceTest {
         ResponseEntity<RestResponse<Category>> response = deleteEntityWithUser(rawUser, "/api/categories/" + mainCategory.getId(), getCategoryType());
 
         Category deleted = categoryRepository.findById(mainCategory.getId()).orElse(null);
-        List<Category> savedSubCategory = categoryRepository.findAllByParentCategoryId(mainCategory.getId());
+        List<Category> savedSubCategory = categoryRepository.findAllByParentCategory(mainCategory);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(deleted).isNull();
