@@ -15,8 +15,7 @@ public class CategoryService {
 
     public Category add(CategoryDto categoryDto) {
         // TODO: 2018. 7. 27. 카테고리가 없을 때 커스텀 에러를 만들어 주어야합니다.
-
-        if (Category.isRoot(categoryDto)) {
+        if (categoryDto.isRoot()) {
             return categoryRepository.save(new Category(categoryDto.getTitle()));
         }
 
@@ -28,7 +27,6 @@ public class CategoryService {
     }
 
     public List<Category> getCategoryList() {
-        //return categoryRepository.findAllRootCategories();
         return categoryRepository.findByParent(null);
     }
 }

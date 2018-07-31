@@ -17,7 +17,6 @@ public class ApiCategoryController {
     @Autowired
     CategoryService categoryService;
 
-
     @GetMapping()
     public CustomResponse<List<Category>> getCategoryList() {
         return new CustomResponse<List<Category>>(CustomResponse.MSG.OK, categoryService.getCategoryList());

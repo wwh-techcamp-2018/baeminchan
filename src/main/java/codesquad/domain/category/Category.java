@@ -37,9 +37,6 @@ public class Category {
         this.title = title;
     }
 
-    public static boolean isRoot(CategoryDto categoryDto) {
-        return categoryDto.getParentId() == null;
-    }
 
     public void addChild(Category childCategory) {
         children.add(childCategory);
