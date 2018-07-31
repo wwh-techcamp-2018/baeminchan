@@ -13,6 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public abstract class AcceptanceTest {
     private static final String DEFAULT_LOGIN_MEMBER = "doy@woowahan.com";
+    private static final String ADMIN_LOGIN_MEMBER = "admin@woowahan.com";
+    private static final String ADMIN_LOGIN_MEMBER_PWD = "admin123";
 
     @Autowired
     private TestRestTemplate template;
@@ -31,10 +33,15 @@ public abstract class AcceptanceTest {
     public TestRestTemplate basicAuthTemplate(Member loginMember) {
         return template.withBasicAuth(loginMember.getEmail(), loginMember.getPassword());
     }
+    public TestRestTemplate basicAdminAuthTemplate() {
+        return template.withBasicAuth(ADMIN_LOGIN_MEMBER, ADMIN_LOGIN_MEMBER_PWD);
+    }
 
     protected Member defaultMember() {
         return findByEmail(DEFAULT_LOGIN_MEMBER);
     }
+
+    protected Member adminMember() {return findByEmail(ADMIN_LOGIN_MEMBER);}
 
     protected Member findByEmail(String email) {
         return memberRepository.findByEmail(email).get();
