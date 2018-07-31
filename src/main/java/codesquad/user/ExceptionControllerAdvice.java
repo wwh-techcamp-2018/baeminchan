@@ -2,6 +2,7 @@ package codesquad.user;
 
 import codesquad.RestResponse;
 import codesquad.user.exception.UnAuthenticationException;
+import codesquad.user.exception.UnAuthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,13 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(UnAuthenticationException.class)
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     public RestResponse<?> unAuthentication(UnAuthenticationException e) {
+        return RestResponse.error(e.getMessage()).build();
+    }
+
+
+    @ExceptionHandler(UnAuthorizedException.class)
+    @ResponseStatus(value = HttpStatus.FORBIDDEN)
+    public RestResponse<?> unAuthorization(UnAuthorizedException e) {
         return RestResponse.error(e.getMessage()).build();
     }
 

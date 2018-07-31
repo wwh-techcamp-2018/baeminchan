@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -37,11 +38,11 @@ public class ApiUserApiAcceptanceTest extends ApiAcceptanceTest {
     @Test
     public void create_fail_not_match_password() {
         UserSignupDto dto = UserSignupDtoTest.validDtoBuilder()
-                .passwordCheck(UserTest.PASSWORD + 1)
+                .passwordCheck(UserTest.RAW_PASSWORD + 1)
                 .build();
 
 
-        ResponseEntity<RestResponse<Void>> responseEntity = createPostResponseEntity("/api/users", dto);
+        ResponseEntity<RestResponse<Void>> responseEntity = createPostResponseEntity("/api/users", dto, getVoidType());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getError().get(0).getField()).isEqualTo("matchPassword");
     }
@@ -53,10 +54,10 @@ public class ApiUserApiAcceptanceTest extends ApiAcceptanceTest {
 
         UserLoginDto dto = UserLoginDto.builder()
                 .email(signupDto.getEmail())
-                .password(UserTest.PASSWORD)
+                .password(UserTest.RAW_PASSWORD)
                 .build();
 
-        ResponseEntity<RestResponse<Void>> responseEntity = createPostResponseEntity("/api/users/login", dto);
+        ResponseEntity<RestResponse<Void>> responseEntity = createPostResponseEntity("/api/users/login", dto, getVoidType());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
@@ -64,10 +65,10 @@ public class ApiUserApiAcceptanceTest extends ApiAcceptanceTest {
     public void login_unauthenticated() {
         UserLoginDto dto = UserLoginDto.builder()
                 .email("tester@gmail.com")
-                .password(UserTest.PASSWORD)
+                .password(UserTest.RAW_PASSWORD)
                 .build();
 
-        ResponseEntity<RestResponse<Void>> responseEntity = createPostResponseEntity("/api/users/login", dto);
+        ResponseEntity<RestResponse<Void>> responseEntity = createPostResponseEntity("/api/users/login", dto, getVoidType());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
         assertThat(responseEntity.getBody().getError()).hasSize(1);
     }
@@ -79,17 +80,22 @@ public class ApiUserApiAcceptanceTest extends ApiAcceptanceTest {
 
         UserLoginDto dto = UserLoginDto.builder()
                 .email(signupDto.getEmail())
-                .password(UserTest.PASSWORD + 1)
+                .password(UserTest.RAW_PASSWORD + 1)
                 .build();
 
-        ResponseEntity<RestResponse<Void>> responseEntity = createPostResponseEntity("/api/users/login", dto);
+        ResponseEntity<RestResponse<Void>> responseEntity = createPostResponseEntity("/api/users/login", dto, getVoidType());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
         assertThat(responseEntity.getBody().getError()).hasSize(1);
     }
 
     private void assertCreateUser(UserSignupDto dto) {
 
-        ResponseEntity<RestResponse<Void>> responseEntity = createPostResponseEntity("/api/users", dto);
+        ResponseEntity<RestResponse<Void>> responseEntity = createPostResponseEntity("/api/users", dto, getVoidType());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+    }
+
+    private ParameterizedTypeReference<RestResponse<Void>> getVoidType() {
+        return new ParameterizedTypeReference<RestResponse<Void>>() {
+        };
     }
 }

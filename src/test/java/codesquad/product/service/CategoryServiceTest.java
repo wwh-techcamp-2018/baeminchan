@@ -2,6 +2,8 @@ package codesquad.product.service;
 
 import codesquad.product.domain.Category;
 import codesquad.product.domain.CategoryRepository;
+import codesquad.product.dto.CategoryDto;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -10,6 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -23,19 +26,59 @@ public class CategoryServiceTest {
     @Mock
     private CategoryRepository categoryRepository;
 
+    private Category mainCategory;
+
+    @Before
+    public void setUp() throws Exception {
+        mainCategory = Category.builder().id(1L).build();
+    }
+
     @Test
     public void getMainCategories() {
         categoryService.getMainCategories();
-        verify(categoryRepository).findByParentCategoryId(null);
+        verify(categoryRepository).findAllByParentCategoryId(null);
     }
 
 
     @Test
     public void getSubCategories() {
-        Category mainCategory = Category.builder().id(1L).build();
         when(categoryRepository.findById(mainCategory.getId())).thenReturn(Optional.of(mainCategory));
 
         categoryService.getSubCategories(mainCategory.getId());
-        verify(categoryRepository).findByParentCategoryId(mainCategory.getId());
+        verify(categoryRepository).findAllByParentCategoryId(mainCategory.getId());
+    }
+
+    @Test
+    public void createMainCategory() {
+        CategoryDto categoryDto = CategoryDto.builder().title("new Category").build();
+        Category category = Category.builder().title(categoryDto.getTitle()).build();
+
+        when(categoryRepository.save(category)).thenReturn(category);
+
+        Category savedCategory = categoryService.create(categoryDto);
+
+        assertThat(savedCategory.getTitle()).isEqualTo(category.getTitle());
+        assertThat(savedCategory.getParentCategory()).isNull();
+    }
+
+
+    @Test
+    public void createSubCategory() {
+        CategoryDto categoryDto = CategoryDto.builder()
+                .title("new Child Category")
+                .parentCategoryId(mainCategory.getId())
+                .build();
+
+
+        Category category = Category.builder().title(categoryDto.getTitle())
+                .parentCategory(mainCategory).build();
+
+        when(categoryRepository.findById(mainCategory.getId())).thenReturn(Optional.of(mainCategory));
+        when(categoryRepository.save(category)).thenReturn(category);
+
+        Category savedCategory = categoryService.create(categoryDto);
+
+        assertThat(savedCategory.getTitle()).isEqualTo(categoryDto.getTitle());
+        assertThat(savedCategory.getParentCategory()).isEqualTo(mainCategory);
     }
 }
