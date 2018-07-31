@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CategoryDto {
     private Long parentId;
+    private Long categoryId;
     private String title;
 
     public boolean isRoot() {

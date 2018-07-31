@@ -53,3 +53,5 @@ INSERT INTO CATEGORY (title, parent_id) VALUES ('반찬장인', 8);
 INSERT INTO CATEGORY (title, parent_id) VALUES ('셰프의요리', 8);
 INSERT INTO CATEGORY (title, parent_id) VALUES ('전국맛집', 8);
 INSERT INTO CATEGORY (title, parent_id) VALUES ('키즈관', 8);
+INSERT INTO USER (USER_TYPE, UID, EMAIL, ENCRYPTED_PASSWORD, NAME, PHONE_NO) VALUES ('AdminUser', 1, 'admin', '$2a$10$xoPpqVuwGChcvXjVAouReeBhUvBgFVJYG27vZIodBosICYWoEO.e6', '조광일', '01032412795');
+INSERT INTO USER (USER_TYPE, UID, EMAIL, ENCRYPTED_PASSWORD, NAME, PHONE_NO) VALUES ('NormalUser', 2, 'user', '$2a$10$xoPpqVuwGChcvXjVAouReeBhUvBgFVJYG27vZIodBosICYWoEO.e6', '조광일', '01032412795');
