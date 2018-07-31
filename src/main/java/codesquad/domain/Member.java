@@ -32,7 +32,7 @@ public class Member {
     @Column(length = 11, nullable = false)
     private String phoneNumber;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "MEMBER_ROLES", joinColumns = @JoinColumn(name = "MEMBER_ID"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>(Arrays.asList(Role.DEFAULT));
@@ -42,6 +42,10 @@ public class Member {
         this.password = password;
         this.username = username;
         this.phoneNumber = phoneNumber;
+    }
+
+    public void giveAdmin() {
+        this.roles.add(Role.ADMIN);
     }
 
     public boolean matchPassword(String rawPassword, PasswordEncoder bcryptPasswordEncoder) {
@@ -64,5 +68,9 @@ public class Member {
     @Override
     public int hashCode() {
         return Objects.hash(id, email, password, username, phoneNumber, roles);
+    }
+
+    public boolean isAdmin() {
+        return this.roles.contains(Role.ADMIN);
     }
 }
