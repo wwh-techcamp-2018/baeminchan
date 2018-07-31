@@ -1,10 +1,11 @@
 package codesquad.service;
 
-import codesquad.BadRequestException;
+import codesquad.exception.BadRequestException;
 import codesquad.domain.User;
 import codesquad.domain.UserRepository;
 import codesquad.dto.LoginDto;
 import codesquad.dto.SignupDto;
+import codesquad.exception.UnAuthenticationException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -74,7 +75,7 @@ public class UserServiceTest {
         userService.login(loginDto);
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test(expected = UnAuthenticationException.class)
     public void loginEmailNotExist() {
         User user = User.of(signupDto, passwordEncoder);
         when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.empty());

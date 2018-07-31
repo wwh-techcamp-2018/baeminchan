@@ -3,7 +3,6 @@ package codesquad.util;
 import codesquad.domain.User;
 
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 public class SessionUtil {
 
@@ -14,8 +13,11 @@ public class SessionUtil {
     }
 
     public static User getUserSession(HttpSession session) {
-        return Optional.ofNullable((User) session.getAttribute(SESSION_KEY))
-                .orElseThrow(RuntimeException::new);
+        User user = (User) session.getAttribute(SESSION_KEY);
+        if (user == null)
+            return User.GUEST_USER;
+
+        return user;
     }
 
     public static void removeUserSession(HttpSession session) {

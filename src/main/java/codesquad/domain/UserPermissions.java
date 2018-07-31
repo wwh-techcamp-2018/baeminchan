@@ -16,8 +16,7 @@ public enum UserPermissions {
         return Arrays.stream(UserPermissions.values())
                 .filter(p -> p.permissions == permissions)
                 .findFirst()
-                .orElseThrow(RuntimeException::new);
-        // TODO: Exception 처리 잘 해봐요 ㅎ_ㅎ
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public long getPermissions() {

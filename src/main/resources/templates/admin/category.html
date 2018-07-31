@@ -1,0 +1,28 @@
+{{#partial "css"}}
+<link rel="stylesheet" type="text/css" href="/css/category.css">
+{{/partial}}
+{{#partial "contents"}}
+
+<div class="control-form">
+    <div class="create-form">
+        <p>제목</p>
+        <input type="text" id="create-title">
+        <button class="create-button">카테고리 생성</button>
+    </div>
+    <div class="update-form">
+        <p>Id</p>
+        <input type="text" id="update-id">
+        <p>제목</p>
+        <input type="text" id="update-title">
+        <button class="update-button">카테고리 수정</button>
+    </div>
+</div>
+
+<ul class="category-container"></ul>
+{{/partial}}
+
+{{#partial "script"}}
+<script src="/js/admin/category.js"></script>
+{{/partial}}
+
+{{> include/base}}

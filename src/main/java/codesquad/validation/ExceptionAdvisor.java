@@ -1,11 +1,11 @@
 package codesquad.validation;
 
-import codesquad.BadRequestException;
+import codesquad.exception.AbstractBaseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.MessageSource;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -24,31 +24,30 @@ public class ExceptionAdvisor {
     @Resource(name = "messageSourceAccessor")
     private MessageSourceAccessor messageSourceAccessor;
 
-    @ExceptionHandler(BadRequestException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResult handleBadRequest(BadRequestException exception) {
-        ErrorResult errorResult = new ErrorResult();
-        errorResult.add(exception.of());
-
-        return errorResult;
+    @ExceptionHandler(AbstractBaseException.class)
+    public ResponseEntity<RestResponse> handleException(AbstractBaseException exception) {
+        log.debug("handleException is called {}", exception);
+        return new ResponseEntity<RestResponse>(new RestResponse().add(exception.of()), exception.getStatus());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResult handleValidationException(MethodArgumentNotValidException exception) {
+    public RestResponse handleValidationException(MethodArgumentNotValidException exception) {
+        log.debug("handleValidationException is called");
         List<ObjectError> errors = exception.getBindingResult().getAllErrors();
-        ErrorResult errorResult = new ErrorResult();
+        RestResponse restResponse = new RestResponse();
         for (ObjectError objectError : errors) {
             FieldError fieldError = (FieldError) objectError;
-            errorResult.add(new Error(fieldError.getField(), getErrorMessage(fieldError)));
+            log.debug("field: {}, message: {}", fieldError.getField(), getErrorMessage(fieldError));
+            restResponse.add(new Error(fieldError.getField(), getErrorMessage(fieldError)));
         }
 
-        return errorResult;
+        return restResponse;
     }
 
     private String getErrorMessage(FieldError fieldError) {
         Optional<String> code = getFirstCode(fieldError);
-        if(!code.isPresent())
+        if (!code.isPresent())
             return null;
         String errorMessage = messageSourceAccessor.getMessage(code.get(), fieldError.getArguments(), fieldError.getDefaultMessage());
         log.debug("error message: {}", errorMessage);
@@ -58,7 +57,7 @@ public class ExceptionAdvisor {
     private Optional<String> getFirstCode(FieldError fieldError) {
         String[] codes = fieldError.getCodes();
         log.debug("codes: {}", codes);
-        if(codes.length == 0) {
+        if (codes.length == 0) {
             return Optional.empty();
         }
         return Optional.ofNullable(codes[0]);
