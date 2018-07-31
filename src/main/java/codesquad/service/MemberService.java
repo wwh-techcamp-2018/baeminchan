@@ -6,6 +6,7 @@ import codesquad.dto.LoginDto;
 import codesquad.dto.MemberDto;
 import codesquad.support.Role;
 import codesquad.support.exception.UnAuthenticationException;
+import codesquad.validation.ValidationMessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,13 +29,13 @@ public class MemberService {
     }
 
     public Member findByEmail(String email) {
-        return memberRepository.findByEmail(email).orElseThrow(() -> new UnAuthenticationException("유저 정보를 찾을 수 없습니다."));
+        return memberRepository.findByEmail(email).orElseThrow(() -> new UnAuthenticationException(ValidationMessageUtil.USER_NOT_FOUND));
     }
 
     public Member login(LoginDto loginDto) {
         return memberRepository.findByEmail(loginDto.getEmail())
                 .filter(m -> bCryptPasswordEncoder.matches(loginDto.getPassword(), m.getPassword()))
-                .orElseThrow(() -> new UnAuthenticationException("유저 정보를 찾을 수 없습니다."));
+                .orElseThrow(() -> new UnAuthenticationException(ValidationMessageUtil.USER_NOT_FOUND));
     }
 
     public Member addRole(Member member, Role role) {

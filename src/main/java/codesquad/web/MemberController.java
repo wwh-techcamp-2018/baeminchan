@@ -5,6 +5,7 @@ import codesquad.dto.LoginDto;
 import codesquad.dto.MemberDto;
 import codesquad.service.MemberService;
 import codesquad.support.SessionUtil;
+import codesquad.validation.ValidationMessageUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class MemberController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid LoginDto loginDto, HttpSession session) {
         SessionUtil.setMember(session, memberService.login(loginDto));
-        return ResponseEntity.ok().body(new CustomResponse(200, "로그인에 성공했습니다."));
+        return ResponseEntity.ok().body(new CustomResponse(200, ValidationMessageUtil.LOGIN_SUCCESS));
     }
 
     @PostMapping
@@ -37,6 +38,6 @@ public class MemberController {
         memberService.save(memberDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .body(new CustomResponse(201, "회원가입이 완료되었습니다."));
+                .body(new CustomResponse(201, ValidationMessageUtil.JOIN_SUCCESS));
     }
 }

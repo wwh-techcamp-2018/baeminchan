@@ -4,16 +4,14 @@ import codesquad.domain.Member;
 import codesquad.support.exception.UnAuthenticationException;
 
 import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 public class SessionUtil {
     public static final String USER_SESSION_KEY = "sessionMember";
 
-    public static Member getMember(HttpSession session) {
+    public static Optional<Member> getMember(HttpSession session) {
         Member loginMember = (Member) session.getAttribute(USER_SESSION_KEY);
-        if (loginMember == null) {
-            throw new UnAuthenticationException("로그인을 먼저 하세요.");
-        }
-        return loginMember;
+        return Optional.ofNullable(loginMember);
     }
 
     public static void setMember(HttpSession session, Member Member) {
@@ -25,7 +23,7 @@ public class SessionUtil {
     }
 
     public static boolean matchMember(HttpSession session, Member Member) {
-        Member loginMember = getMember(session);
+        Member loginMember = getMember(session).orElseThrow(() -> new UnAuthenticationException("로그인이 필요합니다."));
         return loginMember.equals(Member);
     }
 }

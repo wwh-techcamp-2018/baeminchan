@@ -9,6 +9,7 @@ import codesquad.dto.MemberDto;
 import codesquad.service.CategoryService;
 import codesquad.service.MemberService;
 import codesquad.support.Role;
+import codesquad.validation.ValidationMessageUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -83,7 +84,7 @@ public class CategoryAcceptanceTest {
         ResponseEntity<CustomResponse> categoryResponse = template.postForEntity("/admin/categories", categoryDto, CustomResponse.class);
 
         assertThat(categoryResponse.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
-        assertThat(categoryResponse.getBody().getMessage()).isEqualTo("로그인이 필요합니다.");
+        assertThat(categoryResponse.getBody().getMessage()).isEqualTo(ValidationMessageUtil.UNAUTHENTICATION);
     }
 
 

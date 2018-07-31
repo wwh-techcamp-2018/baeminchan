@@ -1,15 +1,15 @@
-function initCategories() {
+function initCategories(callback, failCallback) {
     fetchManager({
         url: '/api/categories',
         method: 'GET',
         headers: {'content-type': 'application/json'},
         body: {},
-        callback: getCategories,
-        failCallback: failGetCategories
+        callback: callback,
+        failCallback: failCallback
     })
 }
 
-function getCategories(response) {
+function getCategoryCallback(response) {
     const menu = $(".category-menu");
     response.body.forEach((parentCategory) => {
         let html =
@@ -20,14 +20,13 @@ function getCategories(response) {
             html += `<li><a href="#">${childCategory.name}</a></li>`;
         });
 
-        html += `</ui>`;
-        html += `</li>`;
+        html += `</ui></li>`;
         menu.insertAdjacentHTML("beforeend", html);
     })
 }
 
-function failGetCategories() {
+function failGetCategoryCallback() {
     alert('카테고리 정보를 가져오는데 실패했습니다.');
 }
 
-initCategories();
+initCategories(getCategoryCallback, failGetCategoryCallback);

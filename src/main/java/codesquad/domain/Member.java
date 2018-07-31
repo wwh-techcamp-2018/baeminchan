@@ -49,7 +49,7 @@ public class Member {
         this.roles.add(role);
     }
 
-    public boolean isAuthorize(Role role) {
-        return roles.contains(role);
+    public boolean isAdmin() {
+        return roles.contains(Role.ADMIN);
     }
 }
