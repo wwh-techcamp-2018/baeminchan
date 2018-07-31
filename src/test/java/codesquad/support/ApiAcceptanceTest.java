@@ -48,7 +48,7 @@ public abstract class ApiAcceptanceTest {
                         });
     }
 
-    protected <T> ResponseEntity<RestResponse<?>> createPostResponseEntity(String path, T dto) {
+    protected <T, R> ResponseEntity<RestResponse<R>> createPostResponseEntity(String path, T dto) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -59,7 +59,7 @@ public abstract class ApiAcceptanceTest {
                 .exchange(path,
                         HttpMethod.POST,
                         request,
-                        new ParameterizedTypeReference<RestResponse<?>>() {
+                        new ParameterizedTypeReference<RestResponse<R>>() {
                         });
     }
 }

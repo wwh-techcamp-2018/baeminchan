@@ -41,7 +41,7 @@ public class ApiUserApiAcceptanceTest extends ApiAcceptanceTest {
                 .build();
 
 
-        ResponseEntity<RestResponse<?>> responseEntity = createPostResponseEntity("/api/users", dto);
+        ResponseEntity<RestResponse<Void>> responseEntity = createPostResponseEntity("/api/users", dto);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getError().get(0).getField()).isEqualTo("matchPassword");
     }
@@ -56,7 +56,7 @@ public class ApiUserApiAcceptanceTest extends ApiAcceptanceTest {
                 .password(UserTest.PASSWORD)
                 .build();
 
-        ResponseEntity<RestResponse<?>> responseEntity = createPostResponseEntity("/api/users/login", dto);
+        ResponseEntity<RestResponse<Void>> responseEntity = createPostResponseEntity("/api/users/login", dto);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
@@ -67,7 +67,7 @@ public class ApiUserApiAcceptanceTest extends ApiAcceptanceTest {
                 .password(UserTest.PASSWORD)
                 .build();
 
-        ResponseEntity<RestResponse<?>> responseEntity = createPostResponseEntity("/api/users/login", dto);
+        ResponseEntity<RestResponse<Void>> responseEntity = createPostResponseEntity("/api/users/login", dto);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
         assertThat(responseEntity.getBody().getError()).hasSize(1);
     }
@@ -82,14 +82,14 @@ public class ApiUserApiAcceptanceTest extends ApiAcceptanceTest {
                 .password(UserTest.PASSWORD + 1)
                 .build();
 
-        ResponseEntity<RestResponse<?>> responseEntity = createPostResponseEntity("/api/users/login", dto);
+        ResponseEntity<RestResponse<Void>> responseEntity = createPostResponseEntity("/api/users/login", dto);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
         assertThat(responseEntity.getBody().getError()).hasSize(1);
     }
 
     private void assertCreateUser(UserSignupDto dto) {
 
-        ResponseEntity<RestResponse<?>> responseEntity = createPostResponseEntity("/api/users", dto);
+        ResponseEntity<RestResponse<Void>> responseEntity = createPostResponseEntity("/api/users", dto);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 }
