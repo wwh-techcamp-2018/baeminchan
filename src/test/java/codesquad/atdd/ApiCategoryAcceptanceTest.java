@@ -33,48 +33,5 @@ public class ApiCategoryAcceptanceTest extends AcceptanceTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
-    @Test
-    public void addCategory_성공(){
-        CategoryDto categoryDto = new CategoryDto("NEW CATEGORY");
-        RequestEntity<CategoryDto> requestEntity = RequestEntity.post(URI.create("/api/categories")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(categoryDto);
-        ResponseEntity<Category> response = template().exchange(requestEntity, Category.class);
-        log.debug("response body : {}", response.getBody());
-        assertThat(response.getBody()).extracting("name").contains(categoryDto.getName());
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-    }
 
-    @Test
-    public void addSubCategory_성공(){
-        CategoryDto categoryDto = new CategoryDto("NEW SUB CATEGORY");
-        RequestEntity<CategoryDto> requestEntity = RequestEntity.post(URI.create("/api/categories/1")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(categoryDto);
-        ResponseEntity<Category> response = template().exchange(requestEntity, Category.class);
-        log.debug("response body : {}", response.getBody());
-        assertThat(response.getBody()).extracting("name").contains(categoryDto.getName());
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-    }
-
-    @Test
-    public void delete_성공(){
-        Category category = createCategory(1L);
-        RequestEntity<Void> requestEntity = RequestEntity.delete(URI.create("/api/categories/"+category.getId())).accept(MediaType.APPLICATION_JSON).build();
-        ResponseEntity<Category> response = template().exchange(requestEntity, Category.class);
-        log.debug("response body : {}", response.getBody());
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-    }
-
-    @Test
-    public void delete_Root_카테고리_실패(){
-        RequestEntity<Void> requestEntity = RequestEntity.delete(URI.create("/api/categories/"+ 0L)).accept(MediaType.APPLICATION_JSON).build();
-        ResponseEntity<Category> response = template().exchange(requestEntity, Category.class);
-        log.debug("response body : {}", response.getBody());
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    private Category createCategory(Long parentId){
-        CategoryDto categoryDto = new CategoryDto("NEW SUB CATEGORY");
-        RequestEntity<CategoryDto> requestEntity = RequestEntity.post(URI.create("/api/categories/"+parentId)).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(categoryDto);
-        ResponseEntity<Category> response = template().exchange(requestEntity, Category.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-        return response.getBody();
-    }
 }

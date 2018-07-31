@@ -4,15 +4,11 @@ import codesquad.domain.Category;
 import codesquad.dto.CategoryDto;
 import codesquad.repository.CategoryRepository;
 import codesquad.support.NotExistException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.plugin.cache.OldCacheEntry;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.OptionalLong;
 
 @Service
 public class CategoryService {
@@ -33,7 +29,8 @@ public class CategoryService {
     }
 
     public Category delete(Long id) {
-        Category category = categoryRepository.findById(id).filter(x -> x.isSameId(ROOT)).orElseThrow(() -> new NotExistException("존재하지 않은 카테고리입니다."));
+        Category category = categoryRepository.findById(id).filter(x -> x.isNotSameId(ROOT)).orElseThrow(() -> new NotExistException("존재하지 않은 카테고리입니다."));
+        category.setChildren(null);
         categoryRepository.delete(category);
         return category;
     }

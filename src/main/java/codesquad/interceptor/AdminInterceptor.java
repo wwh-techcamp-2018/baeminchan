@@ -12,17 +12,12 @@ public class AdminInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //# 관리자 권한을 가진 사용자만 접근하도록 구현한다.
-        //1. 로그인 세션이 유지되었는지 확인 -> 가지고 있지 않다면?
         User user = (User) request.getSession().getAttribute(SessionUtil.SESSION_KEY);
-        if(user == null || user.isAdmin()) {
+        if(user == null || !user.isAdmin()) {
             response.sendRedirect("/users/login");
             return false;
         }
-
-        //2. 로그인 한 사람이 Admin 권한을 가지고 있는지 확인 -> 가지고 있지 않다면?
-
-        return false;
+        return true;
     }
 
 }

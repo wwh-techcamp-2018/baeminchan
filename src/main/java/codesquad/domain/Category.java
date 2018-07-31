@@ -28,7 +28,7 @@ public class Category extends AbstractEntity {
     private String name;
 
     public Category() {
-        children = new ArrayList<>();
+
     }
 
     public Category(String name, Category parent) {
@@ -37,7 +37,7 @@ public class Category extends AbstractEntity {
         this.parent = parent;
     }
 
-    public boolean isSameId(Long rootId) {
+    public boolean isNotSameId(Long rootId) {
         return this.getId() != rootId;
     }
 
