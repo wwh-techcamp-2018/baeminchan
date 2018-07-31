@@ -22,7 +22,6 @@ public class GlobalAdvice {
         List<ObjectError> rawErrors = exception.getBindingResult().getAllErrors();
 
         rawErrors.forEach(e -> response.addError(new ResponseError(e)));
-
         return response;
     }
 
