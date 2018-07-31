@@ -47,7 +47,6 @@ public class Member {
     public void giveAdmin() {
         this.roles.add(Role.ADMIN);
     }
-
     public boolean matchPassword(String rawPassword, PasswordEncoder bcryptPasswordEncoder) {
         return bcryptPasswordEncoder.matches(rawPassword, this.password);
     }
