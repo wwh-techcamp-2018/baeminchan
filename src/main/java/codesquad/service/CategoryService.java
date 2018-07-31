@@ -20,12 +20,12 @@ public class CategoryService {
         return categoryRepository.findByParentCategoryIsNullOrderByPriorityAsc();
     }
 
-    public Category getOne() {
-        return categoryRepository.findById(1L).get();
+    public Category getOne(Long id) {
+        return categoryRepository.findById(id).orElseThrow(() -> new NotMatchedException("아이디에 해당하는 카테고리가 없습니다."));
     }
 
     public void addCategory(User user, CategoryDto categoryDto) {
-        Category parent = categoryRepository.findById(categoryDto.getParentId()).orElseThrow(() -> new NotMatchedException("아이디에 해당하는 카테고리가 없습니다."));
+        Category parent = getOne(categoryDto.getParentId());
         categoryRepository.save(categoryDto.toCategory(user, parent));
     }
 }

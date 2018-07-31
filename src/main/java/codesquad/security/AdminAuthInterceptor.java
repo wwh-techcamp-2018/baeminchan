@@ -16,15 +16,14 @@ public class AdminAuthInterceptor extends HandlerInterceptorAdapter {
 
     private static final Logger log = LoggerFactory.getLogger(AdminAuthInterceptor.class);
 
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
         HttpSession session = request.getSession();
-        Object object = session.getAttribute(SESSIONED_USER);
+        User object = (User)session.getAttribute(SESSIONED_USER);
 
         log.info("Hello, {}", session);
         log.info("user, {}", object);
-        return true;
+        return false;
     }
 }

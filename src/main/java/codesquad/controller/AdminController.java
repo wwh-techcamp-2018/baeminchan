@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -29,8 +30,10 @@ public class AdminController {
 
     @PostMapping("/categories")
     public ResponseEntity<Void> create(HttpSession session, @RequestBody CategoryDto categoryDto) {
-        log.info("create : {}", categoryDto);
-        categoryService.addCategory((User)session.getAttribute(HttpSessionUtils.SESSIONED_USER), categoryDto);
+        log.info("create : {}", categoryDto.toString());
+        User user = (User)session.getAttribute(HttpSessionUtils.SESSIONED_USER);
+        log.info("loginUser : {}", user.toString());
+        categoryService.addCategory(user, categoryDto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

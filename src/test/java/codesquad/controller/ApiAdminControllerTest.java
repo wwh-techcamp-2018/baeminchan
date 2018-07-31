@@ -1,6 +1,7 @@
 package codesquad.controller;
 
 import codesquad.domain.CategoryRepository;
+import codesquad.domain.User;
 import codesquad.dto.CategoryDto;
 import codesquad.web.HtmlFormDataBuilder;
 import controller.ApiUserControllerTest;

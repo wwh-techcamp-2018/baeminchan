@@ -1,16 +1,12 @@
 package codesquad.controller;
 
-import codesquad.domain.Category;
-import codesquad.security.AdminAuthInterceptor;
 import codesquad.security.HttpSessionUtils;
 import codesquad.service.CategoryService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 

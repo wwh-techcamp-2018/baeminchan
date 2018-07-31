@@ -10,7 +10,9 @@ function initEvents() {
 
 function onSuccess() {
     alert("로그인 성공!");
-    location.href = '/';
+    console.log(document.cookie);
+//    location.href = "/";
+
 }
 
 function alertError(response) {
@@ -25,6 +27,7 @@ function loginUserHandler(evt) {
     fetchManager({
         url: '/api/users/login',
         method: 'POST',
+
         headers: { 'content-type': 'application/json'},
         body: JSON.stringify({
             "userId" : userId,

@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface CategoryRepository extends CrudRepository<Category, Long> {
     Iterable<Category> findByParentCategoryIsNullOrderByPriorityAsc();
 
-    Optional<Category> findByName(String 테스트_카테고리);
+    Optional<Category> findByName(String name);
 }
