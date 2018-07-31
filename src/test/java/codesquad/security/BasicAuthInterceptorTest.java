@@ -3,16 +3,13 @@ package codesquad.security;
 
 import codesquad.domain.Member;
 import codesquad.dto.MemberLoginDto;
-import codesquad.exception.UnAuthenticationException;
 import codesquad.service.MemberService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
 
 import java.util.Base64;
 

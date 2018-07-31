@@ -1,6 +1,5 @@
 package codesquad.dto;
 
-import codesquad.security.BasicAuthInterceptor;
 import lombok.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

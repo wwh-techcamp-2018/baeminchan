@@ -14,7 +14,7 @@ public class ApiCategoryAcceptanceTest extends AcceptanceTest {
         ResponseEntity<CategoryListDto> response = template().getForEntity("/api/category", CategoryListDto.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody().getFirstChild().getName()).isEqualTo("밑반찬");
-        assertThat(response.getBody().getFirstChild().getFirstChild().getName()).isEqualTo("무침");
+        assertThat(response.getBody().getFirstChild().getChildren().get(0).getName()).isEqualTo("무침");
     }
 
 }

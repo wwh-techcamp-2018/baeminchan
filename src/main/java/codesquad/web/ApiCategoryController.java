@@ -17,14 +17,14 @@ public class ApiCategoryController {
     @Resource
     private CategoryService categoryService;
 
-//    @GetMapping
-//    @ResponseBody
-//    public CategoryListDto show() {
-//        return categoryService.getParents();
-//    }
     @GetMapping
-    public ResponseEntity<CategoryListDto> show() {
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(categoryService.getParents());
+    public CategoryListDto show() {
+        return categoryService.getParents();
     }
+
+//    @GetMapping
+//    public ResponseEntity<CategoryListDto> show() {
+//        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(categoryService.getParents());
+//    }
 
 }

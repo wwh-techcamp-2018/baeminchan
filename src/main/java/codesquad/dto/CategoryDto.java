@@ -1,10 +1,6 @@
 package codesquad.dto;
 
-import codesquad.domain.Category;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +24,8 @@ public class CategoryDto {
     public CategoryDto() {
     }
 
-    public CategoryDto getFirstChild() {
-        return this.children.get(0);
-    }
+    // TODO 문제의 getFirstChild
+//    public CategoryDto getFirstChild() {
+//        return this.children.get(0);
+//    }
 }
