@@ -28,6 +28,7 @@ dependencies {
     compile('org.hibernate:hibernate-java8')
     compile('pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0')
     compile('org.springframework.boot:spring-boot-devtools')
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.0'
     runtime('com.h2database:h2')
     runtime('net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1')
     testCompile('org.springframework.boot:spring-boot-starter-test')
