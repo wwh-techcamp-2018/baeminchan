@@ -13,4 +13,6 @@ public class UnAuthenticationException extends RuntimeException {
     public static UnAuthenticationException invalidPassword() {
         return new UnAuthenticationException("비밀번호가 틀립니다.");
     }
+
+    public static UnAuthenticationException logInRequired() { return new UnAuthenticationException("로그인이 필요합니다."); }
 }
