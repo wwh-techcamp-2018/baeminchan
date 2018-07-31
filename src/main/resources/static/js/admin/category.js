@@ -3,7 +3,7 @@ function onSuccess(response) {
 }
 
 function onFailure(response) {
-
+    response.json().then((result) => alert("잘못된 요청입니다."));
 }
 
 function showCategories(categoryId) {
@@ -15,7 +15,6 @@ function showCategories(categoryId) {
     fetchManager({
         url: url,
         method: "GET",
-        headers: {"Content-type": "application/json"},
         onSuccess: onSuccessShowCategories,
         onFailure: onFailureShowCategories
     });
@@ -31,7 +30,6 @@ function createCategory(parentCategoryId, title) {
     fetchManager({
         url: url,
         method: "POST",
-        headers: {"Content-type": "application/json"},
         body: JSON.stringify(body),
         onSuccess: onSuccess,
         onFailure: onFailure
@@ -44,7 +42,6 @@ function updateCategory(categoryId, title) {
     fetchManager({
         url: "/admin/categories/" + categoryId,
         method: "PUT",
-        headers: {"Content-type": "application/json"},
         body: JSON.stringify(body),
         onSuccess: onSuccess,
         onFailure: onFailure
@@ -55,7 +52,6 @@ function deleteCategory(categoryId) {
     fetchManager({
         url: "/admin/categories/" + categoryId,
         method: "DELETE",
-        headers: {"Content-type": "application/json"},
         onSuccess: onSuccess,
         onFailure: onFailure
     })
@@ -73,12 +69,13 @@ function handleCategories(object) {
     }
 
     categories.forEach((category) => {
-        appendString += "" +
-            "<li id= " + "category-" + category.id + " class='category-item'>" +
-            "<span>" + category.id + ". </span>" +
-            "<span class='category-item-title'>" + category.title + "</span>" +
-            "<button class='delete-button'>삭제</button>" +
-            "</li>";
+        appendString += `
+            <li id="category-${category.id}" class="category-item">
+            <span>${category.id}. </span>
+            <span class="category-item-title">${category.title}</span>
+            <button class='delete-button'>삭제</button>
+            </li>
+        `;
 
     });
     $(".category-container").innerHTML = appendString;
@@ -93,7 +90,7 @@ function onFailureShowCategories(response) {
 }
 
 function init() {
-    $(".category-container").addEventListener("click", function (evt) {
+    $(".category-container").addEventListener("click", (evt) => {
         evt.preventDefault();
         if (evt.target.className === "delete-button") {
             deleteCategory(evt.target.parentElement.id.split("-").pop());
@@ -103,13 +100,13 @@ function init() {
         }
     });
 
-    $(".create-button").addEventListener("click", function (evt) {
+    $(".create-button").addEventListener("click", (evt) => {
         const parentId = parseInt(window.location.href.split("/").pop());
         const title = $_value("#create-title");
         createCategory(parentId, title);
     });
 
-    $(".update-button").addEventListener("click", function (evt) {
+    $(".update-button").addEventListener("click", (evt) => {
         const categoryId = $_value("#update-id");
         const title = $_value("#update-title");
         updateCategory(categoryId, title);

@@ -19,7 +19,6 @@ function login() {
         url: "/users/login",
         body: JSON.stringify(body),
         method: "post",
-        headers: {"Content-type": "application/json"},
         onSuccess: onSuccessLogin,
         onFailure: onFailureLogin
     })

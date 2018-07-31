@@ -1,3 +1,8 @@
+{{#partial "css"}}
+<link rel="stylesheet" type="text/css" href="/css/index.css">
+{{/partial}}
+
+
 {{#partial "contents"}}
 
 <h1 class="blind">배민찬 - 메인 페이지</h1>
@@ -116,12 +121,12 @@
         <h2 class="blind">주요 프로모션</h2>
 
         <ul class="img-box">
-            <li class="img-item img-1 current">
+            <li class="img-item img-1 visible-image">
                 <a href="#">
                     <span class="blind">장윤주 식단 대공개! 그녀의 건강 반찬을 소개합니다.</span>
                 </a>
             </li>
-            <li class="img-item img-2 next">
+            <li class="img-item img-2">
                 <a href="#">
                     <span class="blind">스페인 그 식당이 안 부러운 비빔밥&apm;한식요리 기획전</span>
                 </a>
@@ -136,7 +141,22 @@
                     <span class="blind">가격따라 고르는 재미가 쏠쏠해요. 알뜰반찬 기획전 3,300원부터!</span>
                 </a>
             </li>
-            <li class="img-item img-5 prev">
+            <li class="img-item img-5">
+                <a href="#">
+                    <span class="blind">2018 미슐 랭 가이드도 반한 '게방식당'을 소개합니다.</span>
+                </a>
+            </li>
+            <li class="img-item img-6">
+                <a href="#">
+                    <span class="blind">2018 미슐랭 가이드도 반한 '게방식당'을 소개합니다.</span>
+                </a>
+            </li>
+            <li class="img-item img-7">
+                <a href="#">
+                    <span class="blind">2018 미슐랭 가이드도 반한 '게방식당'을 소개합니다.</span>
+                </a>
+            </li>
+            <li class="img-item img-8">
                 <a href="#">
                     <span class="blind">2018 미슐랭 가이드도 반한 '게방식당'을 소개합니다.</span>
                 </a>
@@ -150,6 +170,9 @@
 
         <div class="dot-btn-box">
             <a class="dot on" href="#"></a>
+            <a class="dot" href="#"></a>
+            <a class="dot" href="#"></a>
+            <a class="dot" href="#"></a>
             <a class="dot" href="#"></a>
             <a class="dot" href="#"></a>
             <a class="dot" href="#"></a>
@@ -674,6 +697,10 @@
     </section>
 </main>
 <!-- // main-container -->
+{{/partial}}
+
+{{#partial "script"}}
+<script src="/js/main.js"></script>
 {{/partial}}
 
 {{> include/base}}
