@@ -24,7 +24,6 @@ public class BasicAuthInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
         String authorization = request.getHeader("Authorization");
         log.debug("Authorization : {}", authorization);
 

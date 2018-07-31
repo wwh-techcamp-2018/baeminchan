@@ -2,9 +2,12 @@ package codesquad.configuration;
 
 import codesquad.security.AdminAuthInterceptor;
 import codesquad.security.BasicAuthInterceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +17,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class BaeminchanConfig implements WebMvcConfigurer {
+
+    private static final Logger log = LoggerFactory.getLogger(BaeminchanConfig.class);
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -34,9 +39,11 @@ public class BaeminchanConfig implements WebMvcConfigurer {
         return new MessageSourceAccessor(messageSource);
     }
 
-    @Bean
-    public BasicAuthInterceptor basicAuthInterceptor() {
-        return new BasicAuthInterceptor();
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        log.debug("addInterceptors is called");
+        registry.addInterceptor(adminAuthInterceptor()).addPathPatterns("/admin/**").order(1);
+
     }
 
     @Bean
@@ -44,9 +51,20 @@ public class BaeminchanConfig implements WebMvcConfigurer {
         return new AdminAuthInterceptor();
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(basicAuthInterceptor()).order(0);
-        registry.addInterceptor(adminAuthInterceptor()).addPathPatterns("/admin/*").order(1);
+    @Configuration
+    @Profile("dev")
+    public class TestConfing extends BaeminchanConfig {
+
+        @Bean
+        public BasicAuthInterceptor basicAuthInterceptor() {
+            return new BasicAuthInterceptor();
+        }
+
+
+        @Override
+        public void addInterceptors(InterceptorRegistry registry) {
+            super.addInterceptors(registry);
+            registry.addInterceptor(basicAuthInterceptor()).order(0);
+        }
     }
 }
