@@ -25,11 +25,11 @@ public class AdminUserHandlerMethodArgumentResolverTest {
     @Mock
     private NativeWebRequest request;
 
-    private AdminUserHandlerMethodArgumentResolver adminUserHandlerMethodArgumentResolver;
+    private AdminUserHandlerMethodArgumentResolver adminUserResolver;
 
     @Before
     public void setUp() throws Exception {
-        adminUserHandlerMethodArgumentResolver = new AdminUserHandlerMethodArgumentResolver();
+        adminUserResolver = new AdminUserHandlerMethodArgumentResolver();
     }
 
     @Test
@@ -37,7 +37,7 @@ public class AdminUserHandlerMethodArgumentResolverTest {
         User sessionUser = User.builder().role(Role.ADMIN).build();
         when(request.getAttribute(SessionUtil.USER_SESSION_KEY, WebRequest.SCOPE_SESSION)).thenReturn(sessionUser);
 
-        User adminUser = (User) adminUserHandlerMethodArgumentResolver.resolveArgument(parameter, null, request, null);
+        User adminUser = (User) adminUserResolver.resolveArgument(parameter, null, request, null);
 
         assertThat(adminUser).isEqualTo(sessionUser);
     }
@@ -47,23 +47,23 @@ public class AdminUserHandlerMethodArgumentResolverTest {
         User sessionUser = User.builder().role(Role.USER).build();
         when(request.getAttribute(SessionUtil.USER_SESSION_KEY, WebRequest.SCOPE_SESSION)).thenReturn(sessionUser);
 
-        adminUserHandlerMethodArgumentResolver.resolveArgument(parameter, null, request, null);
+        adminUserResolver.resolveArgument(parameter, null, request, null);
     }
 
     @Test(expected = UnAuthorizedException.class)
     public void resolveArgument_not_login() throws Exception {
-        adminUserHandlerMethodArgumentResolver.resolveArgument(parameter, null, request, null);
+        adminUserResolver.resolveArgument(parameter, null, request, null);
     }
 
     @Test
     public void supportsParameter() {
         when(parameter.hasParameterAnnotation(AdminUser.class)).thenReturn(true);
-        assertThat(adminUserHandlerMethodArgumentResolver.supportsParameter(parameter)).isTrue();
+        assertThat(adminUserResolver.supportsParameter(parameter)).isTrue();
     }
 
     @Test
     public void supportsParameterFalse() {
         when(parameter.hasParameterAnnotation(AdminUser.class)).thenReturn(false);
-        assertThat(adminUserHandlerMethodArgumentResolver.supportsParameter(parameter)).isFalse();
+        assertThat(adminUserResolver.supportsParameter(parameter)).isFalse();
     }
 }

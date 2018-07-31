@@ -79,13 +79,16 @@ public class ApiCategoryAcceptanceTest extends ApiAcceptanceTest {
 
     @Test
     public void createMainCategory() {
-        CategoryDto dto = CategoryDto.builder()
-                .title("main")
-                .build();
+        CategoryDto dto = mainCategoryDto();
 
         User rawUser = makeUser(Role.ADMIN);
 
-        ResponseEntity<RestResponse<Category>> response = createPostResponseEntityWithUser(rawUser, "/api/categories", dto, getCategoryType());
+        ResponseEntity<RestResponse<Category>> response =
+                createPostResponseEntityWithUser(
+                        rawUser,
+                        "/api/categories",
+                        dto,
+                        getCategoryType());
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(response.getBody().getData().getTitle()).isEqualTo(dto.getTitle());
@@ -94,13 +97,16 @@ public class ApiCategoryAcceptanceTest extends ApiAcceptanceTest {
 
     @Test
     public void createMainCategory_not_admin() {
-        CategoryDto dto = CategoryDto.builder()
-                .title("main")
-                .build();
+        CategoryDto dto = mainCategoryDto();
 
         User rawUser = makeUser(Role.USER);
 
-        ResponseEntity<RestResponse<Category>> response = createPostResponseEntityWithUser(rawUser, "/api/categories", dto, getCategoryType());
+        ResponseEntity<RestResponse<Category>> response =
+                createPostResponseEntityWithUser(
+                        rawUser,
+                        "/api/categories",
+                        dto,
+                        getCategoryType());
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
     }
@@ -108,21 +114,17 @@ public class ApiCategoryAcceptanceTest extends ApiAcceptanceTest {
 
     @Test
     public void createMainCategory_not_login() {
-        CategoryDto dto = CategoryDto.builder()
-                .title("main")
-                .build();
+        CategoryDto dto = subCategoryDto();
 
-        ResponseEntity<RestResponse<Category>> response = createPostResponseEntity("/api/categories", dto, getCategoryType());
+        ResponseEntity<RestResponse<Category>> response =
+                createPostResponseEntity("/api/categories", dto, getCategoryType());
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
     }
 
     @Test
     public void createSubCategory() {
-        CategoryDto dto = CategoryDto.builder()
-                .title("sub")
-                .parentCategoryId(mainCategory.getId())
-                .build();
+        CategoryDto dto = subCategoryDto();
 
         User rawUser = makeUser(Role.ADMIN);
 
@@ -137,26 +139,25 @@ public class ApiCategoryAcceptanceTest extends ApiAcceptanceTest {
 
     @Test
     public void createSubCategory_not_admin() {
-        CategoryDto dto = CategoryDto.builder()
-                .title("sub")
-                .parentCategoryId(mainCategory.getId())
-                .build();
         User rawUser = makeUser(Role.USER);
 
-        ResponseEntity<RestResponse<Category>> response = createPostResponseEntityWithUser(rawUser, "/api/categories", dto, getCategoryType());
+        ResponseEntity<RestResponse<Category>> response =
+                createPostResponseEntityWithUser(
+                        rawUser,
+                        "/api/categories",
+                        subCategoryDto(),
+                        getCategoryType());
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
     }
 
     @Test
     public void createSubCategory_not_login() {
-        CategoryDto dto = CategoryDto.builder()
-                .title("sub")
-                .parentCategoryId(mainCategory.getId())
-                .build();
-
-
-        ResponseEntity<RestResponse<Category>> response = createPostResponseEntity("/api/categories", dto, getCategoryType());
+        ResponseEntity<RestResponse<Category>> response =
+                createPostResponseEntity(
+                        "/api/categories",
+                        subCategoryDto(),
+                        getCategoryType());
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
     }
@@ -165,7 +166,11 @@ public class ApiCategoryAcceptanceTest extends ApiAcceptanceTest {
     public void deleteMainCategory() {
         User rawUser = makeUser(Role.ADMIN);
 
-        ResponseEntity<RestResponse<Category>> response = deleteEntityWithUser(rawUser, "/api/categories/" + mainCategory.getId(), getCategoryType());
+        ResponseEntity<RestResponse<Category>> response =
+                deleteEntityWithUser(
+                        rawUser,
+                        "/api/categories/" + mainCategory.getId(),
+                        getCategoryType());
 
         Category deleted = categoryRepository.findById(mainCategory.getId()).orElse(null);
         List<Category> savedSubCategory = categoryRepository.findAllByParentCategory(mainCategory);
@@ -179,7 +184,11 @@ public class ApiCategoryAcceptanceTest extends ApiAcceptanceTest {
     public void deleteMainCategory_not_admin() {
         User rawUser = makeUser(Role.USER);
 
-        ResponseEntity<RestResponse<Category>> response = deleteEntityWithUser(rawUser, "/api/categories/" + mainCategory.getId(), getCategoryType());
+        ResponseEntity<RestResponse<Category>> response =
+                deleteEntityWithUser(
+                        rawUser,
+                        "/api/categories/" + mainCategory.getId(),
+                        getCategoryType());
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
     }
@@ -190,7 +199,11 @@ public class ApiCategoryAcceptanceTest extends ApiAcceptanceTest {
 
         Category subCategory = mainCategory.getChildCategories().get(0);
 
-        ResponseEntity<RestResponse<Category>> response = deleteEntityWithUser(rawUser, "/api/categories/" + subCategory.getId(), getCategoryType());
+        ResponseEntity<RestResponse<Category>> response =
+                deleteEntityWithUser(
+                        rawUser,
+                        "/api/categories/" + subCategory.getId(),
+                        getCategoryType());
 
         Category deleted = categoryRepository.findById(subCategory.getId()).orElse(null);
 
@@ -207,6 +220,20 @@ public class ApiCategoryAcceptanceTest extends ApiAcceptanceTest {
     private ParameterizedTypeReference<RestResponse<List<Category>>> getCategoryListType() {
         return new ParameterizedTypeReference<RestResponse<List<Category>>>() {
         };
+    }
+
+
+    private CategoryDto mainCategoryDto() {
+        return CategoryDto.builder()
+                .title("category")
+                .build();
+    }
+
+    private CategoryDto subCategoryDto() {
+        return CategoryDto.builder()
+                .title("category")
+                .parentCategoryId(mainCategory.getId())
+                .build();
     }
 
     private User makeUser(Role role) {
