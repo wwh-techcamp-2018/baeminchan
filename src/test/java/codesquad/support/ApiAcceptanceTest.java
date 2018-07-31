@@ -24,42 +24,20 @@ public abstract class ApiAcceptanceTest {
 
     protected <T> ResponseEntity<RestResponse<List<T>>> getResponseEntityList(String path,
                                                                               ParameterizedTypeReference<RestResponse<List<T>>> typeReference) {
-        HttpHeaders headers = getHeaders();
-
-        HttpEntity<Void> request = new HttpEntity<>(headers);
-
         return template()
                 .exchange(path,
                         HttpMethod.GET,
-                        request,
-                        typeReference);
-    }
-
-    protected <T> ResponseEntity<RestResponse<T>> getResponseEntity(String path,
-                                                                    ParameterizedTypeReference<RestResponse<T>> typeReference) {
-        HttpHeaders headers = getHeaders();
-
-        HttpEntity<Void> request = new HttpEntity<>(headers);
-
-        return template()
-                .exchange(path,
-                        HttpMethod.GET,
-                        request,
+                        new HttpEntity<>(getHeaders()),
                         typeReference);
     }
 
     protected <T, R> ResponseEntity<RestResponse<R>> createPostResponseEntity(String path,
                                                                               T dto,
                                                                               ParameterizedTypeReference<RestResponse<R>> typeReference) {
-        HttpHeaders headers = getHeaders();
-
-        HttpEntity<T> request = new HttpEntity<>(dto, headers);
-
-
         return template()
                 .exchange(path,
                         HttpMethod.POST,
-                        request,
+                        new HttpEntity<>(dto, getHeaders()),
                         typeReference);
     }
 
@@ -68,30 +46,22 @@ public abstract class ApiAcceptanceTest {
                                                                                       String path,
                                                                                       T dto,
                                                                                       ParameterizedTypeReference<RestResponse<R>> typeReference) {
-        HttpHeaders headers = getHeaders();
-
-        HttpEntity<T> request = new HttpEntity<>(dto, headers);
-
-
         return template()
                 .withBasicAuth(user.getEmail(), user.getPassword())
                 .exchange(path,
                         HttpMethod.POST,
-                        request,
+                        new HttpEntity<>(dto, getHeaders()),
                         typeReference);
     }
 
     protected <T> ResponseEntity<RestResponse<T>> deleteEntityWithUser(User user,
                                                                        String path,
                                                                        ParameterizedTypeReference<RestResponse<T>> typeReference) {
-
-        HttpEntity<T> request = new HttpEntity<>(getHeaders());
-
         return template()
                 .withBasicAuth(user.getEmail(), user.getPassword())
                 .exchange(path,
                         HttpMethod.DELETE,
-                        request,
+                        new HttpEntity<>(getHeaders()),
                         typeReference);
     }
 
