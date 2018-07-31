@@ -15,14 +15,14 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public void save(Category category) {
-        categoryRepository.save(category);
+    public Category save(Category category) {
+        return categoryRepository.save(category);
     }
 
-    public void saveWithParent(Long parentId, Category category) {
+    public Category saveWithParent(Long parentId, Category category) {
         Category parentCategory = findExistCategory(parentId);
         category.setParent(parentCategory);
-        categoryRepository.save(category);
+        return categoryRepository.save(category);
     }
 
     public List<Category> getRootCategories() {
@@ -33,10 +33,10 @@ public class CategoryService {
         return findExistCategory(id);
     }
 
-    public void update(Long id, Category updateCategory) {
+    public Category update(Long id, Category updateCategory) {
         Category originalCategory = findExistCategory(id);
         originalCategory.update(updateCategory);
-        categoryRepository.save(originalCategory);
+        return categoryRepository.save(originalCategory);
     }
 
     public void delete(Long id) {

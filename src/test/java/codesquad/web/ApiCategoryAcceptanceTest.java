@@ -1,21 +1,19 @@
 package codesquad.web;
 
 import codesquad.domain.Category;
+import codesquad.domain.CategoryRepository;
 import codesquad.validation.RestResponse;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import support.test.AcceptanceTest;
 import support.test.RequestEntity;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,6 +22,9 @@ public class ApiCategoryAcceptanceTest extends AcceptanceTest {
 
     private static final Logger log = LoggerFactory.getLogger(ApiCategoryAcceptanceTest.class);
     private final String ADMIN_CATEGORIES = "/admin/categories";
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     private Category category;
 
@@ -40,13 +41,13 @@ public class ApiCategoryAcceptanceTest extends AcceptanceTest {
                 .withUrl(ADMIN_CATEGORIES)
                 .withMethod(HttpMethod.POST)
                 .withBody(category)
-                .withReturnType(Void.class);
+                .withReturnType(Category.class);
 
         entityBuilderForUpdate = new RequestEntity.Builder()
                 .withUrl(ADMIN_CATEGORIES + "/4")
                 .withMethod(HttpMethod.PUT)
                 .withBody(category)
-                .withReturnType(Void.class);
+                .withReturnType(Category.class);
 
         entityBuilderForDelete = new RequestEntity.Builder()
                 .withUrl(ADMIN_CATEGORIES + "/1")
@@ -60,9 +61,10 @@ public class ApiCategoryAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
-    @Rollback
     public void save() {
-        assertThat(basicAuthRequest(entityBuilderForCreate.build(), ADMIN_USER).getStatusCode()).isEqualTo(HttpStatus.OK);
+        ResponseEntity<Category> responseEntity = basicAuthRequest(entityBuilderForCreate.build(), ADMIN_USER);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        categoryRepository.delete(responseEntity.getBody());
     }
 
     @Test
@@ -79,7 +81,7 @@ public class ApiCategoryAcceptanceTest extends AcceptanceTest {
 
     @Test
     public void saveInvalidUser() {
-        assertThat(basicAuthRequest(entityBuilderForCreate.build(), DEFAULT_USER).getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+        assertThat(basicAuthRequest(entityBuilderForCreate.withReturnType(Void.class).build(), DEFAULT_USER).getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
     }
 
     @Test
@@ -95,10 +97,10 @@ public class ApiCategoryAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
-    @Rollback
     public void delete() {
+        Category deleteCateogry = categoryRepository.save(category);
         assertThat(
-                basicAuthRequest(entityBuilderForDelete.withUrl(ADMIN_CATEGORIES + "/1").build(), ADMIN_USER).getStatusCode()
+                basicAuthRequest(entityBuilderForDelete.withUrl(ADMIN_CATEGORIES + "/" + deleteCateogry.getId()).build(), ADMIN_USER).getStatusCode()
         ).isEqualTo(HttpStatus.OK);
     }
 
@@ -127,4 +129,5 @@ public class ApiCategoryAcceptanceTest extends AcceptanceTest {
         Category category = (Category) responseEntity.getBody();
         assertThat(category.getChildren().size()).isEqualTo(0);
     }
+
 }

@@ -104,9 +104,9 @@ function init() {
     });
 
     $(".create-button").addEventListener("click", function (evt) {
-        const categoryId = parseInt(window.location.href.split("/").pop());
+        const parentId = parseInt(window.location.href.split("/").pop());
         const title = $_value("#create-title");
-        createCategory(categoryId, title);
+        createCategory(parentId, title);
     });
 
     $(".update-button").addEventListener("click", function (evt) {
@@ -115,7 +115,7 @@ function init() {
         updateCategory(categoryId, title);
     });
 
-    showCategories(showCategories(parseInt(window.location.href.split("/").pop())));
+    showCategories(parseInt(window.location.href.split("/").pop()));
 }
 
 initialize(init);

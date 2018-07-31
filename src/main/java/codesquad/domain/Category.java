@@ -1,14 +1,11 @@
 package codesquad.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
-import java.util.Set;
 
 
 @Entity
@@ -82,5 +79,13 @@ public class Category {
 
     public void update(Category updateCategory) {
         title = updateCategory.title;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
     }
 }

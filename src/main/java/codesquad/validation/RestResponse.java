@@ -26,9 +26,6 @@ public class RestResponse<T> {
         return errors;
     }
 
-    public void setErrors(List<Error> errors) {
-        this.errors = errors;
-    }
 
     public T getData() {
         return data;

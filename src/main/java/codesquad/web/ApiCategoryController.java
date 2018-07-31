@@ -16,13 +16,13 @@ public class ApiCategoryController {
     private CategoryService categoryService;
 
     @PostMapping("/admin/categories")
-    public void save(@Valid @RequestBody Category category) {
-        categoryService.save(category);
+    public Category save(@Valid @RequestBody Category category) {
+        return categoryService.save(category);
     }
 
     @PostMapping("/admin/categories/{parentId}")
-    public void saveWithParent(@PathVariable Long parentId, @Valid @RequestBody Category category) {
-        categoryService.saveWithParent(parentId, category);
+    public Category saveWithParent(@PathVariable Long parentId, @Valid @RequestBody Category category) {
+        return categoryService.saveWithParent(parentId, category);
     }
 
     @GetMapping("/categories")
@@ -37,8 +37,8 @@ public class ApiCategoryController {
     }
 
     @PutMapping("/admin/categories/{id}")
-    public void update(@PathVariable Long id, @Valid @RequestBody Category category) {
-        categoryService.update(id, category);
+    public Category update(@PathVariable Long id, @Valid @RequestBody Category category) {
+        return categoryService.update(id, category);
     }
 
     @DeleteMapping("/admin/categories/{id}")
