@@ -1,26 +1,46 @@
-String.prototype.format = function () {
-    var args = arguments;
-    return this.replace(/{(\d+)}/g, function (match, number) {
-        return typeof args[number] != 'undefined'
-            ? args[number]
-            : match
-            ;
-    });
-};
+document.write('<script src="/js/common.js"></script>')
 
-function $(selector) {
-    return document.querySelector(selector);
-}
+document.addEventListener("DOMContentLoaded", () => {
+    initEvents();
+})
 
-function isEmpty(value) {
-    return value.length == 0
-}
-
-function fetchManager({ url, method, body, headers, callback }) {
-    fetch(url, { method, body, headers, credentials: "same-origin" })
-        .then((response) => {
-            callback(response)
+function createMenu(response) {
+    let html = ``;
+    response.json().then(responseObject => {responseObject.children.forEach(main_menu =>{
+        console.log(main_menu.title);
+        html = html + `
+                <li>
+                    <a href="#">${main_menu.title}</a>
+                    <ul class="sub-menu">
+                `
+        main_menu.children.forEach(sub_menu => {
+            console.log("    " + sub_menu.title);
+            html = html + `
+                            <li>
+                                <a href="#">${sub_menu.title}</a>
+                            </li>
+                        `
         })
+        html = html + `
+                        </ul>
+                    </li>
+                    `
+    })
+    console.log(html);
+
+    //$(".menu").append(html).trigger("create");
+
+    $("#gnb .menu").insertAdjacentHTML("afterbegin", html);
+    });
+}
+
+function initEvents() {
+    fetchManager({
+        url: '/api/categories',
+        method: 'GET',
+        headers: { 'content-type': 'application/json' },
+        callback: createMenu
+    });
 }
 
 function login(response) {

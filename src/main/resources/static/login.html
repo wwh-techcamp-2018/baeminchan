@@ -89,10 +89,12 @@
                     <p class="err_msg">로그인이 필요한 서비스입니다. 회원이 아니시면 회원가입을 해주세요.</p>
 
                     <div class="btn_area">
-                        <button type="button" class="btn btn_kakao btn_login" id="kakao_rest">
-                            <span class="ic"></span>
-                            <span>카카오계정으로 시작하기</span>
-                        </button>
+                        <a href="https://kauth.kakao.com/oauth/authorize?client_id=7318f936054d4de4110f910aae224219&redirect_uri=http://localhost:8080/oauth/kakaologin&response_type=code">
+                            <button type="button" class="btn btn_kakao btn_login" id="kakao_rest">
+                                <span class="ic"></span>
+                                <span>카카오계정으로 시작하기</span>
+                            </button>
+                        </a>
                     </div>
                 </fieldset>
             </form>
