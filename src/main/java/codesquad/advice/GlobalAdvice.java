@@ -1,7 +1,6 @@
 package codesquad.advice;
 
-import codesquad.exception.ConflictException;
-import codesquad.exception.UnauthenticatedException;
+import codesquad.exception.*;
 import codesquad.support.dto.response.ResponseError;
 import codesquad.support.dto.response.ResponseModel;
 import org.springframework.http.HttpStatus;
@@ -37,5 +36,24 @@ public class GlobalAdvice {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResponseModel handleUnauthenticatedException(UnauthenticatedException e) {
         return ResponseModel.ofErrors(ResponseError.of(null, e.getMessage()));
+    }
+
+
+    @ExceptionHandler({ForbiddenException.class})
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ResponseModel handleForbiddenException(ForbiddenException e) {
+        return ResponseModel.ofErrors(ResponseError.of(null, e.getMessage()));
+    }
+
+    @ExceptionHandler({BadRequestException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseModel handleBadRequestException(BadRequestException e) {
+        return ResponseModel.ofErrors(ResponseError.of(e.getFieldName(), e.getMessage()));
+    }
+
+    @ExceptionHandler({ResourceNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseModel handleResourceNotFoundException(ResourceNotFoundException e) {
+        return ResponseModel.ofErrors(ResponseError.of(e.getFieldName(), e.getMessage()));
     }
 }

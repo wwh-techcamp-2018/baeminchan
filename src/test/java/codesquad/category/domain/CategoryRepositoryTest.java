@@ -1,13 +1,13 @@
-package codesquad.category;
+package codesquad.category.domain;
 
-import codesquad.product.domain.Category;
-import codesquad.product.domain.CategoryRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
+import static junit.framework.TestCase.assertFalse;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -18,7 +18,7 @@ public class CategoryRepositoryTest {
 
 
     @Test
-    public void name() {
+    public void 카테고리_저장() {
 
         //Given
         Category child = new Category("child");
@@ -33,6 +33,19 @@ public class CategoryRepositoryTest {
         assertThat(categoryRepository.findById(saved.getId()).get().getParentCategory().getTitle()).isEqualTo(parent.getTitle());
 
 
+    }
+
+    @Test
+    @Transactional
+    public void deleteParentCategory() {
+        //When
+        Category parent = categoryRepository.findById(1L).get();
+        categoryRepository.deleteByParentCategory(parent);
+        categoryRepository.delete(parent);
+        //Then
+
+        assertFalse(categoryRepository.existsById(parent.getId()));
+        assertFalse(categoryRepository.existsByParentCategory(parent));
     }
 }
 

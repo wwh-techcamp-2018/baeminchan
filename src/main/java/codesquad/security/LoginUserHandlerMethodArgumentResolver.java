@@ -22,7 +22,7 @@ public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgu
 
         LoginUser loginUser = parameter.getParameterAnnotation(LoginUser.class);
         if (loginUser.adminRequired() && !user.isAdmin()) {
-            throw new ForbiddenException();
+            throw new ForbiddenException("관리자 권한이 필요합니다.");
         }
         return user;
     }

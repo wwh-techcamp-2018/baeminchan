@@ -1,4 +1,4 @@
-package codesquad.product.domain;
+package codesquad.category.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +26,11 @@ public class Category {
 
     public Category(String title) {
         this.title = title;
+    }
+
+    public Category(String title, Category parentCategory) {
+        this.title = title;
+        this.parentCategory = parentCategory;
     }
 //    TODO: Product Entity 만들기
 //    @OneToMany(mappedBy = "category")
