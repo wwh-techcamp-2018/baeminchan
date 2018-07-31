@@ -24,6 +24,14 @@ public abstract class AcceptanceTest {
         return template;
     }
 
+    public TestRestTemplate templateWithAdminUser() {
+        return template().withBasicAuth("a@naver.com","test1234");
+    }
+
+    public TestRestTemplate templateWithNormalUser() {
+        return template().withBasicAuth("b@naver.com","test1234");
+    }
+
     protected User defaultUser() {
         return findByEmail(DEFAULT_LOGIN_USER);
     }

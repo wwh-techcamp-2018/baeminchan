@@ -31,7 +31,7 @@ function createAdminMenu(response) {
         root.children.forEach(upper_menu => {
             html += `
                 <ul id="category_list_${upper_menu.id}">
-                    <li>
+                    <li class="upper_menu_li">
                         <input data-category-id="${upper_menu.id}" id="menu_${upper_menu.id}" style="display: inline-block" 
                                 value="${upper_menu.title}" placeholder="${upper_menu.title}"/>
                         <button data-category-id="${upper_menu.id}" class="update">수정</button>
@@ -79,7 +79,7 @@ function addUpperCategory(response) {
     response.json().then(category => {
         const html = `
         <ul id="category_list_${category.id}">
-            <li>
+            <liclass="upper_menu_li">
                 <input data-category-id="${category.id}" value="${category.title}" id="menu_${category.id}" 
                 style="display: inline-block" placeholder="${category.title}"/>
                 <button data-category-id="${category.id}" class="update">수정</button>

@@ -1597,9 +1597,21 @@ div.btn_area {
 
 #category_list {
     overflow: scroll;
+    border-top: 2px solid gray;
+    padding-top: 20px;
+    margin-top: 20px;
 }
 
 #category_list ul {
     float:left;
     height:400px;
+}
+
+#category_list input{
+    width: 150px;
+}
+
+.upper_menu_li input{
+    font-size: 20px;
+    font-weight: bold;
 }
