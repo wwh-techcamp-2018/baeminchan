@@ -16,9 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminAuthorizationInterceptor extends HandlerInterceptorAdapter {
     private static final Logger log = LoggerFactory.getLogger(AdminAuthorizationInterceptor.class);
 
-    @Autowired
-    UserService userService;
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.debug("Admin Interceptor preHandle() call");
