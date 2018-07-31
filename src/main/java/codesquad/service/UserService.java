@@ -1,10 +1,8 @@
 package codesquad.service;
 
-import codesquad.domain.Role;
-import codesquad.domain.RoleRepository;
-import codesquad.domain.User;
-import codesquad.domain.UserRepository;
+import codesquad.domain.*;
 import codesquad.dto.UserDto;
+import codesquad.exception.UnAuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,8 +24,9 @@ public class UserService {
         userRepository.save(userDto.toUser(role, passwordEncoder));
     }
 
-    public User login(String userId, String password) throws IllegalAccessException {
-        User savedUser = userRepository.findByUserId(userId).orElseThrow(IllegalAccessException::new);
+    public User login(String userId, String password) throws UnAuthenticationException {
+        User savedUser = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new UnAuthenticationException("아이디와 비밀번호가 일치하지 않습니다."));
         savedUser.login(password, passwordEncoder);
         return savedUser;
     }

@@ -1,11 +1,13 @@
 package codesquad.domain;
 
+import codesquad.exception.UnAuthenticationException;
 import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -32,6 +34,11 @@ public class User {
     public User() {
     }
 
+    public User(String userId, String password) {
+        this.userId = userId;
+        this.password = password;
+    }
+
     public User(String userId, String password, String name, String phoneNumber, Role role, LocalDateTime joinDate) {
         this.userId = userId;
         this.password = password;
@@ -41,10 +48,47 @@ public class User {
         this.joinDate = joinDate;
     }
 
-    public boolean login(String password, PasswordEncoder passwordEncoder) throws IllegalAccessException {
-        if (!passwordEncoder.matches(password, this.password)) {
-            throw new IllegalAccessException();
+    public boolean login(String rawPassword, PasswordEncoder passwordEncoder) throws UnAuthenticationException {
+        if (!passwordEncoder.matches(rawPassword, this.password)) {
+            throw new UnAuthenticationException("비밀번호가 일치하지 않습니다.");
         }
         return true;
+    }
+
+    public boolean isAdmin() {
+        return this.role.isAdmin();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userId='" + userId + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", role=" + role +
+                ", joinDate=" + joinDate +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(userId, user.userId) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(phoneNumber, user.phoneNumber) &&
+                Objects.equals(role, user.role) &&
+                Objects.equals(joinDate, user.joinDate);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, userId, password, name, phoneNumber, role, joinDate);
     }
 }

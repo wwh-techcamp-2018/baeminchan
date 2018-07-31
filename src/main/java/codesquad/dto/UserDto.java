@@ -6,6 +6,7 @@ import codesquad.domain.User;
 import codesquad.validate.Patterns;
 import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;

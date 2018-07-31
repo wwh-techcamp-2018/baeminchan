@@ -1,7 +1,3 @@
-function $(selector) {
-    return document.querySelector(selector);
-}
-
 document.addEventListener("DOMContentLoaded", () => {
     initEvents();
 })
@@ -12,20 +8,13 @@ function initEvents() {
     loginBtn.addEventListener("click", loginUserHandler);
 }
 
-function fetchManager({ url, method, body, headers, callback }) {
-    fetch(url, {method,body,headers,credentials: "same-origin"})
-        .then((response) => {
-            if(response.status == 302) {
-                alert("로그인 성공!");
-                location.href = '/'
-                return
-            }
+function onSuccess(response) {
+    alert("로그인 성공!");
+    location.href = "/";
+}
 
-            if(response.status == 403) {
-                alert("아이디나 비밀번호가 일치하지 않습니다!");
-                return
-            }
-    })
+function alertError(response) {
+    alert(response.message);
 }
 
 function loginUserHandler(evt) {
@@ -40,6 +29,8 @@ function loginUserHandler(evt) {
         body: JSON.stringify({
             "userId" : userId,
             "password" : password
-            })
+        }),
+        callback: onSuccess,
+        errCallback: alertError
     })
 }

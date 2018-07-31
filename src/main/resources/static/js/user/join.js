@@ -1,7 +1,3 @@
-function $(selector) {
-    return document.querySelector(selector);
-}
-
 document.addEventListener("DOMContentLoaded", () => {
     initEvents();
 })
@@ -18,23 +14,18 @@ function emailDomainHandler(event) {
     $(".tb_join").querySelector('#email_domain').value = event.target.value;
 }
 
-function fetchManager({ url, method, body, headers, callback }) {
-    fetch(url, {method,body,headers,credentials: "same-origin"})
-        .then((response) => {
-            if(response.status == 201) {
-                alert("회원가입을 축하드립니다!");
-                location.href = '/'
-                return
-            }
-        return callback(response.json());
-    })
+function onSuccess() {
+    alert("회원가입을 축하드립니다!");
+    location.href = '/';
 }
 
 function checkBlank(joinTable, selectors) {
     for(let selector of selectors) {
         let target = joinTable.querySelector(selector).value;
         if(target === '') {
-            alert('빈칸을 채워주세요.'); joinTable.querySelector(selector).focus(); return false;
+            alert('빈칸을 채워주세요.');
+            joinTable.querySelector(selector).focus();
+            return false;
         }
     }
     return true;
@@ -56,7 +47,6 @@ function registerUserHandler(evt) {
         return;
     }
 
-
     fetchManager({
         url: '/api/users',
         method: 'POST',
@@ -68,16 +58,18 @@ function registerUserHandler(evt) {
             "name" : name,
             "phoneNumber" : phoneNumber
             }),
-        callback: alertError
+        callback: onSuccess,
+        errCallback: alertError
     })
 }
 
 function alertError(result) {
     result.then((response) => {
-    let errorMessage = "";
+        let errorMessage = "";
         for (let error of response.errors) {
           errorMessage += error.errorMessage + "\n";
         }
-    alert(errorMessage);
+
+        alert(errorMessage);
     })
 }

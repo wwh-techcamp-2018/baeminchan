@@ -1,7 +1,7 @@
 package domain;
 
+import codesquad.controller.ApiUserControllerTest;
 import codesquad.dto.UserDto;
-import controller.ApiUserControllerTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
