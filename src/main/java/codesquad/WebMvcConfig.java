@@ -1,5 +1,6 @@
 package codesquad;
 
+import codesquad.security.AdminAuthorizationInterceptor;
 import codesquad.security.LoginInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,9 +22,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new LoginInterceptor();
     }
 
+    @Bean
+    public AdminAuthorizationInterceptor adminAuthorizationInterceptor() {return new AdminAuthorizationInterceptor(); }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor());
+        registry.addInterceptor(loginInterceptor()).order(1);
+        registry.addInterceptor(adminAuthorizationInterceptor()).order(2).addPathPatterns("/api/admin");
     }
 
 //    @Override

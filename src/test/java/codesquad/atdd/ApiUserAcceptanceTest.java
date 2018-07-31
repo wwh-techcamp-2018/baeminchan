@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.security.access.AuthorizationServiceException;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -71,6 +72,14 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
         template().exchange(requestEntity, JsonResponse.class);
         return newUser;
     }
+
+    public User createTestAdmin(String email){
+        User newUser = new User(email, "PASSWORD123", "PASSWORD123","이름", "010-123-1234");
+        newUser.registAdmin();
+        RequestEntity<User> requestEntity = RequestEntity.post(createURI("")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(newUser);
+        template().exchange(requestEntity, JsonResponse.class);
+        return newUser;
+    }
     @Test
     public void login_성공(){
         User newUser = createTestUser("abc@mmm.com");
@@ -95,7 +104,6 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
     public void LoginInterceptor_기능테스트()throws Exception{
         User user = createTestUser("test432111111@test.com");
 
-        HttpHeaders headers = new HttpHeaders();
         String credential = user.getEmail()+ ":" + user.getPassword();
         byte[] basicAuthCredential = Base64.getEncoder().encode(credential.getBytes());
         RequestEntity requestEntity = RequestEntity
@@ -103,5 +111,31 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
                 .header("Authorization", "Basic " + new String(basicAuthCredential))
                 .build();
         template().exchange(requestEntity, Void.class);
+    }
+
+    @Test
+    public void AdminInterceptor_테스트() throws Exception {
+        User user = createTestAdmin("admin111@admin.com");
+        String credential = user.getEmail()+ ":" + user.getPassword();
+        byte[] basicAuthCredential = Base64.getEncoder().encode(credential.getBytes());
+        RequestEntity requestEntity = RequestEntity
+                .get(new URI("/api/admin"))
+                .header("Authorization", "Basic " + new String(basicAuthCredential))
+                .build();
+        template().exchange(requestEntity, Void.class);
+    }
+
+    @Test
+    public void AdminInterceptor_테스트_실패() throws Exception {
+        User user = createTestUser("fake_admin111@admin.com");
+        String credential = user.getEmail()+ ":" + user.getPassword();
+        byte[] basicAuthCredential = Base64.getEncoder().encode(credential.getBytes());
+        RequestEntity requestEntity = RequestEntity
+                .get(new URI("/api/admin"))
+                .header("Authorization", "Basic " + new String(basicAuthCredential))
+                .build();
+        ResponseEntity<ErrorResponse> responseResponseEntity = template().exchange(requestEntity, ErrorResponse.class);
+        assertThat(responseResponseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+        log.debug("Error Response UnAuthorized : {}", responseResponseEntity);
     }
 }

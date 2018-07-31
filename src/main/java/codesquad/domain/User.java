@@ -64,6 +64,8 @@ public class User extends AbstractEntity {
         this.phoneNumber = phoneNumber;
     }
 
+
+
     public String getEmail() {
         return email;
     }
@@ -160,6 +162,10 @@ public class User extends AbstractEntity {
 
     public boolean matchEncodedPassword(PasswordEncoder passwordEncoder, String rawPassword){
         return passwordEncoder.matches(rawPassword, this.encodedPassword);
+    }
+
+    public void registAdmin() {
+        this.userAuthority = UserAuthority.ADMIN;
     }
 
     public boolean isAdmin(){

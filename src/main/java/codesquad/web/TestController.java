@@ -10,14 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/test")
+@RequestMapping({"/test", "/api/admin"})
 public class TestController {
 
     private static final Logger log = LoggerFactory.getLogger(TestController.class);
 
-    @GetMapping("")
+    @GetMapping("test")
     public String Test(HttpSession session){
         log.debug("testLoginUser : {}", session.getAttribute(SessionUtil.SESSION_KEY));
+        return "redirect:/";
+    }
+
+    @GetMapping("api/admin")
+    public String adminTest(HttpSession session) {
+        log.debug("adminLoginUser : {}", session.getAttribute(SessionUtil.SESSION_KEY));
         return "redirect:/";
     }
 }
