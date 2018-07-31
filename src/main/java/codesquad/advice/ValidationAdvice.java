@@ -3,6 +3,9 @@ package codesquad.advice;
 
 import codesquad.domain.ValidationError;
 import codesquad.domain.ValidationErrorResponse;
+import codesquad.exception.NotFoundException;
+import codesquad.exception.UnauthorizedException;
+
 import codesquad.exception.UserVerificationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,6 +61,18 @@ public class ValidationAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ValidationErrorResponse ununiqueException(UserVerificationException exception){
         return new ValidationErrorResponse().addError(exception.getError());
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public void unauthorizedException(UnauthorizedException exception) {
+
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void notFoundException(NotFoundException exception) {
+
     }
 
 }
