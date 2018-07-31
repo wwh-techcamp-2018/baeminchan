@@ -1,10 +1,4 @@
-function $(selector) {
-    return document.querySelector(selector);
-}
-
-function $all(selector) {
-    return document.querySelectorAll(selector);
-}
+document.write('<script src="/js/common.js"></script>')
 
 document.addEventListener("DOMContentLoaded", () => {
     initEvents();
@@ -47,18 +41,6 @@ function initEvents() {
         headers: { 'content-type': 'application/json' },
         callback: createMenu
     });
-}
-
-
-function isEmpty(value) {
-    return value.length == 0
-}
-
-function fetchManager({ url, method, body, headers, callback }) {
-    fetch(url, { method, body, headers, credentials: "same-origin" })
-        .then((response) => {
-            callback(response)
-        })
 }
 
 function login(response) {

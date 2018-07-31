@@ -37,10 +37,16 @@
                 <li>
                     <a href="./join.html">회원가입</a>
                 </li>
-                {{/ loginedUser }} {{# loginedUser }}
+                {{/ loginedUser }}
+                {{# loginedUser }}
                 <li>
                     <a href="javascript:void(0);" onclick="logoutHandler(event)">로그아웃</a>
                 </li>
+                    {{#if loginedUser.admin}}
+                    <li>
+                        <a href="./admin">관리자페이지</a>
+                    </li>
+                    {{/if}}
                 {{/ loginedUser }}
                 <li>
                     <a href="#">
@@ -103,7 +109,7 @@
             <h3 class="blind">전체 메뉴</h3>
 
             <ul class="menu">
-               
+
             </ul>
         </div>
     </nav>

@@ -4,6 +4,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
+import java.util.Arrays;
+
 public class ApiAcceptanceTest extends AcceptanceTest {
 
     public static HttpEntity createHttpEntity(Object body) {

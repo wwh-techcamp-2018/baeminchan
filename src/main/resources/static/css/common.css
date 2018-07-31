@@ -1594,3 +1594,12 @@ div.btn_area {
     -moz-transition: all .2s;
     transition: all .2s
 }
+
+#category_list {
+    overflow: scroll;
+}
+
+#category_list ul {
+    float:left;
+    height:400px;
+}

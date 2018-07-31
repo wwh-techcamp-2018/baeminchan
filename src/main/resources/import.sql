@@ -20,6 +20,7 @@ INSERT INTO category (title, deleted, parent_id) values ('전', false, 1);
 INSERT INTO category (title, deleted, parent_id) values ('장아찌,피클', false, 1);
 INSERT INTO category (title, deleted, parent_id) values ('젓갈,장,소스', false, 1);
 INSERT INTO category (title, deleted, parent_id) values ('세트', false, 1);
+INSERT INTO category (title, deleted, parent_id) values ('보이면 안됨', true, 1);
 
 INSERT INTO category (title, deleted, parent_id) values ('국', false, 2);
 INSERT INTO category (title, deleted, parent_id) values ('찌개', false, 2);
