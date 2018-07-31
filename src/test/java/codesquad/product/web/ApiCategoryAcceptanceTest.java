@@ -9,9 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -66,6 +66,7 @@ public class ApiCategoryAcceptanceTest extends ApiAcceptanceTest {
     }
 
     private ParameterizedTypeReference<RestResponse<List<Category>>> getCategoryListType() {
-        return new ParameterizedTypeReference<RestResponse<List<Category>>>() {};
+        return new ParameterizedTypeReference<RestResponse<List<Category>>>() {
+        };
     }
 }
