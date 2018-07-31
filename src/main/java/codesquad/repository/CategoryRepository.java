@@ -10,6 +10,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CategoryRepository extends CrudRepository<Category, Long> {
-    //Optional<List<Category>> findByParentIsNull();
     Optional<List<Category>> findByParentId(Long pId);
 }

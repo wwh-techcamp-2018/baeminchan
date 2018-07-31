@@ -27,8 +27,8 @@ public class CategoryService {
     }
 
     public Category create(CategoryDto categoryDto, Long parentId) {
-        parentId = (parentId == null) ? ROOT : parentId;
-        Category parentCategory = categoryRepository.findById(parentId).orElseThrow(() -> new NotExistException("존재하지 않은 카테고리입니다."));
+        Long newParentId = (parentId == null) ? ROOT : parentId;
+        Category parentCategory = categoryRepository.findById(newParentId).orElseThrow(() -> new NotExistException("존재하지 않은 카테고리입니다."));
         return categoryRepository.save(categoryDto.toCategory(parentCategory));
     }
 

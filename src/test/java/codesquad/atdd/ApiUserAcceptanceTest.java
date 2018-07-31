@@ -45,7 +45,6 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
         User newUser = new User("ID@abcde.com", "PASSWORD123", "PASSWORD123", "이름", "010-123-1234");
         RequestEntity<User> requestEntity = RequestEntity.post(createURI("")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(newUser);
         ResponseEntity<JsonResponse> responseEntity = template().exchange(requestEntity, JsonResponse.class);
-
         log.debug("response body : {}", responseEntity.getBody());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }

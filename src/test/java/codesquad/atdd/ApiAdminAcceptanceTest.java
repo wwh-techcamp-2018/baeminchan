@@ -40,11 +40,4 @@ public class ApiAdminAcceptanceTest extends AcceptanceTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
-    @Test
-    public void addCategory() {
-        CategoryDto category = new CategoryDto();
-        RequestEntity<Object> request = RequestEntity.post(URI.create("/admin/api/categories")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(category);
-        ResponseEntity<Void> response = basicAuthTemplate(adminUser()).exchange(request, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-    }
 }

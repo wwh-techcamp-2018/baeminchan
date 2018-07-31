@@ -27,8 +27,7 @@ public class ApiCategoryAcceptanceTest extends AcceptanceTest {
     @Test
     public void getAllCategoryJson() {
         RequestEntity<Void> requestEntity = RequestEntity.get(URI.create("/api/categories")).accept(MediaType.APPLICATION_JSON).build();
-        ResponseEntity<List<Category>> response = template().exchange(requestEntity, new ParameterizedTypeReference<List<Category>>() {
-        });
+        ResponseEntity<List<Category>> response = template().exchange(requestEntity, new ParameterizedTypeReference<List<Category>>() {});
         log.debug("response body : {}", response.getBody());
         assertThat(response.getBody()).hasSize(8);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

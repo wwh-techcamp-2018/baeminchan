@@ -8,6 +8,7 @@ import lombok.ToString;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import javax.persistence.criteria.Root;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 @ToString
 @Entity
 public class Category extends AbstractEntity {
+    public static final RootCategory ROOT = new RootCategory();
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -41,5 +43,20 @@ public class Category extends AbstractEntity {
         return this.getId() != rootId;
     }
 
+    public boolean isRoot(){
+        return false;
+    }
+
+    private static class RootCategory extends Category{
+        final Long rootId = 0L ;
+        public RootCategory() {
+            this.setId(rootId);
+        }
+
+        @Override
+        public boolean isRoot() {
+            return true;
+        }
+    }
 
 }

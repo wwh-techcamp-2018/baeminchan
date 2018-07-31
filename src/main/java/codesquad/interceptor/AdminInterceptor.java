@@ -15,7 +15,7 @@ public class AdminInterceptor implements HandlerInterceptor {
         //# 관리자 권한을 가진 사용자만 접근하도록 구현한다.
         //1. 로그인 세션이 유지되었는지 확인 -> 가지고 있지 않다면?
         User user = (User) request.getSession().getAttribute(SessionUtil.SESSION_KEY);
-        if(user == null || user.getUserAuthority() != UserAuthority.ADMIN) {
+        if(user == null || user.isAdmin()) {
             response.sendRedirect("/users/login");
             return false;
         }

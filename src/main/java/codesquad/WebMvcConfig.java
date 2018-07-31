@@ -7,7 +7,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -17,10 +19,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public BasicAuthInterceptor basicAuthInterceptor() { return new BasicAuthInterceptor(); }
+    public BasicAuthInterceptor basicAuthInterceptor() {
+        return new BasicAuthInterceptor();
+    }
 
     @Bean
-    public AdminInterceptor adminInterceptor() { return new AdminInterceptor(); }
+    public AdminInterceptor adminInterceptor() {
+        return new AdminInterceptor();
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -32,8 +38,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        registry.addViewController("/").setViewName("index");
         registry.addViewController("/users/login").setViewName("login");
+        registry.addViewController("/users/join").setViewName("join");
     }
+
 //    @Override
 //    public void addFormatters(FormatterRegistry registry) {
 //        registry.addConverter(new LocalDateConverter("yyyy-MM-dd"));
