@@ -42,18 +42,17 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
 
     @Test
     public void createUser() {
-        User newUser = new User("ID@abcde.com", "PASSWORD123", "PASSWORD123","이름", "010-123-1234");
+        User newUser = new User("ID@abcde.com", "PASSWORD123", "PASSWORD123", "이름", "010-123-1234");
         RequestEntity<User> requestEntity = RequestEntity.post(createURI("")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(newUser);
         ResponseEntity<JsonResponse> responseEntity = template().exchange(requestEntity, JsonResponse.class);
-
         log.debug("response body : {}", responseEntity.getBody());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
 
     @Test
-    public void createUser_실패(){
-        User newUser = new User("daaa@cde.com", "PPASSWORD123", "PASSWORD123","이름", "010-123-1234");
+    public void createUser_실패() {
+        User newUser = new User("daaa@cde.com", "PPASSWORD123", "PASSWORD123", "이름", "010-123-1234");
         RequestEntity<User> requestEntity = RequestEntity.post(createURI("")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(newUser);
         ResponseEntity<ErrorResponse> responseEntity = template().exchange(requestEntity, ErrorResponse.class);
         log.debug("response body : {}", responseEntity.getBody());
@@ -61,14 +60,16 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
         assertThat(responseEntity.getBody().getError().get(0).getMessage())
                 .isEqualTo("입력된 비밀번호가 일치하지 않습니다.");
     }
-    public User createTestUser(String email){
-        User newUser = new User(email, "PASSWORD123", "PASSWORD123","이름", "010-123-1234");
+
+    public User createTestUser(String email) {
+        User newUser = new User(email, "PASSWORD123", "PASSWORD123", "이름", "010-123-1234");
         RequestEntity<User> requestEntity = RequestEntity.post(createURI("")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(newUser);
         template().exchange(requestEntity, JsonResponse.class);
         return newUser;
     }
+
     @Test
-    public void login_성공(){
+    public void login_성공() {
         User newUser = createTestUser("abc@mmm.com");
         RequestEntity<User> requestEntity = RequestEntity.post(createURI("/login")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(newUser);
         ResponseEntity<JsonResponse> responseEntity = template().exchange(requestEntity, JsonResponse.class);
@@ -76,8 +77,9 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody().getUrl()).isEqualTo("/");
     }
+
     @Test
-    public void login_실패(){
+    public void login_실패() {
         User newUser = createTestUser("abc@mmm.com");
         newUser.setPassword("ABCDEFS123");
         RequestEntity<User> requestEntity = RequestEntity.post(createURI("/login")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(newUser);
@@ -91,13 +93,13 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
     public void createUser_2개이상실패() {
         SoftAssertions softly = new SoftAssertions();
 
-        User newUser = new User("daaa@cde.com", "PPASSWORD123", "PASSWORD123","abcd", "110-123-1234");
+        User newUser = new User("daaa@cde.com", "PPASSWORD123", "PASSWORD123", "abcd", "110-123-1234");
         RequestEntity<User> requestEntity = RequestEntity.post(createURI("")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(newUser);
         ResponseEntity<ErrorResponse> responseEntity = template().exchange(requestEntity, ErrorResponse.class);
         log.debug("response body : {}", responseEntity.getBody());
         softly.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         softly.assertThat(responseEntity.getBody().getError())
-                .containsExactlyInAnyOrder( new ValidationError("정규 표현식 \"^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$\" 패턴과 일치해야 합니다.","phoneNumber"),
+                .containsExactlyInAnyOrder(new ValidationError("정규 표현식 \"^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$\" 패턴과 일치해야 합니다.", "phoneNumber"),
                         new ValidationError("정규 표현식 \"^[가-힣]*$\" 패턴과 일치해야 합니다.", "name"));
     }
 }
