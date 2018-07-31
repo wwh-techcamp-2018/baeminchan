@@ -24,5 +24,5 @@ function loginEventHandler(evt) {
             alert(item.message);
         });
     })
-    .fetch();
+    .doFetch();
 }

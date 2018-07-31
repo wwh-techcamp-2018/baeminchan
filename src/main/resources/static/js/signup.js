@@ -26,6 +26,6 @@ function registerJoinEventHandler(evt) {
             alert(item.message);
         });
     })
-    .fetch();
+    .doFetch();
 }
 

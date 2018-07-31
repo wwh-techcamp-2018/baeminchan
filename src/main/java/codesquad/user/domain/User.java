@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Getter
 @Builder
@@ -52,5 +53,23 @@ public class User {
 
     public boolean matchPassword(User user, PasswordEncoder passwordEncoder) {
         return passwordEncoder.matches(user.password, this.password);
+    }
+
+    public boolean isAdmin() {
+        return role == Role.ADMIN;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(uuid, user.uuid);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(uuid);
     }
 }

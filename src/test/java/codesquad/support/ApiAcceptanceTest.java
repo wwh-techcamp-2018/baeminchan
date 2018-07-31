@@ -1,6 +1,7 @@
 package codesquad.support;
 
 import codesquad.RestResponse;
+import codesquad.user.domain.User;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,45 +22,53 @@ public abstract class ApiAcceptanceTest {
         return template;
     }
 
-    protected <T> ResponseEntity<RestResponse<List<T>>> getResponseEntityList(String path, ParameterizedTypeReference<RestResponse<List<T>>> typeReference) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<Void> request = new HttpEntity<>(headers);
-
+    protected <T> ResponseEntity<RestResponse<List<T>>> getResponseEntityList(String path,
+                                                                              ParameterizedTypeReference<RestResponse<List<T>>> typeReference) {
         return template()
                 .exchange(path,
                         HttpMethod.GET,
-                        request,
+                        new HttpEntity<>(getHeaders()),
                         typeReference);
     }
 
-    protected <T> ResponseEntity<RestResponse<T>> getResponseEntity(String path) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<Void> request = new HttpEntity<>(headers);
-
-        return template()
-                .exchange(path,
-                        HttpMethod.GET,
-                        request,
-                        new ParameterizedTypeReference<RestResponse<T>>() {
-                        });
-    }
-
-    protected <T> ResponseEntity<RestResponse<?>> createPostResponseEntity(String path, T dto) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<T> request = new HttpEntity<>(dto, headers);
-
-
+    protected <T, R> ResponseEntity<RestResponse<R>> createPostResponseEntity(String path,
+                                                                              T dto,
+                                                                              ParameterizedTypeReference<RestResponse<R>> typeReference) {
         return template()
                 .exchange(path,
                         HttpMethod.POST,
-                        request,
-                        new ParameterizedTypeReference<RestResponse<?>>() {
-                        });
+                        new HttpEntity<>(dto, getHeaders()),
+                        typeReference);
+    }
+
+
+    protected <T, R> ResponseEntity<RestResponse<R>> createPostResponseEntityWithUser(User user,
+                                                                                      String path,
+                                                                                      T dto,
+                                                                                      ParameterizedTypeReference<RestResponse<R>> typeReference) {
+        return template()
+                .withBasicAuth(user.getEmail(), user.getPassword())
+                .exchange(path,
+                        HttpMethod.POST,
+                        new HttpEntity<>(dto, getHeaders()),
+                        typeReference);
+    }
+
+    protected <T> ResponseEntity<RestResponse<T>> deleteEntityWithUser(User user,
+                                                                       String path,
+                                                                       ParameterizedTypeReference<RestResponse<T>> typeReference) {
+        return template()
+                .withBasicAuth(user.getEmail(), user.getPassword())
+                .exchange(path,
+                        HttpMethod.DELETE,
+                        new HttpEntity<>(getHeaders()),
+                        typeReference);
+    }
+
+
+    private HttpHeaders getHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return headers;
     }
 }

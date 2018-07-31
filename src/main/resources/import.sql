@@ -1,3 +1,6 @@
+INSERT INTO USER (uuid, email, password, name, phone_number, role) VALUES ('550e8400-e29b-41d4-a716-446655441111', 'admin@test.com', '$2a$10$N2c924hshyVMg7PyZYjuTOoDZf8acQN.1Yw5kXjDMKB.UpVVk8ZQa', 'admin', '011-1111-1111', 'ADMIN');
+INSERT INTO USER (uuid, email, password, name, phone_number, role) VALUES ('550e8400-e29b-41d4-a716-446655442222', 'user@test.com', '$2a$10$N2c924hshyVMg7PyZYjuTOoDZf8acQN.1Yw5kXjDMKB.UpVVk8ZQa', 'user', '011-2222-2222', 'USER');
+
 INSERT INTO CATEGORY (title) VALUES ('밑반찬');
 INSERT INTO CATEGORY (title) VALUES ('국·찌개');
 INSERT INTO CATEGORY (title) VALUES ('메인반찬');

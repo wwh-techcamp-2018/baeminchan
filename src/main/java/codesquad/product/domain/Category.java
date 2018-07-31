@@ -26,19 +26,19 @@ public class Category {
     @JsonIgnore
     private Category parentCategory;
 
-    @OneToMany(mappedBy = "parentCategory", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parentCategory", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Category> childCategories = new ArrayList<>();
-
-    public void addChildCategory(Category category) {
-        this.childCategories.add(category);
-        category.parentCategory = this;
-    }
 
     @Builder
     public Category(Long id, String title, Category parentCategory) {
         this.id = id;
         this.title = title;
         this.parentCategory = parentCategory;
+    }
+
+    public void addChildCategory(Category category) {
+        this.childCategories.add(category);
+        category.parentCategory = this;
     }
 
     @Override
