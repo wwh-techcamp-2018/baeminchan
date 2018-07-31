@@ -1,11 +1,14 @@
 package codesquad.domain.user;
 
 
-public class AdminUser extends User {
-    public AdminUser() {
-        super();
-    }
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+
+
+@Entity
+@NoArgsConstructor
+public class AdminUser extends User {
     @Override
     public boolean isAdmin() {
         return true;

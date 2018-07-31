@@ -1,6 +1,6 @@
 package codesquad.controller;
 
-import codesquad.domain.user.User;
+import codesquad.domain.user.NormalUser;
 import codesquad.dto.user.JoinUserDto;
 import codesquad.dto.user.LoginUserDto;
 import codesquad.service.UserService;
@@ -9,10 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -32,7 +29,7 @@ public class ApiUserController {
             @ApiResponse(code = 400, message = "잘못된 요청")
     })
     @PostMapping("")
-    public ResponseEntity<User> create(@Valid @RequestBody JoinUserDto joinUserDto, HttpSession session) {
+    public ResponseEntity<NormalUser> create(@Valid @RequestBody JoinUserDto joinUserDto, HttpSession session) {
         session.setAttribute(SessionUtil.SESSTION_KEY, userService.add(joinUserDto));
         return ResponseEntity.created(URI.create("/api/users")).body(null);
     }
@@ -44,10 +41,15 @@ public class ApiUserController {
             @ApiResponse(code = 400, message = "잘못된 요청")
     })
     @PostMapping("/login")
-    public ResponseEntity<User> login(HttpSession session, @RequestBody LoginUserDto loginUserDto) {
-        session.setAttribute(SessionUtil.SESSTION_KEY, userService.login(loginUserDto));
+    public ResponseEntity<NormalUser> login(HttpSession session, @RequestBody LoginUserDto loginUserDto) {
+        session.setAttribute(SessionUtil.SESSTION_KEY, userService.login(loginUserDto).toUserSessionDto());
         return ResponseEntity.ok(null);
     }
 
+    @GetMapping("/logout")
+    public ResponseEntity<NormalUser> logout(HttpSession session, @RequestBody LoginUserDto loginUserDto) {
+        session.removeAttribute(SessionUtil.SESSTION_KEY);
+        return ResponseEntity.ok(null);
+    }
 
 }
