@@ -1,6 +1,7 @@
 package codesquad.atdd;
 
 import codesquad.domain.User;
+import codesquad.repository.UserRepository;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +16,15 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+
 public abstract class AcceptanceTest {
+
+    private static final String GENERAL_USER_EMAIL = "hongjunho@gmail.com";
+    private static final String ADMIN_USER_EMAIL = "mhyun2@gmail.com";
+    private static final String PASSWORD = "PASSWORD123";
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private TestRestTemplate template;
@@ -28,8 +37,16 @@ public abstract class AcceptanceTest {
         return basicAuthTemplate(defaultUser());
     }
 
-    protected User defaultUser(){
-        return new User();
+    protected User adminUser() {
+        User user = userRepository.findByEmail(ADMIN_USER_EMAIL).get();
+        user.setPassword(PASSWORD);
+        return user;
+    }
+
+    protected User defaultUser() {
+        User user = userRepository.findByEmail(GENERAL_USER_EMAIL).get();
+        user.setPassword(PASSWORD);
+        return user;
     }
 
     public TestRestTemplate basicAuthTemplate(User loginUser) {

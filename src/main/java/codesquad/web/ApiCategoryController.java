@@ -29,6 +29,7 @@ public class ApiCategoryController {
     public Category create(@PathVariable(required = false) Long parentId, @RequestBody  CategoryDto categoryDto) {
         return categoryService.create(categoryDto, parentId);
     }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Category delete( @PathVariable Long id) {

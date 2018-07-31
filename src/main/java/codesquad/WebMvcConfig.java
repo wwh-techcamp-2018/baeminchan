@@ -1,15 +1,13 @@
 package codesquad;
 
 import codesquad.interceptor.AdminInterceptor;
+import codesquad.interceptor.BasicAuthInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
+import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -18,17 +16,23 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public BasicAuthInterceptor basicAuthInterceptor() { return new BasicAuthInterceptor(); }
+
+    @Bean
+    public AdminInterceptor adminInterceptor() { return new AdminInterceptor(); }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AdminInterceptor())
-                .addPathPatterns("/admin**");
+        registry.addInterceptor(basicAuthInterceptor()).order(0);
+        registry.addInterceptor(adminInterceptor())
+                .addPathPatterns("/admin/**").order(1);
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         registry.addViewController("/users/login").setViewName("login");
-        registry.addViewController("/test").setViewName("users/test");
     }
 //    @Override
 //    public void addFormatters(FormatterRegistry registry) {

@@ -1,3 +1,6 @@
+INSERT INTO USER (email, encoded_password, name, phone_number,user_authority, created_at) VALUES ('hongjunho@gmail.com', '$2a$10$Iv3haA5kgZfPvfObhRF5BuUtKGqTCu4lLKenyX7XNaKQlTqCDGsVu', '홍준호', '010-1234-1234', 'GENERAL',CURRENT_TIMESTAMP());
+INSERT INTO USER (email, encoded_password, name, phone_number,user_authority, created_at) VALUES ('mhyun2@gmail.com', '$2a$10$Iv3haA5kgZfPvfObhRF5BuUtKGqTCu4lLKenyX7XNaKQlTqCDGsVu', '어드민', '010-1234-1234', 'ADMIN',CURRENT_TIMESTAMP());
+
 INSERT INTO CATEGORY (name, created_at) VALUES ('밑반찬', CURRENT_TIMESTAMP());
 INSERT INTO CATEGORY (name, created_at) VALUES ('국·찌개', CURRENT_TIMESTAMP());
 INSERT INTO CATEGORY (name, created_at) VALUES ('메인반찬', CURRENT_TIMESTAMP());
