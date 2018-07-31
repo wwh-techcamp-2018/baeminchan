@@ -15,7 +15,7 @@ function loadMainCatetories() {
     .onFailed(errors => {
         
     })
-    .fetch();
+    .doFetch();
 }
 
 function createMainCategoryElement(mainCategory) {
@@ -51,7 +51,7 @@ function loadSubCategories(evt) {
     .onFailed(errors => {
         mainCategory.addEventListener('mouseover', loadSubCategories);  
     })
-    .fetch();
+    .doFetch();
 }
 
 function createSubCategoryElement(subCategory, mainCategory) {

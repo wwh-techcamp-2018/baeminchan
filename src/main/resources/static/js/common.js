@@ -24,7 +24,7 @@ class FetchManager {
         this.headers = headers;
     }
 
-    fetch() {
+    doFetch() {
         const request = {
             method: this.method,
             body: this.body,
