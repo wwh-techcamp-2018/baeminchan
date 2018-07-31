@@ -13,6 +13,7 @@ import org.springframework.http.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
+import java.util.Base64;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,6 +22,9 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
     private static final Logger log = LoggerFactory.getLogger(ApiUserAcceptanceTest.class);
 
     private final static String BASE_URI = "/api/users";
+
+    @Autowired
+    UserRepository userRepository;
 
     private URI createURI(String uri) {
         log.debug("Create URI {}", BASE_URI);
@@ -85,5 +89,19 @@ public class ApiUserAcceptanceTest extends AcceptanceTest {
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         //assertThat(responseEntity.getBody().getError()).contains("ID / PW 를 확인해주십시오");
+    }
+
+    @Test
+    public void LoginInterceptor_기능테스트()throws Exception{
+        User user = createTestUser("test432111111@test.com");
+
+        HttpHeaders headers = new HttpHeaders();
+        String credential = user.getEmail()+ ":" + user.getPassword();
+        byte[] basicAuthCredential = Base64.getEncoder().encode(credential.getBytes());
+        RequestEntity requestEntity = RequestEntity
+                .get(new URI("/test"))
+                .header("Authorization", "Basic " + new String(basicAuthCredential))
+                .build();
+        template().exchange(requestEntity, Void.class);
     }
 }
