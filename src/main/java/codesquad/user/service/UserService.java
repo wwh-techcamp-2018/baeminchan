@@ -1,9 +1,9 @@
 package codesquad.user.service;
 
+import codesquad.constant.Message;
 import codesquad.user.domain.User;
 import codesquad.user.domain.UserRepository;
 import codesquad.user.exception.UnAuthenticationException;
-import codesquad.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,12 +25,14 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void login(User user) {
+    public User login(User user) {
         User loginUser = userRepository.findByEmail(user.getEmail())
                 .orElseThrow(() -> new UnAuthenticationException(msa.getMessage(Message.UNAUTHENTICATED)));
         if (!loginUser.matchPassword(user, passwordEncoder)) {
             throw new UnAuthenticationException(msa.getMessage(Message.WRONG_PASSWORD));
         }
+
+        return loginUser;
     }
 
 }

@@ -1,6 +1,7 @@
 package codesquad.user.web;
 
 import codesquad.RestResponse;
+import codesquad.support.ApiAcceptanceTest;
 import codesquad.user.domain.UserRepository;
 import codesquad.user.domain.UserTest;
 import codesquad.user.dto.UserLoginDto;
@@ -8,25 +9,16 @@ import codesquad.user.dto.UserSignupDto;
 import codesquad.user.dto.UserSignupDtoTest;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ApiUserAcceptanceTest {
-    private static final Logger log = LoggerFactory.getLogger(ApiUserAcceptanceTest.class);
-
-    @Autowired
-    private TestRestTemplate template;
+public class ApiUserApiAcceptanceTest extends ApiAcceptanceTest {
+    private static final Logger log = LoggerFactory.getLogger(ApiUserApiAcceptanceTest.class);
 
     @Autowired
     private UserRepository repository;
@@ -76,7 +68,7 @@ public class ApiUserAcceptanceTest {
                 .build();
 
         ResponseEntity<RestResponse<?>> responseEntity = createPostResponseEntity("/api/users/login", dto);
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
         assertThat(responseEntity.getBody().getError()).hasSize(1);
     }
 
@@ -91,7 +83,7 @@ public class ApiUserAcceptanceTest {
                 .build();
 
         ResponseEntity<RestResponse<?>> responseEntity = createPostResponseEntity("/api/users/login", dto);
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
         assertThat(responseEntity.getBody().getError()).hasSize(1);
     }
 
@@ -100,20 +92,4 @@ public class ApiUserAcceptanceTest {
         ResponseEntity<RestResponse<?>> responseEntity = createPostResponseEntity("/api/users", dto);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
-
-    private <T> ResponseEntity<RestResponse<?>> createPostResponseEntity(String path, T dto) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<T> request = new HttpEntity<>(dto, headers);
-
-
-        return template
-                .exchange(path,
-                        HttpMethod.POST,
-                        request,
-                        new ParameterizedTypeReference<RestResponse<?>>() {
-                        });
-    }
-
 }

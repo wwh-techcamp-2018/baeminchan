@@ -34,6 +34,10 @@ public class RestResponse<T> {
         return new RestResponse<T>(data, "");
     }
 
+    public static <T> RestResponse<T> success() {
+        return new RestResponse<T>();
+    }
+
     public static ErrorResponseBuilder error() {
         return new ErrorResponseBuilder();
     }

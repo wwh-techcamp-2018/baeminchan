@@ -1,4 +1,4 @@
-package codesquad.util;
+package codesquad.constant;
 
 public class Regex {
     public static final String EMAIL = "\\p{Alnum}+[.\\p{Alnum}]+@\\p{Alnum}+\\.\\p{Alpha}+[.]?\\p{Alpha}+";
