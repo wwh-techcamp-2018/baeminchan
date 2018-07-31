@@ -70,5 +70,10 @@ public class Category {
         this.parent = parent;
     }
 
+    public void update(Category updateCategory) {
+        this.title = updateCategory.title;
+        this.parent = updateCategory.parent;
+    }
+
 
 }

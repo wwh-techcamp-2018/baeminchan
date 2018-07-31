@@ -30,8 +30,7 @@ public class CategoryService {
 
     public Category update(Long id, Category updateCategory) {
         Category originalCategory = findCategoryById(id);
-        originalCategory.setParent(updateCategory.getParent());
-        originalCategory.setTitle(updateCategory.getTitle());
+        originalCategory.update(updateCategory);
         return categoryRepository.save(originalCategory);
     }
 
