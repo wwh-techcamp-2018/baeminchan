@@ -1,44 +1,39 @@
 package codesquad.category.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
+@Builder
 public class Category {
+
+    public static final Long ROOT_ID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NonNull
     private String name;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     private Category parent;
 
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", cascade = {CascadeType.ALL})
     @OrderBy("id ASC")
     private Set<Category> children;
 
-    public Category(String name) {
-        this.name = name;
-    }
 
-    public Category(Long id, String name) {
-        this(id, name, null);
-    }
-
-
-    public Category(Long id, String name, Category parent) {
-        this.id = id;
+    public void update(String name, Category parent) {
         this.name = name;
         this.parent = parent;
     }

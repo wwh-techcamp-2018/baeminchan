@@ -36,7 +36,7 @@ public class ExceptionControllerAdvice {
     public ErrorsResponse entityNotFoundException(EntityNotFoundException exception) {
         ErrorsResponse response = new ErrorsResponse();
         // TODO : error handling..
-        //response.addError(new Error(exception.getFieldName(), exception.getMessage()));
+//        response.addError(new Error("entity", exception.getMessage()));
         return response;
     }
 
