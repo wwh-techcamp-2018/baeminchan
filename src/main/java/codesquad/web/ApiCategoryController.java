@@ -33,7 +33,7 @@ public class ApiCategoryController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Category delete( @PathVariable Long id) {
-        return categoryService.delete(null, id);
+        return categoryService.delete(id);
     }
 
 }

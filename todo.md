@@ -16,3 +16,7 @@
 - 카테고리 데이터 JSON API 제공
 - Ajax 로 카테고리 요청 
 - 카테고리 HTML 출력
+
+- import.sql ROOT data 추가
+- findByParentId로 변경
+- children CASCADE.REMOVE 제거 

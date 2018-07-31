@@ -17,7 +17,7 @@ public class ApiAdminAcceptanceTest extends AcceptanceTest {
     @Test
     public void 실패_로그인안했을때() {
         CategoryDto category = new CategoryDto();
-        RequestEntity<Object> request = RequestEntity.post(URI.create("/admin/categories")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(category);
+        RequestEntity<Object> request = RequestEntity.post(URI.create("/admin/api/categories")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(category);
         ResponseEntity<Void> response = template().exchange(request, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FOUND);
         assertThat(response.getHeaders().getLocation().getPath()).startsWith("/users/login");
@@ -26,7 +26,7 @@ public class ApiAdminAcceptanceTest extends AcceptanceTest {
     @Test
     public void 실패_권한없을때() {
         CategoryDto category = new CategoryDto();
-        RequestEntity<Object> request = RequestEntity.post(URI.create("/admin/categories")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(category);
+        RequestEntity<Object> request = RequestEntity.post(URI.create("/admin/api/categories")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(category);
         ResponseEntity<Void> response = basicAuthTemplate().exchange(request, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FOUND);
         assertThat(response.getHeaders().getLocation().getPath()).startsWith("/users/login");
@@ -35,7 +35,15 @@ public class ApiAdminAcceptanceTest extends AcceptanceTest {
     @Test
     public void 성공_권한있을땐() {
         CategoryDto category = new CategoryDto();
-        RequestEntity<Object> request = RequestEntity.post(URI.create("/admin/categories")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(category);
+        RequestEntity<Object> request = RequestEntity.post(URI.create("/admin/api/categories")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(category);
+        ResponseEntity<Void> response = basicAuthTemplate(adminUser()).exchange(request, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+    @Test
+    public void addCategory() {
+        CategoryDto category = new CategoryDto();
+        RequestEntity<Object> request = RequestEntity.post(URI.create("/admin/api/categories")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(category);
         ResponseEntity<Void> response = basicAuthTemplate(adminUser()).exchange(request, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }

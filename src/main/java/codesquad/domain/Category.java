@@ -22,7 +22,7 @@ public class Category extends AbstractEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Category parent;
 
-    @OneToMany(mappedBy = "parent", cascade = {CascadeType.REMOVE})
+    @OneToMany(mappedBy = "parent")
     private List<Category> children;
 
     @NotBlank
@@ -36,5 +36,10 @@ public class Category extends AbstractEntity {
         this.name = name;
         this.parent = parent;
     }
+
+    public boolean isNotRootCategory(Long rootId) {
+        return this.getId() != rootId;
+    }
+
 
 }
