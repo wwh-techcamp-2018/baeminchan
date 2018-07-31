@@ -33,28 +33,17 @@ public class BasicAuthInterceptor extends HandlerInterceptorAdapter {
         Member member = null;
 
         log.debug("Authorization : {}, null means not using basicAuth", authorization);
-
-        if (authorization != null && authorization.startsWith("Basic")) {
-            member = getMemberBasicAuth(request, authorization);
-        }
-        if (member == null) {
-            member = (Member) request.getSession().getAttribute(HttpSessionUtils.MEMBER_SESSION_KEY);
+        if (authorization == null || !authorization.startsWith("Basic")) {
+            return true;
         }
 
         try {
+            member = getMemberBasicAuth(request, authorization);
             log.debug("Login Member Account : {}", member.getUsername());
-            if (member == null) {
-                throw new UnAuthenticationException("로그인 하지 않았습니다.");
-            }
-            if (!member.isAdmin()) {
-                throw new UnAuthenticationException("관리자 권한이 없습니다.");
-            }
-            return true;
         } catch (UnAuthenticationException e) {
             log.debug("interceptor 걸렸네: " + e.getMessage());
-
-            addErrorDetailToResponse(response, e.getMessage());
-            return false;
+        } finally {
+            return true;
         }
     }
 

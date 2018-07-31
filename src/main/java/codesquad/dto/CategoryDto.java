@@ -24,7 +24,11 @@ public class CategoryDto {
         this.name = name;
         this.children = children;
     }
-    public CategoryDto() {
 
+    public CategoryDto() {
+    }
+
+    public CategoryDto getFirstChild() {
+        return this.children.get(0);
     }
 }
