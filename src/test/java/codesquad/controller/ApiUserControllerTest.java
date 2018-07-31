@@ -1,4 +1,4 @@
-package controller;
+package codesquad.controller;
 
 import codesquad.dto.UserDto;
 import codesquad.error.ErrorResponse;

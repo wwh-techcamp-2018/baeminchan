@@ -8,11 +8,9 @@ function initEvents() {
     loginBtn.addEventListener("click", loginUserHandler);
 }
 
-function onSuccess() {
+function onSuccess(response) {
     alert("로그인 성공!");
-    console.log(document.cookie);
-//    location.href = "/";
-
+    location.href = "/";
 }
 
 function alertError(response) {
@@ -27,7 +25,6 @@ function loginUserHandler(evt) {
     fetchManager({
         url: '/api/users/login',
         method: 'POST',
-
         headers: { 'content-type': 'application/json'},
         body: JSON.stringify({
             "userId" : userId,

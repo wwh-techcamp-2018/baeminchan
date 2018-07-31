@@ -2,7 +2,6 @@ package codesquad.dto;
 
 import codesquad.domain.Category;
 import codesquad.domain.User;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,8 +29,31 @@ public class CategoryDto {
         return parentId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public CategoryDto setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Category toNewCategory(User user, Category parentCategory) {
+        this.createdTime = LocalDateTime.now();
+        return toCategory(user, parentCategory);
+    }
+
     public Category toCategory(User user, Category parentCategory) {
-        System.out.println("User123" + user.toString());
         return new Category(parentCategory, this.name, user, this.createdTime, this.priority);
+    }
+
+    @Override
+    public String toString() {
+        return "CategoryDto{" +
+                "name='" + name + '\'' +
+                ", parentId=" + parentId +
+                ", createdTime=" + createdTime +
+                ", priority=" + priority +
+                '}';
     }
 }

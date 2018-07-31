@@ -1,10 +1,11 @@
 package support.test;
 
-import codesquad.BaeminchanApplication;
 import codesquad.domain.User;
 import codesquad.domain.UserRepository;
 import codesquad.exception.NotMatchedException;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -15,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public abstract class AcceptanceTest {
     private static final String DEFAULT_LOGIN_USER = "javajigi@naver.com";
+    private static final Logger log = LoggerFactory.getLogger(AcceptanceTest.class);
 
     @Autowired
     private UserRepository userRepository;

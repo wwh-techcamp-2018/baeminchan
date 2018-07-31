@@ -1,6 +1,7 @@
 package codesquad.config;
 
 import codesquad.security.AdminAuthInterceptor;
+import codesquad.security.BasicAuthInterceptor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,7 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         registry.addViewController("/users/join").setViewName("/user/join");
         registry.addViewController("/users/login").setViewName("/user/login");
+        registry.addViewController("/").setViewName("/index");
     }
 
     @Bean
@@ -31,6 +33,11 @@ public class MvcConfig implements WebMvcConfigurer {
     @Bean
     public MessageSourceAccessor messageSourceAccessor(MessageSource messageSource) {
         return new MessageSourceAccessor(messageSource);
+    }
+
+    @Bean
+    public BasicAuthInterceptor basicAuthInterceptor() {
+        return new BasicAuthInterceptor();
     }
 
     @Bean
@@ -51,7 +58,8 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(adminAuthInterceptor())
-                .addPathPatterns("/api/admin**");
+                .addPathPatterns("/api/admin/**");
+        registry.addInterceptor(basicAuthInterceptor());
     }
 
 }

@@ -5,11 +5,11 @@
     <title>관리자-카테고리페이지</title>
 </head>
 <body>
-    <form name="category-form" id="category-form" method="post" action="/admin/categories">
+    <form name="category-form" id="category-form" style="display:flex">
         <div class="selectric-wrapper join w100">
             <div class="selectric-wrapper selectric-selectric">
                 <div class="selectric-select">
-                    <select class="selectric" id="category-type" tabindex="0">
+                    <select class="selectric" id="category-type" name="categoryType" tabindex="0">
                         <option value="0">부모</option>
                         <option value="1">자식</option>
                     </select>
@@ -25,8 +25,9 @@
                 </div>
             </div>
         </div>
-        <input type="text" name="name">
-        <button type="submit">확인</button>
+        <input type="text" name="name" placeholder="이름">
+        <input type="text" name="priority" placeholder="우선순위">
+        <button type="button" onclick="onClickCreateButton(this.form)">확인</button>
     </form>
     <table id="category-table" style="text-align:center">
         <tr>

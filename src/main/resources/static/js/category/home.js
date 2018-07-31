@@ -21,7 +21,6 @@ function onSuccess(response) {
                               <a href="./side-dishs.html">` + category.name + `</a>
                               <ul class="sub-menu">`;
 
-
             const html2 = category.subCategories.reduce((prevSubCategory, nextSubCategory) => { return prevSubCategory + `<li><a href="#">` + nextSubCategory.name + `</a></li>`}, ``);
 
             const html3 = `</ul></li>`;

@@ -23,7 +23,9 @@ function checkBlank(joinTable, selectors) {
     for(let selector of selectors) {
         let target = joinTable.querySelector(selector).value;
         if(target === '') {
-            alert('빈칸을 채워주세요.'); joinTable.querySelector(selector).focus(); return false;
+            alert('빈칸을 채워주세요.');
+            joinTable.querySelector(selector).focus();
+            return false;
         }
     }
     return true;
@@ -45,7 +47,6 @@ function registerUserHandler(evt) {
         return;
     }
 
-
     fetchManager({
         url: '/api/users',
         method: 'POST',
@@ -64,10 +65,11 @@ function registerUserHandler(evt) {
 
 function alertError(result) {
     result.then((response) => {
-    let errorMessage = "";
+        let errorMessage = "";
         for (let error of response.errors) {
           errorMessage += error.errorMessage + "\n";
         }
-    alert(errorMessage);
+
+        alert(errorMessage);
     })
 }

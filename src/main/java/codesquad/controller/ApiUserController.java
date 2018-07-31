@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Map;
@@ -29,18 +30,14 @@ public class ApiUserController {
 
     @PostMapping("")
     public ResponseEntity<Void> join(@Valid @RequestBody UserDto userDto) {
-        log.info("userDto : {}", userDto);
         userService.join(userDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody Map<String, String> newUser, HttpSession session) {
+    public ResponseEntity<Void> login(@RequestBody Map<String, String> newUser, HttpSession session) throws IllegalAccessException {
         User loginUser = userService.login(newUser.get("userId"), newUser.get("password"));
-        log.info("login 완료 : {}", loginUser.toString());
-        log.info("login 완료 : {}", session);
         session.setAttribute(SESSIONED_USER, loginUser);
-        log.info("user : {}", session.getAttribute(SESSIONED_USER));
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
