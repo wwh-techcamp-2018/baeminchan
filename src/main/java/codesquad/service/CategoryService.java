@@ -33,7 +33,7 @@ public class CategoryService {
     }
 
     public Category delete(Long id) {
-        Category category = categoryRepository.findById(id).filter(x -> x.isNotRootCategory(ROOT)).orElseThrow(() -> new NotExistException("존재하지 않은 카테고리입니다."));
+        Category category = categoryRepository.findById(id).filter(x -> x.isSameId(ROOT)).orElseThrow(() -> new NotExistException("존재하지 않은 카테고리입니다."));
         categoryRepository.delete(category);
         return category;
     }
