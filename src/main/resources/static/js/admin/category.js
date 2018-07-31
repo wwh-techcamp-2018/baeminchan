@@ -69,12 +69,13 @@ function handleCategories(object) {
     }
 
     categories.forEach((category) => {
-        appendString += "" +
-            "<li id= " + "category-" + category.id + " class='category-item'>" +
-            "<span>" + category.id + ". </span>" +
-            "<span class='category-item-title'>" + category.title + "</span>" +
-            "<button class='delete-button'>삭제</button>" +
-            "</li>";
+        appendString += `
+            <li id="category-${category.id}" class="category-item">
+            <span>${category.id}. </span>
+            <span class="category-item-title">${category.title}</span>
+            <button class='delete-button'>삭제</button>
+            </li>
+        `;
 
     });
     $(".category-container").innerHTML = appendString;
