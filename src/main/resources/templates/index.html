@@ -5,6 +5,12 @@
   <meta charset="utf-8">
   <title>배민푸드 메인페이지</title>
   <link rel="stylesheet" href="/main.css" />
+  <link rel="stylesheet" href="/index.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/index.js"></script>
+
 </head>
 
 <body>
@@ -95,218 +101,8 @@
       <div class="inner-wrapper">
         <h3 class="blind">전체 메뉴</h3>
 
-        <ul class="menu">
-          <li>
-            <a href="/side-dishs.html">밑반찬</a>
-            <ul class="sub-menu">
-              <li>
-                <a href="#">무침</a>
-              </li>
-              <li>
-                <a href="#">나물무침</a>
-              </li>
-              <li>
-                <a href="#">볶음</a>
-              </li>
-              <li>
-                <a href="#">조림</a>
-              </li>
-              <li>
-                <a href="#">김치</a>
-              </li>
-              <li>
-                <a href="#">전</a>
-              </li>
-              <li>
-                <a href="#">튀김</a>
-              </li>
-              <li>
-                <a href="#">장아찌·피클</a>
-              </li>
-              <li>
-                <a href="#">샐러드</a>
-              </li>
-              <li>
-                <a href="#">김</a>
-              </li>
-              <li>
-                <a href="#">젓갈·장·소스</a>
-              </li>
-              <li>
-                <a href="#">세트</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="/side-dishs.html">국·찌개</a>
-            <ul class="sub-menu">
-              <li>
-                <a href="#">담백한국</a>
-              </li>
-              <li>
-                <a href="#">얼큰한국</a>
-              </li>
-              <li>
-                <a href="#">찌개</a>
-              </li>
-              <li>
-                <a href="#">탕</a>
-              </li>
-              <li>
-                <a href="#">전골</a>
-              </li>
-              <li>
-                <a href="#">세트</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">메인반찬</a>
-            <ul class="sub-menu">
-              <li>
-                <a href="#">고기반찬</a>
-              </li>
-              <li>
-                <a href="#">해산물반찬</a>
-              </li>
-              <li>
-                <a href="#">생선반찬</a>
-              </li>
-              <li>
-                <a href="#">덮밥</a>
-              </li>
-              <li>
-                <a href="#">면</a>
-              </li>
-              <li>
-                <a href="#">모던한식</a>
-              </li>
-              <li>
-                <a href="#">양식</a>
-              </li>
-              <li>
-                <a href="#">일식·중식</a>
-              </li>
-              <li>
-                <a href="#">분식</a>
-              </li>
-              <li>
-                <a href="#">죽·스프</a>
-              </li>
-              <li>
-                <a href="#">세트</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">아이반찬</a>
-            <ul class="sub-menu">
-              <li>
-                <a href="#">이유식 초기/중기</a>
-              </li>
-              <li>
-                <a href="#">이유식 후기/완료기</a>
-              </li>
-              <li>
-                <a href="#">아이반찬</a>
-              </li>
-              <li>
-                <a href="#">어린이반찬</a>
-              </li>
-              <li>
-                <a href="#">프리미엄재료</a>
-              </li>
-              <li>
-                <a href="#">간식</a>
-              </li>
-              <li>
-                <a href="#">음료</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">정기식단</a>
-            <ul class="sub-menu">
-              <li>
-                <a href="#">1~2인</a>
-              </li>
-              <li>
-                <a href="#">3~4인</a>
-              </li>
-              <li>
-                <a href="#">아이반찬</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">신선·가공</a>
-            <ul class="sub-menu">
-              <li>
-                <a href="#">가공반찬</a>
-              </li>
-              <li>
-                <a href="#">가공간식</a>
-              </li>
-              <li>
-                <a href="#">냉동</a>
-              </li>
-              <li>
-                <a href="#">고기·생선</a>
-              </li>
-              <li>
-                <a href="#">과일·채소·양곡</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">간식</a>
-            <ul class="sub-menu">
-              <li>
-                <a href="#">식사빵</a>
-              </li>
-              <li>
-                <a href="#">간식빵</a>
-              </li>
-              <li>
-                <a href="#">케이크·디저트</a>
-              </li>
-              <li>
-                <a href="#">주스</a>
-              </li>
-              <li>
-                <a href="#">스무디</a>
-              </li>
-              <li>
-                <a href="#">스프레드</a>
-              </li>
-              <li>
-                <a href="#">유제품·커피</a>
-              </li>
-              <li>
-                <a href="#">기타간식</a>
-              </li>
-            </ul>
-          </li>
-          <li class="brand">
-            <a href="#">브랜드관</a>
-            <ul class="sub-menu">
-              <li>
-                <a href="#">반찬가게</a>
-              </li>
-              <li>
-                <a href="#">반찬장인</a>
-              </li>
-              <li>
-                <a href="#">셰프의요리</a>
-              </li>
-              <li>
-                <a href="#">전국맛집</a>
-              </li>
-              <li>
-                <a href="#">키즈관</a>
-              </li>
-            </ul>
-          </li>
+        <ul class="menu category-menu">
+
         </ul>
       </div>
     </nav>
@@ -319,12 +115,12 @@
       <h2 class="blind">주요 프로모션</h2>
 
       <ul class="img-box">
-        <li class="img-item img-1 current">
+        <li class="img-item img-1 visible-banner">
           <a href="#">
             <span class="blind">장윤주 식단 대공개! 그녀의 건강 반찬을 소개합니다.</span>
           </a>
         </li>
-        <li class="img-item img-2 next">
+        <li class="img-item img-2 ">
           <a href="#">
             <span class="blind">스페인 그 식당이 안 부러운 비빔밥&apm;한식요리 기획전</span>
           </a>
@@ -339,7 +135,22 @@
             <span class="blind">가격따라 고르는 재미가 쏠쏠해요. 알뜰반찬 기획전 3,300원부터!</span>
           </a>
         </li>
-        <li class="img-item img-5 prev">
+        <li class="img-item img-5 ">
+          <a href="#">
+            <span class="blind">2018 미슐랭 가이드도 반한 '게방식당'을 소개합니다.</span>
+          </a>
+        </li>
+        <li class="img-item img-6">
+          <a href="#">
+            <span class="blind">2018 미슐랭 가이드도 반한 '게방식당'을 소개합니다.</span>
+          </a>
+        </li>
+        <li class="img-item img-7">
+          <a href="#">
+            <span class="blind">2018 미슐랭 가이드도 반한 '게방식당'을 소개합니다.</span>
+          </a>
+        </li>
+        <li class="img-item img-8">
           <a href="#">
             <span class="blind">2018 미슐랭 가이드도 반한 '게방식당'을 소개합니다.</span>
           </a>
@@ -353,6 +164,9 @@
 
       <div class="dot-btn-box">
         <a class="dot on" href="#"></a>
+        <a class="dot" href="#"></a>
+        <a class="dot" href="#"></a>
+        <a class="dot" href="#"></a>
         <a class="dot" href="#"></a>
         <a class="dot" href="#"></a>
         <a class="dot" href="#"></a>
@@ -1034,6 +848,13 @@
     </section>
   </footer>
   <!-- // footer -->
+
+
+
+  <script type="text/javascript">
+      {{precompile "precompile/title_template"}}
+      {{precompile "precompile/subtitle_template"}}
+  </script>
 
 
 </body>

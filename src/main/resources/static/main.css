@@ -1430,6 +1430,7 @@ a:focus {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  opacity: 0;
 }
 
 #main-visual .img-box .img-1 {
@@ -1468,6 +1469,7 @@ a:focus {
   left: -80px;
   top: 50%;
   transform: translateY(-50%);
+  z-index:11;
 }
 
 #main-visual .direction-btn-box .next {
@@ -1475,6 +1477,7 @@ a:focus {
   right: -80px;
   top: 50%;
   transform: translateY(-50%);
+  z-index:11;
 }
 
 #main-visual .dot-btn-box {
@@ -1482,7 +1485,7 @@ a:focus {
   left: 50%;
   bottom: 15px;
   transform: translateX(-50%);
-  z-index: 0;
+  z-index: 11;
 }
 
 #main-visual .dot-btn-box .dot {
