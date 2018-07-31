@@ -12,14 +12,15 @@ function initEvents() {
     })
 
     $("#category-type").addEventListener("change", (e) => {
-    console.log(e.target.value)
         if(e.target.value == 1) {
-            $("#parent-select").style = "display:visible";
+            $("#parent-select").classList.remove('invisible');
             return;
         }
-        $("#parent-select").style = "display:none";
+        $("#parent-select").classList.add('invisible');
     })
-
+    $("#category-table").addEventListener("click", (e) => {
+        deleteCategory(e.target.value);
+    })
 }
 
 function onSuccess(response) {
@@ -27,29 +28,34 @@ function onSuccess(response) {
     console.log(response);
         response.forEach((category) => {
             // 추가
-            const html1 = `<tr><td>` + category.priority
-                         + `</td><td>` + category.name
-                         + `</td><td>`
-                         + `</td><td>` + ((category.creator == null) ? "null" : category.creator.name)
-                         + `</td><td>` + category.createdTime
-                         + `</td><td> <button type="button" onclick=deleteCategory(` + category.id + `)>삭제</button>`
-                         + `</td></tr>`;
+            const creatorName = (category.creator == null) ? "null" : category.creator.name;
 
-            const html2 = category.subCategories.reduce((prevSubCategory, nextSubCategory) => {
+            const parentCategoryHtml = `<tr>
+                <td>${category.priority}</td>
+                <td>${category.name}</td>
+                <td></td>
+                <td>${creatorName}</td>
+                <td>${category.createdTime}</td>
+                <td> <button type="button" value=${category.id}>삭제</button></td>
+                </tr>`;
+
+            const SubCategoriesHtml = category.subCategories.reduce((prevSubCategory, nextSubCategory) => {
+                const subCategoryCreatorName = (nextSubCategory.creator == null) ? "null" : nextSubCategory.creator.name;
                 return prevSubCategory
-                              + `<tr><td>` + nextSubCategory.priority
-                              + `</td><td>`
-                              + `</td><td>` + nextSubCategory.name
-                              + `</td><td>` + ((nextSubCategory.creator == null) ? "null" : nextSubCategory.creator.name)
-                              + `</td><td>` + nextSubCategory.createdTime
-                              + `</td><td> <button type="button" onclick=deleteCategory(` + nextSubCategory.id + `)>삭제</button>`
-                              + `</td></tr>`;
+                    + `<tr>
+                        <td>${nextSubCategory.priority}</td>
+                        <td></td>
+                        <td>${nextSubCategory.name}</td>
+                        <td>${subCategoryCreatorName}</td>
+                        <td>${nextSubCategory.createdTime}</td>
+                        <td> <button type="button" value=${category.id}>삭제</button></td>
+                    </tr>`;
             }, ``);
 
-            const html3 = ` <option value=` + category.id + `>` + category.name + `</option>`;
+            const parentCategoriesOption = `<option value=${category.id}>${category.name}</option>`;
 
-            $("#category-table").insertAdjacentHTML("beforeend", html1 + html2);
-            $("#parent-name").insertAdjacentHTML("beforeend", html3);
+            $("#category-table").insertAdjacentHTML("beforeend", parentCategoryHtml + SubCategoriesHtml);
+            $("#parent-name").insertAdjacentHTML("beforeend", parentCategoriesOption);
 
         });
     });
@@ -63,7 +69,7 @@ function onClickCreateButton(form) {
     const parentId = (form.categoryType.value == 0) ? null : form.parentId.value;
 
     fetchManager({
-        url: '/api/categories',
+        url: '/api/admin/categories',
         method: 'POST',
 
         headers: { 'content-type': 'application/json'},
@@ -91,7 +97,7 @@ function deleteCategory(categoryId) {
     if (!confirm("정말 삭제하시겠습니까?")) return;
 
     fetchManager({
-        url: '/api/categories/' + categoryId,
+        url: '/api/admin/categories/' + categoryId,
         method: 'DELETE',
         headers: { 'content-type': 'application/json'},
         callback: onDeleteCategory,

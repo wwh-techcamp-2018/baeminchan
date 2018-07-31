@@ -1,5 +1,6 @@
 package codesquad.domain;
 
+import codesquad.exception.UnAuthorityException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import org.hibernate.annotations.ColumnDefault;
@@ -58,7 +59,10 @@ public class Category {
         this.deleted = true;
     }
 
-    public void deleteAll() {
+    public void deleteAll(User user) {
+        if (!isOwner(user)) {
+            throw new UnAuthorityException("자신이 생성한 카테고리만 삭제할 수 있습니다.");
+        }
         this.deleted = true;
         if(this.parentCategory == null) {
             deleteChildren();
@@ -72,6 +76,9 @@ public class Category {
     }
 
     public void update(Category category) {
+        if (!category.isOwner(category.creator)) {
+            throw new UnAuthorityException("자신이 생성한 카테고리만 수정할 수 있습니다.");
+        }
         this.parentCategory = category.parentCategory;
         this.name = category.name;
         this.priority = category.priority;

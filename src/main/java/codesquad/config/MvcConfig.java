@@ -57,9 +57,10 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(basicAuthInterceptor());
         registry.addInterceptor(adminAuthInterceptor())
                 .addPathPatterns("/api/admin/**");
-        registry.addInterceptor(basicAuthInterceptor());
+
     }
 
 }
