@@ -4,6 +4,7 @@ import codesquad.domain.Member;
 import codesquad.dto.LoginDto;
 import codesquad.dto.MemberDto;
 import codesquad.service.MemberService;
+import codesquad.validation.ValidationMessageUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
@@ -84,7 +85,7 @@ public class MemberAcceptanceTest {
         LoginDto loginDto = new LoginDto("javajigi@kakao.com", "123123");
         ResponseEntity<String> response = template.postForEntity("/api/members/login", loginDto, String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
-        assertThat(response.getBody()).isEqualTo("유저 정보를 찾을 수 없습니다.");
+        assertThat(response.getBody()).isEqualTo(ValidationMessageUtil.USER_NOT_FOUND);
     }
 
     @Test

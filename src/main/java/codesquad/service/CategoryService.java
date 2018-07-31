@@ -4,6 +4,7 @@ import codesquad.domain.Category;
 import codesquad.domain.CategoryRepository;
 import codesquad.dto.CategoryDto;
 import codesquad.support.exception.CategoryNotFoundException;
+import codesquad.validation.ValidationMessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,7 @@ public class CategoryService {
 
     public Category findByName(String name) {
         return categoryRepository.findByName(name)
-                .orElseThrow(() -> new CategoryNotFoundException("해당 카테고리를 찾을 수 없습니다."));
+                .orElseThrow(() -> new CategoryNotFoundException(ValidationMessageUtil.CATEGORY_NOT_FOUND));
     }
 
     public Category save(CategoryDto categoryDto) {

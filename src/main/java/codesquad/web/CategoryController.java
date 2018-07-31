@@ -2,6 +2,7 @@ package codesquad.web;
 
 import codesquad.dto.CustomResponse;
 import codesquad.service.CategoryService;
+import codesquad.validation.ValidationMessageUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity getParentCategories() {
-        CustomResponse customResponse = new CustomResponse(200, "카테고리 정보 수신 성공", categoryService.findByParentIsNull());
+        CustomResponse customResponse = new CustomResponse(200, ValidationMessageUtil.CATEGORY_READ_SUCCESS, categoryService.findByParentIsNull());
         return ResponseEntity.ok().body(customResponse);
     }
 

@@ -2,9 +2,10 @@ package codesquad.security;
 
 import codesquad.domain.Member;
 import codesquad.dto.CustomResponse;
-import codesquad.support.Role;
 import codesquad.support.SessionUtil;
 import codesquad.support.exception.UnAuthenticationException;
+import codesquad.support.exception.UnAuthorizedException;
+import codesquad.validation.ValidationMessageUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,13 +23,13 @@ public class AdminAuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         try {
-            Member member = SessionUtil.getMember(request.getSession());
-            if (!member.isAuthorize(Role.ADMIN)) {
-                createErrorResponse(response, "권한이 없습니다.");
-                return false;
+            Member member = SessionUtil.getMember(request.getSession())
+                    .orElseThrow(() -> new UnAuthenticationException(ValidationMessageUtil.UNAUTHENTICATION));
+            if(!member.isAdmin()) {
+                throw new UnAuthorizedException(ValidationMessageUtil.UNAUTHORIZATION);
             }
-        } catch (UnAuthenticationException e) {
-            createErrorResponse(response, "로그인이 필요합니다.");
+        } catch (Exception e) {
+            createErrorResponse(response, e.getMessage());
             return false;
         }
         return true;
