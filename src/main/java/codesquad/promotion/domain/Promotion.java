@@ -1,5 +1,6 @@
 package codesquad.promotion.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
+@Builder
 public class Promotion {
 
     @Id
@@ -17,6 +19,8 @@ public class Promotion {
     @Column(nullable = false)
     private String imgUrl;
 
-    @Column(nullable = false)
-    private Long order;
+    public Promotion(Long id, String imgUrl) {
+        this.id = id;
+        this.imgUrl = imgUrl;
+    }
 }
