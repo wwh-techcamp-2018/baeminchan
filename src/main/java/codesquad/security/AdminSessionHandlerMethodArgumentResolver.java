@@ -1,6 +1,7 @@
 package codesquad.security;
 
 import codesquad.dto.user.UserSessionDto;
+import codesquad.exception.AuthenticationException;
 import codesquad.util.SessionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -23,7 +24,6 @@ public class AdminSessionHandlerMethodArgumentResolver implements HandlerMethodA
         if (adminUserSessionDto.isAdmin()) {
             return adminUserSessionDto;
         }
-        // TODO: 2018. 7. 30. 사용자 정의 예외를 만들어야합니다.
-        throw new RuntimeException();
+        throw new AuthenticationException();
     }
 }
