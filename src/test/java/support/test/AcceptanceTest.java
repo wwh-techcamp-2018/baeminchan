@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -45,5 +47,11 @@ public abstract class AcceptanceTest {
 
     protected Member findByEmail(String email) {
         return memberRepository.findByEmail(email).get();
+    }
+
+    protected <T> ResponseEntity<T> requestForEntityWithParameterized(String url, HttpMethod method, Object body, ParameterizedTypeReference<T> reference) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return template().exchange(url, method, new HttpEntity<>(body, headers), reference);
     }
 }
