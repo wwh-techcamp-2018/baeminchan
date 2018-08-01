@@ -55,13 +55,13 @@ function updateCategorySuccess(response){
     const parentId = $("#update_parent_category_id").value;
     const name = $("#update_category_name").value;
 
-    const node = $(`#category-${id}`);
-    node.innerHTML = `${id} : ${name}`;
+    const updateNode = $(`#category-${id}`);
+    updateNode.innerHTML = `${id} : ${name}`;
 
-    node.parentNode.removeChild(node);
+    updateNode.remove();
 
     const parentNode = $(`${parentId == 1 ? '.menu' : '#category-' + parentId + ' .sub-menu'}`);
-    parentNode.appendChild(node);
+    parentNode.appendChild(updateNode);
 }
 
 function getCategory(){

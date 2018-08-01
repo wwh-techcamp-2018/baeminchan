@@ -1,10 +1,9 @@
 package codesquad.category.domain;
 
+import codesquad.exception.UnAuthorizedException;
+import codesquad.user.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -12,8 +11,8 @@ import java.util.Set;
 @Entity
 @Getter
 @NoArgsConstructor
+@RequiredArgsConstructor(staticName = "of")
 @AllArgsConstructor
-@Builder
 public class Category {
 
     public static final Long ROOT_ID = 1L;
@@ -22,18 +21,22 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NonNull
     private String name;
 
     @JsonIgnore
     @ManyToOne
+    @NonNull
     private Category parent;
 
     @OneToMany(mappedBy = "parent", cascade = {CascadeType.ALL})
     @OrderBy("id ASC")
     private Set<Category> children;
 
-
-    public void update(String name, Category parent) {
+    public void update(User user, String name, Category parent) {
+        if (!user.isAdmin()) {
+            throw new UnAuthorizedException("role", "권한이 없습니다.");
+        }
         this.name = name;
         this.parent = parent;
     }

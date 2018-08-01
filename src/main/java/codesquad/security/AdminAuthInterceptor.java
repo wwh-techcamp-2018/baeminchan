@@ -21,14 +21,9 @@ public class AdminAuthInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info("1");
         Long userId = Optional.ofNullable(HttpSessionUtils.getUserSession(request.getSession()))
                 .orElseThrow(UnAuthenticationException::new);
-        log.info("2");
         User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
-        log.info("3");
-        if (user.isGuestUser())
-            throw new UnAuthorizedException("Email", "관리자 계정으로 로그인 해주세요.");
         if (!user.isAdmin())
             throw new UnAuthorizedException("Role", "관리자 권한이 없습니다.");
 

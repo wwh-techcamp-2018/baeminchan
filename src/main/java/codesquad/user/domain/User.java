@@ -33,18 +33,7 @@ public class User {
 
     private boolean deleted;
 
-    public boolean isGuestUser() {
-        return false;
-    }
-
     public boolean isAdmin() {
-        return this.role == Role.ADMIN;
-    }
-
-    private static class GuestUser extends User{
-        @Override
-        public boolean isGuestUser(){
-            return true;
-        }
+        return role == Role.ADMIN;
     }
 }
