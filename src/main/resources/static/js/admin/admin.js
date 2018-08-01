@@ -17,7 +17,7 @@ function deleteCategory(e){
     const id = $("#delete_category_id").value;
 
     fetchManager({
-        url: `/category/${id}`,
+        url: `/admin/category/${id}`,
         method: "delete",
         headers: { 'content-type': 'application/json; charset=utf-8' },
         success: deleteCategorySuccess,
@@ -38,7 +38,7 @@ function updateCategory(e){
     const name = $("#update_category_name").value;
 
     fetchManager({
-        url: `/category/${id}`,
+        url: `/admin/category/${id}`,
         method: "put",
         headers: { 'content-type': 'application/json; charset=utf-8' },
         body: JSON.stringify({
@@ -106,7 +106,7 @@ function createCategory(e){
     const name = $("#create_category_name").value;
 
     fetchManager({
-        url: `/category/${parentId}`,
+        url: `/admin/category/${parentId}`,
         method: "post",
         headers: { 'content-type': 'application/json; charset=utf-8' },
         body: JSON.stringify({

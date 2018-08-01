@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 function getCategorySuccess(response){
-    console.log(response);
     if(response.status == 200) {
         createMenu(response);
     }
