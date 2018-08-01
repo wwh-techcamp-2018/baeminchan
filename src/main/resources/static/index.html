@@ -6,7 +6,27 @@
   <title>배민푸드 메인페이지</title>
   <link rel="stylesheet" href="./main.css" />
 </head>
+<style>
+ #main-visual .img-box li.img-item.current{
+    width: 100%; display: block;
+    opacity:1;
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+  }
 
+
+  #main-visual .img-box li.img-item{
+   width: 100%;
+   opacity:0;
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+  }
+
+</style>
 <body>
 <h1 class="blind">배민찬 - 메인 페이지</h1>
 
@@ -825,6 +845,48 @@
 <script src="js/util.js" type="text/javascript" defer></script>
 <script src="js/constant.js" type="text/javascript" defer></script>
 <script src="js/index.js" type="text/javascript" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+  $('.spr-btn-arrow-main-slide.prev').addEventListener('click', move);
+  $('.spr-btn-arrow-main-slide.next').addEventListener('click', move);
+});
+
+const move = (event) => {
+ event.preventDefault();
+ let classes = ['prev', 'next', 'current'];
+  if(event.target.classList.contains('prev')){
+    moveClasses(classes, prev);
+    return;
+  }
+  moveClasses(classes, next);
+}
+
+const moveClasses = (list, getTarget) =>{
+  list.forEach((e) => { moveClass(e, getTarget( $('.'+e) )) });
+}
+
+const moveClass = (className, moveTarget) => {
+  removeClass(className);
+  addClass(className, moveTarget);
+}
+
+const next = (element) => {
+  return element.nextElementSibling || element.parentElement.firstElementChild;
+}
+
+const prev = (element) => {
+  return element.previousElementSibling || element.parentElement.lastElementChild;
+}
+
+const removeClass = (className) => {
+  $('.'+className).classList.remove(className);
+}
+
+const addClass = (className, moveTarget) => {
+  moveTarget.classList.add(className);
+}
+
+</script>
 </body>
 
 </html>
