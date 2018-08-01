@@ -8,7 +8,6 @@
     </appender>
 
     <logger name="support.jackson" level="DEBUG"/>
-
     <logger name="codesquad" level="DEBUG"/>
 
     <root level="INFO">
