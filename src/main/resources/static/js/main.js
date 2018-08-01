@@ -85,7 +85,79 @@ function init() {
             clickDot(evt.target);
     });
 
+
     activateAnimation();
+
+    getEventCategories();
 }
 
 initialize(init);
+
+function getEventCategories() {
+    getManager({
+        url: "/eventcategories",
+        method: "GET",
+        callback: drawEventCategories
+    })
+
+}
+
+function drawEventCategories(result) {
+    var template = Handlebars.templates["precompile/event_title_template"];
+    for(const category of result) {
+        $(".tab-btn-box").innerHTML += template(category);
+
+    }
+    $_all(".tab-box .tab-btn-box li a").forEach((v) => {
+        v.addEventListener("click", (evt)=> {
+            evt.preventDefault();
+            clickCategoryTab(evt.target);
+        })
+    })
+
+    initChoiceCategory();
+
+}
+
+function initChoiceCategory(){
+    const selectCategories = $_all("#event_category_title");
+    const randomCategory =  selectCategories[Math.floor(Math.random() * selectCategories.length)];
+    randomCategory.classList.toggle("on");
+    getCategory(randomCategory.getAttribute("type"));
+
+}
+
+function getCategory(categoryId){
+    getManager({
+        url: "/eventcategories/" + categoryId,
+        method: "GET",
+        callback: drowProducts
+    })
+}
+
+function drowProducts(result) {
+
+
+    $(".tab-content-box").innerHTML = "";
+    var template = Handlebars.templates["precompile/product_template"];
+    const products = result.products;
+    for(const product of products) {
+        $(".tab-content-box").innerHTML += template(product);
+    }
+}
+
+function clickCategoryTab(target) {
+
+    const categoryId = target.getAttribute("data-category-id");
+
+    const selectCategories = $_all("#event_category_title");
+    for(category of selectCategories) {
+        if(category.classList.contains("on"))
+            category.classList.toggle("on")
+        if(category.getAttribute("type") === categoryId)
+            category.classList.toggle("on");
+    }
+
+
+    getCategory(categoryId);
+}

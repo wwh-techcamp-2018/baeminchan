@@ -25,3 +25,13 @@ function fetchManager({url, method, body, onSuccess, onFailure}) {
             else onFailure(response);
         });
 }
+
+function getManager({url, method, headers, callback}) {
+    fetch(url, {method, headers: {"Content-type": "application/json"}, credentials: "same-origin"})
+        .then((response) => {
+            const value = response;
+            return value.json();
+        }).then((result) => {
+        callback(result);
+    });
+}
