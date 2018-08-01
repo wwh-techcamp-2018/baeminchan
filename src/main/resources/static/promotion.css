@@ -1,0 +1,7 @@
+.current {
+  z-index: 1;
+}
+
+.dot-btn-box, .direction-btn-box {
+  z-index: 2;
+}

@@ -30,3 +30,11 @@ function setCategories(parents) {
     lastCategory.className = "brand";
 }
 
+function promotion() {
+
+}
+
+function changeZindex() {
+
+}
+

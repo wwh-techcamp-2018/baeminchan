@@ -2,7 +2,6 @@ function $(selector) {
     return document.querySelector(selector);
 }
 
-
 function fetchManager({ url, method, body, headers, onSuccess, onFailure }) {
     fetch(url, {
         method,

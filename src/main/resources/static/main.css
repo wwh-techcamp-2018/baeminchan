@@ -1482,7 +1482,6 @@ a:focus {
   left: 50%;
   bottom: 15px;
   transform: translateX(-50%);
-  z-index: 0;
 }
 
 #main-visual .dot-btn-box .dot {
