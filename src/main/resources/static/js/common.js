@@ -1,8 +1,12 @@
-function $(selector) {
+const $ = (selector) => {
     return document.querySelector(selector);
 }
 
-function fetchManager({ url, method, body, headers, callback }) {
+const $All = (selector) => {
+    return document.querySelectorAll(selector);
+}
+
+const fetchManager = ({ url, method, body, headers, callback }) => {
     fetch(url, {method,body,headers,credentials: "same-origin"})
         .then((response) => {
         return response.json()
@@ -11,7 +15,7 @@ function fetchManager({ url, method, body, headers, callback }) {
     })
 }
 
-function customAjax(u,d) {
+const customAjax = (u,d) => {
     return $.ajax({
                 type: 'post',
                 data: JSON.stringify(d),
@@ -19,4 +23,4 @@ function customAjax(u,d) {
                 dataType : 'json',
                 contentType : 'application/json',
     });
-}
+};
