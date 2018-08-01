@@ -1,6 +1,7 @@
 package codesquad.atdd;
 
 import codesquad.domain.User;
+import codesquad.repository.UserRepository;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +21,10 @@ public abstract class AcceptanceTest {
     @Autowired
     private TestRestTemplate template;
 
+    @Autowired
+    private UserRepository userRepository;
+
+
     public TestRestTemplate template() {
         return template;
     }
@@ -33,7 +38,7 @@ public abstract class AcceptanceTest {
     }
 
     public TestRestTemplate basicAuthTemplate(User loginUser) {
-        return template.withBasicAuth(loginUser.getEmail(), loginUser.getPassword());
+        return template.withBasicAuth(loginUser.getEmail(), loginUser.getEncodedPassword());
     }
 
     protected String createResource(String path, Object bodyPayload) {

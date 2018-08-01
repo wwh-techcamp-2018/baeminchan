@@ -35,7 +35,7 @@ getElement($, idString, 'btn_submit').onclick = () => {
                 + '-' + getElement($, idString, inputElements.phoneNumber3).value,
     };
     fetchManager(requestForm(requestURL.users,
-        METHOD.POST,
+        'POST',
         data,
         resultProcess,
     ));
