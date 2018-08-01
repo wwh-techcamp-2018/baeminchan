@@ -78,7 +78,7 @@ function navigateRight() {
 
 function navigateLeft() {
     const items = $_all(".img-item");
-    navigateToIndex(((getCurrentDisplayIndex() + 7) % items.length))
+    navigateToIndex(((getCurrentDisplayIndex() + items.length - 1) % items.length))
 }
 
 function navigateToIndex(index) {
