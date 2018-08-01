@@ -1,5 +1,6 @@
 package codesquad.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,11 @@ public class CategoryDto {
     }
 
     // TODO 문제의 getFirstChild
-//    public CategoryDto getFirstChild() {
-//        return this.children.get(0);
-//    }
+    @JsonIgnore
+    public CategoryDto getFirstChild() {
+        if (children.isEmpty()) {
+            return null;
+        }
+        return this.children.get(0);
+    }
 }
