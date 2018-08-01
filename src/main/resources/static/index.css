@@ -24,7 +24,6 @@
 }
 
 .img-box .visible-banner {
-    /*z-index: 10;*/
     -webkit-transition: opacity 0.5s ease-in;
     -moz-transition: opacity 0.5s ease-in;
     -o-transition: opacity 0.5s ease-in;
@@ -32,9 +31,17 @@
 }
 
 .img-box .img-item {
-    /*z-index: 5;*/
     -webkit-transition: opacity 0.5s ease-in;
     -moz-transition: opacity 0.5s ease-in;
     -o-transition: opacity 0.5s ease-in;
     opacity: 0;
+}
+
+.now {
+    background: #2ac1bc !important;
+    color: #fff;
+}
+
+.tab-btn-box > li:hover {
+    cursor: pointer;
 }
