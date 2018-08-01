@@ -27,7 +27,7 @@ public class EventCategoryService {
         return eventCategoryRepository.findAll();
     }
 
-    @Cacheable(value = "eventCategory")
+    @Cacheable(value = "eventCategory", key = "#id")
     public EventCategoryDto readEventCategory(Long id) {
         return new EventCategoryDto(eventCategoryRepository
                 .findById(id)

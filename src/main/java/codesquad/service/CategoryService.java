@@ -31,7 +31,7 @@ public class CategoryService {
         return categoryRepository.findByParentNull();
     }
 
-    @Cacheable(value = "category")
+    @Cacheable(value = "category", key = "#id")
     public Category category(Long id) {
         return findExistCategory(id);
     }

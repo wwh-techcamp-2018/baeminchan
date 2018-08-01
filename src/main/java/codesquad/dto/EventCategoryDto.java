@@ -3,9 +3,10 @@ package codesquad.dto;
 import codesquad.domain.EventCategory;
 import codesquad.domain.Product;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class EventCategoryDto {
+public class EventCategoryDto implements Serializable {
 
     private EventCategory eventCategory;
 

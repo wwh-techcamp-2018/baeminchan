@@ -38,12 +38,12 @@ public class EventCategoryServiceTest {
     }
 
     @Test
-    public void firstDataSelect() {
+    public void dataSelect() {
         eventCategoryService.readEventCategories();
     }
 
     @Test
-    public void cacheDataSelect() {
+    public void dataSelect2() {
         eventCategoryService.readEventCategories();
     }
 }
