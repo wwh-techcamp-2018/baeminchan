@@ -110,31 +110,39 @@
       <h2 class="blind">주요 프로모션</h2>
 
       <ul class="img-box">
-        <li class="img-item img-1 current">
-          <a href="#">
-            <span class="blind">장윤주 식단 대공개! 그녀의 건강 반찬을 소개합니다.</span>
-          </a>
-        </li>
-        <li class="img-item img-2 next">
-          <a href="#">
-            <span class="blind">스페인 그 식당이 안 부러운 비빔밥&apm;한식요리 기획전</span>
-          </a>
-        </li>
-        <li class="img-item img-3">
-          <a href="#">
-            <span class="blind">월화수목금 매일매일 터지는 오늘의 찬스를 확인하세요!</span>
-          </a>
-        </li>
-        <li class="img-item img-4">
-          <a href="#">
-            <span class="blind">가격따라 고르는 재미가 쏠쏠해요. 알뜰반찬 기획전 3,300원부터!</span>
-          </a>
-        </li>
-        <li class="img-item img-5 prev">
-          <a href="#">
-            <span class="blind">2018 미슐랭 가이드도 반한 '게방식당'을 소개합니다.</span>
-          </a>
-        </li>
+
+          {{#promotions}}
+          <li>
+              <a href="#">
+                  <img class="img-item" src="{{imgUrl}}">
+              </a>
+          </li>
+          {{/promotions}}
+          <!--<li class="img-item img-1 current">
+            <a href="#">
+              <span class="blind">장윤주 식단 대공개! 그녀의 건강 반찬을 소개합니다.</span>
+            </a>
+          </li>
+          <li class="img-item img-2 next">
+            <a href="#">
+              <span class="blind">스페인 그 식당이 안 부러운 비빔밥&amp;한식요리 기획전</span>
+            </a>
+          </li>
+          <li class="img-item img-3">
+            <a href="#">
+              <span class="blind">월화수목금 매일매일 터지는 오늘의 찬스를 확인하세요!</span>
+            </a>
+          </li>
+          <li class="img-item img-4">
+            <a href="#">
+              <span class="blind">가격따라 고르는 재미가 쏠쏠해요. 알뜰반찬 기획전 3,300원부터!</span>
+            </a>
+          </li>
+          <li class="img-item img-5 prev">
+            <a href="#">
+              <span class="blind">2018 미슐랭 가이드도 반한 '게방식당'을 소개합니다.</span>
+            </a>
+          </li>-->
       </ul>
 
       <div class="direction-btn-box">
@@ -796,13 +804,13 @@
           <p class="safety-service">
             고객님의 안전거래를 위해 현금 등으로 결제 시 LG U+의 구매안전 서비스를 이용하실 수 있습니다. [
             <a href="#">서비스 가입사실 확인</a>]
-            </li>
+          </p>
 
             <p class="copyright">&copy;Woowahan Fresh. All Rights Reserved.</p>
 
             <p class="responsibility">
-              배민찬은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 배민찬은 상품 거래정보 및 거래에 대해 책임지지 않습니다.
-              <br> 다만 회사가 판매하는 직매입 상품의 경우 판매업체의 지위를 갖게 됩니다.
+                배민찬은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 배민찬은 상품 거래정보 및 거래에 대해 책임지지 않습니다.
+                <br> 다만 회사가 판매하는 직매입 상품의 경우 판매업체의 지위를 갖게 됩니다.
             </p>
         </article>
 
