@@ -14,4 +14,8 @@ public class PromotionService {
     public Promotion create(Promotion promotion) {
         return promotionRepository.save(promotion);
     }
+
+    public void delete(Long id) {
+        promotionRepository.deleteById(id);
+    }
 }

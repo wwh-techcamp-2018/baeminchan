@@ -72,6 +72,17 @@ public abstract class AcceptanceTest {
     }
 
 
+    protected <T> ResponseEntity<RestResponse<T>> deleteEntity(String path,
+                                                               ParameterizedTypeReference<RestResponse<T>> typeReference) {
+        return template()
+                .exchange(path,
+                        HttpMethod.DELETE,
+                        new HttpEntity<>(getHeaders()),
+                        typeReference);
+    }
+
+
+
     protected User makeUser(Role role) {
         User rawUser = UserTest.userBuilder().password(UserTest.RAW_PASSWORD).role(role).build();
         User savedUser = UserTest.userBuilder().role(role).build();
