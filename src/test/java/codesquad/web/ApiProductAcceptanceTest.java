@@ -31,7 +31,6 @@ public class ApiProductAcceptanceTest extends AcceptanceTest {
                 .withBody(newProduct)
                 .withReturnType(Product.class)
                 .build();
-
         ResponseEntity<Product> createResponseEntity = basicAuthRequest(createRequestEntity, ADMIN_USER);
         assertResponseProduct(createResponseEntity, newProduct, HttpStatus.CREATED);
 
@@ -42,7 +41,6 @@ public class ApiProductAcceptanceTest extends AcceptanceTest {
                 .withBody(updateProduct)
                 .withReturnType(Product.class)
                 .build();
-
         ResponseEntity<Product> updateResponseEntity = basicAuthRequest(updateRequestEntity, ADMIN_USER);
         assertResponseProduct(updateResponseEntity, updateProduct, HttpStatus.OK);
 
@@ -51,7 +49,6 @@ public class ApiProductAcceptanceTest extends AcceptanceTest {
                 .withMethod(HttpMethod.GET)
                 .withReturnType(Product.class)
                 .build();
-
         ResponseEntity<Product> readResponseEntity = basicAuthRequest(readRequestEntity, DEFAULT_USER);
         assertResponseProduct(readResponseEntity, updateProduct, HttpStatus.OK);
 
@@ -61,7 +58,6 @@ public class ApiProductAcceptanceTest extends AcceptanceTest {
                 .withBody(updateProduct)
                 .withReturnType(Void.class)
                 .build();
-
         ResponseEntity deleteResponseEntity = basicAuthRequest(deleteRequestEntity, ADMIN_USER);
         assertThat(deleteResponseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 
