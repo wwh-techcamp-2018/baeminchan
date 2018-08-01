@@ -4,24 +4,41 @@ import codesquad.security.AdminAuthInterceptor;
 import codesquad.security.BasicAuthInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    @Bean
-    public BasicAuthInterceptor basicAuthInterceptor() {
-        return new BasicAuthInterceptor();
+
+
+    @Configuration
+    @Profile({ "test" })
+    static class TestWebMvcConfig extends WebMvcConfig {
+        @Bean
+        public BasicAuthInterceptor basicAuthInterceptor() {
+            return new BasicAuthInterceptor();
+        }
+
+        @Override
+        public void addInterceptors(InterceptorRegistry registry) {
+            registry.addInterceptor(basicAuthInterceptor());
+        }
     }
 
-    @Bean
-    public AdminAuthInterceptor adminAuthInterceptor() {
-        return new AdminAuthInterceptor();
-    }
+    @Configuration
+    @Profile({ "local", "prod" })
+    static class NotTestWebMvcConfig extends WebMvcConfig {
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(basicAuthInterceptor());
-        registry.addInterceptor(adminAuthInterceptor()).addPathPatterns("/admin/**");
+        @Bean
+        public AdminAuthInterceptor adminAuthInterceptor() {
+            return new AdminAuthInterceptor();
+        }
+
+        @Override
+        public void addInterceptors(InterceptorRegistry registry) {
+            registry.addInterceptor(adminAuthInterceptor()).addPathPatterns("/admin/**");
+        }
+
     }
 }
