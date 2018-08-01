@@ -914,6 +914,7 @@ a:focus {
   background-image: url(./img/spr-btn-arrow-main-slide.png);
   width: 55px;
   height: 90px;
+  z-index: 2;
 }
 
 .bm-icon[class*="spr-btn-arrow-main-slide"].prev {
@@ -1429,7 +1430,16 @@ a:focus {
   bottom: 0;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
+  background-position: center;
+  transition: opacity ease-out 3s, z-index ease-out 3s;
+  z-index: 0;
+  opacity: 0;
+}
+
+#main-visual .img-box .img-item.current{
+  transition: opacity ease-in 3s, z-index ease-in 3s;
+  z-index: 1;
+  opacity: 1;
 }
 
 #main-visual .img-box .img-1 {
@@ -1482,7 +1492,7 @@ a:focus {
   left: 50%;
   bottom: 15px;
   transform: translateX(-50%);
-  z-index: 0;
+  z-index: 2;
 }
 
 #main-visual .dot-btn-box .dot {
