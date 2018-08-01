@@ -76,7 +76,7 @@ public class Category {
     }
 
     public void update(Category category) {
-        if (!category.isOwner(category.creator)) {
+        if (!isOwner(category.creator)) {
             throw new UnAuthorityException("자신이 생성한 카테고리만 수정할 수 있습니다.");
         }
         this.parentCategory = category.parentCategory;

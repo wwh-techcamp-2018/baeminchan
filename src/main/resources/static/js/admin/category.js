@@ -56,7 +56,6 @@ function onSuccess(response) {
 
             $("#category-table").insertAdjacentHTML("beforeend", parentCategoryHtml + SubCategoriesHtml);
             $("#parent-name").insertAdjacentHTML("beforeend", parentCategoriesOption);
-
         });
     });
 }
