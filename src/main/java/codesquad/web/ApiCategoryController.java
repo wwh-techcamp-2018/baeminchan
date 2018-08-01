@@ -1,6 +1,7 @@
 package codesquad.web;
 
 
+
 import codesquad.dto.CategoryListDto;
 import codesquad.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,4 @@ public class ApiCategoryController {
     public CategoryListDto show() {
         return categoryService.getParents();
     }
-
-
 }

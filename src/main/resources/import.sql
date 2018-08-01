@@ -62,3 +62,13 @@ INSERT INTO CATEGORY (name, parent_id) VALUES ('반찬장인', 8);
 INSERT INTO CATEGORY (name, parent_id) VALUES ('셰프의요리', 8);
 INSERT INTO CATEGORY (name, parent_id) VALUES ('전국맛집', 8);
 INSERT INTO CATEGORY (name, parent_id) VALUES ('키즈관', 8);
+
+
+INSERT INTO PROMOTION (banner_url, description) VALUES ('https://cdn.bmf.kr/banner/main_banner/180725/1532508251859_fc64af8aa98c.jpg', '프로모션 메뉴1')
+INSERT INTO PROMOTION (banner_url, description) VALUES ('https://cdn.bmf.kr/banner/main_banner/180608/1528449480985_4b59a338f5a8.jpg', '프로모션 메뉴2')
+INSERT INTO PROMOTION (banner_url, description) VALUES ('https://cdn.bmf.kr/banner/main_banner/180725/1532496347023_26dfc2acadb2.jpg', '프로모션 메뉴3')
+INSERT INTO PROMOTION (banner_url, description) VALUES ('https://cdn.bmf.kr/banner/main_banner/180725/1532509533002_65acd431f094.jpg', '프로모션 메뉴4')
+INSERT INTO PROMOTION (banner_url, description) VALUES ('https://cdn.bmf.kr/banner/main_banner/180719/1531982599279_e66969d9bd66.jpg', '프로모션 메뉴5')
+INSERT INTO PROMOTION (banner_url, description) VALUES ('https://cdn.bmf.kr/banner/main_banner/180712/1531359067444_c293ab9aa477.jpg', '프로모션 메뉴6')
+INSERT INTO PROMOTION (banner_url, description) VALUES ('https://cdn.bmf.kr/banner/main_banner/180719/1531992782374_4c0636e1ca6b.jpg', '프로모션 메뉴7')
+INSERT INTO PROMOTION (banner_url, description) VALUES ('https://cdn.bmf.kr/banner/main_banner/180328/1522226266924_db98fbaef1ab.jpg', '프로모션 메뉴8')

@@ -4,6 +4,9 @@ import codesquad.domain.Category;
 import codesquad.dto.CategoryListDto;
 import codesquad.dto.CategoryPostDto;
 import codesquad.repository.CategoryRepository;
+import codesquad.security.BasicAuthInterceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,15 +17,24 @@ import java.util.stream.Collectors;
 @Service("categoryService")
 public class CategoryService {
 
+    private static final Logger log = LoggerFactory.getLogger(CategoryService.class);
+
+
     @Resource
     private CategoryRepository categoryRepository;
 
     public CategoryListDto getParents() {
-        return new CategoryListDto(categoryRepository.findByParentIsNull()
+
+        CategoryListDto test = new CategoryListDto(categoryRepository.findByParentIsNull()
                 .stream()
                 .map((parent) -> Category.toDto(parent))
                 .collect(Collectors.toList()));
-
+        log.debug(test.toString());
+        return test;
+//        return new CategoryListDto(categoryRepository.findByParentIsNull()
+//                .stream()
+//                .map((parent) -> Category.toDto(parent))
+//                .collect(Collectors.toList()));
     }
 
     @Transactional

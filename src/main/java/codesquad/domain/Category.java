@@ -31,12 +31,6 @@ public class Category {
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Category> children = new ArrayList<Category>();
 
-    public Category(String name, Category parent, List<Category> children) {
-        this.name = name;
-        this.parent = parent;
-        this.children = children;
-    }
-
     public Category(Long id, String name, Category parent, List<Category> children) {
         this.id = id;
         this.name = name;
@@ -44,10 +38,12 @@ public class Category {
         this.children = children;
     }
 
+    public Category(String name, Category parent, List<Category> children) {
+        this(null, name, parent, children);
+    }
+
     public Category(String name) {
-        this.name = name;
-        this.parent = null;
-        this.children = new ArrayList<Category>();
+        this(null, name, null, new ArrayList<Category>());
     }
 
     public Category() {

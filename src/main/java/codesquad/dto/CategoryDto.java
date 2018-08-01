@@ -1,10 +1,7 @@
 package codesquad.dto;
 
-import codesquad.domain.Category;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +21,16 @@ public class CategoryDto {
         this.name = name;
         this.children = children;
     }
-    public CategoryDto() {
 
+    public CategoryDto() {
+    }
+
+    // TODO 문제의 getFirstChild
+    @JsonIgnore
+    public CategoryDto getFirstChild() {
+        if (children.isEmpty()) {
+            return null;
+        }
+        return this.children.get(0);
     }
 }
