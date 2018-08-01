@@ -1414,6 +1414,11 @@ a:focus {
   bottom: 0;
 }
 
+#main-visual .img-box .current {
+  opacity: 1 !important;
+  transition: opacity .5s;
+}
+
 #main-visual .img-box a {
   display: block;
   margin: 0 auto;
@@ -1422,6 +1427,7 @@ a:focus {
 }
 
 #main-visual .img-box .img-item {
+  opacity: 0;
   position: absolute;
   left: 0;
   right: 0;
@@ -1430,25 +1436,26 @@ a:focus {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  transition: opacity .5s;
 }
 
-#main-visual .img-box .img-1 {
+#img-1 {
   background-image: url(./img/img-main-visual-slide_1.jpg);
 }
 
-#main-visual .img-box .img-2 {
+#img-2 {
   background-image: url(./img/img-main-visual-slide_2.jpg);
 }
 
-#main-visual .img-box .img-3 {
+#img-3 {
   background-image: url(./img/img-main-visual-slide_3.jpg);
 }
 
-#main-visual .img-box .img-4 {
+#img-4 {
   background-image: url(./img/img-main-visual-slide_4.jpg);
 }
 
-#main-visual .img-box .img-5 {
+#img-5 {
   background-image: url(./img/img-main-visual-slide_5.jpg);
 }
 
