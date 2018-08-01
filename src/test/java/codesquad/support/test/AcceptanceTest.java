@@ -17,8 +17,5 @@ public class AcceptanceTest {
     public TestRestTemplate template() {
         return template;
     }
-
-    @Test
-    public void emptyTest() {}
 }
 
