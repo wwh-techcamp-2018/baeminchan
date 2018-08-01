@@ -79,14 +79,14 @@ function addUpperCategory(response) {
     response.json().then(category => {
         const html = `
         <ul id="category_list_${category.id}">
-            <liclass="upper_menu_li">
+            <li class="upper_menu_li">
                 <input data-category-id="${category.id}" value="${category.title}" id="menu_${category.id}" 
                 style="display: inline-block" placeholder="${category.title}"/>
                 <button data-category-id="${category.id}" class="update">수정</button>
                 <button data-category-id="${category.id}" class="delete_upper">삭제</button>
             </li>
             <li id="create_lower_menu_li_${category.id}">
-                <input id="menu_${category.id}"/>
+                <input id="lower_menu_${category.id}"/>
                 <button data-category-id="${category.id}" class="create_lower">생성</button>
             </li>
         </ul>
@@ -200,7 +200,6 @@ function updateCategoryHandler(evt) {
     const id = evt.target.dataset.categoryId;
     const title = $("#menu_"+id);
 
-    console.log(title.placeholder);
     if(title.value === title.placeholder) {
         alert("카테고리명을 수정하세요");
         return;

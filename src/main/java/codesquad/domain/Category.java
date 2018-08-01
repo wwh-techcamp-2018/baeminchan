@@ -10,6 +10,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -28,7 +29,7 @@ public class Category {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "parent")
     @Where(clause = "deleted = false")
     @JsonProperty("children")
-    private List<Category> children;
+    private List<Category> children = new ArrayList<>();
 
     @ManyToOne
     @JsonIgnoreProperties({"title", "children", "parent", "deleted"})
@@ -39,7 +40,7 @@ public class Category {
     @JsonProperty("deleted")
     private boolean deleted = false;
 
-    private Category(String title) {
+    public Category(String title) {
         this.title = title;
     }
 
