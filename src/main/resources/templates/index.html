@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./main.css" />
   <script src="/js/common.js"></script>
   <script src="/js/category.js"></script>
+  <script src="/js/promotion.js"></script>
 </head>
 
 <body>
@@ -118,31 +119,6 @@
               </a>
           </li>
           {{/promotions}}
-          <!--<li class="img-item img-1 current">
-            <a href="#">
-              <span class="blind">장윤주 식단 대공개! 그녀의 건강 반찬을 소개합니다.</span>
-            </a>
-          </li>
-          <li class="img-item img-2 next">
-            <a href="#">
-              <span class="blind">스페인 그 식당이 안 부러운 비빔밥&amp;한식요리 기획전</span>
-            </a>
-          </li>
-          <li class="img-item img-3">
-            <a href="#">
-              <span class="blind">월화수목금 매일매일 터지는 오늘의 찬스를 확인하세요!</span>
-            </a>
-          </li>
-          <li class="img-item img-4">
-            <a href="#">
-              <span class="blind">가격따라 고르는 재미가 쏠쏠해요. 알뜰반찬 기획전 3,300원부터!</span>
-            </a>
-          </li>
-          <li class="img-item img-5 prev">
-            <a href="#">
-              <span class="blind">2018 미슐랭 가이드도 반한 '게방식당'을 소개합니다.</span>
-            </a>
-          </li>-->
       </ul>
 
       <div class="direction-btn-box">
@@ -151,11 +127,9 @@
       </div>
 
       <div class="dot-btn-box">
-        <a class="dot on" href="#"></a>
+        {{#promotions}}
         <a class="dot" href="#"></a>
-        <a class="dot" href="#"></a>
-        <a class="dot" href="#"></a>
-        <a class="dot" href="#"></a>
+        {{/promotions}}
       </div>
     </section>
 
