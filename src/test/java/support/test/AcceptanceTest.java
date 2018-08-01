@@ -2,11 +2,15 @@ package support.test;
 
 import codesquad.domain.user.User;
 import codesquad.domain.user.UserRepository;
+import codesquad.dto.user.UserSessionDto;
+import codesquad.util.SessionUtil;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -22,6 +26,14 @@ public abstract class AcceptanceTest {
 
     public TestRestTemplate template() {
         return template;
+    }
+
+    public TestRestTemplate basicAuthTemplate(String email, String password) {
+        return template.withBasicAuth(email, password);
+    }
+
+    public TestRestTemplate basicAuthTemplate() {
+        return basicAuthTemplate("admin", "qwer1234!!");
     }
 
     protected User findByEmail(String email) {

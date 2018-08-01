@@ -3,32 +3,52 @@ package codesquad.service;
 import codesquad.domain.category.Category;
 import codesquad.domain.category.CategoryRepository;
 import codesquad.dto.category.CategoryDto;
+import codesquad.exception.CategoryNotFoundException;
+import com.sun.xml.internal.bind.v2.TODO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Slf4j
 @Service
 public class CategoryService {
     @Autowired
     CategoryRepository categoryRepository;
 
     public Category add(CategoryDto categoryDto) {
-        // TODO: 2018. 7. 27. 카테고리가 없을 때 커스텀 에러를 만들어 주어야합니다.
-
-        if (Category.isRoot(categoryDto)) {
+        if (categoryDto.isRoot()) {
             return categoryRepository.save(new Category(categoryDto.getTitle()));
         }
 
         Category parent = categoryRepository
                 .findById(categoryDto.getParentId())
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(CategoryNotFoundException::new);
         parent.addChild(new Category(categoryDto.getTitle()));
         return categoryRepository.save(parent);
     }
 
     public List<Category> getCategoryList() {
-        //return categoryRepository.findAllRootCategories();
         return categoryRepository.findByParent(null);
+    }
+
+    public void delete(Long cid) {
+        categoryRepository.deleteById(cid);
+    }
+
+    @Transactional
+    public Category update(CategoryDto categoryDto) {
+        Category category = categoryRepository.findById(categoryDto.getCategoryId())
+                .orElseThrow(CategoryNotFoundException::new);
+        Category parent = null;
+
+        if(!categoryDto.isRoot()) {
+            parent = categoryRepository.findById(categoryDto.getParentId()).orElseThrow(CategoryNotFoundException::new);
+        }
+
+        category.update(categoryDto, parent);
+        return category;
     }
 }

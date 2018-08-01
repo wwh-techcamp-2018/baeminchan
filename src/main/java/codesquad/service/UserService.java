@@ -1,5 +1,6 @@
 package codesquad.service;
 
+import codesquad.domain.user.NormalUser;
 import codesquad.domain.user.User;
 import codesquad.domain.user.UserRepository;
 import codesquad.dto.user.JoinUserDto;
@@ -26,14 +27,14 @@ public class UserService {
 
     public User add(JoinUserDto joinUserDto) {
         checkExistsEmail(joinUserDto.getEmail());
-        return userRepository.save(User.createUserByJoinUserDto(joinUserDto, passwordEncoder));
+        return userRepository.save(NormalUser.createUserByJoinUserDto(joinUserDto, passwordEncoder));
     }
 
     public User login(LoginUserDto loginUserDto) {
         try {
-            User user = findByEmail(loginUserDto.getEmail());
-            user.isMatchPassword(loginUserDto, passwordEncoder);
-            return user;
+            User User = findByEmail(loginUserDto.getEmail());
+            User.isMatchPassword(loginUserDto, passwordEncoder);
+            return User;
         } catch (UserNotFoundException e) {
             throw new LoginFailedException();
         }

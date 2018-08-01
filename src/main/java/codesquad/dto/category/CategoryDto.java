@@ -2,13 +2,17 @@ package codesquad.dto.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class CategoryDto {
     private Long parentId;
+    private Long categoryId;
     private String title;
 
-    public CategoryDto() {
+    public boolean isRoot() {
+        return parentId == null;
     }
 }

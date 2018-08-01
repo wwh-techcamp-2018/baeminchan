@@ -3,14 +3,16 @@ package codesquad.domain.category;
 
 import codesquad.dto.category.CategoryDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+@Data
 @Entity
 public class Category {
     @Id
@@ -37,11 +39,13 @@ public class Category {
         this.title = title;
     }
 
-    public static boolean isRoot(CategoryDto categoryDto) {
-        return categoryDto.getParentId() == null;
-    }
 
     public void addChild(Category childCategory) {
         children.add(childCategory);
+    }
+
+    public void update(CategoryDto categoryDto,Category parent) {
+        this.title = categoryDto.getTitle();
+        this.parent = parent;
     }
 }

@@ -1,55 +1,85 @@
 function $(selector) {
-    return document.querySelector(selector);
+  return document.querySelector(selector);
 }
 
-function fetchManager({ url, method, body, headers,callback}) {
-    fetch(url, {method,body,headers,credentials: "same-origin"})
-        .then((response) => {
-        callback(response);
-    })
+function fetchManager({ url, method, body, headers, callback }) {
+  fetch(url, { method, body, headers, credentials: "same-origin" }).then(
+    response => {
+      callback(response);
+    }
+  );
 }
 
-function getCategories() {
-    fetchManager({
-        url: '/api/category',
-        method: 'GET',
-        headers: { 'content-type': 'application/json'},
-        callback: categoriesCallback
-    })
+function getCategories(url, callback) {
+  fetchManager({
+    url: url,
+    method: "GET",
+    headers: { "content-type": "application/json" },
+    callback: callback
+  });
 }
 
-function categoriesCallback(response){
-    response.json().then((result)=>{
-      if(result.message !== "success"){
-        alert("페이지를 새로고침 해주세요.");
+function categoriesCallback(response) {
+  response.json().then(result => {
+    const categories = result.data;
+    categories.forEach(category => {
+      if (isAdminPage()) {
+        createAdminCategoryTemplate(category);
+      } else {
+        createCategoryTemplate(category);
       }
-      
-      const categories = result.data;
-      categories.forEach(category => {
-          createCategoryTemplate(category);
-      });
-    })
+    });
+  });
+}
+
+function isAdminPage() {
+  return window.location.pathname === "/admin.html";
 }
 
 function createCategoryTemplate(category) {
-    const parentUl = $("#categories");
-    let categoryTemplate = 
-    `<li>
+  const parentUl = $("#categories");
+
+  let categoryTemplate = `<li>
         <a href="./side-dishs.html">${category.title}</a>
         <ul class="sub-menu">
         `;
 
-    category.children.forEach(subCategory => {
-        let subCategoryTemplate = 
-        `<li>
+  category.children.forEach(subCategory => {
+    let subCategoryTemplate = `<li>
             <a href="${subCategory.cid}">${subCategory.title}</a>
         </li>
         `;
-        categoryTemplate += subCategoryTemplate;
-    })
+    categoryTemplate += subCategoryTemplate;
+  });
 
-    categoryTemplate += `</ul> 
+  categoryTemplate += `</ul> 
                     </li>`;
-    const categoryNode = document.createRange().createContextualFragment(categoryTemplate);
-    parentUl.appendChild(categoryNode);
+
+  parentUl.insertAdjacentHTML("beforeend", categoryTemplate);
 }
+
+function createAdminCategoryTemplate(category) {
+  const parentUl = $("#categories");
+
+  let categoryTemplate = `<li>
+          <span> ${category.cid} : ${category.title}</span>
+          <ul>
+          `;
+
+  category.children.forEach(subCategory => {
+    let subCategoryTemplate = `<li>
+              <span>${subCategory.cid} : ${subCategory.title}</span>
+          </li>
+          `;
+    categoryTemplate += subCategoryTemplate;
+  });
+
+  categoryTemplate += `</ul> 
+                      </li>`;
+
+  parentUl.insertAdjacentHTML("beforeend", categoryTemplate);
+}
+
+window.addEventListener("load", function(event) {
+  getCategories("/api/category", categoriesCallback);
+});
