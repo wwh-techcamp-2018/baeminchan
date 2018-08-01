@@ -24,7 +24,7 @@ public class BasicAuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String auth = request.getHeader("Authorization");
-        if (isBasicAuthHeader(auth)) {
+        if (!isBasicAuthHeader(auth)) {
             return true;
         }
 
@@ -47,6 +47,6 @@ public class BasicAuthInterceptor extends HandlerInterceptorAdapter {
     }
 
     private boolean isBasicAuthHeader(String auth) {
-        return auth == null || !auth.startsWith("Basic");
+        return auth != null && auth.startsWith("Basic");
     }
 }

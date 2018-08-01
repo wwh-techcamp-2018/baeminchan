@@ -1432,6 +1432,22 @@ a:focus {
   background-position: center center;
 }
 
+#main-visual .img-box li {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  transition: all 1s
+}
+
+#main-visual .img-box li.current {
+  opacity: 1;
+  visibility: visible; 
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  transition: all 1s
+}
+
 #main-visual .img-box .img-1 {
   background-image: url(./img/img-main-visual-slide_1.jpg);
 }

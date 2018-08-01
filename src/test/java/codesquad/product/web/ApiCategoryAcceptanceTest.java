@@ -5,11 +5,10 @@ import codesquad.RestResponse;
 import codesquad.product.domain.Category;
 import codesquad.product.domain.CategoryRepository;
 import codesquad.product.dto.CategoryDto;
-import codesquad.support.ApiAcceptanceTest;
+import codesquad.support.AcceptanceTest;
 import codesquad.user.domain.Role;
 import codesquad.user.domain.User;
 import codesquad.user.domain.UserRepository;
-import codesquad.user.domain.UserTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ApiCategoryAcceptanceTest extends ApiAcceptanceTest {
+public class ApiCategoryAcceptanceTest extends AcceptanceTest {
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -234,13 +233,5 @@ public class ApiCategoryAcceptanceTest extends ApiAcceptanceTest {
                 .title("category")
                 .parentCategoryId(mainCategory.getId())
                 .build();
-    }
-
-    private User makeUser(Role role) {
-        User rawUser = UserTest.userBuilder().password(UserTest.RAW_PASSWORD).role(role).build();
-        User savedUser = UserTest.userBuilder().role(role).build();
-        userRepository.save(savedUser);
-
-        return rawUser;
     }
 }
