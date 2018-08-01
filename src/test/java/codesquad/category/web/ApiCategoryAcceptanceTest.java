@@ -28,9 +28,18 @@ public class ApiCategoryAcceptanceTest extends AcceptanceTest {
         CategoryDto dto = CategoryDto.builder()
                 .name("test")
                 .build();
-        ResponseEntity<Void> response = template.postForEntity("/category", dto, Void.class);
+        ResponseEntity<Void> response = basicAuthTemplate(defaultAdmin()).postForEntity("/admin/category", dto, Void.class);
         assertThat(response.getStatusCode()).isEqualTo((HttpStatus.CREATED));
         assertThat(response.getHeaders().getLocation().getPath()).isNotEmpty();
+    }
+
+    @Test
+    public void create_일반유저(){
+        CategoryDto dto = CategoryDto.builder()
+                .name("test")
+                .build();
+        ResponseEntity<Void> response = basicAuthTemplate(defaultUser()).postForEntity("/admin/category",dto,Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
     }
 
     @Test
@@ -39,7 +48,7 @@ public class ApiCategoryAcceptanceTest extends AcceptanceTest {
                 .name("test")
                 .build();
 
-        String location = createResource("/category", createDto, defaultAdmin());
+        String location = createResource("/admin/category", createDto, defaultAdmin());
 
         CategoryDto updateDto = CategoryDto.builder()
                 .parentId(2L)
@@ -47,7 +56,7 @@ public class ApiCategoryAcceptanceTest extends AcceptanceTest {
                 .build();
 
         ResponseEntity<Void> response = basicAuthTemplate()
-                .exchange(location, HttpMethod.PUT, createHttpEntityWithBody(updateDto), Void.class);
+                .exchange("/admin" + location, HttpMethod.PUT, createHttpEntityWithBody(updateDto), Void.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
@@ -58,11 +67,12 @@ public class ApiCategoryAcceptanceTest extends AcceptanceTest {
                 .name("test")
                 .build();
 
-        String location = createResource("/category", createDto, defaultAdmin());
+        String location = createResource("/admin/category", createDto, defaultAdmin());
 
         ResponseEntity<Void> response = basicAuthTemplate()
-                .exchange(location, HttpMethod.DELETE, createHttpEntity(), Void.class);
+                .exchange("/admin" + location, HttpMethod.DELETE, createHttpEntity(), Void.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
+
 }

@@ -18,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public abstract class AcceptanceTest {
 
+    private static final String DEFAULT_USER = "sample@woowahan.com";
     private static final String ADMIN_USER = "sample2@woowahan.com";
 
     @Autowired
@@ -32,7 +33,11 @@ public abstract class AcceptanceTest {
     }
 
     public TestRestTemplate basicAuthTemplate(User loginUser) {
-        return template.withBasicAuth(loginUser.getEmail(), loginUser.getPassword());
+        return template.withBasicAuth(loginUser.getEmail(), "123456a!");
+    }
+
+    protected User defaultUser() {
+        return findByEmail(DEFAULT_USER);
     }
 
     protected User defaultAdmin() {

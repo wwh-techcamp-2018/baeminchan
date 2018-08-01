@@ -14,26 +14,25 @@ import java.net.URI;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/category")
 @Slf4j
 public class ApiCategoryController {
 
     @Autowired
     private CategoryRepository categoryRepository;
 
-    @GetMapping
+    @GetMapping("/category")
     public ResponseEntity<Category> list() {
         Category category = findById(Category.ROOT_ID);
 
         return ResponseEntity.ok(category);
     }
 
-    @PostMapping
+    @PostMapping("/admin/category")
     public ResponseEntity<Void> create(@Valid @RequestBody CategoryDto categoryDto) {
         return create(Category.ROOT_ID, categoryDto);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/admin/category/{id}")
     public ResponseEntity<Void> create(@PathVariable Long id, @Valid @RequestBody CategoryDto categoryDto) {
         Category newCategory = Category.builder()
                 .parent(findById(id))
@@ -43,7 +42,7 @@ public class ApiCategoryController {
         return ResponseEntity.created(URI.create("/category/" + savedCategory.getId())).build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/category/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @Valid @RequestBody CategoryDto categoryDto) {
         Category category = findById(id);
 
@@ -55,7 +54,7 @@ public class ApiCategoryController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/category/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         Category category = findById(id);
         categoryRepository.delete(category);

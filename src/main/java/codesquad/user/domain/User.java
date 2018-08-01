@@ -32,4 +32,19 @@ public class User {
     private Role role = Role.DEFAULT;
 
     private boolean deleted;
+
+    public boolean isGuestUser() {
+        return false;
+    }
+
+    public boolean isAdmin() {
+        return this.role == Role.ADMIN;
+    }
+
+    private static class GuestUser extends User{
+        @Override
+        public boolean isGuestUser(){
+            return true;
+        }
+    }
 }
