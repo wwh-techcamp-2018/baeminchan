@@ -1,7 +1,7 @@
 package codesquad.user.web;
 
 import codesquad.RestResponse;
-import codesquad.support.ApiAcceptanceTest;
+import codesquad.support.AcceptanceTest;
 import codesquad.user.domain.UserRepository;
 import codesquad.user.domain.UserTest;
 import codesquad.user.dto.UserLoginDto;
@@ -18,8 +18,8 @@ import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ApiUserApiAcceptanceTest extends ApiAcceptanceTest {
-    private static final Logger log = LoggerFactory.getLogger(ApiUserApiAcceptanceTest.class);
+public class ApiUserAcceptanceTest extends AcceptanceTest {
+    private static final Logger log = LoggerFactory.getLogger(ApiUserAcceptanceTest.class);
 
     @Autowired
     private UserRepository repository;
