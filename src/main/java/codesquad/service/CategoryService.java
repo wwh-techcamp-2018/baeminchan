@@ -5,6 +5,7 @@ import codesquad.domain.CategoryRepository;
 import codesquad.domain.DomainField;
 import codesquad.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,10 +26,12 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
+    @Cacheable(value = "rootCategories")
     public List<Category> getRootCategories() {
         return categoryRepository.findByParentNull();
     }
 
+    @Cacheable(value = "category")
     public Category category(Long id) {
         return findExistCategory(id);
     }

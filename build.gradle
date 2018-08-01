@@ -31,6 +31,8 @@ dependencies {
     compile('mysql:mysql-connector-java')
     compile('pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0')
 
+    compile('org.springframework.boot:spring-boot-starter-cache')
+
     compile('org.hibernate:hibernate-java8')
     runtime('net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1')
     testCompile('org.springframework.boot:spring-boot-starter-test')

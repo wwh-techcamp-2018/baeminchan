@@ -1,13 +1,16 @@
 package codesquad.service;
 
 
-import codesquad.domain.*;
+import codesquad.domain.DomainField;
+import codesquad.domain.EventCategory;
+import codesquad.domain.EventCategoryRepository;
+import codesquad.domain.ProductRepository;
 import codesquad.dto.EventCategoryDto;
 import codesquad.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,10 +22,12 @@ public class EventCategoryService {
     @Autowired
     ProductRepository productRepository;
 
+    @Cacheable(value = "eventCategories")
     public List<EventCategory> readEventCategories() {
         return eventCategoryRepository.findAll();
     }
 
+    @Cacheable(value = "eventCategory")
     public EventCategoryDto readEventCategory(Long id) {
         return new EventCategoryDto(eventCategoryRepository
                 .findById(id)
