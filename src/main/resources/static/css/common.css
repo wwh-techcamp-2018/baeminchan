@@ -1604,7 +1604,7 @@ div.btn_area {
 
 #category_list ul {
     float:left;
-    height:400px;
+    min-height:300px;
 }
 
 #category_list input{

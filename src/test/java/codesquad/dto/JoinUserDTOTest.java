@@ -14,30 +14,17 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class JoinUserDTOTest {
+public class JoinUserDTOTest extends DTOTest<JoinUserDTO>{
     private JoinUserDTO joinUserDTO;
-    Validator validator;
-    Set<ConstraintViolation<JoinUserDTO>> violationSet;
 
     @Before
     public void setUp() throws Exception {
-        validator = Validation.buildDefaultValidatorFactory().getValidator();
-
         joinUserDTO = new JoinUserDTO();
         joinUserDTO.setEmail("c@naver.com");
         joinUserDTO.setPassword("test12345");
         joinUserDTO.setPasswordConfirm("test12345");
         joinUserDTO.setName("포비사랑");
         joinUserDTO.setPhoneNo("010-000-0000");
-    }
-
-    private boolean isValid(JoinUserDTO joinUserDTO) {
-        Set<ConstraintViolation<JoinUserDTO>> violations = validate(joinUserDTO);
-        return violations.size() == 0;
-    }
-
-    private Set<ConstraintViolation<JoinUserDTO>> validate(JoinUserDTO joinUserDTO) {
-        return validator.validate(joinUserDTO);
     }
 
     @Test

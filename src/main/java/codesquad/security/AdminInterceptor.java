@@ -6,20 +6,16 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-public class AdminInterceptor extends HandlerInterceptorAdapter {
+public class AdminInterceptor extends SessionInterceptor {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        SessionUserDTO sessionUserDTO = (SessionUserDTO) request.getSession().getAttribute(HttpSessionUtils.USER_SESSION_KEY);
-        if(sessionUserDTO == null){
-            response.sendRedirect("/login.html");
-            return false;
-        }
-        if(!sessionUserDTO.isAdmin()){
-            response.sendError(HttpStatus.FORBIDDEN.value());
-            response.sendRedirect("/login.html");
-            return false;
-        }
-        return true;
+    public void responseForbidden(HttpServletResponse response) throws IOException {
+        response.sendRedirect("/");
+    }
+
+    @Override
+    public void responseUnauth(HttpServletResponse response) throws IOException {
+        response.sendRedirect("/login.html");
     }
 }
