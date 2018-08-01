@@ -21,4 +21,23 @@ public class ProductApiTest extends AcceptanceTest {
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
+
+    @Test
+    public void read() {
+        ResponseEntity<Product> responseEntity = template().getForEntity("/api/product/1", Product.class);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+
+    @Test
+    public void readAuthentic() {
+        ResponseEntity<Product> responseEntity = template().getForEntity("/api/product/1", Product.class);
+        Product readProduct = responseEntity.getBody();
+        Product actualProduct = new Product();
+        actualProduct.setTitle("고기 반찬");
+        actualProduct.setContents("아침에 먹기 좋은 반찬~~!");
+        actualProduct.setPrice(4000);
+        actualProduct.setThumbnailLink("https://cdn.bmf.kr/_data/product/IE15B/f4577c1459679650d0554635d921b536.jpg");
+        assertThat(actualProduct).isEqualTo(readProduct);
+    }
 }

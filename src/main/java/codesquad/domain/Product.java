@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 public class Product {
@@ -30,11 +31,24 @@ public class Product {
     @Column(nullable = false)
     String thumbnailLink;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     EventCategory eventCategory;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(title, product.title) &&
+                Objects.equals(contents, product.contents) &&
+                Objects.equals(price, product.price) &&
+                Objects.equals(thumbnailLink, product.thumbnailLink) &&
+                Objects.equals(category, product.category) &&
+                Objects.equals(eventCategory, product.eventCategory);
+    }
 
     public Long getId() {
         return id;

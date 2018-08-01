@@ -1,7 +1,9 @@
 package codesquad.service;
 
 import codesquad.domain.Product;
+import codesquad.exception.NotFoundException;
 import codesquad.repository.ProductRepository;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +15,9 @@ public class ProductService {
 
     public Product create(Product product) {
         return productRepository.save(product);
+    }
+
+    public Product findProductById(Long id) {
+        return productRepository.findProductByIdEquals(id).orElseThrow(NotFoundException::new);
     }
 }

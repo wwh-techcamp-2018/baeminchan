@@ -19,4 +19,10 @@ public class ProductController {
     public Product create(@RequestBody @Valid Product product) {
         return productService.create(product);
     }
+
+    @GetMapping("/api/product/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Product read(@PathVariable Long id) {
+        return productService.findProductById(id);
+    }
 }
