@@ -55,6 +55,10 @@ public class User extends AbstractEntity {
     public User() {
     }
 
+    public User(String email, String password, String name, String phoneNumber){
+        this(email, password, password, name, phoneNumber);
+    }
+
 
     public User(String email, String password, String passwordCheck, String name, String phoneNumber) {
         this.email = email;

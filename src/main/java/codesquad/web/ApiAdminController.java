@@ -1,5 +1,7 @@
 package codesquad.web;
 
+import codesquad.repository.MenuRepository;
+import codesquad.service.MenuService;
 import codesquad.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,14 +19,24 @@ public class ApiAdminController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    MenuService menuService;
+
     @GetMapping("")
-    public void mainPage(HttpSession httpSession){
+    public void mainPage(){
 
     }
 
-    @PostMapping("/login")
-    public void adminLogin(@RequestBody Map<String, String> admin, HttpSession httpSession){
-        log.debug("Admin controller call, admin : {}", admin.toString());
-        return ;
+    @DeleteMapping("/menu/{menuId}")
+    public void deleteSpecificMenu(@PathVariable long menuId){
+        menuService.deleteMenu(menuId);
+    }
+
+    @PostMapping("/menu")
+    public void registSpecificMenu(@RequestBody Map<String, String> menu){
+        long parentId = Long.parseLong(menu.get("parentId"));
+        String childMenuName = menu.get("childMenuName");
+        log.debug("requestBody : {} {}", parentId, childMenuName);
+        menuService.registMenu(parentId, childMenuName);
     }
 }
