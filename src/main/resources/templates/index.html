@@ -6,28 +6,6 @@
     <title>배민푸드 메인페이지</title>
     <link rel="stylesheet" href="./main.css"/>
 </head>
-<style>
- #main-visual .img-box li.img-item.current{
-    width: 100%; display: block;
-    opacity:1;
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
-  }
-
-
-  #main-visual .img-box li.img-item{
-   width: 100%;
-   opacity:0;
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
-  }
-
-
-</style>
 <body>
 <h1 class="blind">배민찬 - 메인 페이지</h1>
 
@@ -127,31 +105,13 @@
         <h2 class="blind">주요 프로모션</h2>
 
         <ul class="img-box">
-            <li class="img-item img-1 current">
+            {{#promotionList}}
+            <li class="img-item" data-index="{{@index_1}}" style="background-image: url({{url}})">
                 <a href="#">
-                    <span class="blind">장윤주 식단 대공개! 그녀의 건강 반찬을 소개합니다.</span>
+                    <span class="blind">{{description}}</span>
                 </a>
             </li>
-            <li class="img-item img-2 next">
-                <a href="#">
-                    <span class="blind">스페인 그 식당이 안 부러운 비빔밥&apm;한식요리 기획전</span>
-                </a>
-            </li>
-            <li class="img-item img-3">
-                <a href="#">
-                    <span class="blind">월화수목금 매일매일 터지는 오늘의 찬스를 확인하세요!</span>
-                </a>
-            </li>
-            <li class="img-item img-4">
-                <a href="#">
-                    <span class="blind">가격따라 고르는 재미가 쏠쏠해요. 알뜰반찬 기획전 3,300원부터!</span>
-                </a>
-            </li>
-            <li class="img-item img-5 prev">
-                <a href="#">
-                    <span class="blind">2018 미슐랭 가이드도 반한 '게방식당'을 소개합니다.</span>
-                </a>
-            </li>
+            {{/promotionList}}
         </ul>
 
         <div class="direction-btn-box">
@@ -160,11 +120,9 @@
         </div>
 
         <div class="dot-btn-box">
-            <a class="dot on" href="#" data-index="1"></a>
-            <a class="dot" href="#" data-index="2"></a>
-            <a class="dot" href="#" data-index="3"></a>
-            <a class="dot" href="#" data-index="4"></a>
-            <a class="dot" href="#" data-index="5"></a>
+            {{#promotionList}}
+            <a class="dot" href="#" data-index="{{@index_1}}"></a>
+            {{/promotionList}}
         </div>
     </section>
 
@@ -849,68 +807,6 @@
 <script src="js/util.js" type="text/javascript" defer></script>
 <script src="js/constant.js" type="text/javascript" defer></script>
 <script src="js/index.js" type="text/javascript" defer></script>
-<script>
-document.addEventListener("DOMContentLoaded", function(event) {
-  $('.spr-btn-arrow-main-slide.prev').addEventListener('click', arrowMove);
-  $('.spr-btn-arrow-main-slide.next').addEventListener('click', arrowMove);
-
-  $('.dot-btn-box').addEventListener('click', dotMove);
-});
-
-
-const dotMove = (event) => {
-  event.preventDefault();
-  const sourceElement = event.target;
-  if(sourceElement.tagName.toLowerCase() !== 'a') return;
-
-  $('.dot-btn-box > .on').classList.remove('on');
-  addClass('on', sourceElement);
-
-  let index = sourceElement.getAttribute('data-index');
-  const newCurrentImage = $('.img-'+index);
-  move(newCurrentImage);
-}
-
-const arrowMove = (event) => {
- event.preventDefault();
-  if(event.target.classList.contains('prev')){
-    move( prev($('.current')) );
-
-    return;
-  }
-    move( next($('.current')) );
-}
-
-
-const move = (newCurrentImage)=>{
-
-  moveClass('current', newCurrentImage);
-  moveClass('next', next(newCurrentImage));
-  moveClass('prev', prev(newCurrentImage));
-}
-const moveClass = (className, target) =>{
-  removeClass(className);
-  addClass(className, target);
-}
-
-const next = (element) => {
-  return element.nextElementSibling || element.parentElement.firstElementChild;
-}
-
-const prev = (element) => {
-  return element.previousElementSibling || element.parentElement.lastElementChild;
-}
-
-const removeClass = (className) => {
-  $('.'+className).classList.remove(className);
-}
-
-const addClass = (className, target) => {
-  target.classList.add(className);
-}
-
-
-</script>
 </body>
 
 </html>
