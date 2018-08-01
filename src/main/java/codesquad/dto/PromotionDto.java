@@ -16,4 +16,8 @@ public class PromotionDto {
     public static PromotionDto fromEntity(Promotion promotion) {
         return new PromotionDto(promotion.getBannerUrl(), promotion.getDescription());
     }
+
+    public Promotion toEntity() {
+        return new Promotion(this.bannerUrl, this.description);
+    }
 }

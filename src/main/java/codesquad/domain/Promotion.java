@@ -21,4 +21,8 @@ public class Promotion {
     @Column(nullable = false)
     private String description;
 
+    public Promotion(String bannerUrl, String description) {
+        this(null, bannerUrl, description);
+    }
+
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Date;
 
 @ControllerAdvice
@@ -25,6 +26,13 @@ public class SecurityControllerAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler(UnAuthenticationException.class)
     public ResponseEntity<ErrorDetails> unAuthentication(UnAuthenticationException ex) {
         log.debug("UnAuthenticationException : " + ex.getClass() + ex.getMessage());
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage());
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ErrorDetails> unAuthentication(EntityNotFoundException ex) {
+        log.debug("EntityNotFoundException : " + ex.getClass() + ex.getMessage());
         ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage());
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }

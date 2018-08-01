@@ -9,10 +9,12 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 public abstract class AcceptanceTest {
     private static final String DEFAULT_LOGIN_MEMBER = "doy@woowahan.com";
     private static final String ADMIN_LOGIN_MEMBER = "admin@woowahan.com";
