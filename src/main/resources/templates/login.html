@@ -1,0 +1,126 @@
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="반찬배달, 반찬배송, 가정식 반찬배달, 아이반찬, 전국맛집, 새벽배송, 배민찬">
+    <meta name="description" content="반찬배달, 반찬배송, 가정식 반찬배달, 아이반찬, 전국맛집, 새벽배송">
+    <meta name="author" content="배민찬">
+    <meta name="ROBOTS" content="INDEX,FOLLOW">
+    <meta name="ROBOTS" content="ALL">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="naver-site-verification" content="e543b30ae873355f2c556f58b48ae7c95c1cea05">
+    <title>배민찬 - 모바일 넘버원 반찬가게</title>
+    <link rel="stylesheet" type="text/css" href="/common.css">
+    <script src="/js/login.js"></script>
+    <script src="/js/util.js"></script>
+</head>
+<body>
+<!--  skip navi -->
+<a href="#container" id="skip_navigation">본문 바로가기</a>
+<!--  skip navi -->
+
+<div id="wrapper">
+
+    <!--  상단 배너 -->
+    <div id="tbb" class="top_banner_wrap" style="display: none;">
+        <a href="#" class="top_banner">페이지 상단 배너</a>
+        <a href="#" class="btn_close" title="닫기">닫기</a>
+    </div>
+    <!-- //End 상단 배너 -->
+
+    <div class="wrap lnb_wrap">
+        <div id="lnb" class="content lnb">
+            <h2 class="blind">상단 메뉴 목록</h2>
+            <div class="link_app">
+                <a href="#" class="lnb_app">배민찬 앱 다운로드
+                    <span class="ic">&nbsp;</span>
+                </a>
+                <ul class="lnb_sub app">
+                    <li>
+                        <a class="ic_app" target="_blank" onclick="executeMobileAppAuto('app')" style="cursor:pointer">앱스토어</a>
+                    </li>
+                    <li>
+                        <a class="ic_google" target="_blank" onclick="executeMobileAppAuto('google')"
+                           style="cursor:pointer">구글플레이스토어</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="lnb_lst">
+                <li>
+                    <a href="/join">회원가입</a>
+                </li>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- //End  헤더영역 -->
+    <div id="login">
+        <div class="login-box">
+            <h2 class="h2_tlt"> 로그인</h2>
+            <form method="post" action="/member/login.exe.php" target="hidden1529395934"
+                  onsubmit="return checkLoginFrm(this);">
+                <input type="hidden" name="rURL" value="https://www.baeminchan.com/">
+                <input type="hidden" name="chkignore" value="N">
+
+                <fieldset>
+                    <legend class="hidden">로그인폼</legend>
+                    <ul>
+                        <li>
+                            <label for="member_id" style="display: inline;">
+                            </label>
+                            <input type="text" name="member_id" value="" id="member_id" class="input"
+                                   placeholder="아이디(이메일)" style="ime-mode:inactive">
+                        </li>
+                        <li>
+                            <label for="pwd"></label>
+                            <input type="password" name="pwd" id="pwd" class="input" placeholder="비밀번호" maxlength="25">
+                        </li>
+                    </ul>
+                    <button class="btn btn_mint btn_login">
+                        <span>로그인</span>
+                    </button>
+
+                    <!-- checkbox -->
+                    <span class="custom_checkbox">
+                                <i class="chk_box"></i>
+                                <input id="id_save" type="checkbox" name="id_save" value="Y" class="bf hidden_chk">
+                                <label for="id_save">아이디 저장</label>
+                            </span>
+
+                    <p class="err_msg">로그인이 필요한 서비스입니다. 회원이 아니시면 회원가입을 해주세요.</p>
+
+                    <div class="btn_area">
+                        <button type="button" class="btn btn_kakao btn_login" id="kakao_rest">
+                            <span class="ic"></span>
+                            <span>카카오계정으로 시작하기</span>
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+
+            <div class="link">
+                <a href="/member/find_step1.php">아이디 찾기</a> |
+                <a href="/member/find_step1.php?tab=find-pass">비밀번호 찾기</a> |
+                <a href="/join">회원가입</a>
+            </div>
+        </div>
+
+        {{> includes/common-footer}}
+
+        <div id="scroller">
+            <ul class="page_up_down_lst" style="display: none;">
+                <li class="page_up">
+                    <a href="#">위로</a>
+                </li>
+                <li class="page_down">
+                    <a href="#">아래로</a>
+                </li>
+            </ul>
+        </div>
+        <div id="popup_view" class="popup_view"></div>
+    </div>
+</div>
+</body>
+
+</html>
