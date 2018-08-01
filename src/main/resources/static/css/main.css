@@ -1069,6 +1069,7 @@ a:focus {
 .thumbnail-box .content {
   padding: 18px 20px 15px;
   height: 130px;
+  width: 100%;
 }
 
 .thumbnail-box .content * {
@@ -1217,7 +1218,8 @@ a:focus {
 
 .tab-box .content .price-wrapper {
   margin-top: 20px;
-  text-align: right;
+  text-align: left;
+  display: inline-block;
 }
 
 /**
