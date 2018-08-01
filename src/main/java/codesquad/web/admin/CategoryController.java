@@ -1,7 +1,6 @@
-package codesquad.admin.web;
+package codesquad.web.admin;
 
 import codesquad.domain.Category;
-import codesquad.dto.UserDto;
 import codesquad.service.CategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

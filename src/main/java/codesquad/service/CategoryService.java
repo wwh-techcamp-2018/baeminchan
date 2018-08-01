@@ -32,13 +32,16 @@ public class CategoryService {
 
     @Transactional
     public Category update(Long id, CategoryDto categoryDto, User loginUser) {
-        Category savedCategory = categoryRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        return savedCategory.update(categoryDto);
+        return getCategoryById(id).update(categoryDto);
     }
 
     @Transactional
     public void delete(Long id, User loginUser) {
-        Category savedCategory = categoryRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        savedCategory.delete();
+        getCategoryById(id).delete();
     }
+
+    private Category getCategoryById(Long id) {
+        return categoryRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+    }
+
 }

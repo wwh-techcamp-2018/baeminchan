@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 import java.net.URI;
 import java.util.List;
 
+import static codesquad.security.HttpSessionUtils.getUserFromSession;
+
 @RestController
 @RequestMapping("/api/categories")
 public class ApiCategoryController {
@@ -25,7 +27,7 @@ public class ApiCategoryController {
 
     @PostMapping(value = {"", "/{parentId}"})
     public ResponseEntity<Category> create(@PathVariable(required = false) Long parentId, @RequestBody CategoryDto categoryDto, HttpSession session) {
-        Category newCategory = categoryService.create(parentId, categoryDto, (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY));
+        Category newCategory = categoryService.create(parentId, categoryDto, getUserFromSession(session));
         return ResponseEntity.status(HttpStatus.CREATED).body(newCategory);
     }
 
@@ -36,13 +38,13 @@ public class ApiCategoryController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Category> update(@PathVariable Long id, @RequestBody CategoryDto categoryDto, HttpSession session) {
-        Category updatedCategory = categoryService.update(id, categoryDto, (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY));
+        Category updatedCategory = categoryService.update(id, categoryDto, getUserFromSession(session));
         return ResponseEntity.status(HttpStatus.OK).body(updatedCategory);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id, HttpSession session) {
-        categoryService.delete(id, (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY));
+        categoryService.delete(id, getUserFromSession(session));
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

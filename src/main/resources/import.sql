@@ -2,7 +2,7 @@ INSERT INTO role (id, authority) values (1, 'NORMAL');
 INSERT INTO role (id, authority) values (2, 'ADMIN');
 
 INSERT INTO user (id, user_id, password, name, phone_number) values (1, 'gusdk@gusdk.com', '1234qwer!', '권현아', '010-4090-8370');
-INSERT INTO user (id, user_id, password, name, phone_number) values (2, 'wngk@wngk.com', '1234qwer!', '박주하', '010-8756-2544');
+INSERT INTO user (id, user_id, password, name, phone_number, role_id) values (2, 'wngk@wngk.com', '1234qwer!', '박주하', '010-8756-2544', 2);
 INSERT INTO user (id, user_id, password, name, phone_number, role_id) values (3, 'test@test.com', '$2a$10$sw/vkQlruxD5zn/IYA6k0uEspUHkiB3GilGkSQLZ2YsNtYE9P8B.W', '테스트', '010-0101-0101', 1);
 INSERT INTO user (id, user_id, password, name, phone_number, role_id) values (4, 'admin@admin.com', '$2a$10$sw/vkQlruxD5zn/IYA6k0uEspUHkiB3GilGkSQLZ2YsNtYE9P8B.W', '관리자', '010-0101-0101', 2);
 
@@ -19,3 +19,10 @@ INSERT INTO category (parent_category_id, name, deleted) values (3, '고기반�
 INSERT INTO category (parent_category_id, name, deleted) values (3, '해산물반찬', false);
 INSERT INTO category (parent_category_id, name, deleted) values (3, '생선반찬', false);
 
+INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time, priority) values ('주하멍청이', '1', 'https://cdn.bmf.kr/banner/main_banner/180724/1532409236448_d9b2dde93f6a.jpg', '2018-01-01', '2019-01-01', '2018-08-01T00:00:00', 2);
+INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time, priority) values ('민석멍청이', '2', 'https://cdn.bmf.kr/banner/main_banner/180724/1532409236448_d9b2dde93f6a.jpg', '2018-01-01', '2019-01-01', '2018-08-01T00:00:00', 1);
+INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time, priority) values ('종완멍청이', '1', '/img/3', '2018-01-01', '2019-01-01', '2018-08-01T00:00:00', 9);
+INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time) values ('현아멍청이', '2', '/img/4', '2018-01-01', '2019-01-01', '2018-08-01T00:00:00');
+INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time) values ('포비멍청이', '1', '/img/5', '2018-01-01', '2018-07-01', '2018-08-01T00:00:00');
+INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time) values ('크롱멍청이', '2', '/img/6', '2018-01-01', '2018-07-01', '2018-08-01T00:00:00');
+INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time) values ('호눅스멍청이', '1', '/img/7', '2018-01-01', '2018-07-01', '2018-08-01T00:00:00');
