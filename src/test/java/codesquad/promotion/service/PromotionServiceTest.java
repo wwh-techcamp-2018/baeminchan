@@ -9,6 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -41,5 +43,11 @@ public class PromotionServiceTest {
     public void delete() {
         promotionService.delete(promotion.getId());
         verify(promotionRepository).deleteById(promotion.getId());
+    }
+
+    @Test
+    public void findAll() {
+        List<Promotion> promotions = promotionService.findAll();
+        verify(promotionRepository).findAll();
     }
 }
