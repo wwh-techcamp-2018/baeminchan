@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function initEvents() {
-    const submitBtn = selector('.btn.btn_mint.btn_big');
+    const submitBtn = $('.btn.btn_mint.btn_big');
     submitBtn.addEventListener('click', signup);
 }
 
@@ -37,26 +37,26 @@ function signup(evt) {
 }
 
 function getEmail() {
-    const emailId = selector('#email_id').value;
-    const emailDomain = selector('#email_domain').value;
+    const emailId = $('#email_id').value;
+    const emailDomain = $('#email_domain').value;
     return emailId + "@" + emailDomain;
 }
 
 function getPassword() {
-    return selector('#pw1').value;
+    return $('#pw1').value;
 }
 
 function getConfirmPassword() {
-    return selector('#pw2').value;
+    return $('#pw2').value;
 }
 
 function getName() {
-    return selector('#name').value;
+    return $('#name').value;
 }
 
 function getPhoneNumber() {
-    const cell1 = selector('#cell1').value;
-    const cell2 = selector('#cell2').value;
-    const cell3 = selector('#cell2').value;
+    const cell1 = $('#cell1').value;
+    const cell2 = $('#cell2').value;
+    const cell3 = $('#cell2').value;
     return [cell1, cell2, cell3].join('-');
 }
