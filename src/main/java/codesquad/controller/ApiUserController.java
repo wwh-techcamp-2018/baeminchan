@@ -30,7 +30,7 @@ public class ApiUserController {
     })
     @PostMapping("")
     public ResponseEntity<NormalUser> create(@Valid @RequestBody JoinUserDto joinUserDto, HttpSession session) {
-        session.setAttribute(SessionUtil.SESSTION_KEY, userService.add(joinUserDto));
+        session.setAttribute(SessionUtil.SESSION_KEY, userService.add(joinUserDto));
         return ResponseEntity.created(URI.create("/api/users")).body(null);
     }
 
@@ -42,13 +42,13 @@ public class ApiUserController {
     })
     @PostMapping("/login")
     public ResponseEntity<NormalUser> login(HttpSession session, @RequestBody LoginUserDto loginUserDto) {
-        session.setAttribute(SessionUtil.SESSTION_KEY, userService.login(loginUserDto).toUserSessionDto());
+        session.setAttribute(SessionUtil.SESSION_KEY, userService.login(loginUserDto).toUserSessionDto());
         return ResponseEntity.ok(null);
     }
 
     @GetMapping("/logout")
     public ResponseEntity<NormalUser> logout(HttpSession session, @RequestBody LoginUserDto loginUserDto) {
-        session.removeAttribute(SessionUtil.SESSTION_KEY);
+        session.removeAttribute(SessionUtil.SESSION_KEY);
         return ResponseEntity.ok(null);
     }
 
