@@ -9,7 +9,6 @@ import codesquad.support.AcceptanceTest;
 import codesquad.user.domain.Role;
 import codesquad.user.domain.User;
 import codesquad.user.domain.UserRepository;
-import codesquad.user.domain.UserTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CategoryAcceptanceTest extends AcceptanceTest {
+public class ApiCategoryAcceptanceTest extends AcceptanceTest {
 
     @Autowired
     private CategoryRepository categoryRepository;

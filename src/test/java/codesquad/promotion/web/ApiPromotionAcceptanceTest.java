@@ -16,7 +16,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PromotionAcceptanceTest extends AcceptanceTest {
+public class ApiPromotionAcceptanceTest extends AcceptanceTest {
 
     @Autowired
     private PromotionRepository promotionRepository;
