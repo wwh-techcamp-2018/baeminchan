@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function initEvents() {
-    const submitBtn = selector('.btn.btn_mint.btn_login');
+    const submitBtn = $('.btn.btn_mint.btn_login');
     submitBtn.addEventListener('click', login);
 }
 
@@ -34,9 +34,9 @@ function login(evt) {
 }
 
 function getEmail() {
-    return selector('#member_id').value;
+    return $('#member_id').value;
 }
 
 function getPassword() {
-    return selector('#pwd').value;
+    return $('#pwd').value;
 }

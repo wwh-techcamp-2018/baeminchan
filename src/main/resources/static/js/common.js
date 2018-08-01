@@ -1,5 +1,9 @@
-function selector(query) {
+function $(query) {
     return document.querySelector(query);
+}
+
+function $All(query) {
+    return document.querySelectorAll(query);
 }
 
 function fetchManager({url, method, body, headers, onSuccess, onFailed, onError}) {
