@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -31,5 +32,17 @@ public class ApiCategoryController {
     @GetMapping(value = {"", "/{parentId}"})
     public List<Category> list(@PathVariable(required = false) Long parentId) {
         return categoryService.getList(parentId);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Category> update(@PathVariable Long id, @RequestBody CategoryDto categoryDto, HttpSession session) {
+        Category updatedCategory = categoryService.update(id, categoryDto, (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY));
+        return ResponseEntity.status(HttpStatus.OK).body(updatedCategory);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id, HttpSession session) {
+        categoryService.delete(id, (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY));
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

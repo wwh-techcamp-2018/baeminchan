@@ -1,26 +1,56 @@
 package codesquad.interceptor;
 
+import codesquad.domain.Authority;
+import codesquad.domain.Role;
+import codesquad.domain.User;
+import codesquad.security.HttpSessionUtils;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import support.test.AcceptanceTest;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockHttpSession;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LoginInterceptorTest extends AcceptanceTest {
+@RunWith(MockitoJUnitRunner.class)
+public class LoginInterceptorTest {
     private static final Logger log = LoggerFactory.getLogger(LoginInterceptorTest.class);
 
-    @Test
-    public void 비로그인_사용자() {
-        ResponseEntity<String> response = template().getForEntity("/admin", String.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    private MockHttpServletRequest request;
+    private MockHttpServletResponse response;
+
+    @InjectMocks
+    private LoginInterceptor loginInterceptor;
+
+    @Before
+    public void setUp() throws Exception {
+        request = new MockHttpServletRequest();
+        response = new MockHttpServletResponse();
     }
 
     @Test
-    public void 로그인_사용자() {
-        ResponseEntity<String> response = basicAuthTemplate(defaultUser()).getForEntity("/admin", String.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    public void 비로그인_사용자_admin_접근() throws Exception {
+        assertThat(loginInterceptor.preHandle(request, response, null)).isFalse();
+        assertThat(request.getSession().getAttribute(HttpSessionUtils.USER_SESSION_KEY)).isNull();
+        assertThat(response.getHeader("Location")).isEqualTo("/login");
+    }
+
+    @Test
+    public void 로그인_일반_사용자_admin_접근() throws Exception {
+        User normalUser = new User("javajigi@naver.com", "1234qwer!", "자바지기", "010-0101-0101", new Role(Authority.NORMAL));
+
+        MockHttpSession httpSession = new MockHttpSession();
+        httpSession.setAttribute(HttpSessionUtils.USER_SESSION_KEY, normalUser);
+        request.setSession(httpSession);
+
+        assertThat(loginInterceptor.preHandle(request, response, null)).isFalse();
+        assertThat(request.getSession().getAttribute(HttpSessionUtils.USER_SESSION_KEY)).isEqualTo(normalUser);
+        assertThat(response.getForwardedUrl()).isEqualTo("/errors");
     }
 }

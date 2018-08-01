@@ -29,4 +29,16 @@ public class CategoryService {
     public List<Category> getList(Long parentId) {
         return categoryRepository.findByParentCategoryId(parentId);
     }
+
+    @Transactional
+    public Category update(Long id, CategoryDto categoryDto, User loginUser) {
+        Category savedCategory = categoryRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return savedCategory.update(categoryDto);
+    }
+
+    @Transactional
+    public void delete(Long id, User loginUser) {
+        Category savedCategory = categoryRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        savedCategory.delete();
+    }
 }

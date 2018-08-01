@@ -43,4 +43,8 @@ public class User implements Serializable {
         this.role = role;
         this.joinDate = LocalDateTime.now();
     }
+
+    public boolean isAdmin() {
+        return role.isAdmin();
+    }
 }

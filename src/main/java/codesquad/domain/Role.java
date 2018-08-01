@@ -20,4 +20,8 @@ public class Role {
     public Role(Authority authority) {
         this.authority = authority;
     }
+
+    public boolean isAdmin() {
+        return this.authority == Authority.ADMIN;
+    }
 }

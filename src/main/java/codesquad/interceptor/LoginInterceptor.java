@@ -1,6 +1,5 @@
 package codesquad.interceptor;
 
-import codesquad.domain.Authority;
 import codesquad.domain.User;
 import codesquad.security.HttpSessionUtils;
 import org.slf4j.Logger;
@@ -23,7 +22,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             response.sendRedirect("/login");
             return false;
         }
-        if (Authority.ADMIN != loginUser.getRole().getAuthority()) {
+        if (!loginUser.isAdmin()) {
             request.getRequestDispatcher("/errors").forward(request, response);
             return false;
         }

@@ -38,6 +38,7 @@ public class UserDto {
     }
 
     public User toUser(String encodedPassword, Role role) throws NotMatchException {
+        log.debug("password : {}", encodedPassword);
         if (!matchPassword()) throw new NotMatchException("비밀번호가 일치하지 않습니다.");
         return new User(userId, encodedPassword, name, phoneNumber, role);
     }

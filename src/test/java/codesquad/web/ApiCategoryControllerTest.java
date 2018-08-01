@@ -6,7 +6,7 @@ import codesquad.dto.CategoryDto;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import support.test.AcceptanceTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,5 +32,22 @@ public class ApiCategoryControllerTest extends AcceptanceTest {
     public void 카테고리_조회() {
         ResponseEntity<Category[]> response = template().getForEntity("/api/categories", Category[].class);
         log.debug("response.getBody : {}", response.getBody());
+    }
+
+    @Test
+    public void 카테고리_수정() {
+        CategoryDto updateCategoryDto = new CategoryDto("윗반찬");
+        ResponseEntity<Category> response =
+                template().exchange("/api/categories/1", HttpMethod.PUT,
+                        new HttpEntity<>(updateCategoryDto, new HttpHeaders()), Category.class);
+        assertThat(response.getBody().getName()).isEqualTo("윗반찬");
+    }
+
+    @Test
+    public void 카테고리_삭제() {
+        ResponseEntity<Void> response =
+                template().exchange("/api/categories/1", HttpMethod.DELETE,
+                        new HttpEntity<>(new HttpHeaders()), Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 }

@@ -41,14 +41,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/admin**");
+                .addPathPatterns("/admin2**")
+                .addPathPatterns("/admin2/**");
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 
-        registry.addViewController("/").setViewName("/index");
         registry.addViewController("/login").setViewName("/user/login");
         registry.addViewController("/join").setViewName("/user/join");
     }

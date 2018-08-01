@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <title>카테고리 추가</title>
+</head>
+<body>
+<div class="btn-group">
+
+    <select class="btn btn-danger dropdown-toggle" >
+        <option class="dropdown-item">선택</option>
+        <option class="dropdown-item" value="select-main-category">메인</option>
+        <option class="dropdown-item" value="select-sub-category">서브</option>
+    </select>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+
+
+<script language = "javascript">
+<!--상위 셀렉트로 하위 셀렉트 제어하기-->
+function showSub(obj) {
+
+    f = document.forms.select_machine;
+    if(obj == 2) {
+
+        f.SUB1.style.display = "";
+        f.SUB2.style.display = "";
+        f.SUB3.style.display = "";
+        f.SUB4.style.display = "";
+        f.SUB5.style.display = "";
+        f.SUB6.style.display = "";
+
+     }
+}
+</script>
+
+<form name="select_machine">
+
+    <!--//상위 셀렉트박스-->
+    <select name=" " onChange="showSub(this.options[this.selectedIndex].value);">
+        <option>선택</option>
+        <option value="select-main-category">메인</option>
+        <option value="select-sub-category">서브</option>
+    </select>
+
+    <!--//여기부턴 하위셀렉트박스-->
+    <select name="SUB1" style="display: none;">
+        <option value=" ">기아자동차</option>
+        <option value=" ">스포티지</option>
+        <option value=" ">오피러스</option>
+        <option value=" ">소렌토</option>
+        <option value=" ">카니발</option>
+    </select>
+
+
+    <select name="SUB2" style="display: none;">
+        <option value=" ">현대자동차</option>
+        <option value=" ">소나타</option>
+        <option value=" ">산타페</option>
+        <option value=" ">투산</option>
+    </select>
+
+
+    <select name="SUB3" style="display: none;">
+        <option value=" ">대우자동차</option>
+        <option value=" ">매그너스</option>
+        <option value=" ">마티즈</option>
+    </select>
+
+
+    <select name="SUB4" style="display: none;">
+        <option value=" ">대림오토바이</option>
+        <option value=" ">시티100</option>
+        <option value=" ">엑시브</option>
+    </select>
+
+
+    <select name="SUB5" style="display: none;">
+        <option value=" ">가와사키오토바이</option>
+        <option value=" ">ZXR400</option>
+        <option value=" ">ZX6R</option>
+        <option value=" ">ZX10R</option>
+        <option value=" ">ZX12R</option>
+    </select>
+
+
+    <select name="SUB6" style="display: none;">
+        <option value=" ">비엠베오토바이</option>
+        <option value=" ">R1150GS</option>
+        <option value=" ">R1100RT</option>
+        <option value=" ">K1200LT</option>
+    </select>
+
+</form>
+
+
+
+</body>
+</html>
