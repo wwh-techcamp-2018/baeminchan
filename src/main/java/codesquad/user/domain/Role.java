@@ -1,4 +1,6 @@
 package codesquad.user.domain;
 
-public class Role {
+public enum Role {
+    DEFAULT,
+    ADMIN
 }

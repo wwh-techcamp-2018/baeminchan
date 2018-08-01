@@ -1,6 +1,7 @@
 package codesquad.user.dto;
 
 import codesquad.exception.UnAuthenticationException;
+import codesquad.user.domain.Role;
 import codesquad.user.domain.User;
 import codesquad.utils.Regex;
 import lombok.*;
@@ -35,21 +36,18 @@ public class UserDto {
     @Pattern(regexp = Regex.PHONE, message = "Invalid phone number")
     private String phone;
 
-
     public boolean matchPassword() {
         return password.equals(confirmPassword);
     }
 
-    public User toEntity(PasswordEncoder passwordEncoder) throws UnAuthenticationException {
-        if (!matchPassword()) {
-            // TODO fix fieldName hard-coding..
-            throw new UnAuthenticationException("password", "비밀번호가 일치하지 않습니다.");
-        }
+    public User toEntity(PasswordEncoder passwordEncoder) {
+
         return User.builder()
                 .name(name)
                 .password(passwordEncoder.encode(password))
                 .email(email)
                 .phone(phone)
+                .role(Role.DEFAULT)
                 .build();
 
     }

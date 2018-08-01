@@ -12,6 +12,10 @@ public class HttpSessionUtils {
         session.setAttribute(USER_SESSION_KEY, user.getId());
     }
 
+    public static Long getUserSession(HttpSession session){
+        return (Long)session.getAttribute(USER_SESSION_KEY);
+    }
+
     public static void removeSessionID(HttpSession session) {
         session.removeAttribute(USER_SESSION_KEY);
     }

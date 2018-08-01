@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>배민푸드 관리자 페이지</title>
+</head>
+
+<body>
+
+  <div class="ui-box">
+    <!-- create -->
+    <div class="create-box">
+      <form class="form-create">
+        <fieldset>
+          <legend class="hidden">카테고리 생성 양식</legend>
+          <ul>
+            <li>
+              <label for="create_parent_category_id" style="display: inline;">
+              </label>
+              <input type="text" name="create_parent_category_id" value="" id="create_parent_category_id" class="input" placeholder="부모 카테고리 ID">
+            </li>
+            <li>
+              <label for="create_category_name"></label>
+              <input type="text" name="create_category_name" id="create_category_name" class="input" placeholder="카테고리 이름" maxlength="25">
+            </li>
+          </ul>
+          <button class="btn btn_mint" type="submit" id="submitCreate">
+            <span>생성</span>
+          </button>
+        </fieldset>
+      </form>
+    </div>
+    <!-- update -->
+    <div class="update-box">
+      <form class="form-update">
+        <fieldset>
+          <legend class="hidden">카테고리 수정 양식</legend>
+          <ul>
+            <li>
+              <label for="update_category_id" style="display: inline;">
+              </label>
+              <input type="text" name="update_category_id" value="" id="update_category_id" class="input" placeholder="카테고리 ID">
+            </li>
+            <li>
+              <label for="update_parent_category_id" style="display: inline;">
+              </label>
+              <input type="text" name="update_parent_category_id" value="" id="update_parent_category_id" class="input" placeholder="부모 카테고리 ID">
+            </li>
+            <li>
+              <label for="update_category_name"></label>
+              <input type="text" name="update_category_name" id="update_category_name" class="input" placeholder="카테고리 이름" maxlength="25">
+            </li>
+          </ul>
+          <button class="btn btn_mint" type="submit" id="submitUpdate">
+            <span>수정</span>
+          </button>
+        </fieldset>
+      </form>
+    </div>
+    <!-- delete -->
+    <div class="delete-box">
+      <form class="form-delete">
+        <fieldset>
+          <legend class="hidden">카테고리 삭제 양식</legend>
+          <ul>
+            <li>
+              <label for="delete_category_id" style="display: inline;">
+              </label>
+              <input type="text" name="delete_category_id" value="" id="delete_category_id" class="input" placeholder="카테고리 ID">
+            </li>
+          </ul>
+          <input type="hidden" name="_method" value="DELETE">
+          <button class="btn btn_mint" type="submit" id="submitDelete">
+            <span>삭제</span>
+          </button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+  <div class="category-box">
+    <ul class="menu">
+        <!--Category List-->
+    </ul>
+  </div>
+
+  <!-- // footer -->
+  <script src="/js/utils.js"></script>
+  <script src="/js/admin/admin.js"></script>
+</body>
+
+</html>
