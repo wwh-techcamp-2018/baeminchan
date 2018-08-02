@@ -57,4 +57,8 @@ insert into menu (name, child_count, index, parent_id) values ('99맛있는무�
 insert into menu (name, child_count, index, parent_id) values ('99맛없는무침', 0, 3, 9);
 insert into menu (name, child_count, index, parent_id) values ('99짠무침', 0, 4, 9);
 
-
+insert into promotion(description, url) values ('장윤주 식단 대공개! 그녀의 건강 반찬을 소개합니다.', './img/img-main-visual-slide_1.jpg');
+insert into promotion(description, url) values ('스페인 그 식당이 안 부러운 비빔밥&apm;한식요리 기획전.', './img/img-main-visual-slide_2.jpg');
+insert into promotion(description, url) values ('3번이미지', './img/img-main-visual-slide_3.jpg');
+insert into promotion(description, url) values ('4번이미지', './img/img-main-visual-slide_4.jpg');
+insert into promotion(description, url) values ('5번이미지', './img/img-main-visual-slide_5.jpg');
