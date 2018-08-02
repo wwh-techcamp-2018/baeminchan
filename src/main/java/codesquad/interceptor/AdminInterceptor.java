@@ -3,11 +3,13 @@ package codesquad.interceptor;
 import codesquad.domain.User;
 import codesquad.domain.UserAuthority;
 import codesquad.util.SessionUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Slf4j
 public class AdminInterceptor implements HandlerInterceptor {
 
     @Override
