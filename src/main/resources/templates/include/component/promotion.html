@@ -16,10 +16,8 @@
     </div>
 
     <div class="dot-btn-box">
-        <a class="dot on" href="#"></a>
-        <a class="dot" href="#"></a>
-        <a class="dot" href="#"></a>
-        <a class="dot" href="#"></a>
-        <a class="dot" href="#"></a>
+        {{#promotions}}
+        <a class="dot" href="#" onclick="onClickDot({{@index_1}})"></a>
+        {{/promotions}}
     </div>
 </section>
