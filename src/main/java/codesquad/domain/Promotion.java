@@ -3,7 +3,6 @@ package codesquad.domain;
 import codesquad.dto.PromotionDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -84,7 +83,7 @@ public class Promotion {
         );
     }
 
-    public void checkValidPeriod(LocalDate startDate, LocalDate endDate) {
+    private void checkValidPeriod(LocalDate startDate, LocalDate endDate) {
         if (startDate.isAfter(endDate)) {
             throw new ValidationException("기간 형식이 맞지 않습니다.");
         }

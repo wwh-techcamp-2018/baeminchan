@@ -7,11 +7,18 @@
         </layout>
     </appender>
 
-    <logger name="support.jackson" level="DEBUG"/>
+    <springProfile name="local">
+        <logger name="support.jackson" level="DEBUG"/>
+        <logger name="codesquad" level="DEBUG"/>
+        <root level="DEBUG">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
 
-    <logger name="codesquad" level="DEBUG"/>
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
 
-    <root level="INFO">
-        <appender-ref ref="STDOUT"/>
-    </root>
 </configuration>

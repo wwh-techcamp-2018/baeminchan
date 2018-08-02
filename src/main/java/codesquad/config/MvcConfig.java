@@ -3,9 +3,12 @@ package codesquad.config;
 import codesquad.converter.LocalDateConverter;
 import codesquad.security.AdminAuthInterceptor;
 import codesquad.security.BasicAuthInterceptor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.Ordered;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+@Slf4j
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
@@ -43,11 +47,6 @@ public class MvcConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public BasicAuthInterceptor basicAuthInterceptor() {
-        return new BasicAuthInterceptor();
-    }
-
-    @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:validation_messages");
@@ -56,7 +55,6 @@ public class MvcConfig implements WebMvcConfigurer {
         return messageSource;
     }
 
-
     @Bean
     public AdminAuthInterceptor adminAuthInterceptor() {
         return new AdminAuthInterceptor();
@@ -64,10 +62,8 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(basicAuthInterceptor());
         registry.addInterceptor(adminAuthInterceptor())
                 .addPathPatterns("/api/admin/**")
                 .addPathPatterns("/api/promotions/**");
     }
-
 }

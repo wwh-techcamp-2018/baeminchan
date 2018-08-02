@@ -1,7 +1,7 @@
 INSERT INTO role (authority) VALUES ('GENERAL');
 INSERT INTO role (authority) VALUES ('ADMIN');
 INSERT INTO USER (user_id, password, name, phone_number, role_id) VALUES ('javajigi@naver.com', '$2a$10$7QwTvz1eoED4zuieO5Esp.Lo7tjRUbdxmAmy2jvS/IwjYTi3wMGYi', '재성', '010-1111-2222', 2);
-INSERT INTO USER (user_id, password, name, phone_number, role_id) VALUES ('gusdk@naver.com', '$2a$10$7QwTvz1eoED4zuieO5Esp.Lo7tjRUbdxmAmy2jvS/IwjYTi3wMGYi', '현아', '010-1111-2222', 2);
+INSERT INTO USER (user_id, password, name, phone_number, role_id) VALUES ('gusdk@naver.com', '$2a$10$7QwTvz1eoED4zuieO5Esp.Lo7tjRUbdxmAmy2jvS/IwjYTi3wMGYi', '현아', '010-1111-2222', 1);
 
 INSERT INTO category (parent_category_id, name ,priority, creator_id) VALUES (null, '밑반찬', 1, 1);
 INSERT INTO category (parent_category_id, name ,priority, creator_id) VALUES (null, '국, 찌개', 2, 1);
@@ -77,5 +77,5 @@ INSERT INTO category (parent_category_id, name) VALUES (8, '셰프의요리');
 INSERT INTO category (parent_category_id, name) VALUES (8, '전국맛집');
 INSERT INTO category (parent_category_id, name) VALUES (8, '키즈관');
 
-INSERT INTO promotion (title, user_id, created_time, start_date, end_date, image_url) VALUES ('테스트 프로모션', 1, '2018-08-01', '2018-08-02', '2018-08-03', 'https://cdn.bmf.kr/banner/main_banner/180724/1532409236448_d9b2dde93f6a.jpg');
-INSERT INTO promotion (title, user_id, created_time, start_date, end_date, image_url) VALUES ('테스트 프로모션2', 2, '2018-08-01', '2018-08-02', '2018-08-03', 'https://cdn.bmf.kr/banner/main_banner/180724/1532409236448_d9b2dde93f6a.jpg');
+INSERT INTO promotion (title, user_id, created_time, start_date, end_date, image_url) VALUES ('테스트 프로모션', 1, '2018-08-01', '2018-08-01', '2018-08-01', 'https://cdn.bmf.kr/banner/main_banner/180724/1532409236448_d9b2dde93f6a.jpg');
+INSERT INTO promotion (title, user_id, created_time, start_date, end_date, image_url) VALUES ('테스트 프로모션2', 2, '2018-08-01', '2018-08-01', '2018-08-01', 'https://cdn.bmf.kr/banner/main_banner/180724/1532409236448_d9b2dde93f6a.jpg');

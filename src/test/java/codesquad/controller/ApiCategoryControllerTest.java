@@ -17,7 +17,7 @@ public class ApiCategoryControllerTest extends AcceptanceTest {
     public void 카테고리_리스트() {
         ResponseEntity<Iterable> response = template().getForEntity("/api/categories", Iterable.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        log.info("message = {}", response.getBody());
+        log.debug("message = {}", response.getBody());
     }
 }
 

@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/promotions")
@@ -22,22 +21,15 @@ public class ApiPromotionController {
     @Autowired
     private PromotionService promotionService;
 
-    @GetMapping("")
-    public Iterable<Promotion> list() {
-        return promotionService.gets();
-    }
-
-    @PostMapping(value = "", consumes = { "multipart/form-data" })
+    @PostMapping("")
     public ResponseEntity<Void> create(HttpSession httpSession, PromotionDto promotionDto) {
-        log.debug("ApiPromotionController create : {}", promotionDto);
         promotionService.create(HttpSessionUtils.getUserFromSession(httpSession), promotionDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        promotionService.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    @GetMapping("")
+    public Iterable<Promotion> list() {
+        return promotionService.gets();
     }
 
     @PutMapping("/{id}")
@@ -45,5 +37,9 @@ public class ApiPromotionController {
         return ResponseEntity.status(HttpStatus.OK).body(promotionService.update(id, updatedPromotionDto));
     }
 
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        promotionService.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
