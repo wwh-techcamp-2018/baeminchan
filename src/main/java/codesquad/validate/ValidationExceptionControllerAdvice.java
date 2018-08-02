@@ -20,18 +20,18 @@ public class ValidationExceptionControllerAdvice {
     @Resource(name = "messageSourceAccessor")
     private MessageSourceAccessor msa;
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ValidationErrorsResponse handleValidationException(MethodArgumentNotValidException exception) {
-        List<ObjectError> errors = exception.getBindingResult().getAllErrors();
-        ValidationErrorsResponse response = new ValidationErrorsResponse();
-        for (ObjectError objectError : errors) {
-            log.debug("object error : {}", objectError);
-            FieldError fieldError = (FieldError) objectError;
-            response.addValidationError(new ValidationError(fieldError.getField(), getErrorMessage(fieldError)));
-        }
-        return response;
-    }
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    public ValidationErrorsResponse handleValidationException(MethodArgumentNotValidException exception) {
+//        List<ObjectError> errors = exception.getBindingResult().getAllErrors();
+//        ValidationErrorsResponse response = new ValidationErrorsResponse();
+//        for (ObjectError objectError : errors) {
+//            log.debug("object error : {}", objectError);
+//            FieldError fieldError = (FieldError) objectError;
+//            response.addValidationError(new ValidationError(fieldError.getField(), getErrorMessage(fieldError)));
+//        }
+//        return response;
+//    }
 
     private String getErrorMessage(FieldError fieldError) {
         Optional<String> code = getFirstCode(fieldError);

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>배민푸드 메인페이지1</title>
+</head>
+
+<body>
+<main id="main">
+  <section class="admin-create">
+    <h2>카테고리 생성</h2>
+    <form id = "create-form">
+      부모 id : <input type="text" id="create-parent-id" value=""><br>
+      카테고리 name: <input type="text" id="create-category-name" value=""><br>
+      <input type="submit" value="생성">
+    </form>
+  </section>
+  <section class="admin-update">
+    <h2>카테고리 변경</h2>
+    <form id = "update-form">
+      카테고리 id : <input type="text" id="update-id" value=""><br>
+      변경할 name: <input type="text" id="update-category-name" value=""><br>
+      <input type="submit" value="변경">
+    </form>
+  </section>
+  <section class="admin-delete">
+    <h2>카테고리 삭제</h2>
+    <form form id = "delete-form">
+      <input type="hidden" name="_method" value="delete">
+      카테고리 id : <input type="text" id="delete-id" value=""><br>
+      <input type="submit" value="삭제">
+    </form>
+  </section>
+
+  <ul class="menu">
+
+  </ul>
+</main>
+<script src="/js/utils.js"></script>
+<script src="/js/admin.js"></script>
+
+</body>
+
+</html>

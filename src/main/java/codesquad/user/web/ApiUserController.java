@@ -4,6 +4,7 @@ import codesquad.user.domain.User;
 import codesquad.user.domain.UserRepository;
 import codesquad.user.dto.LoginDto;
 import codesquad.user.dto.UserDto;
+import codesquad.user.security.HttpSessionUtils;
 import codesquad.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class ApiUserController {
 
     @PostMapping("/login")
     public ResponseEntity<Void> login(@Valid @RequestBody LoginDto loginDto, HttpSession httpSession) {
-        log.debug("login form: {}", loginDto);
+        log.info("login form: {}", loginDto);
         User user = userService.login(loginDto);
         httpSession.setAttribute(UserService.USER_SESSION_KEY, user.getId());
         HttpHeaders headers = new HttpHeaders();

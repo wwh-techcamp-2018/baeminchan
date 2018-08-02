@@ -1,5 +1,6 @@
 package codesquad.user.service;
 
+import codesquad.exception.UnAuthorizedException;
 import codesquad.user.domain.User;
 import codesquad.user.domain.UserRepository;
 import codesquad.user.dto.LoginDto;
@@ -48,4 +49,5 @@ public class UserService {
     public void logout(HttpSession httpSession) {
         httpSession.removeAttribute(USER_SESSION_KEY);
     }
+
 }
