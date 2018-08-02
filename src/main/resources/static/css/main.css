@@ -1430,6 +1430,13 @@ a:focus {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  opacity: 0;
+  1transition: opacity .5s ease-out;
+}
+
+#main-visual .img-box .current {
+  opacity: 1;
+  1transition: opacity .5s ease-in;
 }
 
 #main-visual .img-box .img-1 {

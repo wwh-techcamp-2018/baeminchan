@@ -2,7 +2,60 @@ document.write('<script src="/js/common.js"></script>')
 
 document.addEventListener("DOMContentLoaded", () => {
     initEvents();
+    addPromotionNextBtn();
+    addPromotionPrevBtn();
 })
+
+function addPromotionNextBtn() {
+    $(".direction-btn-box .next").addEventListener("click", promotionNextBtnHandler)
+}
+
+function addPromotionPrevBtn() {
+    $(".direction-btn-box .prev").addEventListener("click", promotionPrevBtnHandler)
+}
+
+function clearPositionStyle(tag) {
+    tag.classList.remove("prev");
+    tag.classList.remove("current");
+    tag.classList.remove("next");
+}
+
+function setPositionStyle(tag, style) {
+    clearPositionStyle(tag);
+    tag.classList.add(style)
+}
+
+function getNextElement(tag) {
+    return tag === tag.parentElement.lastElementChild ?
+        tag.parentElement.firstElementChild : tag.nextElementSibling;
+}
+
+function getPrevElement(tag) {
+    return tag === tag.parentElement.firstElementChild ?
+        tag.parentElement.lastElementChild : tag.previousElementSibling;
+}
+
+function promotionNextBtnHandler(evt) {
+    //evt.preventDefault();
+    let current = $(".img-box .current");
+    clearPositionStyle(getPrevElement(current));
+    setPositionStyle(current, "prev");
+    current = getNextElement(current);
+    setPositionStyle(current, "current");
+    setPositionStyle(getNextElement(current), "next");
+}
+
+function promotionPrevBtnHandler(evt) {
+    //evt.preventDefault();
+    let current = $(".img-box .current");
+    clearPositionStyle(getNextElement(current));
+    setPositionStyle(current, "next");
+    current = getPrevElement(current);
+    setPositionStyle(current, "current");
+    setPositionStyle(getPrevElement(current), "prev");
+}
+
+//setCurrent(tag): 해당 태그를 새로운 커런트로 바꾸어주고 주변을 정리한다.
 
 function createMenu(response) {
     let html = ``;
