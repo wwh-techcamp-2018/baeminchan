@@ -105,13 +105,13 @@
         <h2 class="blind">주요 프로모션</h2>
 
         <ul class="img-box">
-            {{#promotionList}}
+            {{#promotions}}
             <li class="img-item" data-index="{{@index_1}}" style="background-image: url({{url}})">
                 <a href="#">
                     <span class="blind">{{description}}</span>
                 </a>
             </li>
-            {{/promotionList}}
+            {{/promotions}}
         </ul>
 
         <div class="direction-btn-box">
@@ -120,9 +120,9 @@
         </div>
 
         <div class="dot-btn-box">
-            {{#promotionList}}
+            {{#promotions}}
             <a class="dot" href="#" data-index="{{@index_1}}"></a>
-            {{/promotionList}}
+            {{/promotions}}
         </div>
     </section>
 

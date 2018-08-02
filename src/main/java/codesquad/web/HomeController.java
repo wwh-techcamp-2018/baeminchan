@@ -17,7 +17,7 @@ public class HomeController {
 
     @GetMapping
     public String welcomePage(Model model){
-        model.addAttribute("promotionList", promotionRepository.findAll());
+        model.addAttribute("promotions", promotionRepository.findAll());
         return "/index";
     }
 }
