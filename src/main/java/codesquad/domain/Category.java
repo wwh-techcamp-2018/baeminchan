@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
 @ToString
 @Entity
 public class Category extends AbstractEntity {
@@ -42,4 +41,7 @@ public class Category extends AbstractEntity {
     }
 
 
+    public void removeChildren() {
+        this.children = null;
+    }
 }
