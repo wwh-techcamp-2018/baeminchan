@@ -16,13 +16,13 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @Slf4j
 public class ApiAdminAcceptanceTest extends AcceptanceTest {
+
     @Test
     public void 실패_로그인안했을때() {
         CategoryDto category = new CategoryDto();
         RequestEntity<Object> request = RequestEntity.post(URI.create("/admin/api/categories")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(category);
         ResponseEntity<Void> response = template().exchange(request, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FOUND);
-        assertThat(response.getHeaders().getLocation().getPath()).startsWith("/users/login");
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
     @Test
