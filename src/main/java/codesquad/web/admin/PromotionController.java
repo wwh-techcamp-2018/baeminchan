@@ -19,6 +19,7 @@ import static codesquad.security.HttpSessionUtils.getUserFromSession;
 @RequestMapping("/admin/promotions")
 public class PromotionController {
     private static final Logger log = LoggerFactory.getLogger(PromotionController.class);
+
     @Autowired
     private PromotionService promotionService;
 
@@ -27,16 +28,16 @@ public class PromotionController {
         promotionService.create(promotionDto, getUserFromSession(session));
         return "/";
     }
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Category> update(@PathVariable Long id, @RequestBody CategoryDto categoryDto, HttpSession session) {
-//        Category updatedCategory = categoryService.update(id, categoryDto, getUserFromSession(session));
-//        return ResponseEntity.status(HttpStatus.OK).body(updatedCategory);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> delete(@PathVariable Long id, HttpSession session) {
-//        categoryService.delete(id, getUserFromSession(session));
-//        return ResponseEntity.status(HttpStatus.OK).build();
-//    }
+
+    @PutMapping("/{id}")
+    public String update(@PathVariable Long id, PromotionDto promotionDto, HttpSession session) {
+        promotionService.update(id, promotionDto, getUserFromSession(session));
+        return "/";
+    }
+
+    @DeleteMapping("/{id}")
+    public String update(@PathVariable Long id, HttpSession session) {
+        promotionService.delete(id, getUserFromSession(session));
+        return "/";
+    }
 }

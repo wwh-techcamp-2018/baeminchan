@@ -3,7 +3,6 @@ function $(selector) {
 }
 
 function appendCategories(categories) {
-console.log(categories);
    let categoryHtml = ``;
 
     categories.forEach(function(mainCategory) {

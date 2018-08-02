@@ -24,15 +24,6 @@ public class CategoryController {
     public String list(Model model) {
         List<Category> categories = categoryService.getList(null);
         model.addAttribute("categories", categories);
-        return "/admin/category-list2";
+        return "/admin/category-list";
     }
-
-    @GetMapping("/create")
-    public String create(Model model) {
-        List<Category> categories = categoryService.getList(null);
-        model.addAttribute("categories", categories);
-        return "/admin/category-create";
-    }
-
-
 }

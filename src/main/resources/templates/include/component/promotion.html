@@ -2,7 +2,7 @@
     <h2 class="blind">주요 프로모션</h2>
     <ul class="img-box">
         {{#promotions}}
-        <li class="img-item img-{{@index_1}}" style="background-image: url('{{imageUrl}}'); float: none; list-style: none; position: absolute; width: 538px; z-index: 0; display: none;">
+        <li class="img-item img-{{@index_1}}" style="background-image: url('{{imageUrl}}');">
             <a href="#">
                 <span class="blind">{{title}}</span>
             </a>
@@ -11,8 +11,8 @@
     </ul>
 
     <div class="direction-btn-box">
-        <a class="bm-icon spr-btn-arrow-main-slide prev" href="#" title="이전 슬라이드 보기"></a>
-        <a class="bm-icon spr-btn-arrow-main-slide next" href="#" title="다음 슬라이드 보기"></a>
+        <a class="bm-icon spr-btn-arrow-main-slide prev" href="#" title="이전 슬라이드 보기" onclick="onClickPreButton();"></a>
+        <a class="bm-icon spr-btn-arrow-main-slide next" href="#" title="다음 슬라이드 보기" onclick="onClickNextButton();"></a>
     </div>
 
     <div class="dot-btn-box">

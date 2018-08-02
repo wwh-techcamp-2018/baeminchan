@@ -1,7 +1,7 @@
 package codesquad.config;
 
 import codesquad.security.BasicAuthInterceptor;
-import codesquad.security.LoginInterceptor;
+import codesquad.security.AdminInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -47,9 +47,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(basicAuthInterceptor());
-        registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/admin2**")
-                .addPathPatterns("/admin2/**");
+        registry.addInterceptor(new AdminInterceptor())
+                .addPathPatterns("/admin**")
+                .addPathPatterns("/admin/**");
     }
 
     @Override

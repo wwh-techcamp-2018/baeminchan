@@ -1,6 +1,5 @@
 package codesquad.web;
 
-import codesquad.service.CategoryService;
 import codesquad.service.PromotionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -15,21 +15,32 @@ function fetchManager({ url, method, body, headers, callback }) {
 
 function deleteFunction(response) {
     alert("삭제되었습니다.");
-    location.href = "/admin/categories";
-}
-
-function onClickDeleteButton() {
-    document.querySelectorAll('input[name="chk_info"]').forEach(function print(value) {
-        if(value.checked === true) {
-             let categoryDeleteUrl = '/api/categories/' + value.getAttribute('data-id');
-             console.log(categoryDeleteUrl);
-             fetchManager({
-                         url: categoryDeleteUrl,
-                         method: 'DELETE',
-                         headers: { 'content-type': 'application/json'},
-                         callback: deleteFunction
-             })
-        }
+    const categoryClass = ".category-" + response.url.split("/").pop(-1);
+    let categoryTables = document.querySelectorAll(categoryClass);
+    categoryTables.forEach(function deleteTables(child) {
+        child.parentNode.removeChild(child);
     });
-
 }
+
+function deleteCategory({message, answer}) {
+    if (message !== "ok") {
+        alert(message);
+        return;
+    }
+    var article = document.getElementById('answer-' + answer.id);
+    var countElement = document.getElementById('comment-count');
+    countElement.firstElementChild.innerHTML = Number(countElement.firstElementChild.innerHTML) - 1;
+    article.parentNode.removeChild(article);
+}
+
+function onClickDeleteButton(categoryId) {
+    let categoryDeleteUrl = '/api/categories/' + categoryId;
+
+    fetchManager({
+             url: categoryDeleteUrl,
+             method: 'DELETE',
+             headers: { 'content-type': 'application/json'},
+             callback: deleteFunction
+    })
+}
+

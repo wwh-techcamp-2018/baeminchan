@@ -19,10 +19,10 @@ INSERT INTO category (parent_category_id, name, deleted) values (3, '고기반�
 INSERT INTO category (parent_category_id, name, deleted) values (3, '해산물반찬', false);
 INSERT INTO category (parent_category_id, name, deleted) values (3, '생선반찬', false);
 
-INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time, priority) values ('주하멍청이', '1', 'https://cdn.bmf.kr/banner/main_banner/180724/1532409236448_d9b2dde93f6a.jpg', '2018-01-01', '2019-01-01', '2018-08-01T00:00:00', 2);
-INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time, priority) values ('민석멍청이', '2', 'https://cdn.bmf.kr/banner/main_banner/180724/1532409236448_d9b2dde93f6a.jpg', '2018-01-01', '2019-01-01', '2018-08-01T00:00:00', 1);
-INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time, priority) values ('종완멍청이', '1', '/img/3', '2018-01-01', '2019-01-01', '2018-08-01T00:00:00', 9);
-INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time) values ('현아멍청이', '2', '/img/4', '2018-01-01', '2019-01-01', '2018-08-01T00:00:00');
-INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time) values ('포비멍청이', '1', '/img/5', '2018-01-01', '2018-07-01', '2018-08-01T00:00:00');
-INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time) values ('크롱멍청이', '2', '/img/6', '2018-01-01', '2018-07-01', '2018-08-01T00:00:00');
-INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time) values ('호눅스멍청이', '1', '/img/7', '2018-01-01', '2018-07-01', '2018-08-01T00:00:00');
+INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time, priority) values ('주하입니다', '1', 'https://cdn.bmf.kr/banner/main_banner/180724/1532409236448_d9b2dde93f6a.jpg', '2018-01-01', '2019-01-01', '2018-08-01T00:00:00', 2);
+INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time, priority) values ('민석입니다.', '2', 'https://cdn.bmf.kr/banner/main_banner/180719/1531982599279_e66969d9bd66.jpg', '2018-01-01', '2019-01-01', '2018-08-01T00:00:00', 1);
+INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time, priority) values ('종완입니다.', '1', 'https://cdn.bmf.kr/banner/main_banner/180730/1532935773251_4e3cb565748c.jpg', '2018-01-01', '2019-01-01', '2018-08-01T00:00:00', 9);
+INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time) values ('현아입니다.', '2', 'https://cdn.bmf.kr/banner/main_banner/180725/1532508251859_fc64af8aa98c.jpg', '2018-01-01', '2019-01-01', '2018-08-01T00:00:00');
+INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time) values ('포비입니다.', '1', 'https://cdn.bmf.kr/banner/main_banner/180608/1528449480985_4b59a338f5a8.jpg', '2018-01-01', '2018-07-01', '2018-08-01T00:00:00');
+INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time) values ('크롱입니다.', '2', 'https://cdn.bmf.kr/banner/main_banner/180719/1531992782374_4c0636e1ca6b.jpg', '2018-01-01', '2018-07-01', '2018-08-01T00:00:00');
+INSERT INTO promotion (title, user_id, image_url, start_date, end_date, created_time) values ('호눅스입니다.', '1', 'https://cdn.bmf.kr/banner/main_banner/180328/1522226266924_db98fbaef1ab.jpg', '2018-01-01', '2018-07-01', '2018-08-01T00:00:00');

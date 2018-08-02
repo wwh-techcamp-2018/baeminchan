@@ -4,7 +4,7 @@ import codesquad.domain.Authority;
 import codesquad.domain.Role;
 import codesquad.domain.User;
 import codesquad.security.HttpSessionUtils;
-import codesquad.security.LoginInterceptor;
+import codesquad.security.AdminInterceptor;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,14 +19,14 @@ import org.springframework.mock.web.MockHttpSession;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LoginInterceptorTest {
-    private static final Logger log = LoggerFactory.getLogger(LoginInterceptorTest.class);
+public class AdminInterceptorTest {
+    private static final Logger log = LoggerFactory.getLogger(AdminInterceptorTest.class);
 
     private MockHttpServletRequest request;
     private MockHttpServletResponse response;
 
     @InjectMocks
-    private LoginInterceptor loginInterceptor;
+    private AdminInterceptor adminInterceptor;
 
     @Before
     public void setUp() throws Exception {
@@ -36,7 +36,7 @@ public class LoginInterceptorTest {
 
     @Test
     public void 비로그인_사용자_admin_접근() throws Exception {
-        assertThat(loginInterceptor.preHandle(request, response, null)).isFalse();
+        assertThat(adminInterceptor.preHandle(request, response, null)).isFalse();
         assertThat(request.getSession().getAttribute(HttpSessionUtils.USER_SESSION_KEY)).isNull();
         assertThat(response.getHeader("Location")).isEqualTo("/login");
     }
@@ -49,7 +49,7 @@ public class LoginInterceptorTest {
         httpSession.setAttribute(HttpSessionUtils.USER_SESSION_KEY, normalUser);
         request.setSession(httpSession);
 
-        assertThat(loginInterceptor.preHandle(request, response, null)).isFalse();
+        assertThat(adminInterceptor.preHandle(request, response, null)).isFalse();
         assertThat(request.getSession().getAttribute(HttpSessionUtils.USER_SESSION_KEY)).isEqualTo(normalUser);
         assertThat(response.getForwardedUrl()).isEqualTo("/errors");
     }

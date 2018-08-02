@@ -1,9 +1,11 @@
 package codesquad.domain;
 
+import codesquad.dto.PromotionDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,6 +18,7 @@ import static codesquad.utils.Utils.PRIORITY_DEFAULT;
 @Getter
 @ToString
 @NoArgsConstructor
+@Where(clause = "deleted != 'true'")
 public class Promotion {
 
     @Id
@@ -47,9 +50,9 @@ public class Promotion {
     @NotNull
     private String imageUrl;
 
-    @Column
+    @Column(name = "deleted")
     @ColumnDefault("false")
-    private boolean deleted;
+    private boolean isDeleted;
 
     public Promotion(String title, String userId, int priority, LocalDate startDate, LocalDate endDate, String imageUrl) {
         this.title = title;
@@ -59,6 +62,19 @@ public class Promotion {
         this.startDate = startDate;
         this.endDate = endDate;
         this.imageUrl = imageUrl;
+    }
+
+    public void update(PromotionDto promotionDto, User loginUser) {
+        this.title = promotionDto.getTitle();
+        this.userId = loginUser.getUserId();
+        this.priority = promotionDto.getPriority();
+        this.startDate = promotionDto.getStartDate();
+        this.endDate = promotionDto.getEndDate();
+        this.imageUrl = promotionDto.getImageUrl();
+    }
+
+    public void delete() {
+        this.isDeleted = true;
     }
 }
 

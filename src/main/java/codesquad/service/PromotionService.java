@@ -28,7 +28,20 @@ public class PromotionService {
     @Transactional
     public Promotion create(PromotionDto promotionDto, User user) {
         Promotion promotion = promotionRepository.save(promotionDto.toPromotion(user));
-        log.debug("123 : {}", promotion);
         return promotion;
+    }
+
+    @Transactional
+    public void update(Long id, PromotionDto promotionDto, User loginUser) {
+        getPromotionById(id).update(promotionDto, loginUser);
+    }
+
+    @Transactional
+    public void delete(Long id, User loginUser) {
+        getPromotionById(id).delete();
+    }
+
+    private Promotion getPromotionById(Long id) {
+        return promotionRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 }
