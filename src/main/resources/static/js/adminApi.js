@@ -1,11 +1,6 @@
 document.write("<script src='/js/common.js'></script>")
 
 function toIntElseNull(strValue) {
-//  if (strValue.trim() === "") {
-//    return null;
-//  }
-//  return parseInt(strValue);
-
   return strValue.trim() === "" ? null : parseInt(strValue);
 }
 
@@ -57,4 +52,3 @@ document.addEventListener("DOMContentLoaded", () => {
   initEvents("#category-delete-button", deleteCategoryHandler);
   initEvents("#category-update-button", updateCategoryHandler);
 });
-

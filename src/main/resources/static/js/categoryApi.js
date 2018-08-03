@@ -42,7 +42,7 @@ function createCategoryTemplate(category) {
     categoryTemplate += subCategoryTemplate;
   });
 
-  categoryTemplate += `</ul> 
+  categoryTemplate += `</ul>
                             </li>`;
   parentUl.insertAdjacentHTML("beforeend", categoryTemplate);
 }
@@ -58,6 +58,7 @@ function createAdminCategoryTemplate(category) {
     let subCategoryTemplate = `<li>
                                     <span>${subCategory.cid} : ${subCategory.title}</span>
                                </li>`;
+
     categoryTemplate += subCategoryTemplate;
   });
 

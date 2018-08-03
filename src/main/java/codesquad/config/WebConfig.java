@@ -13,7 +13,6 @@ import java.util.List;
 
 @Configuration
 public abstract class WebConfig implements WebMvcConfigurer {
-
     @Bean
     public AdminSessionHandlerMethodArgumentResolver adminUserHandlerMethodArgumentResolver() {
         return new AdminSessionHandlerMethodArgumentResolver();

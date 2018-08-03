@@ -7624,3 +7624,5 @@ Unconditional classes:
 2018-08-03 16:23:50.808 DEBUG 172983 --- [ Thread-3 ] o.s.b.f.s.DisposableBeanAdapter - Invoking destroy() on bean with name 'requestContextFilter'
 2018-08-03 16:23:50.808 DEBUG 172983 --- [ Thread-3 ] o.s.b.f.s.DefaultListableBeanFactory - Retrieved dependent beans for bean 'org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory': [org.springframework.context.annotation.internalConfigurationAnnotationProcessor]
 2018-08-03 16:24:13.203 DEBUG 20866 --- [ main ] codesquad.BaeminchanApplication - Running with Spring Boot v2.0.3.RELEASE, Spring v5.0.7.RELEASE
+2018-08-03 16:42:06.915 DEBUG 20803 --- [ main ] codesquad.BaeminchanApplication - Running with Spring Boot v2.0.3.RELEASE, Spring v5.0.7.RELEASE
+2018-08-03 16:42:42.819 DEBUG 20764 --- [ main ] codesquad.BaeminchanApplication - Running with Spring Boot v2.0.3.RELEASE, Spring v5.0.7.RELEASE

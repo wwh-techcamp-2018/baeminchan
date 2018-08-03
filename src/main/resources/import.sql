@@ -60,3 +60,4 @@ INSERT INTO PROMOTION (promotion_url) values ('https://cdn.bmf.kr/banner/main_ev
 INSERT INTO PROMOTION (promotion_url) values ('https://cdn.bmf.kr/banner/main_event/170628/1498639751272_e6cadbda65b4.jpg');
 INSERT INTO PROMOTION (promotion_url) values ('https://cdn.bmf.kr/banner/main_event/170425/1493082744401_ba9831e4e2bb.png');
 INSERT INTO PROMOTION (promotion_url) values ('https://cdn.bmf.kr/banner/main_event/171214/1513243754333_8a0018a0575a.jpg');
+
