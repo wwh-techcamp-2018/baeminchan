@@ -77,4 +77,7 @@ public class UserDTO {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
 }

@@ -1,5 +1,6 @@
 package codesquad.support.test;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,5 +17,8 @@ public class AcceptanceTest {
     public TestRestTemplate template() {
         return template;
     }
+
+    @Test
+    public void emptyTest() {}
 }
 

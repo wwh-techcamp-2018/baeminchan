@@ -31,7 +31,7 @@ public class UserControllerAcceptanceTest extends AcceptanceTest {
 
     @Test
     public void signup() throws Exception {
-        user = new UserDTO("javajigi@tech.com", "12345678", "12345678", "javajigi", "010-1234-5678");
+        user = new UserDTO("qjkhdjqkwd@tech.com", "12345678", "12345678", "javajigi", "010-1234-5678");
         requestSuccessProcess(SIGNUP_URL, user);
     }
 

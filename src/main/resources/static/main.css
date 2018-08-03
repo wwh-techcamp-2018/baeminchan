@@ -432,6 +432,7 @@ a:focus {
   flex-grow: 1;
   position: relative;
   padding: 5px 25px 0 0;
+  z-index: 15;
 }
 
 #gnb .menu>li>a {

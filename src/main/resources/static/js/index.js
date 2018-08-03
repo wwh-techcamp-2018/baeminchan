@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function(evt) {
 
     getRootCategories();
 
+    getEventCategories();
+
     $(".direction-btn-box .next").addEventListener("click", function (evt) {
         evt.preventDefault();
         navigateRight();
@@ -45,8 +47,25 @@ function getSubCategories(id) {
     });
 }
 
-function drawCategories(result) {
+function getEventCategories() {
+    getManager({
+        url: "/api/categories/event",
+        method: "GET",
+        headers: {"Content-type": "application/json"},
+        callback : drawEventCategories
+    });
+}
 
+function getEventCategoryProducts(id) {
+    getManager({
+        url: "/api/categories/event/" + id,
+        method: "GET",
+        headers: {"Content-type": "application/json"},
+        callback : drawEventCategoryProducts
+    });
+}
+
+function drawCategories(result) {
     var template = Handlebars.templates["precompile/title_template"];
     for(const category of result) {
         $(".category-menu").innerHTML += template(category);
@@ -71,6 +90,39 @@ function drawSubCategories(result) {
     }
 }
 
+function drawEventCategories(result) {
+    $(".tab-btn-box").innerHTML = "";
+    const template = Handlebars.templates["precompile/event_category_template"];
+    for(category of result) {
+        $(".tab-btn-box").innerHTML += template(category);
+    }
+    const categories = $_all(".tab-btn-box li");
+    for(var i = 0; i < categories.length; ++i) {
+        const elem = categories[i];
+        elem.addEventListener("click", function(evt) {
+            clickEventCategory(this.querySelector("a").getAttribute("type"));
+        });
+    }
+    clickEventCategory(chooseRandomFromArray(categories).querySelector("a").getAttribute("type"));
+}
+
+function drawEventCategoryProducts(result) {
+    $(".tab-content-box").innerHTML = "";
+    const template = Handlebars.templates["precompile/event_category_product_template"];
+    for(product of result) {
+        $(".tab-content-box").innerHTML += template(product);
+    }
+}
+
+function clickEventCategory(id) {
+    console.log(id);
+    if ($("a.now")) {
+        $("a.now").classList.toggle("now");
+    }
+    $("#event-category-" + id).classList.toggle("now");
+    getEventCategoryProducts(id);
+}
+
 function navigateRight() {
     const items = $_all(".img-item");
     navigateToIndex(((getCurrentDisplayIndex() + 1) % items.length))
@@ -78,7 +130,7 @@ function navigateRight() {
 
 function navigateLeft() {
     const items = $_all(".img-item");
-    navigateToIndex(((getCurrentDisplayIndex() + 7) % items.length))
+    navigateToIndex(((getCurrentDisplayIndex() + items.length - 1) % items.length))
 }
 
 function navigateToIndex(index) {

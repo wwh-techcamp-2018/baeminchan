@@ -21,7 +21,7 @@ public class UserTest {
 
     @Test(expected = UserVerificationException.class)
     public void passwordMatch() {
-        user.matchPassword("12345678", passwordEncoder);
+        user.matchPassword("1234568", passwordEncoder);
     }
 
 }

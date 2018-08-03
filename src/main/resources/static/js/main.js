@@ -34,3 +34,7 @@ function getManager({url, method, headers, callback}) {
         callback(result);
     });
 }
+
+function chooseRandomFromArray(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}

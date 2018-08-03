@@ -1,6 +1,8 @@
 package codesquad;
 
 import codesquad.security.AdminAuthInterceptor;
+import codesquad.security.BasicAuthInterceptor;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@EnableCaching
 public class WebConfig implements WebMvcConfigurer {
 
     @Bean
@@ -24,7 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:messages");
         messageSource.setDefaultEncoding("UTF-8");
-        messageSource.setCacheMillis(30);
+        messageSource.setCacheSeconds(30);
         return messageSource;
     }
 
@@ -38,8 +41,14 @@ public class WebConfig implements WebMvcConfigurer {
         return new AdminAuthInterceptor();
     }
 
+    @Bean
+    public BasicAuthInterceptor basicAuthInterceptor() {
+        return new BasicAuthInterceptor();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(adminAuthInterceptor()).addPathPatterns("/admin/**");
+        registry.addInterceptor(basicAuthInterceptor()).order(0);
+        registry.addInterceptor(adminAuthInterceptor()).addPathPatterns("/admin/**").order(1);
     }
 }
