@@ -10,8 +10,8 @@ function isEmpty(value) {
     return value.length == 0
 }
 
-function fetchManager({ url, method, body, headers, callback }) {
-    fetch(url, { method, body, headers, credentials: "same-origin" })
+function fetchManager({url, method, body, headers, callback}) {
+    fetch(url, {method, body, headers, credentials: "same-origin"})
         .then((response) => {
             callback(response)
         })

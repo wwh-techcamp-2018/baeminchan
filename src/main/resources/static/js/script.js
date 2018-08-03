@@ -2,32 +2,101 @@ document.write('<script src="/js/common.js"></script>')
 
 document.addEventListener("DOMContentLoaded", () => {
     initEvents();
+    addArrowBtn();
+    addDotBtn();
 })
+
+function addDotBtn() {
+    const btn = $("#main-visual .dot-btn-box");
+    if (btn === null) return;
+    btn.addEventListener("click", dotBtnHandler);
+}
+
+function dotBtnHandler(evt) {
+    evt.preventDefault();
+    if (evt.target.classList.contains("dot-btn-box"))
+        return;
+    let onDot = $(".dot-btn-box .dot.on");
+    if (onDot !== null)
+        onDot.classList.remove("on");
+    onDot = evt.target;
+    onDot.classList.add("on");
+    synchronizeDotAndPromotion(onDot);
+}
+
+function addArrowBtn() {
+    addPromotionNextBtn();
+    addPromotionPrevBtn();
+}
+
+
+function addPromotionNextBtn() {
+    const btn = $(".direction-btn-box .next");
+    if (btn === null) return;
+    btn.addEventListener("click", promotionArrowBtnHandler);
+}
+
+function addPromotionPrevBtn() {
+    const btn = $(".direction-btn-box .prev");
+    if (btn === null) return;
+    btn.addEventListener("click", promotionArrowBtnHandler);
+}
+
+function promotionArrowBtnHandler(evt) {
+    evt.preventDefault();
+    let onDot = $(".dot-btn-box .dot.on");
+    onDot.classList.remove("on");
+    onDot = evt.target.classList.contains("next") ? getNextElement(onDot) : getPrevElement(onDot);
+    onDot.classList.add("on");
+    synchronizeDotAndPromotion(onDot);
+}
+
+function synchronizeDotAndPromotion(dot) {
+    const dotIndex = [...dot.parentElement.children].indexOf(dot);
+    setPromotion(dotIndex);
+}
+
+function setPromotion(index) {
+    const current = $(".img-box .current");
+    current.classList.remove("current");
+    current.parentElement.children[index].classList.add("current");
+}
+
+function getNextElement(tag) {
+    return tag === tag.parentElement.lastElementChild ?
+        tag.parentElement.firstElementChild : tag.nextElementSibling;
+}
+
+function getPrevElement(tag) {
+    return tag === tag.parentElement.firstElementChild ?
+        tag.parentElement.lastElementChild : tag.previousElementSibling;
+}
 
 function createMenu(response) {
     let html = ``;
-    response.json().then(responseObject => {responseObject.children.forEach(main_menu =>{
-        html = html + `
+    response.json().then(responseObject => {
+        responseObject.children.forEach(main_menu => {
+            html = html + `
                 <li>
                     <a href="#">${main_menu.title}</a>
                     <ul class="sub-menu">
                 `
-        main_menu.children.forEach(sub_menu => {
-            html = html + `
+            main_menu.children.forEach(sub_menu => {
+                html = html + `
                             <li>
                                 <a href="#">${sub_menu.title}</a>
                             </li>
                         `
-        })
-        html = html + `
+            })
+            html = html + `
                         </ul>
                     </li>
                     `
-    })
+        })
 
-    //$(".menu").append(html).trigger("create");
+        //$(".menu").append(html).trigger("create");
 
-    $("#gnb .menu").insertAdjacentHTML("afterbegin", html);
+        $("#gnb .menu").insertAdjacentHTML("afterbegin", html);
     });
 }
 
@@ -35,7 +104,7 @@ function initEvents() {
     fetchManager({
         url: '/api/categories',
         method: 'GET',
-        headers: { 'content-type': 'application/json' },
+        headers: {'content-type': 'application/json'},
         callback: createMenu
     });
 }
@@ -64,7 +133,7 @@ function loginHandler(evt) {
     fetchManager({
         url: '/api/users/login',
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        headers: {'content-type': 'application/json'},
         body: JSON.stringify(loginForm),
         callback: login
     });
@@ -82,7 +151,7 @@ function logoutHandler(evt) {
     fetchManager({
         url: '/api/users/logout',
         method: 'GET',
-        headers: { 'content-type': 'application/json' },
+        headers: {'content-type': 'application/json'},
         callback: logout
     });
 }
@@ -128,7 +197,7 @@ function joinHandler(evt) {
     fetchManager({
         url: '/api/users',
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        headers: {'content-type': 'application/json'},
         body: JSON.stringify(joinForm),
         callback: join
     });

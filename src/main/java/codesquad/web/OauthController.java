@@ -21,7 +21,9 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -32,8 +34,38 @@ public class OauthController {
     private static final String API_KEY = "7318f936054d4de4110f910aae224219";
     private static final String REDIR_URI = "http://localhost:8080/oauth/kakaologin";
 
+    public static String getAccessToken(String autorize_code) {
+        final String requestUrl = "https://kauth.kakao.com/oauth/token";
+
+        RestTemplate template = new RestTemplate();
+        MultiValueMap<String, String> postParams = new LinkedMultiValueMap<>();
+
+        List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();
+        converters.add(new FormHttpMessageConverter());
+        converters.add(new StringHttpMessageConverter());
+
+        template.setMessageConverters(converters);
+
+        postParams.add("grant_type", GRANT_TYPE);
+        postParams.add("client_id", API_KEY);
+        postParams.add("redirect_uri", REDIR_URI);
+        postParams.add("code", autorize_code);
+
+        String result = template.postForObject(requestUrl, postParams, String.class);
+        log.debug("result : {}", result);
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jsonNode = null;
+        try {
+            jsonNode = mapper.readTree(result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        log.debug("access token : {}", jsonNode.get("access_token").toString());
+        return jsonNode.get("access_token").toString();
+    }
+
     @GetMapping("kakao-join")
-    public String kakaoJoin(@Valid JoinUserDTO joinUserDTO, HttpSession session){
+    public String kakaoJoin(@Valid JoinUserDTO joinUserDTO, HttpSession session) {
         return "/";
     }
 
@@ -42,9 +74,9 @@ public class OauthController {
         log.info("code : {}", code);
         JsonNode userInfo = getUSerInfo(getAccessToken(code));
 
-        model.addAttribute("emailId", userInfo.get("kaccount_email").toString().replaceAll("\"","").split("@")[0]);
-        model.addAttribute("emailDomain", userInfo.get("kaccount_email").toString().replaceAll("\"","").split("@")[1]);
-        model.addAttribute("name", userInfo.get("properties").get("nickname").toString().replaceAll("\"",""));
+        model.addAttribute("emailId", userInfo.get("kaccount_email").toString().replaceAll("\"", "").split("@")[0]);
+        model.addAttribute("emailDomain", userInfo.get("kaccount_email").toString().replaceAll("\"", "").split("@")[1]);
+        model.addAttribute("name", userInfo.get("properties").get("nickname").toString().replaceAll("\"", ""));
         return "/kakao-join";
     }
 
@@ -62,17 +94,17 @@ public class OauthController {
         template.setMessageConverters(converters);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_FORM_URLENCODED}));
+        headers.setAccept(Arrays.asList(new MediaType[]{MediaType.APPLICATION_FORM_URLENCODED}));
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.set("Authorization", "Bearer " + accessToken);
 
-        HttpEntity<String> entityReq = new HttpEntity<String>("",headers);
+        HttpEntity<String> entityReq = new HttpEntity<String>("", headers);
 
         ResponseEntity<String> responseEntity = template.exchange(requestUrl, HttpMethod.POST, entityReq, String.class);
 
         String responseBody = responseEntity.getBody();
 
-        log.debug("body : {}",responseBody);
+        log.debug("body : {}", responseBody);
 
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -82,35 +114,5 @@ public class OauthController {
         }
 
         return result;
-    }
-
-    public static String getAccessToken(String autorize_code) {
-        final String requestUrl = "https://kauth.kakao.com/oauth/token";
-
-        RestTemplate template = new RestTemplate();
-        MultiValueMap<String, String> postParams = new LinkedMultiValueMap<>();
-
-        List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();
-        converters.add(new FormHttpMessageConverter());
-        converters.add(new StringHttpMessageConverter());
-
-        template.setMessageConverters(converters);
-
-        postParams.add("grant_type",GRANT_TYPE);
-        postParams.add("client_id",API_KEY);
-        postParams.add("redirect_uri",REDIR_URI);
-        postParams.add("code",autorize_code);
-
-        String result = template.postForObject(requestUrl, postParams, String.class);
-        log.debug("result : {}", result);
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = null;
-        try {
-            jsonNode = mapper.readTree(result);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        log.debug("access token : {}",jsonNode.get("access_token").toString());
-        return jsonNode.get("access_token").toString();
     }
 }

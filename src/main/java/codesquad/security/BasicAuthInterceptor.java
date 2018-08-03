@@ -21,7 +21,7 @@ public class BasicAuthInterceptor extends HandlerInterceptorAdapter {
     private UserService userService;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String authorization = request.getHeader("Authorization");
         log.debug("Authorization : {}", authorization);
         if (authorization == null || !authorization.startsWith("Basic")) {
@@ -38,7 +38,7 @@ public class BasicAuthInterceptor extends HandlerInterceptorAdapter {
         log.debug("login user dto : {}", loginUserDTO);
         User user = userService.login(loginUserDTO);
         log.debug("Login Success : {}", user);
-        HttpSessionUtils.saveSession(request.getSession(),user);
+        HttpSessionUtils.saveSession(request.getSession(), user);
         return true;
     }
 }

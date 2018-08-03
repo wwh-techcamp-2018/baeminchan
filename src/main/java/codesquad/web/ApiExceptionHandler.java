@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ApiExceptionHandler {
 
     @ExceptionHandler(CategoryNotFoundException.class)
-    public ResponseEntity<String> categoryNotFound(CategoryNotFoundException exception){
+    public ResponseEntity<String> categoryNotFound(CategoryNotFoundException exception) {
         log.debug("[CategoryNotFoundException] {}", exception.getMessage());
         return new ResponseEntity(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
