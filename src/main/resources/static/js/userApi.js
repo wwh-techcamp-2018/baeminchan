@@ -1,24 +1,9 @@
-function $(selector) {
-    return document.querySelector(selector);
-}
+document.write("<script src='/js/common.js'></script>")
 
 document.addEventListener("DOMContentLoaded", () => {
     initEvents(".join_form_box .btn_area .btn",registerUserHandler);
     initEvents("#login_btn",loginHandler);
 })
-
-function initEvents(btnSelector,handler) {
-    const initBtn = $(btnSelector);
-    if(initBtn === null) return;
-    initBtn.addEventListener("click", handler);
-}
-
-function fetchManager({ url, method, body, headers,callback}) {
-    fetch(url, {method,body,headers,credentials: "same-origin"})
-        .then((response) => {
-        callback(response);
-    })
-}
 
 function registerUserHandler(evt) {
     evt.preventDefault();

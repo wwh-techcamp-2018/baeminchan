@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
 @RestControllerAdvice
-public class ExceptionController {
+public class ApiExceptionController {
 
     @ExceptionHandler(LoginFailedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
