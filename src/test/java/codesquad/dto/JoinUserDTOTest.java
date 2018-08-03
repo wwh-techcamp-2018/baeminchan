@@ -1,20 +1,11 @@
 package codesquad.dto;
 
-import codesquad.exception.ExistedEmailException;
-import codesquad.repository.UserRepository;
-import codesquad.service.UserService;
-import org.hibernate.mapping.Join;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-
-import javax.validation.*;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class JoinUserDTOTest extends DTOTest<JoinUserDTO>{
+public class JoinUserDTOTest extends DTOTest<JoinUserDTO> {
     private JoinUserDTO joinUserDTO;
 
     @Before

@@ -4,9 +4,11 @@ import codesquad.dto.CategoryDTO;
 import codesquad.dto.UpdateCategoryDTO;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ActiveProfiles("develop")
 public class CategoryTest {
     private Category parentCategory;
     private CategoryDTO childCategoryDTO;
@@ -43,7 +45,7 @@ public class CategoryTest {
 
     @Test
     public void updateTest() {
-        parentCategory.update(new UpdateCategoryDTO(null,"변경"));
+        parentCategory.update(new UpdateCategoryDTO(null, "변경"));
         assertThat(parentCategory.getTitle()).isEqualTo("변경");
     }
 }

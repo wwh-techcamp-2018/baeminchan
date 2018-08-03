@@ -7,17 +7,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function addHandler() {
     const root_div = $("#category_list")
-    if(root_div === null) return;
-    root_div.addEventListener("click",categoryDivEventHandler);
+    if (root_div === null) return;
+    root_div.addEventListener("click", categoryDivEventHandler);
 }
 
 function errorHandler(response) {
-    if(response.status === 401){
+    if (response.status === 401) {
         alert("인증오류입니다");
         location.replace("/login.html");
         return;
     }
-    if(response.status === 403){
+    if (response.status === 403) {
         alert("인가오류입니다");
         location.replace("/");
         return;
@@ -64,13 +64,13 @@ function initEvents() {
     fetchManager({
         url: '/api/categories',
         method: 'GET',
-        headers: { 'content-type': 'application/json' },
+        headers: {'content-type': 'application/json'},
         callback: createAdminMenu
     });
 }
 
 function addUpperCategory(response) {
-    if(response.status === 400) {
+    if (response.status === 400) {
         alert("카테고리명을 채워주세요");
         return;
     }
@@ -91,7 +91,7 @@ function addUpperCategory(response) {
             </li>
         </ul>
         `
-        $("#category_list").insertAdjacentHTML("beforeend",html);
+        $("#category_list").insertAdjacentHTML("beforeend", html);
     })
 }
 
@@ -99,8 +99,8 @@ function addUpperCategoryHandler(evt) {
     evt.preventDefault();
 
     const categoryForm = {
-        "title" : $("#category_title").value,
-        "parentId" : 0
+        "title": $("#category_title").value,
+        "parentId": 0
     };
 
     $("#category_title").value = "";
@@ -108,14 +108,14 @@ function addUpperCategoryHandler(evt) {
     fetchManager({
         url: '/api/admin/category',
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        headers: {'content-type': 'application/json'},
         body: JSON.stringify(categoryForm),
         callback: addUpperCategory
     });
 }
 
 function addLowerCategory(response) {
-    if(response.status === 400) {
+    if (response.status === 400) {
         alert("카테고리명을 채워주세요");
         return;
     }
@@ -129,30 +129,30 @@ function addLowerCategory(response) {
                 <button data-category-id="${category.id}" class="delete_lower">삭제</button>
             </li>
             `;
-        $("#create_lower_menu_li_"+category.parent.id).insertAdjacentHTML("beforebegin", html);
+        $("#create_lower_menu_li_" + category.parent.id).insertAdjacentHTML("beforebegin", html);
     })
 }
 
 function deleteLowerCategory(response) {
     errorHandler(response);
     response.json().then(category => {
-        $("#lower_menu_li_"+category.id).remove();
+        $("#lower_menu_li_" + category.id).remove();
     })
 }
 
 function deleteUpperCategory(response) {
     errorHandler(response);
     response.json().then(category => {
-        $("#category_list_"+category.id).remove();
+        $("#category_list_" + category.id).remove();
     })
 }
 
 
 function deleteUpperCategoryHandler(evt) {
     fetchManager({
-        url: '/api/admin/category/'+evt.target.dataset.categoryId,
+        url: '/api/admin/category/' + evt.target.dataset.categoryId,
         method: 'DELETE',
-        headers: { 'content-type': 'application/json' },
+        headers: {'content-type': 'application/json'},
         callback: deleteUpperCategory
     });
 }
@@ -160,9 +160,9 @@ function deleteUpperCategoryHandler(evt) {
 function deleteLowerCategoryHandler(evt) {
 
     fetchManager({
-        url: '/api/admin/category/'+evt.target.dataset.categoryId,
+        url: '/api/admin/category/' + evt.target.dataset.categoryId,
         method: 'DELETE',
-        headers: { 'content-type': 'application/json' },
+        headers: {'content-type': 'application/json'},
         callback: deleteLowerCategory
     });
 }
@@ -170,16 +170,16 @@ function deleteLowerCategoryHandler(evt) {
 function createLowerCategoryHandler(evt) {
     const parentId = evt.target.dataset.categoryId;
     const categoryForm = {
-        "parentId" : parentId,
-        "title" : $("#lower_menu_"+parentId).value
+        "parentId": parentId,
+        "title": $("#lower_menu_" + parentId).value
     };
 
-    $("#lower_menu_"+parentId).value = "";
+    $("#lower_menu_" + parentId).value = "";
 
     fetchManager({
         url: '/api/admin/category',
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        headers: {'content-type': 'application/json'},
         body: JSON.stringify(categoryForm),
         callback: addLowerCategory
     });
@@ -188,8 +188,8 @@ function createLowerCategoryHandler(evt) {
 function updateCategory(response) {
     errorHandler(response);
     response.json().then(category => {
-        $("#menu_"+category.id).value = category.title;
-        $("#menu_"+category.id).placeholder = category.title;
+        $("#menu_" + category.id).value = category.title;
+        $("#menu_" + category.id).placeholder = category.title;
     })
 
 }
@@ -198,22 +198,22 @@ function updateCategoryHandler(evt) {
     evt.preventDefault();
 
     const id = evt.target.dataset.categoryId;
-    const title = $("#menu_"+id);
+    const title = $("#menu_" + id);
 
-    if(title.value === title.placeholder) {
+    if (title.value === title.placeholder) {
         alert("카테고리명을 수정하세요");
         return;
     }
 
     const categoryForm = {
-        "title" : title.value,
-        "id" : id
+        "title": title.value,
+        "id": id
     };
 
     fetchManager({
-        url: '/api/admin/category/'+id,
+        url: '/api/admin/category/' + id,
         method: 'PUT',
-        headers: { 'content-type': 'application/json' },
+        headers: {'content-type': 'application/json'},
         body: JSON.stringify(categoryForm),
         callback: updateCategory
     });
@@ -224,19 +224,19 @@ function categoryDivEventHandler(evt) {
 
     const target_class = evt.target.className;
 
-    if(target_class === "create_lower"){
+    if (target_class === "create_lower") {
         createLowerCategoryHandler(evt);
         return;
     }
-    if(target_class === "delete_lower"){
+    if (target_class === "delete_lower") {
         deleteLowerCategoryHandler(evt);
         return;
     }
-    if(target_class === "delete_upper") {
+    if (target_class === "delete_upper") {
         deleteUpperCategoryHandler(evt);
         return;
     }
-    if(target_class == "update"){
+    if (target_class == "update") {
         updateCategoryHandler(evt);
         return;
     }

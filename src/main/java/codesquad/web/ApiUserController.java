@@ -28,7 +28,7 @@ public class ApiUserController {
     public ResponseEntity<Void> join(@Valid @RequestBody JoinUserDTO joinUserDTO, HttpSession session) {
         log.debug("[가입 시도] {}", joinUserDTO.toString());
         User loginUser = userService.login(userService.join(joinUserDTO));
-        HttpSessionUtils.saveSession(session,loginUser);
+        HttpSessionUtils.saveSession(session, loginUser);
         log.debug("[가입 성공] email: {} 응답 코드: 200 OK", joinUserDTO.getEmail());
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
@@ -49,7 +49,7 @@ public class ApiUserController {
         log.debug("[로그인 시도] {}", loginUserDTO.toString());
         User loginUser = userService.login(loginUserDTO);
         log.debug("[로그인 성공] email: {} 응답 코드: 200 OK", loginUserDTO.getEmail());
-        HttpSessionUtils.saveSession(session,loginUser);
+        HttpSessionUtils.saveSession(session, loginUser);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 }

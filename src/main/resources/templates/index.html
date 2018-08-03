@@ -42,11 +42,11 @@
                 <li>
                     <a href="javascript:void(0);" onclick="logoutHandler(event)">로그아웃</a>
                 </li>
-                    {{#if loginedUser.admin}}
-                    <li>
-                        <a href="./admin">관리자페이지</a>
-                    </li>
-                    {{/if}}
+                {{#if loginedUser.admin}}
+                <li>
+                    <a href="./admin">관리자페이지</a>
+                </li>
+                {{/if}}
                 {{/ loginedUser }}
                 <li>
                     <a href="#">

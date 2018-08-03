@@ -16,9 +16,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 public class ApiAdminAcceptanceTest extends ApiAcceptanceTest {
 
-    private CategoryDTO categoryDTO;
-
     private static final String API_URL = "/api/admin";
+    private CategoryDTO categoryDTO;
     private UpdateCategoryDTO updateCategoryDTO;
 
     @Before

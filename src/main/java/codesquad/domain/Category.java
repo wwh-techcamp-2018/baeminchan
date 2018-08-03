@@ -2,7 +2,6 @@ package codesquad.domain;
 
 import codesquad.dto.CategoryDTO;
 import codesquad.dto.UpdateCategoryDTO;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -44,7 +43,8 @@ public class Category {
         this.title = title;
     }
 
-    public Category(){}
+    public Category() {
+    }
 
     public static Category fromDTO(CategoryDTO categoryDTO) {
         return new Category(categoryDTO.getTitle());
@@ -63,12 +63,12 @@ public class Category {
 
     public void delete() {
         this.deleted = true;
-        if(children!=null){
+        if (children != null) {
             deleteChildren();
         }
     }
 
-    private void deleteChildren(){
+    private void deleteChildren() {
         for (Category child : children) {
             child.delete();
         }
