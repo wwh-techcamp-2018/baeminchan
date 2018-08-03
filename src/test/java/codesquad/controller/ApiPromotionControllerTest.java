@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.*;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.util.MultiValueMap;
 import support.test.AcceptanceTest;
 
@@ -30,6 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 3. 프론트엔트 transition 구현
  */
 @Slf4j
+@ActiveProfiles("test")
 public class ApiPromotionControllerTest extends AcceptanceTest {
     private final Long TEST_PROMOTION_ID = 1L;
 
@@ -40,7 +42,7 @@ public class ApiPromotionControllerTest extends AcceptanceTest {
 
     @Before
     public void setUp() throws Exception {
-        defaultUser = new User("javajigi@naver.com", "test33##");
+        defaultUser = new User("serverwizard@naver.com", "test33##");
     }
 
     @Test

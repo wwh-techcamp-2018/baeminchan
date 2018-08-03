@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 import support.test.AcceptanceTest;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class ApiUserControllerTest extends AcceptanceTest {
 
     @Before
     public void setUp() throws Exception {
-        defaultUser.put("userId", "javajigi@naver.com");
+        defaultUser.put("userId", "serverwizard@naver.com");
         defaultUser.put("password", "test33##");
     }
 

@@ -1,41 +1,62 @@
-document.addEventListener("DOMContentLoaded", initEvents);
+document.addEventListener("DOMContentLoaded", onLoadDocument);
 
-const ARRAY_LENGTH = 5;
-const CLASS_NAME_PREV = "prev";
-const CLASS_NAME_NEXT = "next";
-const CLASS_NAME_CUR  = "current";
+const CLASS_NAME_CUR = "current";
+const CLASS_NAME_DOT_ON = "on";
 
-const liList = $("#slide-box").children;
-let currentIndex = 0;
+const dotList = Array.from($("#dot-box").children);
 
-function initEvents() {
+let currentPromotion = $("#slide-box").firstElementChild;
+let currentDot = $("#dot-box").firstElementChild;
+
+let interval;
+
+function onLoadDocument() {
     $("#slide-next-arrow-btn").addEventListener("click", onClickNextButton);
     $("#slide-prev-arrow-btn").addEventListener("click", onClickPrevButton);
+    $("#dot-box").addEventListener("click", onClickDotButton);
+    autoSlide();
 }
 
-function onClickNextButton(e) {
-    // 현재가 흐려지고 다음이 환해진다.
-
-    // 이전
-    liList[currentIndex].classList.remove(CLASS_NAME_CUR);
-    liList[currentIndex].classList.add(CLASS_NAME_PREV);
-    liList[(currentIndex === 0) ? ARRAY_LENGTH - 1 : currentIndex - 1].classList.remove(CLASS_NAME_PREV);
-
-    // 현재
-    currentIndex = (currentIndex + 1) % ARRAY_LENGTH;
-    liList[currentIndex % ARRAY_LENGTH].classList.remove(CLASS_NAME_NEXT);
-    liList[currentIndex % ARRAY_LENGTH].classList.add(CLASS_NAME_CUR);
-    liList[(currentIndex + 1) % ARRAY_LENGTH].classList.add(CLASS_NAME_NEXT);
+function onClickNextButton() {
+    clearInterval(interval);
+    moveNextPromotion(currentPromotion.nextElementSibling || currentPromotion.parentNode.firstElementChild);
+    moveNextDot();
+    autoSlide();
 }
 
-function onClickPrevButton(e) {
-    // 현재가 흐려지고 그 전이 환해진다.
-    liList[(currentIndex + 1 + ARRAY_LENGTH) % ARRAY_LENGTH].classList.remove(CLASS_NAME_NEXT);
-    liList[(currentIndex + ARRAY_LENGTH) % ARRAY_LENGTH].classList.remove(CLASS_NAME_CUR);
-    liList[(currentIndex + ARRAY_LENGTH) % ARRAY_LENGTH].classList.add(CLASS_NAME_NEXT);
+function onClickPrevButton() {
+    clearInterval(interval);
+    moveNextPromotion(currentPromotion.previousElementSibling || currentPromotion.parentNode.lastElementChild);
+    moveNextDot();
+    autoSlide();
+}
 
-    currentIndex = (currentIndex + ARRAY_LENGTH - 1) % 5;
-    liList[(currentIndex + ARRAY_LENGTH) % ARRAY_LENGTH].classList.remove(CLASS_NAME_PREV);
-    liList[(currentIndex + ARRAY_LENGTH) % ARRAY_LENGTH].classList.add(CLASS_NAME_CUR);
-    liList[(currentIndex + ARRAY_LENGTH - 1) % ARRAY_LENGTH].classList.add(CLASS_NAME_PREV);
+function autoSlide() {
+    interval = setInterval(function () {
+        moveNextPromotion(currentPromotion.nextElementSibling || currentPromotion.parentNode.firstElementChild);
+        moveNextDot();
+    }, 3000);
+}
+
+function onClickDotButton(e) {
+    const index = dotList.indexOf(e.target);
+    if (index === -1) return;
+
+    currentDot.classList.toggle(CLASS_NAME_DOT_ON);
+    currentDot = e.target;
+    currentDot.classList.toggle(CLASS_NAME_DOT_ON);
+
+    moveNextPromotion(currentPromotion.parentNode.children[index]);
+}
+
+function moveNextPromotion(nextPromotion) {
+    currentPromotion.classList.toggle(CLASS_NAME_CUR);
+    currentPromotion = nextPromotion || currentPromotion.nextElementSibling || currentPromotion.parentNode.firstElementChild;
+    currentPromotion.classList.toggle(CLASS_NAME_CUR);
+}
+
+function moveNextDot() {
+    currentDot.classList.toggle(CLASS_NAME_DOT_ON);
+    currentDot = currentDot.nextElementSibling || currentDot.parentNode.firstElementChild;
+    currentDot.classList.toggle(CLASS_NAME_DOT_ON);
 }

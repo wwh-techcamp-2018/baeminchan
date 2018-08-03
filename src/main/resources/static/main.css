@@ -1523,15 +1523,12 @@ a:focus {
 .invisible{
     display: none;
 }
-.prev{
-    opacity: 0;
-    transition: opacity 1s;
+
+.img-item{
+  opacity: 0;
+  transition: opacity 0.5s;
 }
 .current{
-    opacity: 1;
-    transition: opacity 1s;
-}
-.next{
-    opacity: 0;
-    transition: opacity 1s;
+  opacity: 1;
+  transition: opacity 0.5s;
 }

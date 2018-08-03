@@ -1,12 +1,10 @@
 package codesquad.converter;
 
 import org.springframework.core.convert.converter.Converter;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public final class LocalDateConverter implements Converter<String, LocalDate> {
-
     private final DateTimeFormatter formatter;
 
     public LocalDateConverter(String dateFormat) {

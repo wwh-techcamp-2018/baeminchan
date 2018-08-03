@@ -3,8 +3,7 @@ package codesquad.controller;
 import codesquad.domain.Category;
 import codesquad.dto.CategoryDto;
 import codesquad.service.CategoryService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +13,10 @@ import javax.servlet.http.HttpSession;
 
 import static codesquad.security.HttpSessionUtils.getUserFromSession;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/admin/categories")
 public class ApiAdminController {
-    private static final Logger log = LoggerFactory.getLogger(ApiAdminController.class);
-
     @Autowired
     private CategoryService categoryService;
 
@@ -31,6 +29,7 @@ public class ApiAdminController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(HttpSession session, @PathVariable Long id, @RequestBody CategoryDto categoryDto) {
+        log.info("Aa");
         Category category = categoryService.update(getUserFromSession(session), categoryDto, id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

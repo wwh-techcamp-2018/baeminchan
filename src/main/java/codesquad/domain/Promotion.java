@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 public class Promotion {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
