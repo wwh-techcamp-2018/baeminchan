@@ -28,18 +28,26 @@ public abstract class WebConfig extends WebMvcConfigurerAdapter {
         return new AdminInterceptor();
     }
 
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        addBasicAuth(registry);
+
+        registry.addInterceptor(apiAdminInterceptor())
+                .addPathPatterns("/api/admin/**");
+
+        registry.addInterceptor(adminInterceptor())
+                .addPathPatterns("/admin*");
+    }
+
+    protected abstract void addBasicAuth(InterceptorRegistry registry);
+
+
+
     @Configuration
     @Profile("product")
     static class ProductWebConfig extends WebConfig {
         @Override
-        public void addInterceptors(InterceptorRegistry registry) {
-            registry.addInterceptor(apiAdminInterceptor())
-                    .addPathPatterns("/api/admin/**");
-
-            registry.addInterceptor(adminInterceptor())
-                    .addPathPatterns("/admin*");
-        }
-
+        protected void addBasicAuth(InterceptorRegistry registry) { }
     }
 
     @Configuration
@@ -51,15 +59,8 @@ public abstract class WebConfig extends WebMvcConfigurerAdapter {
         }
 
         @Override
-        public void addInterceptors(InterceptorRegistry registry) {
+        protected void addBasicAuth(InterceptorRegistry registry) {
             registry.addInterceptor(basicAuthInterceptor());
-
-            registry.addInterceptor(apiAdminInterceptor())
-                    .addPathPatterns("/api/admin/**");
-
-            registry.addInterceptor(adminInterceptor())
-                    .addPathPatterns("/admin*");
         }
-
     }
 }
