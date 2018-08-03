@@ -5,7 +5,9 @@ import codesquad.domain.CategoryRepository;
 import codesquad.domain.DomainField;
 import codesquad.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,12 +38,24 @@ public class CategoryService {
         return findExistCategory(id);
     }
 
+    @Caching(
+            evict = {
+                    @CacheEvict(value = "rootCategories", allEntries = true),
+                    @CacheEvict(value = "category", key = "#id")
+            }
+    )
     public Category update(Long id, Category updateCategory) {
         Category originalCategory = findExistCategory(id);
         originalCategory.update(updateCategory);
         return categoryRepository.save(originalCategory);
     }
 
+    @Caching(
+            evict = {
+                    @CacheEvict(value = "rootCategories", allEntries = true),
+                    @CacheEvict(value = "category", key = "#id")
+            }
+    )
     public void delete(Long id) {
         categoryRepository.delete(findExistCategory(id));
     }

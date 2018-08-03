@@ -26,14 +26,12 @@ public class ExceptionAdvisor {
 
     @ExceptionHandler(AbstractBaseException.class)
     public ResponseEntity<RestResponse> handleException(AbstractBaseException exception) {
-        log.debug("handleException is called {}", exception);
         return new ResponseEntity<RestResponse>(new RestResponse().add(exception.of()), exception.getStatus());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public RestResponse handleValidationException(MethodArgumentNotValidException exception) {
-        log.debug("handleValidationException is called");
         List<ObjectError> errors = exception.getBindingResult().getAllErrors();
         RestResponse restResponse = new RestResponse();
         for (ObjectError objectError : errors) {

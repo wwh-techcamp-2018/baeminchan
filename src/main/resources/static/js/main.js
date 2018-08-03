@@ -120,7 +120,7 @@ function drawEventCategories(result) {
 }
 
 function initChoiceCategory(){
-    const selectCategories = $_all("#event_category_title");
+    const selectCategories = $_all(".event_category_title");
     const randomCategory =  selectCategories[Math.floor(Math.random() * selectCategories.length)];
     randomCategory.classList.toggle("on");
     getCategory(randomCategory.getAttribute("type"));
@@ -136,8 +136,6 @@ function getCategory(categoryId){
 }
 
 function drowProducts(result) {
-
-
     $(".tab-content-box").innerHTML = "";
     var template = Handlebars.templates["precompile/product_template"];
     const products = result.products;
@@ -147,17 +145,8 @@ function drowProducts(result) {
 }
 
 function clickCategoryTab(target) {
-
+    $(".tab-box .tab-btn-box li.on").classList.toggle("on");
     const categoryId = target.getAttribute("data-category-id");
-
-    const selectCategories = $_all("#event_category_title");
-    for(category of selectCategories) {
-        if(category.classList.contains("on"))
-            category.classList.toggle("on")
-        if(category.getAttribute("type") === categoryId)
-            category.classList.toggle("on");
-    }
-
-
+    $("#event_category_title-"+categoryId).classList.toggle("on");
     getCategory(categoryId);
 }
