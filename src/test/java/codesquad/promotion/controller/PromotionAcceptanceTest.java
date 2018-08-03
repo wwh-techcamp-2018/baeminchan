@@ -1,4 +1,4 @@
-package codesquad.promotion.web;
+package codesquad.promotion.controller;
 
 import codesquad.promotion.domain.Promotion;
 import codesquad.promotion.domain.PromotionRepository;

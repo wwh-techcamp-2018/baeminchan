@@ -1,6 +1,6 @@
 package codesquad.promotion.dto;
 
-import codesquad.promotion.web.PromotionDto;
+import codesquad.promotion.controller.PromotionDto;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
