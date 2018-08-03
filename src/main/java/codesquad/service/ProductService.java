@@ -5,6 +5,7 @@ import codesquad.domain.Product;
 import codesquad.domain.ProductRepository;
 import codesquad.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +18,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    @CacheEvict(value = "eventCategory", allEntries = true)
     public Product update(Product updateProduct) {
         existProduct(updateProduct.getId());
         return productRepository.save(updateProduct);
@@ -28,6 +30,7 @@ public class ProductService {
         }
     }
 
+    @CacheEvict(value = "eventCategory", allEntries = true)
     public void delete(Product deleteProduct) {
         existProduct(deleteProduct.getId());
         productRepository.delete(deleteProduct);

@@ -26,7 +26,7 @@ function fetchManager({url, method, body, onSuccess, onFailure}) {
         });
 }
 
-function getManager({url, method, headers, callback}) {
+function getManager({url, method, callback}) {
     fetch(url, {method, headers: {"Content-type": "application/json"}, credentials: "same-origin"})
         .then((response) => {
             const value = response;
