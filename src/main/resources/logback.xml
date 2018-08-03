@@ -9,9 +9,24 @@
 
     <logger name="support.jackson" level="DEBUG"/>
 
-    <logger name="codesquad" level="DEBUG"/>
+    <springProfile name="local">
+        <logger name="codesquad" level="DEBUG"/>
+    </springProfile>
+
+    <springProfile name="dev">
+        <logger name="codesquad" level="DEBUG"/>
+    </springProfile>
+
+    <springProfile name="production">
+        <logger name="codesquad" level="INFO"/>
+    </springProfile>
+
+    <springProfile name="test">
+        <logger name="codesquad" level="DEBUG"/>
+    </springProfile>
 
     <root level="INFO">
-        <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
+

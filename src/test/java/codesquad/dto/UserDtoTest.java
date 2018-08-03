@@ -1,4 +1,4 @@
-package domain;
+package codesquad.dto;
 
 import codesquad.controller.ApiUserControllerTest;
 import codesquad.dto.UserDto;
@@ -44,7 +44,7 @@ public class UserDtoTest {
                 .setUserId("javajigi@@gmail.com");
         Set<ConstraintViolation<UserDto>> constraintViolations = validator.validate(newUser);
         for (ConstraintViolation<UserDto> constraintViolation : constraintViolations) {
-            log.info("Test error msg : {}", constraintViolation.getMessage());
+            log.debug("Test error msg : {}", constraintViolation.getMessage());
         }
         assertThat(constraintViolations.size()).isEqualTo(1);
     }
@@ -55,7 +55,7 @@ public class UserDtoTest {
                 .setUserId("javajigi@asdfasdf");
         Set<ConstraintViolation<UserDto>> constraintViolations = validator.validate(newUser);
         for (ConstraintViolation<UserDto> constraintViolation : constraintViolations) {
-            log.info("Test error msg : {}", constraintViolation.getMessage());
+            log.debug("Test error msg : {}", constraintViolation.getMessage());
         }
         assertThat(constraintViolations.size()).isEqualTo(1);
     }
@@ -66,7 +66,7 @@ public class UserDtoTest {
                 .setPassword2("tes@ttest3332");
         Set<ConstraintViolation<UserDto>> constraintViolations = validator.validate(newUser);
         for (ConstraintViolation<UserDto> constraintViolation : constraintViolations) {
-            log.info("Test error msg : {}", constraintViolation.getMessage());
+            log.debug("Test error msg : {}", constraintViolation.getMessage());
         }
         assertThat(constraintViolations.size()).isEqualTo(1);
     }
@@ -77,7 +77,7 @@ public class UserDtoTest {
                 .setName("aaaa");
         Set<ConstraintViolation<UserDto>> constraintViolations = validator.validate(newUser);
         for (ConstraintViolation<UserDto> constraintViolation : constraintViolations) {
-            log.info("Test error msg : {}", constraintViolation.getMessage());
+            log.debug("Test error msg : {}", constraintViolation.getMessage());
         }
         assertThat(constraintViolations.size()).isEqualTo(1);
     }
@@ -88,7 +88,7 @@ public class UserDtoTest {
                 .setPhoneNumber("999-1111-2222");
         Set<ConstraintViolation<UserDto>> constraintViolations = validator.validate(newUser);
         for (ConstraintViolation<UserDto> constraintViolation : constraintViolations) {
-            log.info("Test error msg : {}", constraintViolation.getMessage());
+            log.debug("Test error msg : {}", constraintViolation.getMessage());
         }
         assertThat(constraintViolations.size()).isEqualTo(1);
     }
@@ -99,7 +99,7 @@ public class UserDtoTest {
                 .setPhoneNumber("012-1111-2222");
         Set<ConstraintViolation<UserDto>> constraintViolations = validator.validate(newUser);
         for (ConstraintViolation<UserDto> constraintViolation : constraintViolations) {
-            log.info("Test error msg : {}", constraintViolation.getMessage());
+            log.debug("Test error msg : {}", constraintViolation.getMessage());
         }
         assertThat(constraintViolations.size()).isEqualTo(1);
     }

@@ -3,14 +3,13 @@
   <main id="main">
     <section id="main-visual" class="main-visual-section visual-slider-box">
       <h2 class="blind">주요 프로모션</h2>
-
-      <ul class="img-box">
+      <ul class="img-box" id="slide-box">
         <li class="img-item img-1 current">
           <a href="#">
             <span class="blind">장윤주 식단 대공개! 그녀의 건강 반찬을 소개합니다.</span>
           </a>
         </li>
-        <li class="img-item img-2 next">
+        <li class="img-item img-2">
           <a href="#">
             <span class="blind">스페인 그 식당이 안 부러운 비빔밥&apm;한식요리 기획전</span>
           </a>
@@ -25,24 +24,22 @@
             <span class="blind">가격따라 고르는 재미가 쏠쏠해요. 알뜰반찬 기획전 3,300원부터!</span>
           </a>
         </li>
-        <li class="img-item img-5 prev">
+        <li class="img-item img-5">
           <a href="#">
             <span class="blind">2018 미슐랭 가이드도 반한 '게방식당'을 소개합니다.</span>
           </a>
         </li>
       </ul>
-
       <div class="direction-btn-box">
-        <a class="bm-icon spr-btn-arrow-main-slide prev" href="#" title="이전 슬라이드 보기"></a>
-        <a class="bm-icon spr-btn-arrow-main-slide next" href="#" title="다음 슬라이드 보기"></a>
+        <a class="bm-icon spr-btn-arrow-main-slide prev" title="이전 슬라이드 보기" id="slide-prev-arrow-btn"></a>
+        <a class="bm-icon spr-btn-arrow-main-slide next" title="다음 슬라이드 보기" id="slide-next-arrow-btn"></a>
       </div>
-
-      <div class="dot-btn-box">
-        <a class="dot on" href="#"></a>
-        <a class="dot" href="#"></a>
-        <a class="dot" href="#"></a>
-        <a class="dot" href="#"></a>
-        <a class="dot" href="#"></a>
+      <div class="dot-btn-box" id="dot-box">
+        <a class="dot on" data-key="0"></a>
+        <a class="dot" data-key="1"></a>
+        <a class="dot" data-key="2"></a>
+        <a class="dot" data-key="3"></a>
+        <a class="dot" data-key="4"></a>
       </div>
     </section>
 
@@ -565,6 +562,7 @@
   <!-- // main-container -->
 <script src="/js/util.js"></script>
 <script src="/js/category/home.js"></script>
+<script src="/js/promotion/promotion.js"></script>
 {{/partial}}
 
 {{> include/base}}

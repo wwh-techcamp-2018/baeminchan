@@ -32,7 +32,7 @@ public class ValidationExceptionControllerAdvice {
                 response.addValidationError(new ValidationError(fieldError.getField(), getErrorMessage(fieldError)));
                 continue;
             }
-            log.info("object error : {}", error.getDefaultMessage());
+            log.debug("object error : {}", error.getDefaultMessage());
             response.addValidationError(new ValidationError(error.getObjectName(), msa.getMessage(error.getCode(), null, "입력값이 올바르지 않습니다.")));
         }
         return response;
@@ -45,7 +45,7 @@ public class ValidationExceptionControllerAdvice {
         }
 
         String errorMessage = msa.getMessage(code.get(), fieldError.getArguments(), fieldError.getDefaultMessage());
-        log.info("error message: {}", errorMessage);
+        log.debug("error message: {}", errorMessage);
         return errorMessage;
     }
 
