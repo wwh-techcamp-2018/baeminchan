@@ -1,3 +1,7 @@
+function $(selector) {
+    return document.querySelector(selector);
+}
+
 function appendCategories(categories) {
    let categoryHtml = ``;
 
@@ -13,7 +17,6 @@ function appendCategories(categories) {
         categoryHtml += `</ul></li>`;
     });
 
-    console.log(categoryHtml);
     $("#categoryMenu").insertAdjacentHTML("afterbegin", categoryHtml);
 }
 
@@ -38,3 +41,19 @@ function drawCategories() {
 document.addEventListener("DOMContentLoaded", () => {
     drawCategories();
 })
+
+function onClickLoginButton(form) {
+    if(!checkValidForLogin(form)) return;
+
+    fetchManager({
+        url: '/api/users/login',
+        method: 'POST',
+        headers: { 'content-type': 'application/json'},
+        body: JSON.stringify({
+            "userId": form.userId.value,
+            "password": form.password.value
+        }),
+        callback: goHome,
+        errorCallback: onError
+    })
+}

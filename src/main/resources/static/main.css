@@ -1422,6 +1422,8 @@ a:focus {
 }
 
 #main-visual .img-box .img-item {
+  opacity: 0;
+  transition: opacity 1s;
   position: absolute;
   left: 0;
   right: 0;
@@ -1430,6 +1432,10 @@ a:focus {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+}
+
+#main-visual .img-box .current {
+  opacity: 1 !important;
 }
 
 #main-visual .img-box .img-1 {

@@ -17,7 +17,7 @@ import static org.junit.Assert.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public abstract class AcceptanceTest {
-    private static final String DEFAULT_LOGIN_USER = "gusdk@gusdk.com";
+    private static final String DEFAULT_LOGIN_USER = "test@test.com";
 
     @Autowired
     private TestRestTemplate template;
