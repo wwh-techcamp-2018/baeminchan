@@ -31,7 +31,9 @@ dependencies {
 
     compile('org.springframework.boot:spring-boot-devtools')
     compile('pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0')
-    
+
+    compile('org.springframework.boo:spring-boot-starter-cache')
+    compile('net.sf.ehcache:ehcache:2.10.3')
 
     compile('org.hibernate:hibernate-java8')
     runtime('com.h2database:h2')

@@ -31,10 +31,10 @@ public class Product {
     @Column(nullable = false)
     String thumbnailLink;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     Category category;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     EventCategory eventCategory;
 
     @Override

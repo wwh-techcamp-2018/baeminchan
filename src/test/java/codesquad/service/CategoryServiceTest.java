@@ -56,5 +56,4 @@ public class CategoryServiceTest {
         fakeCategory.setId(1000L);
         categoryService.update(1000L, fakeCategory);
     }
-
 }

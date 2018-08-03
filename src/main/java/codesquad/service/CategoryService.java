@@ -5,6 +5,7 @@ import codesquad.domain.CategoryDTO;
 import codesquad.exception.NotFoundException;
 import codesquad.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,6 +39,7 @@ public class CategoryService {
         return categoryRepository.findCategoriesByParentEquals(parent);
     }
 
+    @Cacheable(value = "findCategoryCache", key = "#id")
     public Category findCategoryById(Long id) {
         Optional<Category> maybeCategory = categoryRepository.findCategoryById(id);
         if(!maybeCategory.isPresent()) {

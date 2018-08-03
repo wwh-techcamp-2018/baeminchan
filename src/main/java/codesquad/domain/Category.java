@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 public class Category {
@@ -23,11 +24,12 @@ public class Category {
 //    private Long order;
 
     @JsonIgnore
-    @ManyToOne(fetch=FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Category parent;
 
-    public Category() {}
+    public Category() {
+    }
 
     public Category(String title) {
         this.title = title;
@@ -75,5 +77,11 @@ public class Category {
         this.parent = updateCategory.parent;
     }
 
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(title, category.title) && Objects.equals(parent, category.parent);
+    }
 }
