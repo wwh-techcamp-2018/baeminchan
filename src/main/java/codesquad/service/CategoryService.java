@@ -5,6 +5,7 @@ import codesquad.domain.CategoryDTO;
 import codesquad.exception.NotFoundException;
 import codesquad.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,7 @@ public class CategoryService {
         delete(findCategoryById(id));
     }
 
+    @CacheEvict(value="findCategoryCache", key = "#id")
     public Category update(Long id, Category updateCategory) {
         Category originalCategory = findCategoryById(id);
         originalCategory.update(updateCategory);

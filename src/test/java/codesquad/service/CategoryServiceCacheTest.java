@@ -18,12 +18,12 @@ public class CategoryServiceCacheTest {
     private CategoryService categoryService;
 
     @Test
-    public void cacheData() {
+    public void cacheUpdateData() {
         Category category = categoryService.findCategoryById(1L);
         Category updated = new Category("updated title", category.getParent());
         categoryService.update(category.getId(), updated);
         Category maybeCached = categoryService.findCategoryById(category.getId());
 
-        assertThat(maybeCached).isEqualTo(category);
+        assertThat(maybeCached).isNotEqualTo(category);
     }
 }
