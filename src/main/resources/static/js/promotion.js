@@ -1,11 +1,16 @@
 let carouselTimer;
 
 document.addEventListener("DOMContentLoaded", () => {
+    initPromotions();
     carouselTimer = setInterval(moveNextCarousel, 3000);
     $('.dot-btn-box').addEventListener('click', moveCarousel);
     $('.bm-icon.prev').addEventListener('click', movePrevCarousel);
     $('.bm-icon.next').addEventListener('click', moveNextCarousel);
 });
+
+function initPromotions(){
+    $('.img-item:first-child').classList.add('current');
+}
 
 function moveCarousel(e) {
     e.preventDefault();

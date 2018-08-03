@@ -5,6 +5,7 @@ import codesquad.security.BasicAuthInterceptor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer {
+public abstract class WebMvcConfig implements WebMvcConfigurer {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -39,19 +40,34 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new AdminAuthInterceptor();
     }
 
-    @Bean
-    public BasicAuthInterceptor basicAuthInterceptor() {
-        return new BasicAuthInterceptor();
-    }
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(basicAuthInterceptor());
         registry.addInterceptor(adminAuthInterceptor()).addPathPatterns("/admin/**");
     }
+
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/admin").setViewName("/admin/index");
+    }
+
+    @Configuration
+    @Profile("test")
+    static class TestWebMvcConfig extends WebMvcConfig {
+        @Bean
+        public BasicAuthInterceptor basicAuthInterceptor() {
+            return new BasicAuthInterceptor();
+        }
+
+        @Override
+        public void addInterceptors(InterceptorRegistry registry) {
+            registry.addInterceptor(basicAuthInterceptor());
+            super.addInterceptors(registry);
+        }
+    }
+
+    @Configuration
+    @Profile({"local", "dev", "production"})
+    static class NotTestWebMvcConfig extends WebMvcConfig {
     }
 }
