@@ -1,10 +1,8 @@
 package codesquad.web;
 
-import codesquad.domain.Category;
 import codesquad.domain.Member;
 import codesquad.dto.CategoryDto;
 import codesquad.dto.CustomResponse;
-import codesquad.dto.LoginDto;
 import codesquad.dto.MemberDto;
 import codesquad.service.CategoryService;
 import codesquad.service.MemberService;
@@ -49,27 +47,13 @@ public class CategoryAcceptanceTest {
 
         memberService.addRole(member, Role.ADMIN);
 
-        //로그인 진행
-        ResponseEntity<String> loginResponse = template.postForEntity("/api/members/login", LoginDto.defaultLoginDto(), String.class);
-        String[] cookieEntries = loginResponse.getHeaders().get("Set-Cookie").get(0).split(";");
-        assertThat(loginResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-
         String name = "메인반찬";
         CategoryDto categoryDto = CategoryDto.defaultCategoryDto().setName(name);
         categoryDto.addChild(CategoryDto.defaultCategoryDto().setName("child1"));
         categoryDto.addChild(CategoryDto.defaultCategoryDto().setName("child2"));
 
-        //쿠키 JSESSIONID 추출 및 category 생성
-        String jSessionId = null;
-        for (String cookie : cookieEntries) {
-            if (cookie.startsWith("JSESSIONID")) {
-                jSessionId = cookie.split("=")[1];
-            }
-        }
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Cookie", "JSESSIONID=" + jSessionId);
-        HttpEntity<String> requestEntity = new HttpEntity(categoryDto, headers);
-        ResponseEntity<Category> categoryResponse = template.exchange("/admin/categories", HttpMethod.POST, requestEntity, Category.class);
+        ResponseEntity<CustomResponse> categoryResponse = template.withBasicAuth(email, "1234")
+                .postForEntity("/admin/categories", categoryDto, CustomResponse.class);
 
         assertThat(categoryResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(categoryService.findByName(name)).isNotNull();
@@ -88,6 +72,4 @@ public class CategoryAcceptanceTest {
         assertThat(categoryResponse.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
         assertThat(categoryResponse.getBody().getMessage()).isEqualTo(ValidationMessageUtil.UNAUTHENTICATION);
     }
-
-
 }
