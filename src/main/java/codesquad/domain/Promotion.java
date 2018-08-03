@@ -20,7 +20,6 @@ import static codesquad.utils.Utils.PRIORITY_DEFAULT;
 @NoArgsConstructor
 @Where(clause = "deleted != 'true'")
 public class Promotion {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -77,19 +76,3 @@ public class Promotion {
         this.isDeleted = true;
     }
 }
-
-/*
-
-  todo list
-  - promotion 테스트 코드 작성
-  - list, create, delete, update 컨트롤러 구현
-  - index html 템플릿 작성
-  - 프론트엔드 js 및 css 구현
-
-  */
-
-
-
-
-
-

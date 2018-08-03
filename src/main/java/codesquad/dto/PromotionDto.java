@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
@@ -21,8 +19,6 @@ import static codesquad.utils.Utils.PRIORITY_DEFAULT;
 @NoArgsConstructor
 @ToString
 public class PromotionDto {
-    private static final Logger log = LoggerFactory.getLogger(PromotionDto.class);
-
     @Column
     private String title;
 

@@ -1,12 +1,13 @@
 package codesquad.config;
 
-import codesquad.security.BasicAuthInterceptor;
 import codesquad.security.AdminInterceptor;
+import codesquad.security.BasicAuthInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.Ordered;
@@ -39,14 +40,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new MessageSourceAccessor(messageSource);
     }
 
-    @Bean
-    public BasicAuthInterceptor basicAuthInterceptor() {
-        return new BasicAuthInterceptor();
-    }
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(basicAuthInterceptor());
         registry.addInterceptor(new AdminInterceptor())
                 .addPathPatterns("/admin**")
                 .addPathPatterns("/admin/**");
@@ -58,5 +53,19 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         registry.addViewController("/login").setViewName("/user/login");
         registry.addViewController("/join").setViewName("/user/join");
+    }
+
+    @Configuration
+    @Profile("dev")
+    public class TestConfig extends WebMvcConfig {
+        @Bean
+        public BasicAuthInterceptor basicAuthInterceptor() {
+            return new BasicAuthInterceptor();
+        }
+
+        @Override
+        public void addInterceptors(InterceptorRegistry registry) {
+            registry.addInterceptor(basicAuthInterceptor());
+        }
     }
 }

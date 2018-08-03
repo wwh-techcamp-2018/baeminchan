@@ -1,14 +1,13 @@
 package codesquad.web;
 
-import codesquad.domain.*;
+import codesquad.domain.Authority;
+import codesquad.domain.Promotion;
+import codesquad.domain.Role;
+import codesquad.domain.User;
 import codesquad.dto.PromotionDto;
 import codesquad.service.PromotionService;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PromotionControllerTest extends AcceptanceTest{
+public class PromotionControllerTest extends AcceptanceTest {
     private static final Logger log = LoggerFactory.getLogger(PromotionControllerTest.class);
 
     private User defaultUser;
@@ -33,10 +32,11 @@ public class PromotionControllerTest extends AcceptanceTest{
         defaultRole = new Role(Authority.NORMAL);
         defaultUser = new User("test@test.com", "1234qwer!", "자바지기", "010-4090-8370", defaultRole);
     }
+
     @Test
     public void 리스트_가져오기() {
         List<Promotion> promotions = promotionService.getShowList();
-        log.info("promotions : {}", promotions);
+        log.debug("promotions : {}", promotions);
     }
 
     @Test

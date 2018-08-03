@@ -46,7 +46,7 @@ public class ApiCategoryControllerTest extends AcceptanceTest {
     @Test
     public void 카테고리_삭제() {
         ResponseEntity<Void> response =
-                template().exchange("/api/categories/1", HttpMethod.DELETE,
+                template().exchange("/api/categories/2", HttpMethod.DELETE,
                         new HttpEntity<>(new HttpHeaders()), Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
