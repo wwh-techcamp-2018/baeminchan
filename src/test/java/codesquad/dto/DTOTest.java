@@ -1,10 +1,13 @@
 package codesquad.dto;
 
+import org.springframework.test.context.ActiveProfiles;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.Set;
 
+@ActiveProfiles("develop")
 public class DTOTest<T> {
     Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
