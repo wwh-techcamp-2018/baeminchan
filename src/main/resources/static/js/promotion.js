@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', initEvents);
 
 function initEvents() {
+    $('.img-item:first-child').classList.add('current');
+
     $('.bm-icon.spr-btn-arrow-main-slide.next').addEventListener('click', navigateRight);
     $('.bm-icon.spr-btn-arrow-main-slide.prev').addEventListener('click', navigateLeft);
     $('.dot-btn-box').addEventListener('click', moveToDot);

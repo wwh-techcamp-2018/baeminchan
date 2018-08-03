@@ -59,5 +59,8 @@ INSERT INTO Category (name, parent_id) VALUES ('셰프의요리', 8);
 INSERT INTO Category (name, parent_id) VALUES ('전국맛집', 8);
 INSERT INTO Category (name, parent_id) VALUES ('키즈관', 8);
 
-
-
+INSERT INTO Promotion (img_url) VALUES ('./img/img-main-visual-slide_1.jpg');
+INSERT INTO Promotion (img_url) VALUES ('./img/img-main-visual-slide_2.jpg');
+INSERT INTO Promotion (img_url) VALUES ('./img/img-main-visual-slide_3.jpg');
+INSERT INTO Promotion (img_url) VALUES ('./img/img-main-visual-slide_4.jpg');
+INSERT INTO Promotion (img_url) VALUES ('./img/img-main-visual-slide_5.jpg');
