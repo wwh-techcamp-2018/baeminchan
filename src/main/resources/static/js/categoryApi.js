@@ -1,14 +1,4 @@
-function $(selector) {
-  return document.querySelector(selector);
-}
-
-function fetchManager({ url, method, body, headers, callback }) {
-  fetch(url, { method, body, headers, credentials: "same-origin" }).then(
-    response => {
-      callback(response);
-    }
-  );
-}
+document.write("<script src='/js/common.js'></script>")
 
 function getCategories(url, callback) {
   fetchManager({
@@ -52,25 +42,23 @@ function createCategoryTemplate(category) {
     categoryTemplate += subCategoryTemplate;
   });
 
-  categoryTemplate += `</ul> 
-                    </li>`;
-
+  categoryTemplate += `</ul>
+                            </li>`;
   parentUl.insertAdjacentHTML("beforeend", categoryTemplate);
 }
 
 function createAdminCategoryTemplate(category) {
   const parentUl = $("#categories");
 
-  let categoryTemplate = `<li>
-          <span> ${category.cid} : ${category.title}</span>
-          <ul>
-          `;
+  let categoryTemplate =    `<li>
+                                <span> ${category.cid} : ${category.title}</span>
+                        <ul>`;
 
   category.children.forEach(subCategory => {
     let subCategoryTemplate = `<li>
-              <span>${subCategory.cid} : ${subCategory.title}</span>
-          </li>
-          `;
+                                    <span>${subCategory.cid} : ${subCategory.title}</span>
+                               </li>`;
+
     categoryTemplate += subCategoryTemplate;
   });
 

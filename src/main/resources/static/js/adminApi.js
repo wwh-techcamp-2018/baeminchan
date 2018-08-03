@@ -1,20 +1,7 @@
-function $(selector) {
-  return document.querySelector(selector);
-}
-
-function fetchManager({ url, method, body, headers, callback }) {
-  fetch(url, { method, body, headers, credentials: "same-origin" }).then(
-    response => {
-      callback(response);
-    }
-  );
-}
+document.write("<script src='/js/common.js'></script>")
 
 function toIntElseNull(strValue) {
-  if (strValue.trim() === "") {
-    return null;
-  }
-  return parseInt(strValue);
+  return strValue.trim() === "" ? null : parseInt(strValue);
 }
 
 function createCategoryHandler() {
@@ -65,9 +52,3 @@ document.addEventListener("DOMContentLoaded", () => {
   initEvents("#category-delete-button", deleteCategoryHandler);
   initEvents("#category-update-button", updateCategoryHandler);
 });
-
-function initEvents(btnSelector, handler) {
-  const initBtn = $(btnSelector);
-  if (initBtn === null) return;
-  initBtn.addEventListener("click", handler);
-}
