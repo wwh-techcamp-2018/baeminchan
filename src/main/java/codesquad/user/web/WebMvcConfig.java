@@ -6,6 +6,7 @@ import codesquad.user.security.LoginUserHandlerMethodArgumentResolver;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -49,9 +50,19 @@ public class WebMvcConfig implements WebMvcConfigurer {
         argumentResolvers.add(loginUserArgumentResolver());
     }
 
-    @Bean
-    public BasicAuthInterceptor basicAuthInterceptor() {
-        return new BasicAuthInterceptor();
+    @Configuration
+    @Profile({ "development" })
+    static class DevelopmentWebMvcConfig extends WebMvcConfig {
+        @Bean
+        public BasicAuthInterceptor basicAuthInterceptor() {
+            return new BasicAuthInterceptor();
+        }
+
+        @Override
+        public void addInterceptors(InterceptorRegistry registry) {
+            registry.addInterceptor(basicAuthInterceptor());
+            super.addInterceptors(registry);
+        }
     }
 
     @Bean
@@ -59,10 +70,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new AdminAuthInterceptor();
     }
 
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(basicAuthInterceptor());
         registry.addInterceptor(adminAuthInterceptor()).addPathPatterns("/admin/**");
     }
 
