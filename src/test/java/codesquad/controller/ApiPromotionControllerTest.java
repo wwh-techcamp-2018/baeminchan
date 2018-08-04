@@ -42,7 +42,7 @@ public class ApiPromotionControllerTest extends AcceptanceTest {
 
     @Before
     public void setUp() throws Exception {
-        defaultUser = new User("serverwizard@naver.com", "test33##");
+        defaultUser = new User("javajigi@naver.com", "test33##");
     }
 
     @Test
@@ -55,7 +55,6 @@ public class ApiPromotionControllerTest extends AcceptanceTest {
                 .addParameter("endDate", LocalDate.now().plusDays(7).toString())
                 .addParameter("imageFile", new ClassPathResource("/static/img/img-main-visual-slide_1.jpg"))
                 .build();
-
         ResponseEntity<Void> response = basicAuthTemplate(defaultUser).postForEntity("/api/promotions", request, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }

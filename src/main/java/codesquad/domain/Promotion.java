@@ -82,7 +82,7 @@ public class Promotion {
         );
     }
 
-    private void checkValidPeriod(LocalDate startDate, LocalDate endDate) {
+    public void checkValidPeriod(LocalDate startDate, LocalDate endDate) {
         if (startDate.isAfter(endDate)) {
             throw new ValidationException("기간 형식이 맞지 않습니다.");
         }

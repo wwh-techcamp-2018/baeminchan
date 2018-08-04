@@ -77,5 +77,5 @@ INSERT INTO category (parent_category_id, name) VALUES (8, '셰프의요리');
 INSERT INTO category (parent_category_id, name) VALUES (8, '전국맛집');
 INSERT INTO category (parent_category_id, name) VALUES (8, '키즈관');
 
-INSERT INTO promotion (title, user_id, created_time, start_date, end_date, image_url) VALUES ('테스트 프로모션', 1, '2018-08-01', '2018-08-03', '2018-08-03', 'https://cdn.bmf.kr/banner/main_banner/180724/1532409236448_d9b2dde93f6a.jpg');
-INSERT INTO promotion (title, user_id, created_time, start_date, end_date, image_url) VALUES ('테스트 프로모션2', 2, '2018-08-01', '2018-08-03', '2018-08-03', 'https://cdn.bmf.kr/banner/main_banner/180724/1532409236448_d9b2dde93f6a.jpg');
+INSERT INTO promotion (title, user_id, created_time, start_date, end_date, image_url) VALUES ('테스트 프로모션', 1, '2018-08-01', '2018-08-02', '2018-08-03', 'https://cdn.bmf.kr/banner/main_banner/180724/1532409236448_d9b2dde93f6a.jpg');
+INSERT INTO promotion (title, user_id, created_time, start_date, end_date, image_url) VALUES ('테스트 프로모션2', 2, '2018-08-01', '2018-08-02', '2018-08-03', 'https://cdn.bmf.kr/banner/main_banner/180724/1532409236448_d9b2dde93f6a.jpg');
