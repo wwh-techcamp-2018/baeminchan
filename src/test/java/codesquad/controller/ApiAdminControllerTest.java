@@ -27,7 +27,7 @@ public class ApiAdminControllerTest extends AcceptanceTest {
 
     @Before
     public void setUp() throws Exception {
-        defaultUser = new User("javajigi@naver.com", "test33##");
+        defaultUser = new User("serverwizard@naver.com", "test33##");
         other = new User("gusdk@naver.com", "test33##");
         categoryDto = new CategoryDto("테스트 카테고리", 1L, 1);
     }

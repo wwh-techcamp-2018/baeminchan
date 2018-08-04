@@ -2,13 +2,10 @@ package codesquad.config;
 
 import codesquad.converter.LocalDateConverter;
 import codesquad.security.AdminAuthInterceptor;
-import codesquad.security.BasicAuthInterceptor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.Ordered;
@@ -64,6 +61,7 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(adminAuthInterceptor())
                 .addPathPatterns("/api/admin/**")
-                .addPathPatterns("/api/promotions/**");
+                .addPathPatterns("/api/promotions/**")
+                .order(Ordered.LOWEST_PRECEDENCE);
     }
 }

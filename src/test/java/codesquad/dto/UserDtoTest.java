@@ -1,4 +1,4 @@
-package domain;
+package codesquad.dto;
 
 import codesquad.controller.ApiUserControllerTest;
 import codesquad.dto.UserDto;

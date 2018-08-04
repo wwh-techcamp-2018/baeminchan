@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 public abstract class AcceptanceTest {
-    private static final String DEFAULT_LOGIN_USER = "javajigi@naver.com";
+    private static final String DEFAULT_LOGIN_USER = "serverwizard@naver.com";
     private static final Logger log = LoggerFactory.getLogger(AcceptanceTest.class);
 
     @Autowired

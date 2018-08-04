@@ -1,37 +1,75 @@
 spring:
   profiles:
     active: local
-
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:~/baeminchan;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
   jpa:
-    show-sql: true
-    database-platform: org.hibernate.dialect.H2Dialect
-  h2:
-    console:
-      enabled: true
-
+    hibernate:
+      format_sql: true
 
 handlebars:
   suffix: .html
   cache: false
   expose-session-attributes: true
 
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
 
 ---
 spring:
   profiles: local
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
 
----
-spring:
-  profiles: test
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:~/baeminchan;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+  h2:
+    console:
+      enabled: true
+
 
 ---
 spring:
   profiles: dev
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:~/baeminchan;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+
+  h2:
+    console:
+      enabled: true
 
 
 ---
 spring:
   profiles: production
+  jpa:
+    hibernate:
+      ddl-auto:  validate
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:주소:포트/DB명
+    username: serverwizard
+    password: password
+
+---
+
+spring:
+  profiles: test

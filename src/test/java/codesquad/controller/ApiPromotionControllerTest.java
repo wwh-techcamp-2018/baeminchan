@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.*;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.util.MultiValueMap;
 import support.test.AcceptanceTest;
 
@@ -30,6 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 3. 프론트엔트 transition 구현
  */
 @Slf4j
+@ActiveProfiles("test")
 public class ApiPromotionControllerTest extends AcceptanceTest {
     private final Long TEST_PROMOTION_ID = 1L;
 
@@ -53,7 +55,6 @@ public class ApiPromotionControllerTest extends AcceptanceTest {
                 .addParameter("endDate", LocalDate.now().plusDays(7).toString())
                 .addParameter("imageFile", new ClassPathResource("/static/img/img-main-visual-slide_1.jpg"))
                 .build();
-
         ResponseEntity<Void> response = basicAuthTemplate(defaultUser).postForEntity("/api/promotions", request, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }

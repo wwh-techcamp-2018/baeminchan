@@ -3,8 +3,7 @@ package codesquad.security;
 import codesquad.domain.User;
 import codesquad.exception.UnAuthenticationException;
 import codesquad.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -14,9 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.Charset;
 import java.util.Base64;
 
+@Slf4j
 public class BasicAuthInterceptor extends HandlerInterceptorAdapter {
-    private static final Logger log = LoggerFactory.getLogger(BasicAuthInterceptor.class);
-
     @Autowired
     private UserService userService;
 
