@@ -1,19 +1,20 @@
-document.addEventListener('DOMContentLoaded', () =>{
+document.addEventListener('DOMContentLoaded', () => {
     fetchManager({
-      url: '/api/categories',
-      method: 'GET',
-      headers: { 'content-type': 'application/json'},
-      callback: appendAnswer
+        url: '/api/categories',
+        method: 'GET',
+        headers: {'content-type': 'application/json'},
+        callback: appendAnswer
     });
 }, false);
 
 const appendAnswer = (data) => {
-  const outer = ({name}, subMenu) => `<li> <a href="#">${name}</a><ul class="sub-menu"> ${subMenu} </ul></li>`;
-  const inner = ({name})=> `<li><a href="#">${name}</a></li>`;
+    const outer = ({name}, subMenu) => `<li> <a href="#">${name}</a><ul class="sub-menu"> ${subMenu} </ul></li>`;
+    const inner = ({name}) => `<li><a href="#">${name}</a></li>`;
 
-  let resultHTML = data.reduce( function(p,c){
-    return p + outer(c, c.children.map((e)=> inner(e)).join());}, "");
-  $("#nav-menu").insertAdjacentHTML('afterbegin', resultHTML);
+    let resultHTML = data.reduce(function (p, c) {
+        return p + outer(c, c.children.map((e) => inner(e)).join());
+    }, "");
+    $("#nav-menu").insertAdjacentHTML('afterbegin', resultHTML);
 }
 
 const addAllEvent = () => {
