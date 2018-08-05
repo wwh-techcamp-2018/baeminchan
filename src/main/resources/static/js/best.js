@@ -19,15 +19,21 @@ const categoryInit = (data) => {
     const innerList = data.reduce( (accum, cur) => {
         return accum + insertHtml(cur);
     }, '');
-    $('.tab-btn-box').insertAdjacentHTML('beforeend', innerList);
-}
-
-const banchanInit = (data) => {
-    const innerList = data.reduce((accum, cur) => {
-        return accum + banchanInnerHTML(cur);
+    const boxList = data.reduce( (accum) => {
+            return accum + banchanOuterHtml;
     }, '');
 
-    $('.tab-content-group-box').insertAdjacentHTML('beforeend', banchanOuterHtml(innerList));
+    $('.tab-btn-box').insertAdjacentHTML('beforeend', innerList);
+    $('.tab-content-group-box').insertAdjacentHTML('beforeend', boxList);
+}
+
+const banchanInit = (data, id) => {
+    const innerList = data.reduce((accum, cur) => {
+        return accum + banchanBoxHTML(cur);
+    }, '');
+
+    $All('.tab-content-box')[id-1].insertAdjacentHTML('beforeend', innerList);
+    $('.tab-content-group-box').children[id-1].classList.add('on');
 }
 
 const bestBanchan = (id) => {
@@ -35,7 +41,7 @@ const bestBanchan = (id) => {
             url:  '/api/banchan/best/' + id,
             method: 'GET',
             headers: { 'content-type': 'application/json'},
-            callback: banchanInit,
+            callback: (data) => banchanInit(data, id),
 
         });
 }
@@ -49,16 +55,15 @@ const bestCategory = (onIndex) => {
             categoryInit(data);
             $('.tab-btn-box').children[onIndex].classList.add('on');
             bestBanchan( onIndex + 1);
+            $('.tab-btn-box').children[onIndex].classList.add('on');
         }
     });
 
 }
 
 
-const banchanOuterHtml = ( inner ) =>
-//todo on class 붙이고 빼는건 자바스크립트로 처리
-  `<li class="on"> <ul class="tab-content-box">${inner}</ul></li>`;
-const banchanInnerHTML = ( {description, title, imgUrl, originalPrice, realPrice} ) => `<li>
+const banchanOuterHtml =`<li> <ul class="tab-content-box"></ul></li>`;
+const banchanBoxHTML = ( {description, title, imgUrl, originalPrice, realPrice} ) => `<li>
                                  <a class="thumbnail-box" href="#">
                                      <div class="thumbnail">
                                          <img src="${imgUrl}" alt="${title}" />
@@ -79,3 +84,7 @@ const banchanInnerHTML = ( {description, title, imgUrl, originalPrice, realPrice
                                      </dl>
                                  </a>
                              </li>`
+
+//const moveBanchanBox = (id) => {
+//    $('.tab-content-group-box')
+//}
