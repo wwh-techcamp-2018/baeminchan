@@ -1,7 +1,7 @@
 package codesquad.service;
 
 import codesquad.domain.Member;
-import codesquad.domain.MemberRepository;
+import codesquad.repository.MemberRepository;
 import codesquad.dto.LoginDto;
 import codesquad.dto.MemberDto;
 import org.junit.Test;
