@@ -1164,7 +1164,7 @@ a:focus {
 }
 
 .tab-box .tab-btn-box li.on a,
-.tab-box .tab-btn-box li:hover a {
+.tab-box .tab-btn-box li:hover a{
   margin-right: 0;
   padding-right: 1px;
   background: #2ac1bc;

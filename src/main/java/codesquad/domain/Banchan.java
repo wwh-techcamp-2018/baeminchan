@@ -23,3 +23,5 @@ public class Banchan extends AbstractEntity {
     private String originalPrice;
     private String realPrice;
 }
+
+

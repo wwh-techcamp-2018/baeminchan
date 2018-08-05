@@ -25,18 +25,18 @@ public class ApiBestBanchanController {
     @Autowired
     BanchanRepository banchanRepository;
 
-    @GetMapping("/test1")
+    @GetMapping("")
     public Iterable<BestBanchan> getBestCategories(){
         return bestBanchanRepository.findAll();
     }
 
 
-    @GetMapping("/test2")
-    public List<BestBanchan> getBestCategories2222(){
-        List<BestBanchan> bestBanchans = new ArrayList<>();
-        bestBanchanRepository.findAll().forEach(bestBanchans::add);
-        return bestBanchans;
-    }
+//    @GetMapping("/test2")
+//    public List<BestBanchan> getBestCategories2222(){
+//        List<BestBanchan> bestBanchans = new ArrayList<>();
+//        bestBanchanRepository.findAll().forEach(bestBanchans::add);
+//        return bestBanchans;
+//    }
 
     @GetMapping("/{id}")
     public List<Banchan> getBanchans(@PathVariable Long id){
