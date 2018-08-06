@@ -20,6 +20,15 @@ function initEventsList(list,handler){
   });
 }
 
+function getData(url, callback) {
+  fetchManager({
+    url: url,
+    method: "GET",
+    headers: { "content-type": "application/json" },
+    callback: callback
+  });
+}
+
 function fetchManager({ url, method, body, headers, callback }) {
   fetch(url, { method, body, headers, credentials: "same-origin" }).then(
     response => {
@@ -28,3 +37,9 @@ function fetchManager({ url, method, body, headers, callback }) {
   );
 }
 
+function clearChildrenStyle(parent, style) {
+    const children = [...parent.children];
+    children.forEach(child => {
+        child.classList.remove(style);
+    })
+}

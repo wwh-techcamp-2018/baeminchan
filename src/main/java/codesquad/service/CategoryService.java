@@ -4,9 +4,9 @@ import codesquad.domain.category.Category;
 import codesquad.domain.category.CategoryRepository;
 import codesquad.dto.category.CategoryDto;
 import codesquad.exception.CategoryNotFoundException;
-import com.sun.xml.internal.bind.v2.TODO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -30,6 +30,7 @@ public class CategoryService {
         return categoryRepository.save(parent);
     }
 
+    @Cacheable(value = "categories")
     public List<Category> getCategoryList() {
         return categoryRepository.findByParent(null);
     }
@@ -44,7 +45,7 @@ public class CategoryService {
                 .orElseThrow(CategoryNotFoundException::new);
         Category parent = null;
 
-        if(!categoryDto.isRoot()) {
+        if (!categoryDto.isRoot()) {
             parent = categoryRepository.findById(categoryDto.getParentId()).orElseThrow(CategoryNotFoundException::new);
         }
 

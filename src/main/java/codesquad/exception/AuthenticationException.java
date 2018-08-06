@@ -1,7 +1,7 @@
 package codesquad.exception;
 
 public class AuthenticationException extends RuntimeException {
-    public AuthenticationException(){
+    public AuthenticationException() {
         super("Authentication error");
     }
 

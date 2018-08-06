@@ -4,8 +4,6 @@ package codesquad.domain.category;
 import codesquad.dto.category.CategoryDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -44,7 +42,7 @@ public class Category {
         children.add(childCategory);
     }
 
-    public void update(CategoryDto categoryDto,Category parent) {
+    public void update(CategoryDto categoryDto, Category parent) {
         this.title = categoryDto.getTitle();
         this.parent = parent;
     }
