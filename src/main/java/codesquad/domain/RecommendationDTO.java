@@ -1,5 +1,6 @@
 package codesquad.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecommendationDTO {
@@ -22,5 +23,9 @@ public class RecommendationDTO {
 
     public List<Product> getProducts() {
         return products;
+    }
+
+    public static RecommendationDTO valueOf(String keyword){
+        return new RecommendationDTO(keyword, new ArrayList<Product>());
     }
 }

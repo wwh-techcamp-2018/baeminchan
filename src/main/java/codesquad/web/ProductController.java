@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,6 +32,9 @@ public class ProductController {
     @GetMapping("/search/recommendations")
     @ResponseStatus(HttpStatus.OK)
     public RecommendationDTO recommendations(@RequestParam String keyword) {
+        if(keyword.length() == 0) {
+            return RecommendationDTO.valueOf(keyword);
+        }
         return new RecommendationDTO(keyword, productService.findProductsContainingKeyword(keyword));
     }
 }
