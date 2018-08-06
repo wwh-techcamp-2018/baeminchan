@@ -16,21 +16,29 @@ const changeBestBanchan = (event) => {
     event.preventDefault();
     console.log(event);
 
-    if(event.target.tagName === 'A' || event.target.tagName === 'LI'){
+    //if(event.target.tagName === 'A' || event.target.tagName === 'LI'){
 
-        $('.tab-btn-box .on').remove('on');
-        $('.tab-content-group-box').remove('on');
+        $('.tab-btn-box .on').classList.remove('on');
+        $('.tab-content-group-box .on').classList.remove('on');
+        //몇번째 li child 인지 아는 방법
+        // li가 아닌 li 하위 태그인 경우엔, elem = closest('li') - 가정: li / li 하위태그, li 하위에 li가 들어오지 않는다 --> 깨질경우 있나
+        const targetLi = event.target.tagName !== 'LI'? event.target.closest('li') :  event.target ;
+       //or event.target.closest('li')|| event.target ;
+        const targetIdx = getIndex(targetLi);
 
-        $('.tab-btn-box').children[randomIdx].classList.add('on');
-        $('.tab-content-group-box').children[randomIdx].classList.add('on');
-        //몇번째 child 인지 아는 방법
+        //ajax call if not cached
 
-    }
+
+        $('.tab-btn-box').children[targetIdx].classList.add('on');
+        $('.tab-content-group-box').children[targetIdx].classList.add('on');
+
+
+    //}
 }
 
-const getIndex = (elem) => {
-    elem.parentChil
-}
+const getIndex = (elem) => (
+    Array.prototype.slice.call(elem.parentElement.children).indexOf(elem)
+)
 //const templateInit = async () => {
 //    //call bestCategory
 //    const randomIdx = Math.floor(Math.random()*6);
