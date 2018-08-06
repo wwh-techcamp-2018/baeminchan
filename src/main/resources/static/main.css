@@ -1531,3 +1531,7 @@ a:focus {
   opacity: 1;
   transition: opacity 0.5s;
 }
+.now{
+  color: white !important;
+  background: #2ac1bc !important;
+}

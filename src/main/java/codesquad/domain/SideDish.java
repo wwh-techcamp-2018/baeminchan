@@ -31,9 +31,6 @@ public class SideDish {
     private DeliveryType deliveryType;
     private boolean isEnableRegularDelivery;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<SideDishImage> images;
-
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_category"))
     private Category category;

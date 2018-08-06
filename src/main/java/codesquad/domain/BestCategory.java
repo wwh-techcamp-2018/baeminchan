@@ -10,11 +10,12 @@ import java.util.List;
 
 /**TODO
  * 1. 백엔드
- *  - spring chache 적용
  *
  *  Done
  *  - 베스트 카테고리 리스트 보내주기
  *  - 베스트 카테고리 아이디에 따른 반찬 보내주기
+ *
+ *  - spring chache 적용
  *
  *
  * 2. 프론트엔드
@@ -23,6 +24,9 @@ import java.util.List;
  *  Done
  *  - 베스트 카테고리 리스트 요청
  *  - 클릭한 베스트 카테고리의 반찬 요청
+ *
+ *  - AJAX 랜덤 요청
+ *
  */
 
 

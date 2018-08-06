@@ -6,6 +6,8 @@ import codesquad.domain.User;
 import codesquad.dto.PromotionDto;
 import codesquad.exception.NotMatchedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,16 +23,19 @@ public class PromotionService {
     }
 
     @Transactional
+    @CacheEvict(value = "promotionsCache")
     public void delete(Long id) {
         Promotion promotion = getPromotionById(id);
         promotion.delete();
     }
 
+    @Cacheable(value = "promotionsCache")
     public Iterable<Promotion> gets() {
         return promotionRepository.findByDeletedAndStartDateLessThanEqualAndEndDateGreaterThanEqual(false, LocalDate.now(), LocalDate.now());
     }
 
     @Transactional
+    @CacheEvict(value = "promotionsCache")
     public Promotion update(Long id, PromotionDto updatedPromotionDto) {
         Promotion savedPromotion = getPromotionById(id);
         return savedPromotion.update(updatedPromotionDto);

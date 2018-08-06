@@ -1,11 +1,21 @@
+const CLASS_NAME_NOW = "now";
+
 document.addEventListener("DOMContentLoaded", () => {
     initEvents();
     $("#best-categories").addEventListener("click", onClickBestCategory);
 });
 
 function onClickBestCategory(evt) {
+    let {"target" : target} = evt;
+    $(".now").classList.toggle(CLASS_NAME_NOW);
+    target.classList.toggle(CLASS_NAME_NOW);
+
+    loadSideDishes(target.dataset["categoryId"]);
+}
+
+function loadSideDishes(categoryId) {
     fetchManager({
-        url: '/api/bestCategories/' + evt.target.dataset["categoryId"],
+        url: '/api/bestCategories/' + categoryId,
         method: 'GET',
         headers: { 'content-type': 'application/json'},
         callback: onSuccessBestSideDishes,
@@ -50,11 +60,14 @@ function onSuccess(response) {
 function onSuccessBestCategories(response) {
     response.json().then((result) => {
         const html = result.reduce((prev, next) => {
-            return prev + `<li><a data-category-id=${next.id}>${next.name}</a></li>`;
+            return prev + `<li><a class="best-category-a" data-category-id=${next.id}>${next.name}</a></li>`;
         }, ``);
 
-
         $("#best-categories").insertAdjacentHTML("beforeend", html);
+
+        const randomNumber = (generateRandomNumber(1, result.length));
+        loadSideDishes(randomNumber);
+        $("#best-categories").children[randomNumber - 1].querySelector("a").classList.toggle(CLASS_NAME_NOW);
     });
 }
 
@@ -95,4 +108,8 @@ function onSuccessBestSideDishes(response) {
 
 function alertError() {
     alert("요기요를 이용해주세요...죄송합니다.");
+}
+
+function generateRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
