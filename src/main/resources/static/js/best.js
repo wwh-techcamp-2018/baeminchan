@@ -3,16 +3,33 @@ document.addEventListener('DOMContentLoaded', () =>{
 
    templateInit2();
 
-
+    $('.tab-btn-box').addEventListener('click', changeBestBanchan);
 }, false);
 
+const changeBestBanchan = (event) => {
+    event.preventDefault();
+    console.log(event);
+
+    $('.tab-btn-box .on').remove('on');
+    $('.tab-content-group-box').remove('on');
+
+    if(event.target.tagName === 'A' || event.target.tagName === 'LI'){
+        $('.tab-btn-box').children[randomIdx].classList.add('on');
+        $('.tab-content-group-box').children[randomIdx].classList.add('on');
+        //몇번째 child 인지 아는 방법
+
+    }
+}
+
+const getIndex = (elem) => {
+    elem.parentChil
+}
 const templateInit = () => {
     const randomIdx = Math.floor(Math.random()*6);
     bestCategory(randomIdx);
 
 }
 const templateInit2 = async () => {
-    //call bestCategory
 
     const bestCategoryData = await fetchAsync({
                       url:  '/api/banchan/best',
@@ -21,7 +38,7 @@ const templateInit2 = async () => {
                   });
     categoryInit(bestCategoryData);
 
-    const randomIdx = Math.floor(Math.random()*6);
+    const randomIdx = Math.floor(Math.random() * (bestCategoryData.length - 1));
 
     const bestBanchanData = await fetchAsync({
                 url:  '/api/banchan/best/' + (randomIdx + 1),
