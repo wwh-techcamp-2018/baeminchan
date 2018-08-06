@@ -15,6 +15,11 @@ const fetchManager = ({ url, method, body, headers, callback }) => {
     })
 }
 
+
+const fetchAsync = ({ url, method, body, headers} ) => (
+ fetch(url, {method,body,headers,credentials: "same-origin"}).then(res => res.json())
+);
+
 const customAjax = (u,d) => {
     return $.ajax({
                 type: 'post',

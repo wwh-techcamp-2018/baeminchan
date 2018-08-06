@@ -12,7 +12,7 @@ const appendAnswer = (data) => {
   const inner = ({name})=> `<li><a href="#">${name}</a></li>`;
 
   let resultHTML = data.reduce( function(p,c){
-    return p + outer(c, c.children.map((e)=> inner(e)).join());}, "");
+    return p + outer(c, c.children.map((e)=> inner(e)).join(""));}, "");
   $("#nav-menu").insertAdjacentHTML('afterbegin', resultHTML);
 }
 

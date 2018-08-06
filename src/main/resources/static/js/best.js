@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () =>{
-   templateInit();
+   //templateInit();
 }, false);
 
 const templateInit = () => {
@@ -7,6 +7,29 @@ const templateInit = () => {
     const randomIdx = Math.floor(Math.random()*6);
     bestCategory(randomIdx);
 
+    //call bestBanchan
+
+}
+const templateInit2 = async () => {
+    //call bestCategory
+
+    const bestCategoryData = await fetchAsync({
+                      url:  '/api/banchan/best',
+                      method: 'GET',
+                      headers: { 'content-type': 'application/json'},
+                  });
+    categoryInit(bestCategoryData);
+    const randomIdx = Math.floor(Math.random()*6);
+    $('.tab-btn-box').children[randomIdx].classList.add('on');
+    $('.tab-content-group-box').children[randomIdx].classList.add('on');
+
+    const bestBanchanData = await fetchAsync({
+                url:  '/api/banchan/best/' + (randomIdx + 1),
+                method: 'GET',
+                headers: { 'content-type': 'application/json'},
+                });
+
+     banchanInit(bestBanchanData, randomIdx);
     //call bestBanchan
 
 }
@@ -58,7 +81,6 @@ const bestCategory = (onIndex) => {
             $('.tab-btn-box').children[onIndex].classList.add('on');
         }
     });
-
 }
 
 
