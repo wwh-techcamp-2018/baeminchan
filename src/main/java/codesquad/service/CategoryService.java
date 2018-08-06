@@ -4,7 +4,6 @@ import codesquad.domain.category.Category;
 import codesquad.domain.category.CategoryRepository;
 import codesquad.dto.category.CategoryDto;
 import codesquad.exception.CategoryNotFoundException;
-import com.sun.xml.internal.bind.v2.TODO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +43,7 @@ public class CategoryService {
                 .orElseThrow(CategoryNotFoundException::new);
         Category parent = null;
 
-        if(!categoryDto.isRoot()) {
+        if (!categoryDto.isRoot()) {
             parent = categoryRepository.findById(categoryDto.getParentId()).orElseThrow(CategoryNotFoundException::new);
         }
 

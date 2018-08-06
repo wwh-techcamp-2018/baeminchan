@@ -7,6 +7,7 @@ public class CustomResponse<T> {
 
     T data;
     private String message;
+
     public CustomResponse(MSG message, T data) {
         this.message = message.getMsg();
         this.data = data;
@@ -15,7 +16,7 @@ public class CustomResponse<T> {
     public enum MSG {
         OK("success"),
         VALIDATION_ERROR("valid_error"), LOGIN_FAILED_ERROR("login_failed"), ALREADT_EXISTS_USER_ERROR("already_exists_user"),
-        AUTHENTICATION_ERROR("권한이 없습니다."),CATEGORY_NOT_FOUND_ERROR("카테고리가 없습니다.");
+        AUTHENTICATION_ERROR("권한이 없습니다."), CATEGORY_NOT_FOUND_ERROR("카테고리가 없습니다.");
 
 
         final private String msg;

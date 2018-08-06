@@ -16,8 +16,8 @@ public class HomeController {
     PromotionService promotionService;
 
     @GetMapping
-    public String home(Model model){
-        model.addAttribute("promotions",promotionService.getPromotions());
+    public String home(Model model) {
+        model.addAttribute("promotions", promotionService.getPromotions());
         return "index";
     }
 }

@@ -1,14 +1,5 @@
 document.write("<script src='/js/common.js'></script>")
 
-function getCategories(url, callback) {
-  fetchManager({
-    url: url,
-    method: "GET",
-    headers: { "content-type": "application/json" },
-    callback: callback
-  });
-}
-
 function categoriesCallback(response) {
   response.json().then(result => {
     const categories = result.data;
@@ -69,5 +60,5 @@ function createAdminCategoryTemplate(category) {
 }
 
 window.addEventListener("load", function(event) {
-  getCategories("/api/category", categoriesCallback);
+  getData("/api/category", categoriesCallback);
 });

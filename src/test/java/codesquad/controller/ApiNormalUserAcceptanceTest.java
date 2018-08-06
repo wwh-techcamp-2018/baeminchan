@@ -26,7 +26,7 @@ public class ApiNormalUserAcceptanceTest extends AcceptanceTest {
     public void login() {
         JoinUserDto joinUserDto = UserTest.CYS;
         ResponseEntity<Void> response = template().postForEntity("/api/users", joinUserDto, Void.class);
-        LoginUserDto loginUserDto = new LoginUserDto("chldbtjd2272@naver.com","password!2");
+        LoginUserDto loginUserDto = new LoginUserDto("chldbtjd2272@naver.com", "password!2");
         response = template().postForEntity("/api/users/login", loginUserDto, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }

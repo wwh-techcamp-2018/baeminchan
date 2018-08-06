@@ -1,7 +1,6 @@
 package codesquad.controller;
 
 import codesquad.dto.TestCategoryDto;
-import codesquad.dto.category.CategoryDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.*;
@@ -29,10 +28,10 @@ public class ApiAdminAcceptanceTest extends AcceptanceTest {
 
     @Test
     public void createCategoryByNormalUser() {
-        ResponseEntity responseEntity = basicAuthTemplate("user","qwer1234!!").postForEntity("/api/admin/category", categoryDto, Void.class);
+        ResponseEntity responseEntity = basicAuthTemplate("user", "qwer1234!!").postForEntity("/api/admin/category", categoryDto, Void.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
         categoryDto.setParentId(1L);
-        responseEntity = basicAuthTemplate("user","qwer1234!!").postForEntity("/api/admin/category", categoryDto, Void.class);
+        responseEntity = basicAuthTemplate("user", "qwer1234!!").postForEntity("/api/admin/category", categoryDto, Void.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
     }
 
@@ -40,7 +39,7 @@ public class ApiAdminAcceptanceTest extends AcceptanceTest {
     public void deleteCategoryByAdminUser() {
         categoryDto.setCategoryId(50L);
         HttpEntity httpEntity = new HttpEntity(null, null);
-        ResponseEntity responseEntity = basicAuthTemplate("admin","qwer1234!!").exchange("/api/admin/category/50", HttpMethod.DELETE, httpEntity, Void.class);
+        ResponseEntity responseEntity = basicAuthTemplate("admin", "qwer1234!!").exchange("/api/admin/category/50", HttpMethod.DELETE, httpEntity, Void.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
@@ -48,7 +47,7 @@ public class ApiAdminAcceptanceTest extends AcceptanceTest {
     public void deleteCategoryByNormalUser() {
         categoryDto.setCategoryId(50L);
         HttpEntity httpEntity = new HttpEntity(null, null);
-        ResponseEntity responseEntity = basicAuthTemplate("user","qwer1234!!").exchange("/api/admin/category/50", HttpMethod.DELETE, httpEntity, Void.class);
+        ResponseEntity responseEntity = basicAuthTemplate("user", "qwer1234!!").exchange("/api/admin/category/50", HttpMethod.DELETE, httpEntity, Void.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
     }
 
@@ -59,7 +58,7 @@ public class ApiAdminAcceptanceTest extends AcceptanceTest {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity httpEntity = new HttpEntity(categoryDto, httpHeaders);
-        ResponseEntity responseEntity = basicAuthTemplate("user","qwer1234!!").exchange("/api/admin/category", HttpMethod.PUT, httpEntity, Void.class);
+        ResponseEntity responseEntity = basicAuthTemplate("user", "qwer1234!!").exchange("/api/admin/category", HttpMethod.PUT, httpEntity, Void.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
     }
 
@@ -71,7 +70,7 @@ public class ApiAdminAcceptanceTest extends AcceptanceTest {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity httpEntity = new HttpEntity(categoryDto, httpHeaders);
-        ResponseEntity responseEntity = basicAuthTemplate("admin","qwer1234!!").exchange("/api/admin/category", HttpMethod.PUT, httpEntity, Void.class);
+        ResponseEntity responseEntity = basicAuthTemplate("admin", "qwer1234!!").exchange("/api/admin/category", HttpMethod.PUT, httpEntity, Void.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
@@ -81,7 +80,7 @@ public class ApiAdminAcceptanceTest extends AcceptanceTest {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity httpEntity = new HttpEntity(categoryDto, httpHeaders);
-        ResponseEntity responseEntity = basicAuthTemplate("admin","qwer1234!!").exchange("/api/admin/category", HttpMethod.PUT, httpEntity, Void.class);
+        ResponseEntity responseEntity = basicAuthTemplate("admin", "qwer1234!!").exchange("/api/admin/category", HttpMethod.PUT, httpEntity, Void.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
@@ -92,7 +91,7 @@ public class ApiAdminAcceptanceTest extends AcceptanceTest {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity httpEntity = new HttpEntity(categoryDto, httpHeaders);
-        ResponseEntity responseEntity = basicAuthTemplate("admin","qwer1234!!").exchange("/api/admin/category", HttpMethod.PUT, httpEntity, Void.class);
+        ResponseEntity responseEntity = basicAuthTemplate("admin", "qwer1234!!").exchange("/api/admin/category", HttpMethod.PUT, httpEntity, Void.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
@@ -102,7 +101,7 @@ public class ApiAdminAcceptanceTest extends AcceptanceTest {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity httpEntity = new HttpEntity(categoryDto, httpHeaders);
-        ResponseEntity responseEntity = basicAuthTemplate("admin","qwer1234!!").exchange("/api/admin/category", HttpMethod.PUT, httpEntity, Void.class);
+        ResponseEntity responseEntity = basicAuthTemplate("admin", "qwer1234!!").exchange("/api/admin/category", HttpMethod.PUT, httpEntity, Void.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 }
