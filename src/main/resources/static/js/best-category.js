@@ -20,7 +20,6 @@ function bestCategoryHandler(evt) {
     evt.preventDefault();
     const target = evt.target.parentElement;
     const index = getOrder(target);
-    console.log(index);
     $('.tab-btn-box > .on').classList.toggle('on');
     target.classList.toggle('on');
     $('.tab-content-group-box > .on').classList.toggle('on');
@@ -28,13 +27,10 @@ function bestCategoryHandler(evt) {
 }
 
 function bestCategoryCallback(response) {
-    console.log(response);
     response.json().then((bestCategoryList) => setBestCategory(bestCategoryList));
 }
 
 function setBestCategory(bestCategoryList) {
-    console.log(bestCategoryList);
-
     const tabBtnBox = $(".tab-btn-box");
     const tabContentGroupBox = $(".tab-content-group-box");
 

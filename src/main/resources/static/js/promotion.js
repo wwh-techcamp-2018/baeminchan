@@ -27,7 +27,6 @@ function setPromotion(promotionList) {
     const imgBox = $(".img-box");
     const dotBox = $(".dot-btn-box");
     promotionList.forEach((promotion) => {
-        console.log(promotion);
     	imgBox.insertAdjacentHTML('beforeend', promotionTemplateWriter(promotion.bannerUrl, promotion.description));
         dotBox.insertAdjacentHTML('beforeend', dotTemplateWriter());
     });
