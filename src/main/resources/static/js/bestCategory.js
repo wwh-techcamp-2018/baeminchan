@@ -6,7 +6,7 @@ function initBestCategory(callback, failCallback) {
     var tabBtnBox = $('.tab-btn-box');
     tabBtnBox.addEventListener('click', clickBestProductTab);
 
-    fetchManager({
+    newFetchManager({
         url: 'api/best-categories',
         method: 'GET',
         headers: {'content-type': 'application/json'},
@@ -30,8 +30,8 @@ function bestProductToggle(currentNo) {
     selectBestCategoryNodes.forEach((node) => node.classList.toggle("on"));
 }
 
-function getBestCategoryCallback(response) {
-    response.body.forEach((bestCategory, index) => {
+function getBestCategoryCallback(result) {
+    result.forEach((bestCategory, index) => {
         let name = bestCategory.name;
         let products = bestCategory.products;
 

@@ -47,7 +47,7 @@ public class CategoryAcceptanceTest {
 
         memberService.addRole(member, Role.ADMIN);
 
-        String name = "메인반찬";
+        String name = "메인반찬2";
         CategoryDto categoryDto = CategoryDto.defaultCategoryDto().setName(name);
         categoryDto.addChild(CategoryDto.defaultCategoryDto().setName("child1"));
         categoryDto.addChild(CategoryDto.defaultCategoryDto().setName("child2"));

@@ -1,4 +1,5 @@
 package codesquad.web;
+
 import codesquad.domain.BestCategory;
 import codesquad.service.BestCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/best-categories")
 public class BestCategoryController {
-
     @Autowired
     private BestCategoryService bestCategoryService;
 
     @GetMapping
-    public List<BestCategory> show () {
+    public List<BestCategory> show() {
         return bestCategoryService.findAll();
     }
 }

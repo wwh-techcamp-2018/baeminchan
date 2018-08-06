@@ -26,6 +26,6 @@ public class CategoryService {
     }
 
     public List<Category> findByParentIsNull() {
-        return categoryRepository.findByParentIsNull().orElseThrow(() -> new CategoryNotFoundException("카테고리를 찾을 수 없습니다."));
+        return categoryRepository.findByParentIsNull().orElseThrow(() -> new CategoryNotFoundException(ValidationMessageUtil.CATEGORY_NOT_FOUND));
     }
 }
