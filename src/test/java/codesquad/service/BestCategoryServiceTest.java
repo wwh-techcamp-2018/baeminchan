@@ -22,6 +22,6 @@ public class BestCategoryServiceTest {
     @Test
     public void findAllTest() {
         when(bestCategoryRepository.findAll()).thenReturn(Arrays.asList(BestCategoryDto.defaultBestCategoryDto().toEntity()));
-        assertThat(bestCategoryService.findAll()).isEqualTo(Arrays.asList(BestCategoryDto.defaultBestCategoryDto()));
+        assertThat(bestCategoryService.findAll()).isEqualTo(Arrays.asList(BestCategoryDto.defaultBestCategoryDto().toEntity()));
     }
 }

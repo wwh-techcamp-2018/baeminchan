@@ -4,6 +4,7 @@ import codesquad.domain.Promotion;
 import codesquad.dto.PromotionDto;
 import codesquad.repository.PromotionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 public class PromotionService {
     @Autowired
     private PromotionRepository promotionRepository;
-    @Cacheable(value="findByPromotionCache")
+    @Cacheable(value="findByPromotionAllCache")
     public List<PromotionDto> findAll() {
         return convertPromotionDto(promotionRepository.findAll());
     }
@@ -30,7 +31,7 @@ public class PromotionService {
         return promotionRepository.save(promotionDto.toEntity());
     }
     @Caching(evict = {
-            @CacheEvict("findByPromotionCache"),
+            @CacheEvict(value = "findByPromotionAllCache", allEntries = true),
             @CacheEvict(value = "findByPromotionCache", key = "#id")
     })
     public void delete(Long id) {

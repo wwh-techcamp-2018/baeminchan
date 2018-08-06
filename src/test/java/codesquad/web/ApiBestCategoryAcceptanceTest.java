@@ -1,5 +1,6 @@
 package codesquad.web;
 
+import codesquad.domain.BestCategory;
 import codesquad.dto.BestCategoryDto;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +17,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class ApiBestCategoryAcceptanceTest extends AcceptanceTest {
-    @Autowired
-    private CacheManager cacheManager;
     @Test
     public void showAll() {
-        ResponseEntity<List<BestCategoryDto>> response =
+        ResponseEntity<List<BestCategory>> response =
                 requestForEntityWithParameterized("/api/best-categories",
-                        HttpMethod.GET, null, new ParameterizedTypeReference<List<BestCategoryDto>>(){});
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-
-        response =
-                requestForEntityWithParameterized("/api/best-categories",
-                        HttpMethod.GET, null, new ParameterizedTypeReference<List<BestCategoryDto>>(){});
-
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<BestCategory>>(){});
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 }

@@ -2,10 +2,12 @@ package codesquad.domain;
 
 import codesquad.dto.BestCategoryDto;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,7 +15,8 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BestCategory {
+@EqualsAndHashCode
+public class BestCategory implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

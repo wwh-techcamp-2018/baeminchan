@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode
 public class BestCategoryDto {
+
     private String categoryName;
     private List<Product> products;
     public static BestCategoryDto fromEntity(BestCategory bestCategory) {

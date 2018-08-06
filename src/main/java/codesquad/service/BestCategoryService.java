@@ -1,9 +1,11 @@
 package codesquad.service;
 
+import codesquad.domain.BestCategory;
 import codesquad.dto.BestCategoryDto;
 import codesquad.repository.BestCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -19,10 +21,10 @@ public class BestCategoryService {
     private BestCategoryRepository bestCategoryRepository;
     @Autowired
     private CacheManager ehCacheCacheManager;
-    
+
     @Cacheable(value="findByBestCategoryCache")
-    public List<BestCategoryDto> findAll() {
-        return bestCategoryRepository.findAll().stream().map(bc -> BestCategoryDto.fromEntity(bc)).collect(Collectors.toList());
+    public List<BestCategory> findAll() {
+        return bestCategoryRepository.findAll().stream().collect(Collectors.toList());
     }
 
 }
