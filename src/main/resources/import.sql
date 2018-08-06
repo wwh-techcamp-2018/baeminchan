@@ -134,4 +134,3 @@ INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (5, 
 INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (6, 16);
 INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (6, 17);
 INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (6, 18);
-

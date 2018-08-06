@@ -42,7 +42,7 @@ public class ApiPromotionControllerTest extends AcceptanceTest {
 
     @Before
     public void setUp() throws Exception {
-        defaultUser = new User("javajigi@naver.com", "test33##");
+        defaultUser = new User("serverwizard@naver.com", "test33##");
     }
 
     @Test
