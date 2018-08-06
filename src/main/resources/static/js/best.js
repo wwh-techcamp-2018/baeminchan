@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', () =>{
    //templateInit();
+
+   templateInit2();
+
+
 }, false);
 
 const templateInit = () => {
-    //call bestCategory
     const randomIdx = Math.floor(Math.random()*6);
     bestCategory(randomIdx);
-
-    //call bestBanchan
 
 }
 const templateInit2 = async () => {
@@ -19,9 +20,8 @@ const templateInit2 = async () => {
                       headers: { 'content-type': 'application/json'},
                   });
     categoryInit(bestCategoryData);
+
     const randomIdx = Math.floor(Math.random()*6);
-    $('.tab-btn-box').children[randomIdx].classList.add('on');
-    $('.tab-content-group-box').children[randomIdx].classList.add('on');
 
     const bestBanchanData = await fetchAsync({
                 url:  '/api/banchan/best/' + (randomIdx + 1),
@@ -30,35 +30,21 @@ const templateInit2 = async () => {
                 });
 
      banchanInit(bestBanchanData, randomIdx);
-    //call bestBanchan
+
+     $('.tab-btn-box').children[randomIdx].classList.add('on');
+     $('.tab-content-group-box').children[randomIdx].classList.add('on');
 
 }
 
-const insertHtml = ( {id, title} ) => `<li>
-    <a data-category-id="${id}" href="#">${title}</a>
-    </li>`;
-
-const categoryInit = (data) => {
-    const innerList = data.reduce( (accum, cur) => {
-        return accum + insertHtml(cur);
-    }, '');
-    const boxList = data.reduce( (accum) => {
-            return accum + banchanOuterHtml;
-    }, '');
-
-    $('.tab-btn-box').insertAdjacentHTML('beforeend', innerList);
-    $('.tab-content-group-box').insertAdjacentHTML('beforeend', boxList);
-}
 
 const banchanInit = (data, id) => {
     const innerList = data.reduce((accum, cur) => {
         return accum + banchanBoxHTML(cur);
     }, '');
 
-    $All('.tab-content-box')[id-1].insertAdjacentHTML('beforeend', innerList);
-    $('.tab-content-group-box').children[id-1].classList.add('on');
+    $All('.tab-content-box')[id].insertAdjacentHTML('beforeend', innerList);
 }
-
+/*
 const bestBanchan = (id) => {
     fetchManager({
             url:  '/api/banchan/best/' + id,
@@ -68,7 +54,8 @@ const bestBanchan = (id) => {
 
         });
 }
-
+*/
+/*
 const bestCategory = (onIndex) => {
     fetchManager({
         url:  '/api/banchan/best',
@@ -82,8 +69,23 @@ const bestCategory = (onIndex) => {
         }
     });
 }
+*/
 
+const insertHtml = ( {id, title} ) => `<li>
+    <a data-category-id="${id}" href="#">${title}</a>
+    </li>`;
 
+const categoryInit = (data) => {
+    const innerList = data.reduce( (accum, cur) => {
+        return accum + insertHtml(cur);
+    }, '');
+    $('.tab-btn-box').insertAdjacentHTML('beforeend', innerList);
+
+    const boxList = data.reduce( (accum) => {
+                return accum + banchanOuterHtml;
+        }, '');
+    $('.tab-content-group-box').insertAdjacentHTML('beforeend', boxList);
+}
 const banchanOuterHtml =`<li> <ul class="tab-content-box"></ul></li>`;
 const banchanBoxHTML = ( {description, title, imgUrl, originalPrice, realPrice} ) => `<li>
                                  <a class="thumbnail-box" href="#">
@@ -105,7 +107,7 @@ const banchanBoxHTML = ( {description, title, imgUrl, originalPrice, realPrice} 
                                          </dd>
                                      </dl>
                                  </a>
-                             </li>`
+                             </li>`;
 
 //const moveBanchanBox = (id) => {
 //    $('.tab-content-group-box')
