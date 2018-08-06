@@ -23,6 +23,8 @@
     background-image: url("https://cdn.bmf.kr/banner/main_banner/180328/1522226266924_db98fbaef1ab.jpg") !important;
 }
 
+textarea, select, input, button { outline: none; }
+
 .img-box .visible-banner {
     -webkit-transition: opacity 0.5s ease-in;
     -moz-transition: opacity 0.5s ease-in;
@@ -44,4 +46,25 @@
 
 .tab-btn-box > li:hover {
     cursor: pointer;
+}
+
+#search-results-holder {
+    position: absolute;
+    top: 40px;
+    left: 0px;
+    width: 100%;
+    z-index: 20;
+}
+
+.search-result {
+    padding: 8px 12px 8px 12px;
+    height: 40px;
+    line-height: 26px;
+    background-color: #fafafa;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.search-result-selected {
+    background-color: #11c2bc;
 }

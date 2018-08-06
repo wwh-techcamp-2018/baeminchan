@@ -9,6 +9,8 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.js"></script>
   <script src="/js/main.js"></script>
+  <script src="/js/SearchBar.js"></script>
+  <script src="/js/SearchResult.js"></script>
   <script src="/js/index.js"></script>
 
 </head>
@@ -81,6 +83,9 @@
         <button type="submit">
           <span>검색</span>
         </button>
+        <div id="search-results-holder">
+
+        </div>
       </form>
 
       <ul class="favorite-menu">
@@ -856,6 +861,8 @@
       {{precompile "precompile/subtitle_template"}}
       {{precompile "precompile/event_category_template"}}
       {{precompile "precompile/event_category_product_template"}}
+      {{precompile "precompile/search_result_template"}}
+
   </script>
 
 
