@@ -72,3 +72,59 @@ INSERT INTO PROMOTION (banner_url, description) VALUES ('https://cdn.bmf.kr/bann
 INSERT INTO PROMOTION (banner_url, description) VALUES ('https://cdn.bmf.kr/banner/main_banner/180712/1531359067444_c293ab9aa477.jpg', '프로모션 메뉴6')
 INSERT INTO PROMOTION (banner_url, description) VALUES ('https://cdn.bmf.kr/banner/main_banner/180719/1531992782374_4c0636e1ca6b.jpg', '프로모션 메뉴7')
 INSERT INTO PROMOTION (banner_url, description) VALUES ('https://cdn.bmf.kr/banner/main_banner/180328/1522226266924_db98fbaef1ab.jpg', '프로모션 메뉴8')
+
+INSERT INTO best_category(category_name) VALUES('풍성한 고기반찬')
+INSERT INTO best_category(category_name) VALUES('오늘은 뭐먹지')
+INSERT INTO best_category(category_name) VALUES('바다향가득 반찬')
+INSERT INTO best_category(category_name) VALUES('추천해요 아이반찬')
+INSERT INTO best_category(category_name) VALUES('할인특가 세트상품')
+INSERT INTO best_category(category_name) VALUES('맛있는 간식타임')
+
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '맛있는 반찬1', 1000, 1);
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '맛있는 반찬2', 1000, 1);
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '맛있는 반찬3', 1000, 1);
+
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '맛없는 반찬1', 1000, 2);
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '맛없는 반찬2', 1000, 2);
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '맛없는 반찬3', 1000, 2);
+
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '고기반찬1', 1000, 3);
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '고기반찬2', 1000, 3);
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '고기반찬3', 1000, 3);
+
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '해산물 반찬1', 1000, 4);
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '해산물 반찬2', 1000, 4);
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '해산물 반찬3', 1000, 4);
+
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '덜익은 반찬1', 1000, 5);
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '덜익은 반찬2', 1000, 5);
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '덜익은 반찬3', 1000, 5);
+
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '감자탕 반찬1', 1000, 6);
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '감자탕 반찬2', 1000, 6);
+INSERT INTO product(discount_rate, name, price, best_category_id) VALUES(0, '감자탕 반찬3', 1000, 6);
+
+
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(1, 'https://cdn.bmf.kr/_data/product/I1BF4/a0954782a02f9e956577a5d8907bad69.jpg');
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(2, 'https://cdn.bmf.kr/_data/product/I21A3/da9a106836a01d411897eb94b37e7c9c.jpg');
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(3, 'https://cdn.bmf.kr/_data/product/I6759/f95f212332282cb4d3906eaad344c256.jpg');
+
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(4, 'https://cdn.bmf.kr/_data/product/IC5BB/7db9fa5a56f6203836ae7c90ab67b3ce.jpg');
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(5, 'https://cdn.bmf.kr/_data/product/I5200/da93cbe8aa03e01aaf1a642a4ca54ef1.jpg');
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(6, 'https://cdn.bmf.kr/_data/product/I1BF4/a0954782a02f9e956577a5d8907bad69.jpg');
+
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(7, 'https://cdn.bmf.kr/_data/product/H8B82/2b1c6be5e548efadb1cab1caba575853.jpg');
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(8, 'https://cdn.bmf.kr/_data/product/IC5BB/7db9fa5a56f6203836ae7c90ab67b3ce.jpg');
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(9, 'https://cdn.bmf.kr/_data/product/H5D38/245501ac785549711e399ee0a15714a0.jpg');
+
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(10, 'https://cdn.bmf.kr/_data/product/I1BF4/a0954782a02f9e956577a5d8907bad69.jpg');
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(11, 'https://cdn.bmf.kr/_data/product/I0783/0792c09f383d599777827a3765d1bca8.jpg');
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(12, 'https://cdn.bmf.kr/_data/product/I1BF4/a0954782a02f9e956577a5d8907bad69.jpg');
+
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(13, 'https://cdn.bmf.kr/_data/product/H5D38/245501ac785549711e399ee0a15714a0.jpg');
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(14, 'https://cdn.bmf.kr/_data/product/I1BF4/a0954782a02f9e956577a5d8907bad69.jpg');
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(15, 'https://cdn.bmf.kr/_data/product/I1BF4/a0954782a02f9e956577a5d8907bad69.jpg');
+
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(16, 'https://cdn.bmf.kr/_data/product/I1BF4/a0954782a02f9e956577a5d8907bad69.jpg');
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(17, 'https://cdn.bmf.kr/_data/product/I1BF4/a0954782a02f9e956577a5d8907bad69.jpg');
+INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(18, 'https://cdn.bmf.kr/_data/product/IA7F1/c4eebd6b6b1feb612bcbaa47c71c4c38.jpg');

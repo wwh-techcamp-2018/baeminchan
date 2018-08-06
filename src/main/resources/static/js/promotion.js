@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    initEvents();
+    initPromotionEvents();
 })
 
-function initEvents() {
+function initPromotionEvents() {
     loadPromotion();
     const dotBtnBox = $(".dot-btn-box");
     dotBtnBox.addEventListener("click", dotClickHandler);
@@ -27,7 +27,6 @@ function setPromotion(promotionList) {
     const imgBox = $(".img-box");
     const dotBox = $(".dot-btn-box");
     promotionList.forEach((promotion) => {
-        console.log(promotion);
     	imgBox.insertAdjacentHTML('beforeend', promotionTemplateWriter(promotion.bannerUrl, promotion.description));
         dotBox.insertAdjacentHTML('beforeend', dotTemplateWriter());
     });
