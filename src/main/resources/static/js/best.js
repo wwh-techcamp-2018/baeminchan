@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         //+ loaded 여부를 알수있게?
 }, false);
 
-const changeBestBanchan = (event) => {
+const changeBestBanchan = async (event) => {
     event.preventDefault();
     console.log(event);
 
@@ -25,6 +25,16 @@ const changeBestBanchan = (event) => {
         const targetLi = event.target.tagName !== 'LI'? event.target.closest('li') :  event.target ;
        //or event.target.closest('li')|| event.target ;
         const targetIdx = getIndex(targetLi);
+
+        if(!targetLi.getAttribute("data-load")){
+            const bestBanchanData = await fetchAsync({
+                                url:  '/api/banchan/best/' + (targetIdx + 1),
+                                method: 'GET',
+                                headers: { 'content-type': 'application/json'},
+                                });
+            banchanInit(bestBanchanData, targetIdx);
+            $('.tab-btn-box').children[targetIdx].setAttribute("data-load", "loaded");
+        }
 
         //ajax call if not cached
 
@@ -68,9 +78,11 @@ const templateInit2 = async () => {
      banchanInit(bestBanchanData, randomIdx);
 
      $('.tab-btn-box').children[randomIdx].classList.add('on');
+     $('.tab-btn-box').children[randomIdx].setAttribute("data-load", "loaded");
      $('.tab-content-group-box').children[randomIdx].classList.add('on');
 
 }
+
 
 
 const banchanInit = (data, id) => {
