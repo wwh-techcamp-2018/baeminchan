@@ -79,3 +79,59 @@ INSERT INTO category (parent_category_id, name) VALUES (8, '키즈관');
 
 INSERT INTO promotion (title, user_id, created_time, start_date, end_date, image_url) VALUES ('테스트 프로모션', 1, '2018-08-01', '2018-08-02', '2018-08-03', 'https://cdn.bmf.kr/banner/main_banner/180724/1532409236448_d9b2dde93f6a.jpg');
 INSERT INTO promotion (title, user_id, created_time, start_date, end_date, image_url) VALUES ('테스트 프로모션2', 2, '2018-08-01', '2018-08-02', '2018-08-03', 'https://cdn.bmf.kr/banner/main_banner/180724/1532409236448_d9b2dde93f6a.jpg');
+
+INSERT INTO best_category (name, writer_id) VALUES ('서울맛집탐방', 1);
+INSERT INTO best_category (name, writer_id) VALUES ('풍성한 고기반찬', 1);
+INSERT INTO best_category (name, writer_id) VALUES ('바다향가득 반찬', 1);
+INSERT INTO best_category (name, writer_id) VALUES ('간편한 덮밥요리', 1);
+INSERT INTO best_category (name, writer_id) VALUES ('할인특가 세트상품', 1);
+INSERT INTO best_category (name, writer_id) VALUES ('맛있는 간식타임', 1);
+
+INSERT INTO brand (name, address) values ('포비브랜드', '서울 송파구');
+INSERT INTO brand (name, address) values ('크롱브랜드', '서울 강남구');
+INSERT INTO brand (name, address) values ('주하브랜드', '서울 영등포구');
+INSERT INTO brand (name, address) values ('현아브랜드', '서울 강서구');
+
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('ALL_REGION_DELIVERY', '반찬1 설명입니다.', '월, 화, 수, 목, 금', true, '반찬1', 5900, 4900, 200, 1, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('DAWN_DELIVERY', '반찬2 설명입니다.', '월, 화, 수', true, '반찬2', 5900, 4900, 200, 2, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('ALL_REGION_DELIVERY', '반찬3 설명입니다.', '월, 화, 수, 목, 금', true, '반찬3', 5900, 4900, 200, 3, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('DAWN_DELIVERY', '반찬4 설명입니다.', '월, 화, 수, 목, 금', true, '반찬4', 5900, 4900, 200, 4, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('ALL_REGION_DELIVERY', '반찬5 설명입니다.', '월, 화, 수, 목, 금', true, '반찬5', 5900, 4900, 200, 1, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('DAWN_DELIVERY', '반찬6 설명입니다.', '월, 화, 수', true, '반찬6', 5900, 4900, 200, 2, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('ALL_REGION_DELIVERY', '반찬7 설명입니다.', '월, 화, 수, 목, 금', true, '반찬7', 5900, 4900, 200, 3, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('DAWN_DELIVERY', '반찬8 설명입니다.', '월, 화, 수, 목, 금', true, '반찬8', 5900, 4900, 200, 4, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('ALL_REGION_DELIVERY', '반찬9 설명입니다.', '월, 화, 수, 목, 금', true, '반찬9', 5900, 4900, 200, 1, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('DAWN_DELIVERY', '반찬10 설명입니다.', '월, 화, 수', true, '반찬10', 5900, 4900, 200, 2, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('ALL_REGION_DELIVERY', '반찬11 설명입니다.', '월, 화, 수, 목, 금', true, '반찬11', 5900, 4900, 200, 3, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('DAWN_DELIVERY', '반찬12 설명입니다.', '월, 화, 수, 목, 금', true, '반찬12', 5900, 4900, 200, 4, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('ALL_REGION_DELIVERY', '반찬13 설명입니다.', '월, 화, 수, 목, 금', true, '반찬13', 5900, 4900, 200, 1, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('DAWN_DELIVERY', '반찬14 설명입니다.', '월, 화, 수', true, '반찬14', 5900, 4900, 200, 2, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('ALL_REGION_DELIVERY', '반찬15 설명입니다.', '월, 화, 수, 목, 금', true, '반찬15', 5900, 4900, 200, 3, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('DAWN_DELIVERY', '반찬16 설명입니다.', '월, 화, 수, 목, 금', true, '반찬16', 5900, 4900, 200, 4, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('ALL_REGION_DELIVERY', '반찬17 설명입니다.', '월, 화, 수, 목, 금', true, '반찬17', 5900, 4900, 200, 1, 1, 1);
+INSERT INTO side_dish(DELIVERY_TYPE, DESCRIPTION, ENABLE_DAY, IS_ENABLE_REGULAR_DELIVERY, NAME, PRICE, SALE_PRICE, WEIGHT, BRAND_ID, CATEGORY_ID, WRITER_ID) VALUES ('DAWN_DELIVERY', '반찬18 설명입니다.', '월, 화, 수', true, '반찬18', 5900, 4900, 200, 2, 1, 1);
+
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (1, 1);
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (1, 2);
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (1, 3);
+
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (2, 4);
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (2, 5);
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (2, 6);
+
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (3, 7);
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (3, 8);
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (3, 9);
+
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (4, 10);
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (4, 11);
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (4, 12);
+
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (5, 13);
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (5, 14);
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (5, 15);
+
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (6, 16);
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (6, 17);
+INSERT INTO best_category_side_dish (best_category_id, side_dish_id) VALUES (6, 18);
+

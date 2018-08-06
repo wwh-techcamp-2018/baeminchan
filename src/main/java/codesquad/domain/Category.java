@@ -29,6 +29,7 @@ public class Category {
     @Where(clause = "deleted = false")
     private List<Category> subCategories = new ArrayList<>();
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_creator_id"))
     private User creator;
     @Column
