@@ -1,11 +1,9 @@
 package codesquad.service;
 
-import codesquad.domain.Product;
 import codesquad.domain.ProductRepository;
+import codesquad.dto.SearchRecommendationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class SearchService {
@@ -13,7 +11,7 @@ public class SearchService {
     @Autowired
     private ProductRepository productRepository;
 
-    public List<Product> search(String keyword) {
-        return productRepository.findAllByTitleContains(keyword);
+    public SearchRecommendationDto search(String keyword) {
+        return new SearchRecommendationDto(keyword, productRepository.findAllByTitleContains(keyword));
     }
 }
