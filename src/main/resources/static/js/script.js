@@ -1,5 +1,3 @@
-document.write('<script src="/js/common.js"></script>')
-
 document.addEventListener("DOMContentLoaded", () => {
     initEvents();
     addArrowBtn();
