@@ -101,6 +101,4 @@ public class Category {
         this.parent.getChildren().remove(this);
         setParent(null);
     }
-
-//TODO products 만들어줘야 함
 }

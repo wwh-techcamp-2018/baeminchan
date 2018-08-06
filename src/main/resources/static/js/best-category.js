@@ -62,7 +62,7 @@ function appendContents(tabContentGroupBox, products) {
 
               </ul>
             </li>`
-        );
+    );
 
     let tabContentBox = tabContentGroupBox.lastElementChild.firstElementChild;
     products.forEach(p => tabContentBox.insertAdjacentHTML("beforeend",

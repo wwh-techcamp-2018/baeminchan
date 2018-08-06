@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode
-public class BestCategoryDto {
+public class BestCategoryDto implements Serializable {
 
     private String categoryName;
     private List<Product> products;

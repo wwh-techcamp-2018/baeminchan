@@ -37,6 +37,6 @@ public class ApiMemberController {
         HttpSessionUtils.setMemberToSession(loginMember, session);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create("/"));
-        return new ResponseEntity<Void>(headers, HttpStatus.FOUND);
+        return new ResponseEntity<>(headers, HttpStatus.FOUND);
     }
 }

@@ -1,24 +1,19 @@
 package codesquad.security;
 
-import codesquad.exception.ErrorDetails;
 import codesquad.exception.UnAuthenticationException;
 
 import codesquad.domain.Member;
 import codesquad.dto.MemberLoginDto;
 import codesquad.service.MemberService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Base64;
-import java.util.Date;
 
 public class BasicAuthInterceptor extends HandlerInterceptorAdapter {
     private static final Logger log = LoggerFactory.getLogger(BasicAuthInterceptor.class);
@@ -27,10 +22,9 @@ public class BasicAuthInterceptor extends HandlerInterceptorAdapter {
     private MemberService memberService;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-            throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String authorization = request.getHeader("Authorization");
-        Member member = null;
+        Member member;
 
         log.debug("Authorization : {}, null means not using basicAuth", authorization);
         if (authorization == null || !authorization.startsWith("Basic")) {
@@ -57,15 +51,5 @@ public class BasicAuthInterceptor extends HandlerInterceptorAdapter {
         request.getSession().setAttribute(HttpSessionUtils.MEMBER_SESSION_KEY, member);
         return member;
     }
-
-    private void addErrorDetailToResponse(HttpServletResponse response, String errorMessage) throws IOException {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), errorMessage);
-        response.setStatus(HttpStatus.BAD_REQUEST.value());
-        String json = new ObjectMapper().writeValueAsString(errorDetails);
-        response.getWriter().write(json);
-        response.flushBuffer();
-    }
-
-
 }
 

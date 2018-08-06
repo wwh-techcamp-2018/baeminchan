@@ -15,11 +15,10 @@ public class ApiPromotionAcceptanceClass extends AcceptanceTest {
     @Test
     public void show() {
         ResponseEntity<List<PromotionDto>> response =
-                requestForEntityWithParameterized("/api/promotion", HttpMethod.GET, null, new ParameterizedTypeReference<List<PromotionDto>>(){});
+                requestForEntityWithParameterized("/api/promotion", HttpMethod.GET, null,
+                        new ParameterizedTypeReference<List<PromotionDto>>() {});
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody().size()).isNotZero();
     }
-
-
 }

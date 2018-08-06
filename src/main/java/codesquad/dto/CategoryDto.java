@@ -2,9 +2,10 @@ package codesquad.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Data
 public class CategoryDto {
@@ -14,7 +15,7 @@ public class CategoryDto {
 
     public CategoryDto(String name) {
         this.name = name;
-        this.children = new ArrayList<CategoryDto>();
+        this.children = new ArrayList<>();
     }
 
     public CategoryDto(String name, List<CategoryDto> children) {
@@ -25,7 +26,6 @@ public class CategoryDto {
     public CategoryDto() {
     }
 
-    // TODO 문제의 getFirstChild
     @JsonIgnore
     public CategoryDto getFirstChild() {
         if (children.isEmpty()) {

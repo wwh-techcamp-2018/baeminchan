@@ -4,7 +4,6 @@ import codesquad.domain.Category;
 import codesquad.dto.CategoryListDto;
 import codesquad.dto.CategoryPostDto;
 import codesquad.repository.CategoryRepository;
-import codesquad.security.BasicAuthInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -31,10 +30,6 @@ public class CategoryService {
                 .collect(Collectors.toList()));
         log.debug(test.toString());
         return test;
-//        return new CategoryListDto(categoryRepository.findByParentIsNull()
-//                .stream()
-//                .map((parent) -> Category.toDto(parent))
-//                .collect(Collectors.toList()));
     }
 
     @Transactional
