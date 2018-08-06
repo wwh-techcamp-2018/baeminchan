@@ -19,8 +19,6 @@ import java.util.stream.Collectors;
 public class BestCategoryService {
     @Autowired
     private BestCategoryRepository bestCategoryRepository;
-    @Autowired
-    private CacheManager ehCacheCacheManager;
 
     @Cacheable(value="findByBestCategoryCache")
     public List<BestCategory> findAll() {
