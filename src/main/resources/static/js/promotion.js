@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    initEvents();
+    initPromotionEvents();
 })
 
-function initEvents() {
+function initPromotionEvents() {
     loadPromotion();
     const dotBtnBox = $(".dot-btn-box");
     dotBtnBox.addEventListener("click", dotClickHandler);
