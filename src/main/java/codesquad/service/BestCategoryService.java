@@ -19,10 +19,7 @@ public class BestCategoryService {
     private BestCategoryRepository bestCategoryRepository;
     @Autowired
     private CacheManager ehCacheCacheManager;
-
-
-
-
+    
     @Cacheable(value="findByBestCategoryCache")
     public List<BestCategoryDto> findAll() {
         return bestCategoryRepository.findAll().stream().map(bc -> BestCategoryDto.fromEntity(bc)).collect(Collectors.toList());
