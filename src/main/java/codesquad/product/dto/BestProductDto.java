@@ -1,5 +1,6 @@
 package codesquad.product.dto;
 
+import codesquad.product.domain.BestProduct;
 import codesquad.product.domain.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,5 +24,9 @@ public class BestProductDto {
     public BestProductDto(@NotNull @NotEmpty @Size(min = 1, max = 30) String name, List<Product> products) {
         this.name = name;
         this.products = products;
+    }
+
+    public BestProduct toEntity() {
+        return new BestProduct(this.name, this.products);
     }
 }

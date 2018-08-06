@@ -10,13 +10,13 @@ import java.util.Set;
 
 @Entity
 @Getter
-@Builder
+@NoArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
 
     @Column(length = 100, nullable = false)
@@ -32,13 +32,25 @@ public class Product {
     private String description;
 
     @ElementCollection
-    @CollectionTable
+    @CollectionTable(joinColumns = @JoinColumn(name = "id", referencedColumnName = "id"))
     private Set<String> images;
 
-    @Column(nullable = false)
+    @Column
     private String deliveryType;
 
     @ElementCollection
-    @CollectionTable(joinColumns = @JoinColumn(name = "pid", referencedColumnName = "id"))
+    @CollectionTable(joinColumns = @JoinColumn(name = "id", referencedColumnName = "id"))
     private Set<Day> receiptableDays;
+
+    @Builder
+    public Product(Category category, String title, Long originalPrice, Double discountPercent, String description, Set<String> images, String deliveryType, Set<Day> receiptableDays) {
+        this.category = category;
+        this.title = title;
+        this.originalPrice = originalPrice;
+        this.discountPercent = discountPercent;
+        this.description = description;
+        this.images = images;
+        this.deliveryType = deliveryType;
+        this.receiptableDays = receiptableDays;
+    }
 }
