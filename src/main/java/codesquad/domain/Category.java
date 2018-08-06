@@ -29,6 +29,7 @@ public class Category {
     @Where(clause = "deleted = false")
     private List<Category> subCategories = new ArrayList<>();
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_creator_id"))
     private User creator;
     @Column
@@ -64,7 +65,7 @@ public class Category {
             throw new UnAuthorityException("자신이 생성한 카테고리만 삭제할 수 있습니다.");
         }
         this.deleted = true;
-        if(this.parentCategory == null) {
+        if (this.parentCategory == null) {
             deleteChildren();
         }
     }

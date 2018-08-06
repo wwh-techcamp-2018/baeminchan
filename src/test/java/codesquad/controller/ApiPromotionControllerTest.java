@@ -55,7 +55,6 @@ public class ApiPromotionControllerTest extends AcceptanceTest {
                 .addParameter("endDate", LocalDate.now().plusDays(7).toString())
                 .addParameter("imageFile", new ClassPathResource("/static/img/img-main-visual-slide_1.jpg"))
                 .build();
-
         ResponseEntity<Void> response = basicAuthTemplate(defaultUser).postForEntity("/api/promotions", request, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }

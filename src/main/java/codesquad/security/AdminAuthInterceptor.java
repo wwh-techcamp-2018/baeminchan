@@ -3,6 +3,8 @@ package codesquad.security;
 import codesquad.domain.User;
 import codesquad.exception.UnAuthenticationException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;

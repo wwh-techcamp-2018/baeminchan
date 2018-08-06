@@ -1523,7 +1523,6 @@ a:focus {
 .invisible{
     display: none;
 }
-
 .img-item{
   opacity: 0;
   transition: opacity 0.5s;
@@ -1531,4 +1530,8 @@ a:focus {
 .current{
   opacity: 1;
   transition: opacity 0.5s;
+}
+.now{
+  color: white !important;
+  background: #2ac1bc !important;
 }
