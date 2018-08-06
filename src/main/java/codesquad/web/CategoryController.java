@@ -21,5 +21,4 @@ public class CategoryController {
         CustomResponse customResponse = new CustomResponse(200, ValidationMessageUtil.CATEGORY_READ_SUCCESS, categoryService.findByParentIsNull());
         return ResponseEntity.ok().body(customResponse);
     }
-
 }

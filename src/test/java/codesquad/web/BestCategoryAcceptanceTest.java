@@ -19,7 +19,5 @@ public class BestCategoryAcceptanceTest extends AcceptanceTestTemplate {
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody().size()).isNotZero();
-
-        //TODO get으로 받은 데이터 내용을 좀 더 정확하게 테스트 하면 좋을 것 같다.
     }
 }
