@@ -33,10 +33,12 @@ public class SideDish {
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_category"))
+    @JsonIgnore
     private Category category;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_side_writer"))
+    @JsonIgnore
     private User writer;
 
 

@@ -1,27 +1,10 @@
 const CLASS_NAME_NOW = "now";
+const side_dishes_cache = {};
 
 document.addEventListener("DOMContentLoaded", () => {
     initEvents();
     $("#best-categories").addEventListener("click", onClickBestCategory);
 });
-
-function onClickBestCategory(evt) {
-    let {"target" : target} = evt;
-    $(".now").classList.toggle(CLASS_NAME_NOW);
-    target.classList.toggle(CLASS_NAME_NOW);
-
-    loadSideDishes(target.dataset["categoryId"]);
-}
-
-function loadSideDishes(categoryId) {
-    fetchManager({
-        url: '/api/bestCategories/' + categoryId,
-        method: 'GET',
-        headers: { 'content-type': 'application/json'},
-        callback: onSuccessBestSideDishes,
-        errCallback: alertError
-    });
-}
 
 function initEvents() {
     fetchManager({
@@ -71,13 +54,45 @@ function onSuccessBestCategories(response) {
     });
 }
 
+function onClickBestCategory(evt) {
+    let {"target" : target} = evt;
+    $(".now").classList.toggle(CLASS_NAME_NOW);
+    target.classList.toggle(CLASS_NAME_NOW);
+    if(!side_dishes_cache[target.dataset["categoryId"]])
+        loadSideDishes(target.dataset["categoryId"]);
+    else
+        updateSideDishes(side_dishes_cache[target.dataset["categoryId"]]);
+}
+
+function loadSideDishes(categoryId) {
+    fetchManager({
+        url: '/api/bestCategories/' + categoryId,
+        method: 'GET',
+        headers: { 'content-type': 'application/json'},
+        callback: onSuccessBestSideDishes,
+        errCallback: alertError
+    });
+}
+
 function onSuccessBestSideDishes(response) {
     response.json().then((result) => {
-        const html = result.reduce((prev, next) => {
-            return prev + `<li>
+        side_dishes_cache[$(".now").dataset["categoryId"]] = result;
+        updateSideDishes(result);
+    });
+}
+
+function updateSideDishes(result) {
+    const html = getSideDishesTemplete(result);
+    $("#best-side-dish-box").innerHTML = '';
+    $("#best-side-dish-box").insertAdjacentHTML("beforeend", html);
+}
+
+function getSideDishesTemplete(sideDishes) {
+    return sideDishes.reduce((prev, next) => {
+        return prev + `<li>
                   <a class="thumbnail-box" href="#">
                     <div class="thumbnail">
-                      <img src="./img/img-best-dish.jpg" alt="[집밥의완성] 1월 제철박스" />
+                      <img src="./img/img-best-dish.jpg" alt=[${next.brand.name}]${next.name} />
                       <div class="overlay">
                         <p class="txt">새벽배송</p>
                         <p class="txt">전국택배</p>
@@ -88,22 +103,19 @@ function onSuccessBestSideDishes(response) {
                     </div>
 
                     <dl class="content">
-                      <dt class="title">${next.name}</dt>
-                      <dd class="desc">둘이서 한 끼 먹기 딱 좋아요</dd>
+                      <dt class="title">[${next.brand.name}]${next.name}</dt>
+                      <dd class="desc">${next.description}</dd>
                       <dd class="price-wrapper">
-                        <span class="original-price">22,900</span>
+                        <span class="original-price">${next.price}</span>
                         <span class="final-price">
-                          <span class="number">20,500</span>
+                          <span class="number">${next.salePrice}</span>
                           <span class="unit">원</span>
                         </span>
                       </dd>
                     </dl>
                   </a>
                 </li>`;
-        }, ``);
-        $("#best-side-dish-box").innerHTML = '';
-        $("#best-side-dish-box").insertAdjacentHTML("beforeend", html);
-    });
+    }, ``);
 }
 
 function alertError() {
