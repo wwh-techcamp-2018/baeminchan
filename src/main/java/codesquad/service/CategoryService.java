@@ -1,13 +1,12 @@
 package codesquad.service;
 
 import codesquad.domain.Category;
-import codesquad.domain.CategoryRepository;
+import codesquad.repository.CategoryRepository;
 import codesquad.dto.CategoryDto;
 import codesquad.support.exception.CategoryNotFoundException;
 import codesquad.validation.ValidationMessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,6 +26,6 @@ public class CategoryService {
     }
 
     public List<Category> findByParentIsNull() {
-        return categoryRepository.findByParentIsNull().orElseThrow(() -> new CategoryNotFoundException("카테고리를 찾을 수 없습니다."));
+        return categoryRepository.findByParentIsNull().orElseThrow(() -> new CategoryNotFoundException(ValidationMessageUtil.CATEGORY_NOT_FOUND));
     }
 }

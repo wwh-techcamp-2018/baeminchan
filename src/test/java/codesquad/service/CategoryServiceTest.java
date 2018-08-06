@@ -1,7 +1,7 @@
 package codesquad.service;
 
 import codesquad.domain.Category;
-import codesquad.domain.CategoryRepository;
+import codesquad.repository.CategoryRepository;
 import codesquad.dto.CategoryDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -16,16 +16,24 @@ function fetchManager({ url, method, body, headers, callback, failCallback}) {
         return response.json();
     }).then((result) => {
         if(result.status === 200 || result.status === 201) {
-            console.log(result);
             callback(result)
         } else {
-            console.log(result);
             failCallback(result);
-            // error.errors.forEach((val) => {
-            //     const emailCautionEl = $('#' + val.field + '_caution');
-            //     emailCautionEl.innerText = val.defaultMessage;
-            //     emailCautionEl.style.display = 'block';
-            // });
+        }
+    });
+}
+
+function newFetchManager({ url, method, body, headers, callback, failCallback}) {
+    fetch(url, {
+        method,
+        body,
+        headers,
+        credentials: "same-origin"
+    }).then((response) => {
+        if(response.ok) {
+            response.json().then((result) => callback(result))
+        } else {
+            failCallback(response);
         }
     });
 }

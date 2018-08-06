@@ -1,5 +1,6 @@
-package codesquad.domain;
+package codesquad.repository;
 
+import codesquad.domain.Category;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

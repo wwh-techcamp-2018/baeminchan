@@ -1,17 +1,15 @@
 package codesquad.service;
 
 import codesquad.domain.Member;
-import codesquad.domain.MemberRepository;
+import codesquad.repository.MemberRepository;
 import codesquad.dto.LoginDto;
 import codesquad.dto.MemberDto;
 import codesquad.support.Role;
 import codesquad.support.exception.UnAuthenticationException;
 import codesquad.validation.ValidationMessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
