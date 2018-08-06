@@ -4,16 +4,23 @@ document.addEventListener('DOMContentLoaded', () =>{
    templateInit2();
 
     $('.tab-btn-box').addEventListener('click', changeBestBanchan);
+    //click event listener -- 베스트만찬 로드 및 출력 완료후
+        //콟백 - remove on class, cached/ loaded? ajax, add 'on' class
+        //1. cached[] = [0] //변수로 저장 유지 --
+        //2. ul data-loaded="loaded" -- html node 속성으로 관리 --
+        //3. childElementCount -
+        //+ loaded 여부를 알수있게?
 }, false);
 
 const changeBestBanchan = (event) => {
     event.preventDefault();
     console.log(event);
 
-    $('.tab-btn-box .on').remove('on');
-    $('.tab-content-group-box').remove('on');
-
     if(event.target.tagName === 'A' || event.target.tagName === 'LI'){
+
+        $('.tab-btn-box .on').remove('on');
+        $('.tab-content-group-box').remove('on');
+
         $('.tab-btn-box').children[randomIdx].classList.add('on');
         $('.tab-content-group-box').children[randomIdx].classList.add('on');
         //몇번째 child 인지 아는 방법
@@ -24,11 +31,15 @@ const changeBestBanchan = (event) => {
 const getIndex = (elem) => {
     elem.parentChil
 }
-const templateInit = () => {
-    const randomIdx = Math.floor(Math.random()*6);
-    bestCategory(randomIdx);
-
-}
+//const templateInit = async () => {
+//    //call bestCategory
+//    const randomIdx = Math.floor(Math.random()*6);
+//    await bestCategory();
+//    //call bestBanchan
+//    await bestBanchan(randomIdx + 1);
+//    $('.tab-btn-box').children[randomIdx].classList.add('on');
+//    $('.tab-content-group-box').children[id-1].classList.add('on');
+//}
 const templateInit2 = async () => {
 
     const bestCategoryData = await fetchAsync({
@@ -62,7 +73,7 @@ const banchanInit = (data, id) => {
     $All('.tab-content-box')[id].insertAdjacentHTML('beforeend', innerList);
 }
 /*
-const bestBanchan = (id) => {
+const bestBanchan = (id) => new Promise(resolve => {
     fetchManager({
         url:  '/api/banchan/best/' + id,
         method: 'GET',
@@ -71,11 +82,11 @@ const bestBanchan = (id) => {
             resolve(banchanInit(data, id));
         },
 
-        });
-}
+    });
+});
 */
 /*
-const bestCategory = (onIndex) => {
+const bestCategory = () => new Promise(resolve => {
     fetchManager({
         url:  '/api/banchan/best',
         method: 'GET',
@@ -84,12 +95,8 @@ const bestCategory = (onIndex) => {
             resolve(categoryInit(data));
         },
     });
-}
+});
 */
-
-const insertHtml = ( {id, title} ) => `<li>
-    <a data-category-id="${id}" href="#">${title}</a>
-    </li>`;
 
 const categoryInit = (data) => {
     const innerList = data.reduce( (accum, cur) => {
@@ -126,7 +133,8 @@ const banchanBoxHTML = ( {description, title, imgUrl, originalPrice, realPrice})
                                      </dl>
                                  </a>
                              </li>`;
-
+                             // todo 뱃지 나중에 추가해야함.
+}
 const insertHtml = ( {id, title} ) => `<li>
     <a data-category-id="${id}" href="#">${title}</a>
     </li>`;
