@@ -1,6 +1,6 @@
 package codesquad.web;
 
-import codesquad.domain.Authority;
+import codesquad.enums.Authority;
 import codesquad.domain.Promotion;
 import codesquad.domain.Role;
 import codesquad.domain.User;

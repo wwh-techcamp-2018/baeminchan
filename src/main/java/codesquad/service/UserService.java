@@ -1,6 +1,6 @@
 package codesquad.service;
 
-import codesquad.domain.Authority;
+import codesquad.enums.Authority;
 import codesquad.domain.RoleRepository;
 import codesquad.domain.User;
 import codesquad.domain.UserRepository;

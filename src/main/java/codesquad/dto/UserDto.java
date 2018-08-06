@@ -1,6 +1,5 @@
 package codesquad.dto;
 
-import codesquad.domain.Authority;
 import codesquad.domain.Role;
 import codesquad.domain.User;
 import codesquad.exception.NotMatchException;

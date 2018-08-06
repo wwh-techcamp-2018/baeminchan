@@ -1,6 +1,7 @@
 package codesquad.domain;
 
 import codesquad.dto.PromotionDto;
+import codesquad.enums.Authority;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

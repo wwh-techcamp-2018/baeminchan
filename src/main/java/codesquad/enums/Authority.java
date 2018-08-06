@@ -1,4 +1,4 @@
-package codesquad.domain;
+package codesquad.enums;
 
 public enum Authority {
     NORMAL, ADMIN;
