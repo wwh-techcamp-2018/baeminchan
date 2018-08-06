@@ -73,5 +73,4 @@ function goToSlide(evt) {
 
     $(".on-item").classList.toggle("on-item");
     dotList[currentNo].classList.toggle("on-item");
-
 }

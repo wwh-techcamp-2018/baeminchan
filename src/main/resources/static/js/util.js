@@ -16,16 +16,9 @@ function fetchManager({ url, method, body, headers, callback, failCallback}) {
         return response.json();
     }).then((result) => {
         if(result.status === 200 || result.status === 201) {
-            console.log(result);
             callback(result)
         } else {
-            console.log(result);
             failCallback(result);
-            // error.errors.forEach((val) => {
-            //     const emailCautionEl = $('#' + val.field + '_caution');
-            //     emailCautionEl.innerText = val.defaultMessage;
-            //     emailCautionEl.style.display = 'block';
-            // });
         }
     });
 }
