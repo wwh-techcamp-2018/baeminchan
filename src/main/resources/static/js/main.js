@@ -21,14 +21,9 @@ const addAllEvent = () => {
     registClickEvent($(".bm-icon.spr-btn-arrow-main-slide.next"), moveNext);
     Array.from($('#promotion-dot-box').children).forEach(child => registClickEvent(child, moveByDot));
 };
+//todo common?
 
-const registClickEvent = (target, whatToDo) => {
-    target.addEventListener("click", (event) => {
-        event.preventDefault();
-        whatToDo();
-    });
-};
-
+//todo common?
 const change = (target, className, callback) => {
     const current = $(target);
     const next = callback(current);
@@ -64,7 +59,7 @@ const moveByDot = () => {
     change('#promotion-dot-box .on', 'on', getEventTarget);
 
     const prevImage = $(".current");
-    const dotIndex = Array.from(getEventTarget().parentNode.children).indexOf(getEventTarget());
+    const dotIndex = getIndex(getEventTarget());
     const currentImage = $All(".img-item")[dotIndex];
     prevImage.classList.toggle("current", false);
     currentImage.classList.toggle("current", true);

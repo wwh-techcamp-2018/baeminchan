@@ -29,3 +29,14 @@ const customAjax = (u,d) => {
                 contentType : 'application/json',
     });
 };
+
+const getIndex = (elem) => (
+    Array.prototype.slice.call(elem.parentElement.children).indexOf(elem)
+);
+
+const registClickEvent = (target, whatToDo) => {
+    target.addEventListener("click", (event) => {
+        event.preventDefault();
+        whatToDo();
+    });
+};
