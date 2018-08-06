@@ -120,7 +120,7 @@
 
       <ul class="img-box">
         {{#promotions}}
-        <li class="img-item img-{{@index_1}}" style="background-image: url(&quot{{url}}&quot)">
+        <li class="img-item img-{{@index_1}}" style="background-image: url(&quot;{{url}}&quot;)">
           <a href="#">
             <span class="blind"></span>
           </a>
@@ -134,11 +134,9 @@
       </div>
 
       <div class="dot-btn-box">
-        <a class="dot on" href="#"></a>
+        {{#promotions}}
         <a class="dot" href="#"></a>
-        <a class="dot" href="#"></a>
-        <a class="dot" href="#"></a>
-        <a class="dot" href="#"></a>
+        {{/promotions}}
       </div>
     </section>
 
