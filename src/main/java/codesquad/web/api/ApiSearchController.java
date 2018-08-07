@@ -1,4 +1,4 @@
-package codesquad.web;
+package codesquad.web.api;
 
 import codesquad.dto.SearchRecommendationDto;
 import codesquad.service.SearchService;
