@@ -19,7 +19,7 @@ public class BestProduct {
     @Column(length = 20, nullable = false, unique = true)
     private String title;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Product> products;
 
