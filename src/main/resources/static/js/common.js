@@ -40,3 +40,5 @@ const registClickEvent = (target, whatToDo) => {
         whatToDo();
     });
 };
+
+const formatMoney = (number) => ( Number(number).toLocaleString() );

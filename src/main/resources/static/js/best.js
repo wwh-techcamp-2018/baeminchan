@@ -1,27 +1,26 @@
 document.addEventListener('DOMContentLoaded', () =>{
-    templateInit();
+    renderBestCategory();
     registClickEvent($('.tab-btn-box'), changeBestBanchan);
 }, false);
 
 const changeBestBanchan = () => {
         const targetLi = event.target.tagName !== 'LI'? event.target.closest('li') :  event.target ;
-        const targetIdx = getIndex(targetLi);
-        changeActiveBox('tab-btn-box', targetIdx);
-        changeActiveBox('tab-content-group-box', targetIdx);
+        const targetIndex = getIndex(targetLi);
+        changeActiveBox('tab-btn-box', targetIndex);
+        changeActiveBox('tab-content-group-box', targetIndex);
 
         if(!targetLi.getAttribute("data-load")){
-            loadBestBanchan(targetIdx);
+            loadBestBanchan(targetIndex);
         }
 }
 
-const templateInit = async () =>{
-    const randomIdx = Math.floor(Math.random()*6);
+const renderBestCategory = async () =>{
     await initBestCategory();
-    //todo 실제 BestCategory의 id로 치환
-    await loadBestBanchan(randomIdx);
+    const randomIndex = Math.floor(Math.random()* $('.tab-btn-box').childElementCount);
+    await loadBestBanchan(randomIndex);
 
-     $('.tab-btn-box').children[randomIdx].classList.add('on');
-     $('.tab-content-group-box').children[randomIdx].classList.add('on');
+     $('.tab-btn-box').children[randomIndex].classList.add('on');
+     $('.tab-content-group-box').children[randomIndex].classList.add('on');
 
 }
 
@@ -41,21 +40,22 @@ const changeActiveBox = (target, index) => {
 
 const initBestCategory = async ( ) =>{
     const bestCategoryData = await getBestBanchanData();
-    categoryInit(bestCategoryData);
+    initCategory(bestCategoryData);
 };
 
 const loadBestBanchan = async (index) => {
-     const bestBanchanData = await getBestBanchanData(index + 1);
-      //todo 실제 BestCategory의 id로 치환
-     banchanInit(bestBanchanData, index);
+     const targetId = $('.tab-btn-box :nth-child('+ (index + 1) +') a').getAttribute('data-category-id')
+     const bestBanchanData = await getBestBanchanData(targetId);
+
+     initBanchan(bestBanchanData, index);
      $('.tab-btn-box').children[index].setAttribute("data-load", "loaded");
 };
 
-const banchanInit = (data, id) => {
+const initBanchan = (data, id) => {
     appendHtmlFromData(data, banchanBoxHTML, $All('.tab-content-box')[id]);
 }
 
-const categoryInit = (data) => {
+const initCategory = (data) => {
     appendHtmlFromData(data, categoryHtml, $('.tab-btn-box'));
     appendHtmlFromData(data, banchanOuterHtml, $('.tab-content-group-box'));
 }
@@ -69,8 +69,7 @@ const appendHtmlFromData = (data, templateFun, parentElement) => {
 
 const banchanOuterHtml = () => `<li> <ul class="tab-content-box"></ul></li>`;
 const banchanBoxHTML = ( {description, title, imgUrl, originalPrice, realPrice}) => {
-//todo price , 붙이기 ( 백엔드에서하는 방법이 있을까? )
-    const priceHTML = (originalPrice !== realPrice)? `<span class="original-price" >${originalPrice}</span>`:"";
+    const priceHTML = (originalPrice !== realPrice)? `<span class="original-price" >${ formatMoney(originalPrice) }</span>`:"";
     return `<li>
                                  <a class="thumbnail-box" href="#">
                                      <div class="thumbnail">
@@ -85,7 +84,7 @@ const banchanBoxHTML = ( {description, title, imgUrl, originalPrice, realPrice})
                                          <dd class="price-wrapper">
                                              ${priceHTML}
                                              <span class="final-price">
-                                               <span class="number">${realPrice}</span>
+                                               <span class="number">${ formatMoney(realPrice) }</span>
                                                <span class="unit">원</span>
                                              </span>
                                          </dd>

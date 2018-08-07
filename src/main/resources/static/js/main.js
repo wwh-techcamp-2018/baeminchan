@@ -15,15 +15,12 @@ const appendAnswer = (data) => {
     return p + outer(c, c.children.map((e)=> inner(e)).join(""));}, "");
   $("#nav-menu").insertAdjacentHTML('afterbegin', resultHTML);
 }
-
 const addAllEvent = () => {
     registClickEvent($(".bm-icon.spr-btn-arrow-main-slide.prev"), movePrevious);
     registClickEvent($(".bm-icon.spr-btn-arrow-main-slide.next"), moveNext);
     Array.from($('#promotion-dot-box').children).forEach(child => registClickEvent(child, moveByDot));
 };
-//todo common?
 
-//todo common?
 const change = (target, className, callback) => {
     const current = $(target);
     const next = callback(current);

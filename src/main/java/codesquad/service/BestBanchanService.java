@@ -17,16 +17,16 @@ public class BestBanchanService {
     //@Autowired
     //private BanchanRepository banchanRepository; .findAllByParentId
 //todo cacheable
-//    @Cacheable
+    @Cacheable("banchan")
     public List<Banchan> getByParentId(Long id) {
        BestCategory bestCategory = bestBanchanRepository.findById(id)
                .orElseThrow( () -> new NotExistException("Best Banchan Not Found"));
        return bestCategory.getBanchans();
     }
 //todo cacheable
-//    @Cacheable
+    @Cacheable("bestCategories")
     public Iterable<BestCategory> retrieveAll() {
-        return bestBanchanRepository.findAll();
+        return bestBanchanRepository.findByIsActiveTrue();
     }
 
     //create, delete
