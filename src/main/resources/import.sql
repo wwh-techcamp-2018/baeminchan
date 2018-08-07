@@ -84,30 +84,30 @@ INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, descr
 INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product18', 10000, 50.0, 'product18 desc');
 
 INSERT INTO PRODUCT_IMAGES (id, images) VALUES (1, '/img/img-best-dish.jpg');
-INSERT INTO PRODUCT_IMAGES (id, images) VALUES (2, '/img/img-best-dish.jpg');
-INSERT INTO PRODUCT_IMAGES (id, images) VALUES (3, '/img/img-best-dish.jpg');
-INSERT INTO PRODUCT_IMAGES (id, images) VALUES (4, '/img/img-best-dish.jpg');
-INSERT INTO PRODUCT_IMAGES (id, images) VALUES (5, '/img/img-best-dish.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (2, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (3, 'https://cdn.bmf.kr/_data/product/I6759/7be858b59943e500d72b134e5810bb76.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (4, 'https://cdn.bmf.kr/_data/product/I6759/7be858b59943e500d72b134e5810bb76.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (5, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg');
 INSERT INTO PRODUCT_IMAGES (id, images) VALUES (6, '/img/img-best-dish.jpg');
 INSERT INTO PRODUCT_IMAGES (id, images) VALUES (7, '/img/img-best-dish.jpg');
-INSERT INTO PRODUCT_IMAGES (id, images) VALUES (8, '/img/img-best-dish.jpg');
-INSERT INTO PRODUCT_IMAGES (id, images) VALUES (9, '/img/img-best-dish.jpg');
-INSERT INTO PRODUCT_IMAGES (id, images) VALUES (10, '/img/img-best-dish.jpg');
-INSERT INTO PRODUCT_IMAGES (id, images) VALUES (11, '/img/img-best-dish.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (8, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (9, 'https://cdn.bmf.kr/_data/product/I6759/7be858b59943e500d72b134e5810bb76.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (10, 'https://cdn.bmf.kr/_data/product/I6759/7be858b59943e500d72b134e5810bb76.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (11, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg');
 INSERT INTO PRODUCT_IMAGES (id, images) VALUES (12, '/img/img-best-dish.jpg');
 INSERT INTO PRODUCT_IMAGES (id, images) VALUES (13, '/img/img-best-dish.jpg');
-INSERT INTO PRODUCT_IMAGES (id, images) VALUES (14, '/img/img-best-dish.jpg');
-INSERT INTO PRODUCT_IMAGES (id, images) VALUES (15, '/img/img-best-dish.jpg');
-INSERT INTO PRODUCT_IMAGES (id, images) VALUES (16, '/img/img-best-dish.jpg');
-INSERT INTO PRODUCT_IMAGES (id, images) VALUES (17, '/img/img-best-dish.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (14, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (15, 'https://cdn.bmf.kr/_data/product/I6759/7be858b59943e500d72b134e5810bb76.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (16, 'https://cdn.bmf.kr/_data/product/I6759/7be858b59943e500d72b134e5810bb76.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (17, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg');
 INSERT INTO PRODUCT_IMAGES (id, images) VALUES (18, '/img/img-best-dish.jpg');
 
-INSERT INTO BEST_PRODUCT (title) VALUES ('best product 1');
-INSERT INTO BEST_PRODUCT (title) VALUES ('best product 2');
-INSERT INTO BEST_PRODUCT (title) VALUES ('best product 3');
-INSERT INTO BEST_PRODUCT (title) VALUES ('best product 4');
-INSERT INTO BEST_PRODUCT (title) VALUES ('best product 5');
-INSERT INTO BEST_PRODUCT (title) VALUES ('best product 6');
+INSERT INTO BEST_PRODUCT (title) VALUES ('할인특가 세트상품');
+INSERT INTO BEST_PRODUCT (title) VALUES ('풍성한 고기반찬');
+INSERT INTO BEST_PRODUCT (title) VALUES ('바다향가득 반찬');
+INSERT INTO BEST_PRODUCT (title) VALUES ('편리한 반찬세트');
+INSERT INTO BEST_PRODUCT (title) VALUES ('간편한 덮밥요리');
+INSERT INTO BEST_PRODUCT (title) VALUES ('우리아이영양반찬');
 
 INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (1, 1);
 INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (1, 2);
