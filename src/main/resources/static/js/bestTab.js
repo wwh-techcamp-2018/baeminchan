@@ -55,11 +55,15 @@ function insertBestTabContentHTML(tabs) {
     }
 }
 
+function reducer(accumulator, value) {
+    accumulator[value.bestTab] = 
+        accumulator[value.bestTab] ? [...accumulator[value.bestTab], value] : [value];
+    return accumulator;
+}
+
 function organizeTab(products) {
     let tabs = {};
-    products.forEach(product => {
-        tabs[product.bestTab] = tabs[product.bestTab] ? tabs[product.bestTab].concat([product]) : [product];
-    });
+    products.reduce(reducer, tabs);
     return tabs;
 }
 
