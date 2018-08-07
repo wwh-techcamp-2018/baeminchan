@@ -1,6 +1,7 @@
 package codesquad.domain;
 
 
+import codesquad.enums.Authority;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

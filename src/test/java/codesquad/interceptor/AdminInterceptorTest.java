@@ -1,6 +1,6 @@
 package codesquad.interceptor;
 
-import codesquad.domain.Authority;
+import codesquad.enums.Authority;
 import codesquad.domain.Role;
 import codesquad.domain.User;
 import codesquad.security.HttpSessionUtils;

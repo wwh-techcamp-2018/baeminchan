@@ -32,7 +32,6 @@ public class User implements Serializable {
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_role_to_user"))
-    @Enumerated(EnumType.STRING)
     private Role role;
 
     public User(String userId, String password, String name, String phoneNumber, Role role) {

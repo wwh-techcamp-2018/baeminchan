@@ -7,6 +7,7 @@ import codesquad.dto.PromotionDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ public class PromotionService {
     @Autowired
     private PromotionRepository promotionRepository;
 
+    @Cacheable(value = "getPromotionListCache")
     public List<Promotion> getShowList() {
         LocalDate nowDate = LocalDate.now();
         return promotionRepository.findByStartDateLessThanEqualAndEndDateGreaterThanEqualOrderByPriorityAsc(nowDate, nowDate);
