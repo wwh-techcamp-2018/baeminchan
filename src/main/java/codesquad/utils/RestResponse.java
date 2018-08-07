@@ -1,14 +1,11 @@
 package codesquad.utils;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@Builder
+@Getter
 @NoArgsConstructor
-@AllArgsConstructor
-public class RestResponse {
-    private Object data;
+@RequiredArgsConstructor(staticName = "of")
+public class RestResponse<T> {
+    @NonNull
+    private T data;
 }

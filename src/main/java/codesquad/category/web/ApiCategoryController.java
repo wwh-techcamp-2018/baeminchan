@@ -34,7 +34,7 @@ public class ApiCategoryController {
         log.info("sub: {}", sub);
         List<Category> categoryList = sub.getChildren().stream().filter(c -> !c.isDeleted()).collect(Collectors.toList());
         log.info("category List: {}", categoryList);
-        return ResponseEntity.ok().body(RestResponse.builder().data(categoryList).build());
+        return ResponseEntity.ok().body(RestResponse.of(categoryList));
     }
 
     @PostMapping("/admin/categories")

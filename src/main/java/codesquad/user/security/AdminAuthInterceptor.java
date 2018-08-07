@@ -10,6 +10,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 @Slf4j
 public class AdminAuthInterceptor extends HandlerInterceptorAdapter {
@@ -21,10 +22,7 @@ public class AdminAuthInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
 
-        Long id = (Long)request.getSession().getAttribute(UserService.USER_SESSION_KEY);
-        if(id==null){
-            throw new UnAuthorizedException();
-        }
+        Long id = Optional.ofNullable((Long) request.getSession().getAttribute(UserService.USER_SESSION_KEY)).orElseThrow(UnAuthorizedException::new);
         User user = userRepository.findById(id).orElseThrow(UnAuthorizedException::new);
         log.info("admin User : {}", user);
 

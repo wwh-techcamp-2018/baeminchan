@@ -1431,14 +1431,13 @@ a:focus {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  transition: opacity ease-out 3s, z-index ease-out 3s;
+  transition: opacity ease-out 0.5s, z-index ease-out 0.5s;
   z-index: 0;
   opacity: 0;
 }
 
-#main-visual .img-box .img-item.current{
-  transition: opacity ease-in 3s, z-index ease-in 3s;
-  z-index: 1;
+#main-visual .img-box .img-item.current {
+  transition: opacity ease-in 0.5s, z-index ease-in 0.5s;
   opacity: 1;
 }
 

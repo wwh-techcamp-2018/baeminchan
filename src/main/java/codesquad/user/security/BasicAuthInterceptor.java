@@ -43,7 +43,7 @@ public class BasicAuthInterceptor extends HandlerInterceptorAdapter {
 
             User user = userService.login(mayBeUser);
             log.info("Login Success : {}", user);
-            request.getSession().setAttribute(HttpSessionUtils.USER_SESSION_KEY, user);
+            request.getSession().setAttribute(UserService.USER_SESSION_KEY, user.getId());
             return true;
         } catch (UnAuthenticationException e) {
             return true;
