@@ -17,7 +17,7 @@ public class CategoryService {
     CategoryRepository categoryRepository;
 
     private static final Long ROOT = 0L;
-
+// todo cacheable
     public List<Category> getCategories(){
         return categoryRepository.findByParentId(ROOT).orElse(new ArrayList<>());
     }

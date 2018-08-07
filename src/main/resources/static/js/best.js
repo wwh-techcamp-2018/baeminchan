@@ -17,6 +17,7 @@ const changeBestBanchan = () => {
 const templateInit = async () =>{
     const randomIdx = Math.floor(Math.random()*6);
     await initBestCategory();
+    //todo 실제 BestCategory의 id로 치환
     await loadBestBanchan(randomIdx);
 
      $('.tab-btn-box').children[randomIdx].classList.add('on');
@@ -45,7 +46,7 @@ const initBestCategory = async ( ) =>{
 
 const loadBestBanchan = async (index) => {
      const bestBanchanData = await getBestBanchanData(index + 1);
-
+      //todo 실제 BestCategory의 id로 치환
      banchanInit(bestBanchanData, index);
      $('.tab-btn-box').children[index].setAttribute("data-load", "loaded");
 };
@@ -68,6 +69,7 @@ const appendHtmlFromData = (data, templateFun, parentElement) => {
 
 const banchanOuterHtml = () => `<li> <ul class="tab-content-box"></ul></li>`;
 const banchanBoxHTML = ( {description, title, imgUrl, originalPrice, realPrice}) => {
+//todo price , 붙이기 ( 백엔드에서하는 방법이 있을까? )
     const priceHTML = (originalPrice !== realPrice)? `<span class="original-price" >${originalPrice}</span>`:"";
     return `<li>
                                  <a class="thumbnail-box" href="#">

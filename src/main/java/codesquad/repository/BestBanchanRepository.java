@@ -1,9 +1,8 @@
 package codesquad.repository;
 
-import codesquad.domain.BestBanchan;
+import codesquad.domain.BestCategory;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 //@Repository
-public interface BestBanchanRepository extends CrudRepository<BestBanchan, Long> {
+public interface BestBanchanRepository extends CrudRepository<BestCategory, Long> {
 }

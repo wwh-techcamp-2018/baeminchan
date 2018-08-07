@@ -1,6 +1,7 @@
 package codesquad.repository;
 
 import codesquad.domain.Banchan;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
