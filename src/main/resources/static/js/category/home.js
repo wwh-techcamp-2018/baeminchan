@@ -4,6 +4,7 @@ const side_dishes_cache = {};
 document.addEventListener("DOMContentLoaded", () => {
     initEvents();
     $("#best-categories").addEventListener("click", onClickBestCategory);
+    $("#searching_text").addEventListener("keyup", onKeyUpSearchForm);
 });
 
 function initEvents() {
@@ -22,6 +23,54 @@ function initEvents() {
         callback: onSuccessBestCategories,
         errCallback: alertError
     });
+}
+
+function onKeyUpSearchForm({target}) {
+    const pattern = /^[가-힇|A-Za-z|0-9]{0,20}$/;
+    if (target.value.trim() === "" || !pattern.test(target.value)) {
+        toggleInvisible(true);
+        return;
+    }
+
+    fetchManager({
+        url: '/api/sidedishes/' + target.value,
+        method: 'GET',
+        headers: { 'content-type': 'application/json'},
+        callback: onKeyUpCallBack,
+        errCallback: alertError
+    });
+}
+
+function toggleInvisible(isInvisible) {
+    if(isInvisible) {
+        $("#searching_box").classList.add("invisible");
+    } else {
+        $("#searching_box").classList.remove("invisible");
+    }
+}
+
+function onKeyUpCallBack(response) {
+    response.json().then((sideDishes) => {
+        console.log(sideDishes);
+        toggleInvisible(sideDishes.length === 0);
+
+        const searchingText = $("#searching_text").value;
+        const searchingHTML = sideDishes.map((sideDishName) => {
+                return highlightWord(sideDishName, searchingText);
+            })
+            .reduce(makeSearchingHTML, ``);
+        $("#searching_box").innerHTML = '';
+        $("#searching_box").insertAdjacentHTML("beforeend", searchingHTML);
+    })
+}
+
+function highlightWord(word, searchingText) {
+    return word.replace(searchingText, `<span class="highlight-search">${searchingText}</span>`);
+}
+
+function makeSearchingHTML (prev, curr) {
+    // console.log(curr);
+    return prev + `<li>${curr}</li>`;
 }
 
 function onSuccess(response) {

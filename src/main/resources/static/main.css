@@ -1535,3 +1535,17 @@ a:focus {
   color: white !important;
   background: #2ac1bc !important;
 }
+#searching_box{
+  position: relative;
+  background: #11c2bc;
+  padding: 10px;
+  line-height: 30px;
+  z-index: 1;
+}
+#searching_box li{
+  color: black;
+  font-weight: bold;
+}
+.highlight-search{
+  color: red;
+}
