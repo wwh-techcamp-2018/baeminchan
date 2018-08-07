@@ -1,0 +1,59 @@
+{
+  "_from": "hangul-js",
+  "_id": "hangul-js@0.2.5",
+  "_inBundle": false,
+  "_integrity": "sha512-ZafxR9uUgS7ZpYgMUFRWA4/ixems1PGLFuSqfoE2L0RnAmqvLqV39SWp+v90htBUA8Y5SMbF7Db6pNWe/7wjRw==",
+  "_location": "/hangul-js",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "hangul-js",
+    "name": "hangul-js",
+    "escapedName": "hangul-js",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/hangul-js/-/hangul-js-0.2.5.tgz",
+  "_shasum": "de630731db3acced3d42eefbe8530851812f5e0f",
+  "_spec": "hangul-js",
+  "_where": "/Users/woowatechcamp_25/Documents/ws/baeminchan",
+  "author": {
+    "name": "Jaemin Jo"
+  },
+  "bugs": {
+    "url": "https://github.com/e-/Hangul.js/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "A simple library for manipulating Hangul (Korean alphabet)",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.12.0",
+    "grunt-contrib-qunit": "^0.5.2",
+    "grunt-contrib-uglify": "^0.7.0"
+  },
+  "homepage": "https://github.com/e-/Hangul.js",
+  "keywords": [
+    "hangul",
+    "korean",
+    "alphabet"
+  ],
+  "license": "MIT",
+  "main": "hangul.js",
+  "name": "hangul-js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/e-/Hangul.js.git"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "types": "hangul.d.ts",
+  "version": "0.2.5"
+}

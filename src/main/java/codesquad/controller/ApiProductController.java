@@ -1,6 +1,7 @@
 package codesquad.controller;
 
 import codesquad.domain.product.Product;
+import codesquad.dto.product.ProductSearchDTO;
 import codesquad.service.ProductService;
 import codesquad.util.CustomResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -27,4 +28,9 @@ public class ApiProductController {
         return new CustomResponse<>(CustomResponse.MSG.OK, productService.findAll());
     }
 
+    @GetMapping("/search")
+    @ResponseStatus(HttpStatus.OK)
+    public CustomResponse<List<ProductSearchDTO>> searchList() {
+        return new CustomResponse<>(CustomResponse.MSG.OK, ProductSearchDTO.getSearchDTOList(productService.findAll()));
+    }
 }
