@@ -8,6 +8,8 @@ import codesquad.product.domain.Product;
 import codesquad.product.domain.ProductRepository;
 import codesquad.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,10 +26,12 @@ public class BestProductService {
         return bestProductRepository.save(bestProduct);
     }
 
+    @Cacheable("bestProduct")
     public List<BestProduct> show() {
         return bestProductRepository.findAll();
     }
 
+    @CacheEvict("bestProduct")
     public BestProduct delete(User maybeAdmin, Long bestProductId) {
         checkAdmin(maybeAdmin);
         BestProduct bestProduct = bestProductRepository.findById(bestProductId)
@@ -43,6 +47,7 @@ public class BestProductService {
 
     }
 
+    @Cacheable("productList")
     public List<Product> getProducts(Long id) {
         return bestProductRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", "존재하지 않는 베스트 반찬입니다.")).getProducts();
     }

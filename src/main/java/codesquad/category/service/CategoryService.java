@@ -9,6 +9,8 @@ import codesquad.exception.ResourceNotFoundException;
 import codesquad.user.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +37,7 @@ public class CategoryService {
     }
 
     @Transactional
+    @CacheEvict({"category", "subCategory"})
     public Category delete(User maybeAdmin, Long id) {
         checkAdmin(maybeAdmin);
         Category category = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", "존재하지 않는 카테고리입니다."));
@@ -50,10 +53,12 @@ public class CategoryService {
 
     }
 
+    @Cacheable("category")
     public List<Category> getTopCategories() {
         return categoryRepository.findAllByParentCategoryIsNull();
     }
 
+    @Cacheable("subCategory")
     public List<Category> getSubCategories(Long id) {
         return categoryRepository.findByParentCategoryId(id);
     }
