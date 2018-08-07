@@ -4,6 +4,8 @@ import codesquad.domain.Category;
 import codesquad.dto.CategoryDto;
 import codesquad.repository.CategoryRepository;
 import codesquad.support.NotExistException;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,7 +19,7 @@ public class CategoryService {
     CategoryRepository categoryRepository;
 
     private static final Long ROOT = 0L;
-
+    @Cacheable("categories")
     public List<Category> getCategories(){
         return categoryRepository.findByParentId(ROOT).orElse(new ArrayList<>());
     }
@@ -28,6 +30,7 @@ public class CategoryService {
         return categoryRepository.save(categoryDto.toCategory(parentCategory));
     }
 
+    @CacheEvict(value = "categories", allEntries = true)
     public Category delete(Long id) {
         Category category = categoryRepository.findById(id).filter(x -> x.isNotSameId(ROOT)).orElseThrow(() -> new NotExistException("존재하지 않은 카테고리입니다."));
         category.removeChildren();

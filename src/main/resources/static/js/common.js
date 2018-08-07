@@ -15,6 +15,11 @@ const fetchManager = ({ url, method, body, headers, callback }) => {
     })
 }
 
+
+const fetchAsync = ({ url, method, body, headers} ) => (
+ fetch(url, {method,body,headers,credentials: "same-origin"}).then(res => res.json())
+);
+
 const customAjax = (u,d) => {
     return $.ajax({
                 type: 'post',
@@ -24,3 +29,16 @@ const customAjax = (u,d) => {
                 contentType : 'application/json',
     });
 };
+
+const getIndex = (elem) => (
+    Array.prototype.slice.call(elem.parentElement.children).indexOf(elem)
+);
+
+const registClickEvent = (target, whatToDo) => {
+    target.addEventListener("click", (event) => {
+        event.preventDefault();
+        whatToDo();
+    });
+};
+
+const formatMoney = (number) => ( Number(number).toLocaleString() );

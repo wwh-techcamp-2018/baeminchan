@@ -60,6 +60,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                     .addPathPatterns("/admin/**").order(1);
         }
     }
+
 }
 
 

@@ -1,6 +1,8 @@
 package codesquad.domain;
 
 
+import javax.persistence.Column;
+
 public enum Regrex{
     PASSWORD("^[a-zA-Z0-9]*$"),
     NAME("^[가-힣]*$"),
