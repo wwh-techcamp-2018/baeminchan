@@ -32,13 +32,13 @@ public class ApiAdminController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/promotion")
+    @PostMapping("/promotions")
     public ResponseEntity addPromotion(@RequestBody PromotionDto promotionDto) {
         promotionService.save(promotionDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @DeleteMapping("/promotion/{id}")
+    @DeleteMapping("/promotions/{id}")
     public ResponseEntity deletePromotion(@PathVariable Long id) {
         promotionService.delete(id);
         return ResponseEntity.ok().build();

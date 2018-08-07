@@ -24,7 +24,6 @@ public class Category {
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "parent_id")
     private Category parent;
 
     @Column

@@ -15,7 +15,7 @@ public class ApiPromotionAcceptanceClass extends AcceptanceTest {
     @Test
     public void show() {
         ResponseEntity<List<PromotionDto>> response =
-                requestForEntityWithParameterized("/api/promotion", HttpMethod.GET, null,
+                requestForEntityWithParameterized("/api/promotions", HttpMethod.GET, null,
                         new ParameterizedTypeReference<List<PromotionDto>>() {});
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
