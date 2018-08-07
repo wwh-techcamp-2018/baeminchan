@@ -7,7 +7,9 @@
         </layout>
     </appender>
 
-    <root level="DEBUG">
-        <appender-ref ref="STDOUT"/>
-    </root>
+    <!--<logger n-->
+
+    <!--<root level="DEBUG">-->
+        <!--<appender-ref ref="STDOUT"/>-->
+    <!--</root>-->
 </configuration>

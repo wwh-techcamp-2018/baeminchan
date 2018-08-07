@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function initPromotions(){
     $('.img-item:first-child').classList.add('current');
+    $('.dot-btn-box .dot:first-child').classList.add('on');
 }
 
 function moveCarousel(e) {
