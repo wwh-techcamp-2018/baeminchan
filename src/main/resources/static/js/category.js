@@ -1,22 +1,21 @@
 const cached = {};
 
-document.addEventListener('DOMContentLoaded', initCategories);
+const menu = $("#gnb .menu");
+const eventMenu = $(".tab-btn-box");
 
 function initCategories() {
+    menu.addEventListener('mouseover', showSubCategories);
+    eventMenu.addEventListener('click', handleEventBanchanClicked);
+
     loadMainCategories();
     loadEventCategories();
 }
-
 
 function loadMainCategories() {
     fetch('/categories')
         .then(validateResponse)
         .then(({data}) => {
-            const menu = $("#gnb .menu");
-            menu.addEventListener('mouseover', showSubCategories);
-            data.forEach(category => {
-                menu.innerHTML += categoryTemplate(category, true);
-            });
+            menu.innerHTML += data.map(category => categoryTemplate(category, true)).join('');
         })
         .catch(handleError);
 }
@@ -25,12 +24,7 @@ function loadEventCategories() {
     fetch('/categories/event')
         .then(validateResponse)
         .then(({data}) => {
-            const eventMenu = $(".tab-btn-box");
-            eventMenu.addEventListener('click', handleEventBanchanClicked);
-            data.forEach(eventCategory => {
-                eventMenu.innerHTML += eventCategoryTemplate(eventCategory);
-            });
-
+            eventMenu.innerHTML += data.map(eventCategoryTemplate).join('');
             return parseInt(Math.random() * data.length) + 1;
         })
         .then(showEventBanchan)
@@ -57,8 +51,7 @@ function showEventBanchan(eventCategoryId) {
     fetch(`/categories/event/${eventCategoryId}/banchans`)
         .then(validateResponse)
         .then(({data}) => {
-            const banchanBox = $('.tab-content-group-box');
-            banchanBox.innerHTML += banchanListTemplate(data, eventCategoryId);
+            $('.tab-content-group-box').innerHTML += banchanListTemplate(data, eventCategoryId);
             return eventCategoryId;
         })
         .then(toggleBanchanList)
@@ -88,11 +81,7 @@ function showSubCategories(e) {
         .then(validateResponse)
         .then(({data}) => {
             cached[category_id] = true;
-
-            const submenu = $(`#${id} .sub-menu`);
-            data.forEach(category => {
-                submenu.innerHTML += categoryTemplate(category);
-            });
+            $(`#${id} .sub-menu`).innerHTML += data.map(categoryTemplate).join('');
         })
         .catch(handleError);
 }
@@ -169,3 +158,5 @@ function validateResponse(response) {
 function handleError(err) {
     console.error(err);
 }
+
+document.addEventListener('DOMContentLoaded', initCategories);
