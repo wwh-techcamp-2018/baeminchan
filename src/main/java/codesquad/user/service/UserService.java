@@ -1,11 +1,10 @@
 package codesquad.user.service;
 
-import codesquad.exception.UnAuthorizedException;
+import codesquad.exception.UnAuthenticationException;
 import codesquad.user.domain.User;
 import codesquad.user.domain.UserRepository;
 import codesquad.user.dto.LoginDto;
 import codesquad.user.dto.UserDto;
-import codesquad.exception.UnAuthenticationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
