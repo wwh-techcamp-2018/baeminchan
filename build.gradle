@@ -35,6 +35,9 @@ dependencies {
     compile('org.springframework.boo:spring-boot-starter-cache')
     compile('net.sf.ehcache:ehcache:2.10.3')
 
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
     compile('org.hibernate:hibernate-java8')
     runtime('com.h2database:h2')
     runtime('net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1')

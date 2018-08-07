@@ -68,3 +68,8 @@ textarea, select, input, button { outline: none; }
 .search-result-selected {
     background-color: #11c2bc;
 }
+
+.search-result-highlighted {
+    color: #fa6565;
+    font-weight: bold;
+}

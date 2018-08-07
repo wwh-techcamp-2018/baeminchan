@@ -3,7 +3,7 @@ class SearchBar {
         this.resultHolder = null;
         this.resultList = [];
         this.keywordString = "";
-        this.selected = null;
+        this.selected = -1;
         this.init();
     }
 
@@ -17,6 +17,17 @@ class SearchBar {
             }
 
         }.bind(this));
+
+        $("#searching_text").addEventListener("focusout", function(evt) {
+            evt.preventDefault();
+            this.resultHolder.style.display = "none";
+        }.bind(this));
+
+        $("#searching_text").addEventListener("focus", function(evt) {
+            evt.preventDefault();
+            this.resultHolder.style.display = "block";
+        }.bind(this));
+
 
         $("#searching_text").addEventListener("keydown",function (evt) {
             console.log(evt.keyCode);
@@ -52,28 +63,33 @@ class SearchBar {
         console.log(result);
         this.resultList = [];
         for(const product of result.products) {
-
             this.resultList.push(new SearchResult(this, product));
         }
     }
 
     handleArrowKeys(keyCode) {
-        const selected = $(".search-result-selected ");
-        console.log("Handling arrow keys!");
+        this.selectSearchResult(this.selected);
         if(keyCode == 38) { // UP
-            if(!selected) {
-                this.selectSearchResult(this.resultList.length - 1);
+            if(this.selected <= 0) {
+                this.selected = this.resultList.length - 1;
+            } else {
+                this.selected = this.selected - 1;
             }
         } else if (keyCode == 40) { // DOWN
-            if(!selected) {
-                this.selectSearchResult(0);
+            if(this.selected >= this.resultList.length - 1) {
+                this.selected = 0;
+            } else {
+                this.selected = this.selected + 1;
             }
         }
+        this.selectSearchResult(this.selected);
     }
 
     selectSearchResult(index) {
+        if(index === -1) return;
         const searchResults = $_all(".search-result");
         searchResults[index].classList.toggle("search-result-selected")
+        // this.resultList[index].makeSelected();
     }
 
 

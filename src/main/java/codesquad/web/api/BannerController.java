@@ -1,4 +1,4 @@
-package codesquad.web;
+package codesquad.web.api;
 
 import codesquad.domain.Category;
 import codesquad.domain.CategoryDTO;

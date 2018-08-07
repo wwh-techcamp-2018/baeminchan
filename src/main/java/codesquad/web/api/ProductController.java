@@ -1,4 +1,4 @@
-package codesquad.web;
+package codesquad.web.api;
 
 import codesquad.domain.Product;
 import codesquad.domain.RecommendationDTO;
