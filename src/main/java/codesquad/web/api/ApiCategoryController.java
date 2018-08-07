@@ -1,9 +1,7 @@
-package codesquad.web;
+package codesquad.web.api;
 
 import codesquad.domain.Category;
-import codesquad.domain.User;
 import codesquad.dto.CategoryDto;
-import codesquad.security.HttpSessionUtils;
 import codesquad.service.CategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.net.URI;
 import java.util.List;
 
 import static codesquad.security.HttpSessionUtils.getUserFromSession;

@@ -18,6 +18,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -44,6 +45,19 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new MessageSourceAccessor(messageSource);
     }
 
+    @Bean
+    public EhCacheCacheManager cacheManager() {
+        return new EhCacheCacheManager(ehCacheCacheManager().getObject());
+    }
+
+    @Bean
+    public EhCacheManagerFactoryBean ehCacheCacheManager() {
+        EhCacheManagerFactoryBean factory = new EhCacheManagerFactoryBean();
+        factory.setConfigLocation(new ClassPathResource("ehcache.xml"));
+        factory.setShared(true);
+        return factory;
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AdminInterceptor())
@@ -59,6 +73,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/join").setViewName("/user/join");
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+
     @Configuration
     @Profile("dev")
     public class TestConfig extends WebMvcConfig {
@@ -71,18 +94,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
         public void addInterceptors(InterceptorRegistry registry) {
             registry.addInterceptor(basicAuthInterceptor());
         }
-    }
-
-    @Bean
-    public EhCacheCacheManager cacheManager() {
-        return new EhCacheCacheManager(ehCacheCacheManager().getObject());
-    }
-
-    @Bean
-    public EhCacheManagerFactoryBean ehCacheCacheManager() {
-        EhCacheManagerFactoryBean factory = new EhCacheManagerFactoryBean();
-        factory.setConfigLocation(new ClassPathResource("ehcache.xml"));
-        factory.setShared(true);
-        return factory;
     }
 }
