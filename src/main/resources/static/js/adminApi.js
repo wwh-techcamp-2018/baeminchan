@@ -10,7 +10,7 @@ function createCategoryHandler() {
     method: "POST",
     body: JSON.stringify({
       parentId: toIntElseNull($("#add-input-parent-id").value),
-      title: $("#add-input-category-title").value
+      title: $("#add-input-category-keyWord").value
     }),
     headers: { "content-type": "application/json" },
     callback: refreshIfOk
@@ -36,7 +36,7 @@ function updateCategoryHandler() {
     body: JSON.stringify({
       parentId: toIntElseNull($("#update-input-parent-id").value),
       categoryId: toIntElseNull($("#update-input-category-id").value),
-      title: $("#update-input-category-title").value
+      title: $("#update-input-category-keyWord").value
     }),
     callback: refreshIfOk
   });

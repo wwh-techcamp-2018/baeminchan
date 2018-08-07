@@ -388,7 +388,7 @@ a:focus {
   font-family: Verdana, 나눔고딕, "Nanum", "Malgun Gothic", sans-serif;
 }
 
-#header .search-form .auto_search_div {
+#header .search-form .auto_search_div .auto_search_ul {
   z-index: 1;
   position: relative;
   padding: 5px;
