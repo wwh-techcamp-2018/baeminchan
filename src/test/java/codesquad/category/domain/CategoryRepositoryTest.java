@@ -5,9 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
-import static junit.framework.TestCase.assertFalse;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -33,19 +31,6 @@ public class CategoryRepositoryTest {
         assertThat(categoryRepository.findById(saved.getId()).get().getParentCategory().getTitle()).isEqualTo(parent.getTitle());
 
 
-    }
-
-    @Test
-    @Transactional
-    public void deleteParentCategory() {
-        //When
-        Category parent = categoryRepository.findById(1L).get();
-        categoryRepository.deleteByParentCategory(parent);
-        categoryRepository.delete(parent);
-        //Then
-
-        assertFalse(categoryRepository.existsById(parent.getId()));
-        assertFalse(categoryRepository.existsByParentCategory(parent));
     }
 }
 
