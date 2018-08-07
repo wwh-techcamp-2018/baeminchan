@@ -12,7 +12,6 @@ function autoSearchFocusHandler(evt) {
 }
 
 function autoSearchKeyUpHandler(evt) {
-    //evt.preventDefault();
     if(autoSearchList === undefined)
         return;
     if(evt.target.value === "") {
@@ -26,7 +25,6 @@ function autoSearchKeyUpHandler(evt) {
 function autoSearchCallback(response){
     response.json().then(res => {
         autoSearchList = new AutoSearchList(res.data);
-        //autoSearchList.appendAutoSearchView($(".auto_search_div"));
     })
 }
 
@@ -38,10 +36,10 @@ class AutoSearchList{
         }
     }
 
-    makeAutoSearchView(searchValue){
+    makeAutoSearchView(matchedSearchItems){
         let autoSearchHTML = `<ul class="auto_search_ul">`
-        for(const searchItem of this.searchList){
-            autoSearchHTML += searchItem.makeSearchItemLi(searchValue);
+        for(const matchedSearchItem of matchedSearchItems){
+            autoSearchHTML += matchedSearchItem.makeSearchItemLi();
         }
         autoSearchHTML += `</ul>`;
         return autoSearchHTML;
@@ -49,9 +47,10 @@ class AutoSearchList{
 
     appendAutoSearchView(target, searchValue) {
         this.removeAutoSearchView(target);
-        if(this.countMatchedSearchItem(searchValue) === 0)
+        const matchedSearchItems = this.getMatchedSearchItems(searchValue);
+        if(matchedSearchItems.length === 0)
             return;
-        target.insertAdjacentHTML("afterbegin", this.makeAutoSearchView(searchValue));
+        target.insertAdjacentHTML("afterbegin", this.makeAutoSearchView(matchedSearchItems));
     }
 
     removeAutoSearchView(target) {
@@ -60,13 +59,12 @@ class AutoSearchList{
         target.removeChild(target.firstElementChild);
     }
 
-    countMatchedSearchItem(searchValue){
-        let count = 0;
-        for(const searchItem of this.searchList){
-            if(searchItem.isMatchedSearchItem(searchValue))
-                count++;
-        }
-        return count;
+    getMatchedSearchItems(searchValue){
+        return this.searchList.filter(item => item.isMatchedSearchItem(searchValue));
+    }
+
+    reducer(accumulator, currentValue){
+        currentValue
     }
 }
 
@@ -76,10 +74,8 @@ class SearchItem {
         this.keyWord = keyWord;
     }
 
-    makeSearchItemLi(searchValue){
-        if(this.isMatchedSearchItem(searchValue))
-            return `<li id = "search_item_${this.id}">${this.keyWord}</li>`
-        return "";
+    makeSearchItemLi(){
+        return `<li id = "search_item_${this.id}">${this.keyWord}</li>`
     }
 
     isMatchedSearchItem(searchValue) {
