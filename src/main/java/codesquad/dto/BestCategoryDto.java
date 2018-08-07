@@ -30,7 +30,13 @@ public class BestCategoryDto implements Serializable {
         return new BestCategory(this.categoryName, this.products);
     }
 
+    public BestCategoryDto setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+        return this;
+    }
 
-
-
+    public BestCategoryDto setProducts(List<Product> products) {
+        this.products = products;
+        return this;
+    }
 }

@@ -25,14 +25,14 @@ public class ApiMemberController {
     private MemberService memberService;
 
     @PostMapping
-    public ResponseEntity<Void> create(@Valid @RequestBody MemberJoinDto memberDto) {
+    public ResponseEntity create(@Valid @RequestBody MemberJoinDto memberDto) {
         memberService.add(memberDto);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@Valid @RequestBody MemberLoginDto memberDto, HttpSession session) {
+    public ResponseEntity login(@Valid @RequestBody MemberLoginDto memberDto, HttpSession session) {
         Member loginMember = memberService.login(memberDto);
         HttpSessionUtils.setMemberToSession(loginMember, session);
         HttpHeaders headers = new HttpHeaders();

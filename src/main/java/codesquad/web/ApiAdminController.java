@@ -21,26 +21,26 @@ public class ApiAdminController {
     private PromotionService promotionService;
 
     @PostMapping("/category")
-    public ResponseEntity<Void> add(@RequestBody CategoryPostDto categoryPostDto) {
+    public ResponseEntity add(@RequestBody CategoryPostDto categoryPostDto) {
         categoryService.add(categoryPostDto);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @DeleteMapping("/category")
-    public ResponseEntity<Void> delete(@RequestBody CategoryPostDto categoryPostDto) {
+    public ResponseEntity delete(@RequestBody CategoryPostDto categoryPostDto) {
         categoryService.delete(categoryPostDto);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/promotion")
-    public ResponseEntity<Void> addPromotion(@RequestBody PromotionDto promotionDto) {
+    public ResponseEntity addPromotion(@RequestBody PromotionDto promotionDto) {
         promotionService.save(promotionDto);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @DeleteMapping("/promotion/{id}")
-    public ResponseEntity<Void> deletePromotion(@PathVariable Long id) {
+    public ResponseEntity deletePromotion(@PathVariable Long id) {
         promotionService.delete(id);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 }
