@@ -1,4 +1,4 @@
-package codesquad.user.web;
+package codesquad.user.controller;
 
 import codesquad.RestResponse;
 import codesquad.user.domain.User;

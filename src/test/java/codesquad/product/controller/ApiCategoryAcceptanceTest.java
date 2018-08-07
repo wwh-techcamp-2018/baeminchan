@@ -1,4 +1,4 @@
-package codesquad.product.web;
+package codesquad.product.controller;
 
 
 import codesquad.RestResponse;

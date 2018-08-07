@@ -1,4 +1,4 @@
-package codesquad.home.web;
+package codesquad.home.controller;
 
 import codesquad.promotion.service.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;

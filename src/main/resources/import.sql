@@ -63,3 +63,75 @@ INSERT INTO PROMOTION (img_url) VALUES ('./img/img-main-visual-slide_2.jpg');
 INSERT INTO PROMOTION (img_url) VALUES ('./img/img-main-visual-slide_3.jpg');
 INSERT INTO PROMOTION (img_url) VALUES ('./img/img-main-visual-slide_4.jpg');
 INSERT INTO PROMOTION (img_url) VALUES ('./img/img-main-visual-slide_5.jpg');
+
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product1', 10000, 50.0, 'product1 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product2', 10000, 50.0, 'product2 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product3', 10000, 50.0, 'product3 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product4', 10000, 50.0, 'product4 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product5', 10000, 50.0, 'product5 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product6', 10000, 50.0, 'product6 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product7', 10000, 50.0, 'product7 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product8', 10000, 50.0, 'product8 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product9', 10000, 50.0, 'product9 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product10', 10000, 50.0, 'product10 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product11', 10000, 50.0, 'product11 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product12', 10000, 50.0, 'product12 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product13', 10000, 50.0, 'product13 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product14', 10000, 50.0, 'product14 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product15', 10000, 50.0, 'product15 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product16', 10000, 50.0, 'product16 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product17', 10000, 50.0, 'product17 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product18', 10000, 50.0, 'product18 desc');
+
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (1, '/img/img-best-dish.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (2, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (3, 'https://cdn.bmf.kr/_data/product/I6759/7be858b59943e500d72b134e5810bb76.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (4, 'https://cdn.bmf.kr/_data/product/I6759/7be858b59943e500d72b134e5810bb76.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (5, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (6, '/img/img-best-dish.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (7, '/img/img-best-dish.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (8, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (9, 'https://cdn.bmf.kr/_data/product/I6759/7be858b59943e500d72b134e5810bb76.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (10, 'https://cdn.bmf.kr/_data/product/I6759/7be858b59943e500d72b134e5810bb76.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (11, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (12, '/img/img-best-dish.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (13, '/img/img-best-dish.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (14, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (15, 'https://cdn.bmf.kr/_data/product/I6759/7be858b59943e500d72b134e5810bb76.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (16, 'https://cdn.bmf.kr/_data/product/I6759/7be858b59943e500d72b134e5810bb76.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (17, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg');
+INSERT INTO PRODUCT_IMAGES (id, images) VALUES (18, '/img/img-best-dish.jpg');
+
+INSERT INTO BEST_PRODUCT (title) VALUES ('할인특가 세트상품');
+INSERT INTO BEST_PRODUCT (title) VALUES ('풍성한 고기반찬');
+INSERT INTO BEST_PRODUCT (title) VALUES ('바다향가득 반찬');
+INSERT INTO BEST_PRODUCT (title) VALUES ('편리한 반찬세트');
+INSERT INTO BEST_PRODUCT (title) VALUES ('간편한 덮밥요리');
+INSERT INTO BEST_PRODUCT (title) VALUES ('우리아이영양반찬');
+
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (1, 1);
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (1, 2);
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (1, 3);
+
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (2, 4);
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (2, 5);
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (2, 6);
+
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (3, 7);
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (3, 8);
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (3, 9);
+
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (4, 10);
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (4, 11);
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (4, 12);
+
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (5, 13);
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (5, 14);
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (5, 15);
+
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (6, 16);
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (6, 17);
+INSERT INTO BEST_PRODUCT_PRODUCTS (best_product_id, products_id) VALUES (6, 18);
+
+
+

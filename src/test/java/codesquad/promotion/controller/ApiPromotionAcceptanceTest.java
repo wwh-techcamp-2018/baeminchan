@@ -1,4 +1,4 @@
-package codesquad.promotion.web;
+package codesquad.promotion.controller;
 
 import codesquad.RestResponse;
 import codesquad.promotion.domain.Promotion;
