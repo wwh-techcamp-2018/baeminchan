@@ -1,6 +1,5 @@
 package codesquad.domain.product;
 
-import codesquad.dto.product.ProductSearchDTO;
 import lombok.Getter;
 
 import javax.persistence.Entity;
@@ -30,8 +29,4 @@ public class Product {
     private Long price;
 
     private String bestTab;
-
-    public ProductSearchDTO toSearchDTO() {
-        return new ProductSearchDTO(id, title);
-    }
 }

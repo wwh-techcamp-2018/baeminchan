@@ -1,8 +1,9 @@
 package codesquad.controller;
 
 import codesquad.domain.product.Product;
-import codesquad.dto.product.ProductSearchDTO;
+import codesquad.domain.search.SearchItem;
 import codesquad.service.ProductService;
+import codesquad.service.SearchItemService;
 import codesquad.util.CustomResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class ApiProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private SearchItemService searchItemService;
+
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
     public CustomResponse<List<Product>> list() {
@@ -30,7 +34,7 @@ public class ApiProductController {
 
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.OK)
-    public CustomResponse<List<ProductSearchDTO>> searchList() {
-        return new CustomResponse<>(CustomResponse.MSG.OK, ProductSearchDTO.getSearchDTOList(productService.findAll()));
+    public CustomResponse<List<SearchItem>> searchList() {
+        return new CustomResponse<>(CustomResponse.MSG.OK, searchItemService.findAll());
     }
 }

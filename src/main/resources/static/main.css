@@ -388,6 +388,16 @@ a:focus {
   font-family: Verdana, 나눔고딕, "Nanum", "Malgun Gothic", sans-serif;
 }
 
+#header .search-form .auto_search_div {
+  z-index: 1;
+  position: relative;
+  padding: 5px;
+  border: 1px solid #cfd0d2;
+  background-color: mintcream;
+  color: #888;
+  font-family: Verdana, 나눔고딕, "Nanum", "Malgun Gothic", sans-serif;
+}
+
 #header .search-form input[type="text"]:hover,
 #header .search-form input[type="text"]:focus {
   border-color: #2ac1bc;
