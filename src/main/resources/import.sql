@@ -66,3 +66,46 @@ INSERT INTO promotion(url) VALUES ('https://cdn.bmf.kr/banner/main_banner/180725
 INSERT INTO promotion(url) VALUES ('https://cdn.bmf.kr/banner/main_banner/180608/1528449480985_4b59a338f5a8.jpg');
 INSERT INTO promotion(url) VALUES ('https://cdn.bmf.kr/banner/main_banner/180719/1531992782374_4c0636e1ca6b.jpg');
 INSERT INTO promotion(url) VALUES ('https://cdn.bmf.kr/banner/main_banner/180328/1522226266924_db98fbaef1ab.jpg');
+
+INSERT INTO Best_Category (id, name) VALUES (1, '서울맛집탐방');
+INSERT INTO Best_Category (id, name) VALUES (2, '풍성한 고기반찬');
+INSERT INTO Best_Category (id, name) VALUES (3, '바다향가득 반찬');
+INSERT INTO Best_Category (id, name) VALUES (4, '간편한 덮밥요리');
+INSERT INTO Best_Category (id, name) VALUES (5, '할인특가 세트상품');
+INSERT INTO Best_Category (id, name) VALUES (6, '맛있는 간식타임');
+
+INSERT INTO Badge (badge_id, name) VALUES (1, '이벤트특가');
+INSERT INTO Badge (badge_id, name) VALUES (2, '베스트');
+
+INSERT INTO product (product_id, title, subtitle, brand, original_price, sales_rate) VALUES (1, '이름1', '너는 안줄거다', '성열스', 10000, 0);
+INSERT INTO product (product_id, title, subtitle, brand, original_price, sales_rate) VALUES (2, '이름2', '내꺼임', '갓잇', 5000, 10);
+INSERT INTO product (product_id, title, subtitle, brand, original_price, sales_rate) VALUES (3, '이름3', '너는 안줄거다', '성열스', 2000, 50);
+INSERT INTO product (product_id, title, subtitle, brand, original_price, sales_rate) VALUES (4, '이름4', '바보다', '석윤스', 5000, 0);
+INSERT INTO product (product_id, title, subtitle, brand, original_price, sales_rate) VALUES (5, '이름5', 'ㅈㅅ', '갓잇', 5000, 10);
+INSERT INTO product (product_id, title, subtitle, brand, original_price, sales_rate) VALUES (6, '이름6', '너는 안줄거다', '성열스', 2000, 50);
+INSERT INTO product (product_id, title, subtitle, brand, original_price, sales_rate) VALUES (7, '이름7', '너는 안줄거다', '성열스', 10000, 0);
+INSERT INTO product (product_id, title, subtitle, brand, original_price, sales_rate) VALUES (8, '이름8', '내꺼임', '갓잇', 5000, 10);
+INSERT INTO product (product_id, title, subtitle, brand, original_price, sales_rate) VALUES (9, '이름9', '너는 안줄거다', '성열스', 2000, 50);
+
+INSERT INTO tbl_Badge_product (badge_id, product_id) VALUES (1, 1);
+INSERT INTO tbl_Badge_product (badge_id, product_id) VALUES (2, 1);
+INSERT INTO tbl_Badge_product (badge_id, product_id) VALUES (1, 2);
+
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (1, 1);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (1, 2);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (1, 3);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (2, 4);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (2, 5);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (2, 6);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (3, 7);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (3, 8);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (3, 9);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (4, 4);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (4, 6);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (4, 1);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (5, 2);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (5, 3);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (5, 6);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (6, 7);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (6, 8);
+INSERT INTO tbl_Bestcategory_product (bestcategory_id, product_id) VALUES (6, 3);

@@ -1,8 +1,8 @@
 package codesquad.category;
 
-import codesquad.category.domain.Category;
-import codesquad.category.domain.CategoryDto;
-import codesquad.category.domain.CategoryRepository;
+import codesquad.RestResponse;
+import codesquad.category.domain.*;
+import codesquad.product.domain.Product;
 import codesquad.security.HttpSessionUtils;
 import codesquad.user.domain.User;
 import codesquad.user.domain.UserRepository;
@@ -15,6 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -27,11 +28,26 @@ public class ApiCategoryController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private BestCategoryRepository bestCategoryRepository;
+
     @GetMapping("/category")
     public ResponseEntity<Category> list() {
         Category category = findById(Category.ROOT_ID);
 
         return ResponseEntity.ok(category);
+    }
+
+    @GetMapping("/category/best")
+    public ResponseEntity<RestResponse> getBestCategory() {
+        List<BestCategory> bestCategories = bestCategoryRepository.findAll();
+        return ResponseEntity.ok(new RestResponse(bestCategories));
+    }
+
+    @GetMapping("/category/best/{id}")
+    public ResponseEntity<RestResponse> getProductList(@PathVariable Long id) {
+        BestCategory bestCategory = bestCategoryRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return ResponseEntity.ok(new RestResponse(bestCategory.getProducts()));
     }
 
     @PostMapping("/admin/category")
