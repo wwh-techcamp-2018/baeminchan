@@ -17,8 +17,10 @@ public class ApiCategoryController {
     @Autowired
     private CategoryService categoryService;
 
+
     @GetMapping("")
     public ResponseEntity<Category> list() {
         return new ResponseEntity<>(categoryService.findRoot(), HttpStatus.OK);
+
     }
 }

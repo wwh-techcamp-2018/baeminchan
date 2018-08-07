@@ -384,12 +384,14 @@ a:focus {
     height: 40px;
     border: 1px solid #cfd0d2;
     color: #888;
+    font-size: 14px;
     font-family: Verdana, 나눔고딕, "Nanum", "Malgun Gothic", sans-serif;
 }
 
 #header .search-form input[type="text"]:hover,
 #header .search-form input[type="text"]:focus {
     border-color: #2ac1bc;
+    outline: none;
 }
 
 #header .search-form button[type="submit"] {
