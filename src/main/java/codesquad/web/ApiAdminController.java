@@ -20,13 +20,13 @@ public class ApiAdminController {
     @Autowired
     private PromotionService promotionService;
 
-    @PostMapping("/category")
+    @PostMapping("/categories")
     public ResponseEntity add(@RequestBody CategoryPostDto categoryPostDto) {
-        categoryService.add(categoryPostDto);
+            categoryService.add(categoryPostDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @DeleteMapping("/category")
+    @DeleteMapping("/categories")
     public ResponseEntity delete(@RequestBody CategoryPostDto categoryPostDto) {
         categoryService.delete(categoryPostDto);
         return ResponseEntity.ok().build();

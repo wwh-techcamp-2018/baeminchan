@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/api/promotion")
+@RequestMapping("/api/promotions")
 public class ApiPromotionController {
 
     @Autowired

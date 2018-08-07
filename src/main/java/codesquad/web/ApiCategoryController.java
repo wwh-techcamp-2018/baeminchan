@@ -2,7 +2,6 @@ package codesquad.web;
 
 
 
-import codesquad.dto.CategoryListDto;
 import codesquad.service.CategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("/api/category")
+@RequestMapping("/api/categories")
 public class ApiCategoryController {
 
     @Resource
