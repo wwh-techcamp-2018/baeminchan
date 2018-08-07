@@ -42,10 +42,10 @@ INSERT INTO side_dish (name, description, price, sale_price, weight) values ('�
 INSERT INTO side_dish (name, description, price, sale_price, weight) values ('볶음밥','이것은 설명입니다', 1000, 1000, 100);
 INSERT INTO side_dish (name, description, price, sale_price, weight) values ('포테토칩','이것은 설명입니다', 100, 50, 100);
 INSERT INTO side_dish (name, description, price, sale_price, weight) values ('김포카리','이것은 설명입니다', 1000, 800, 100);
-INSERT INTO side_dish (name, description, price, sale_price, weight) values ('콜김라','이것은 설명입니다', 200, 100, 100);
+INSERT INTO side_dish (name, description, price, sale_price, weight) values ('콜김라콜김라콜김라콜','이것은 설명입니다', 200, 100, 100);
 INSERT INTO side_dish (name, description, price, sale_price, weight) values ('사이김다','이것은 설명입니다', 5000, 3500, 100);
-INSERT INTO side_dish (name, description, price, sale_price, weight) values ('스프라김이트','이것은 설명입니다', 1000, 700, 100);
-INSERT INTO side_dish (name, description, price, sale_price, weight) values ('사과쥬김스','이것은 설명입니다', 1000, 700, 100);
+INSERT INTO side_dish (name, description, price, sale_price, weight) values ('스프라이트','이것은 설명입니다', 1000, 700, 100);
+INSERT INTO side_dish (name, description, price, sale_price, weight) values ('사과쥬스','이것은 설명입니다', 1000, 700, 100);
 INSERT INTO side_dish (name, description, price, sale_price, weight) values ('탕수육','이것은 설명입니다', 1000, 800, 100);
 INSERT INTO side_dish (name, description, price, sale_price, weight) values ('치킨','이것은 설명입니다', 1000, 900, 100);
 INSERT INTO side_dish (name, description, price, sale_price, weight) values ('피자','이것은 설명입니다', 5000, 4000, 100);

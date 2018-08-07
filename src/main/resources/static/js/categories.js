@@ -91,7 +91,7 @@ function renderCategories() {
 
 function renderBestCategories() {
     fetchManager({
-            url: '/api/bestcategories',
+            url: '/api/best/categories',
             method: 'GET',
             headers: { 'content-type': 'application/json'},
             callback: appendBestCategories

@@ -22,7 +22,7 @@ public class Category {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_category_parent"))
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_category_parent")) // index 테이블 이름
     private Category parentCategory;
 
     @Column
@@ -35,7 +35,7 @@ public class Category {
     private boolean isDeleted;
 
     @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_writer"))
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_category_writer"))
     private User writer;
 
     @Column

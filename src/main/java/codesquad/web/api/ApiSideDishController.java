@@ -13,7 +13,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/sidedishes")
+@RequestMapping("/api/side/dishes")
 public class ApiSideDishController {
     @Autowired
     private SideDishService sideDishService;

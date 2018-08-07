@@ -13,6 +13,6 @@ public class SideDishService {
     @Autowired
     private SideDishRepository sideDishRepository;
     public List<SideDish> getSearchResults(String searchText) {
-        return sideDishRepository.findTop5ByNameContaining(searchText).orElse(new ArrayList<>());
+        return sideDishRepository.findByNameContaining(searchText).orElse(new ArrayList<>());
     }
 }
