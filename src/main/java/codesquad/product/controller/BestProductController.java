@@ -1,6 +1,7 @@
 package codesquad.product.controller;
 
 import codesquad.product.domain.BestProduct;
+import codesquad.product.domain.Product;
 import codesquad.product.dto.BestProductDto;
 import codesquad.product.service.BestProductService;
 import codesquad.security.LoginUser;
@@ -29,6 +30,13 @@ public class BestProductController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseModel<List<BestProduct>> show() {
         return ResponseModel.ofSuccess(bestProductService.show(), null);
+    }
+
+
+    @GetMapping("/{bestProductId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseModel<List<Product>> getProducts(@PathVariable Long bestProductId) {
+        return ResponseModel.ofSuccess(bestProductService.getProducts(bestProductId), null);
     }
 
     @DeleteMapping("/{bestProductId}")

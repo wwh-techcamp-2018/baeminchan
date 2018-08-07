@@ -4,6 +4,7 @@ import codesquad.exception.ForbiddenException;
 import codesquad.exception.ResourceNotFoundException;
 import codesquad.product.domain.BestProduct;
 import codesquad.product.domain.BestProductRepository;
+import codesquad.product.domain.Product;
 import codesquad.product.domain.ProductRepository;
 import codesquad.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,9 @@ public class BestProductService {
             throw new ForbiddenException("관리자 권한이 필요합니다.");
         }
 
+    }
+
+    public List<Product> getProducts(Long id) {
+        return bestProductRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id", "존재하지 않는 베스트 반찬입니다.")).getProducts();
     }
 }
