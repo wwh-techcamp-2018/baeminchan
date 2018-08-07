@@ -2,16 +2,15 @@ function $(selector) {
     return document.querySelector(selector);
 }
 
-$('#logout').addEventListener('click', e => {
+const logoutElement = $('#logout');
+logoutElement && logoutElement.addEventListener('click', e => {
     e.preventDefault();
 
     fetch('/logout')
-    .then(response => {
-        // doesn't matter
-        location.href = '/';
-    })
-    .catch(error => {
-        location.href = '/';
-    });
-
+    .then(moveDocumentRoot)
+    .catch(moveDocumentRoot);
 });
+
+function moveDocumentRoot() {
+    location.href = '/';
+}

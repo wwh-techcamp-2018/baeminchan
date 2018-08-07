@@ -35,7 +35,7 @@ function handleEventBanchanClicked(e) {
     e.preventDefault();
 
     const {target} = e;
-    const id = target.id || target.parentNode.id;
+    const id = target.closest('li').id;
     const eventCategoryId = id.split('-').pop();
 
     showEventBanchan(eventCategoryId);
@@ -70,7 +70,7 @@ function toggleBanchanList(eventCategoryId) {
 
 function showSubCategories(e) {
     const {target} = e;
-    const id = target.id || target.parentNode.id;
+    const id = target.closest('li').id;
     const category_id = id.split('-').pop();
 
     if (cached[category_id]) {
@@ -81,7 +81,7 @@ function showSubCategories(e) {
         .then(validateResponse)
         .then(({data}) => {
             cached[category_id] = true;
-            $(`#${id} .sub-menu`).innerHTML += data.map(categoryTemplate).join('');
+            $(`#${id} .sub-menu`).innerHTML += data.map(category => categoryTemplate(category, false)).join('');
         })
         .catch(handleError);
 }
