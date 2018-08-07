@@ -17,14 +17,16 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(length = 30, nullable = false)
     private String name;
+
     @ManyToOne
-    @JoinColumn(name = "parent_id")
     @JsonIgnore
     private Category parent;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "parent_id")
+    @JoinColumn(name = "parent")
     private List<Category> children = new ArrayList<>();
 
     public Category(String name) {

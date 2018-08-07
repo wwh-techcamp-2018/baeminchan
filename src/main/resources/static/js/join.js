@@ -1,8 +1,42 @@
-function successJoin(response) {
+document.addEventListener("DOMContentLoaded", () => {
+    initJoinEvents();
+})
+
+function initJoinEvents() {
+    const submitBtn = $(".submit-btn");
+    submitBtn.addEventListener("click", registerMemberHandler);
+    const passwordCheckField = $('#pw2');
+    passwordCheckField.addEventListener("keyup", checkPassword);
+}
+
+function registerMemberHandler(evt) {
+    evt.preventDefault();
+    const emailId = $('#email_id').value;
+    const emailDomain = $('#email_domain').value;
+    const password = $('#pw1').value;
+    const username = $('#name').value;
+    const phoneNumber = $('#cell1').value +  $('#cell2').value +  $('#cell3').value;
+
+    fetchManager({
+        url: '/api/members',
+        method: 'POST',
+        headers: { 'content-type': 'application/json'},
+        body: JSON.stringify({
+            email: emailId + '@' + emailDomain,
+            password: password,
+            username: username,
+            phoneNumber: phoneNumber
+        }),
+        onSuccess: successJoinCallback,
+        onFailure: failJoinCallback
+    })
+}
+
+function successJoinCallback(response) {
     document.location.href = '/';
 }
 
-function failJoin(response) {
+function failJoinCallback(response) {
     const errors = response.errors;
     $All('.caution').forEach((el) => {
         el.style.display = 'none';
@@ -29,38 +63,3 @@ function checkPassword() {
         joinCheck.style.color = 'green';
     }
 }
-
-function registerMemberHandler(evt) {
-    evt.preventDefault();
-    const emailId = $('#email_id').value;
-    const emailDomain = $('#email_domain').value;
-    const password = $('#pw1').value;
-    const username = $('#name').value;
-    const phoneNumber = $('#cell1').value +  $('#cell2').value +  $('#cell3').value;
-
-    fetchManager({
-        url: '/api/members',
-        method: 'POST',
-        headers: { 'content-type': 'application/json'},
-        body: JSON.stringify({
-            email: emailId + '@' + emailDomain,
-            password: password,
-            username: username,
-            phoneNumber: phoneNumber
-        }),
-        callback: successJoin,
-        failCallback: failJoin
-    })
-}
-
-
-function initEvents() {
-    const submitBtn = $(".submit-btn");
-    submitBtn.addEventListener("click", registerMemberHandler);
-    const passwordCheckField = $('#pw2');
-    passwordCheckField.addEventListener("keyup", checkPassword);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    initEvents();
-})

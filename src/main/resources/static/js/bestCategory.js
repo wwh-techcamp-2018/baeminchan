@@ -1,18 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
-    initBestCategory(getBestCategoryCallback, failGetBestCategoryCallback);
+    initBestCategories(getBestCategoryCallback, failGetBestCategoryCallback);
 })
 
-function initBestCategory(callback, failCallback) {
+function initBestCategories(successCallback, failCallback) {
     var tabBtnBox = $('.tab-btn-box');
     tabBtnBox.addEventListener('click', clickBestProductTab);
 
-    newFetchManager({
+    fetchManager({
         url: 'api/best-categories',
         method: 'GET',
         headers: {'content-type': 'application/json'},
         body: {},
-        callback: callback,
-        failCallback: failCallback
+        onSuccess: successCallback,
+        onFailure: failCallback
     })
 }
 
@@ -30,8 +30,8 @@ function bestProductToggle(currentNo) {
     selectBestCategoryNodes.forEach((node) => node.classList.toggle("on"));
 }
 
-function getBestCategoryCallback(result) {
-    result.forEach((bestCategory, index) => {
+function getBestCategoryCallback(bestCategoryList) {
+    bestCategoryList.forEach((bestCategory, index) => {
         let name = bestCategory.name;
         let products = bestCategory.products;
 
@@ -99,4 +99,3 @@ function getFinalPrice(product) {
 function failGetBestCategoryCallback() {
     alert('best category fail!');
 }
-
