@@ -49,8 +49,8 @@ public abstract class BaeminchanConfig implements WebMvcConfigurer {
     }
 
     @Configuration
-    @Profile("development")
-    static class BaeminchanDevConfig extends BaeminchanConfig {
+    @Profile("test")
+    static class BaeminchanTestConfig extends BaeminchanConfig {
 
         @Bean
         public BasicAuthInterceptor basicAuthInterceptor() {
@@ -61,6 +61,13 @@ public abstract class BaeminchanConfig implements WebMvcConfigurer {
         public void addInterceptors(InterceptorRegistry registry) {
             registry.addInterceptor(basicAuthInterceptor());
         }
+
+    }
+
+
+    @Configuration
+    @Profile("development")
+    static class BaeminchanDevConfig extends BaeminchanConfig {
 
     }
 

@@ -18,7 +18,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("development")
+@ActiveProfiles("test")
 public abstract class AcceptanceTest {
     @Autowired
     protected UserRepository userRepository;

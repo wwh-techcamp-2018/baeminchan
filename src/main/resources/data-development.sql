@@ -64,7 +64,7 @@ INSERT INTO PROMOTION (img_url) VALUES ('./img/img-main-visual-slide_3.jpg');
 INSERT INTO PROMOTION (img_url) VALUES ('./img/img-main-visual-slide_4.jpg');
 INSERT INTO PROMOTION (img_url) VALUES ('./img/img-main-visual-slide_5.jpg');
 
-INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product1', 10000, 50.0, 'product1 desc');
+INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, '고기고기', 10000, 50.0, 'product1 desc');
 INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product2', 10000, 50.0, 'product2 desc');
 INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product3', 10000, 50.0, 'product3 desc');
 INSERT INTO PRODUCT (category_id, title, original_price, discount_percent, description) VALUES (1, 'product4', 10000, 50.0, 'product4 desc');

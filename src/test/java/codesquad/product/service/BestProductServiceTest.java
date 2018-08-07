@@ -36,8 +36,6 @@ public class BestProductServiceTest {
         List<Product> result = bestProductService.getProducts(BEST_PRODUCT_ID);
 
         assertThat(result).isEqualTo(bestProduct.getProducts());
-
-
     }
 
     @Test(expected = EntityNotFoundException.class)
