@@ -22,7 +22,7 @@ public class Banchan {
     private String title;
 
     @Column(nullable = false)
-    private String subTitle;
+    private String subtitle;
 
     @Column(nullable = false)
     private String brand;
