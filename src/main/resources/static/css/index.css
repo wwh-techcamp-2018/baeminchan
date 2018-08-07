@@ -40,3 +40,26 @@
     z-index: 11 !important;
 }
 
+.search-result-item > p {
+    z-index: 20;
+    position: relative;
+    background-color: #fff;
+    height: 40px;
+    border: solid 1px #ccc;
+    line-height: 40px;
+    width: 210px;
+    padding: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search-result-selected > p {
+    background-color: #18c2bd;
+    color: #fff;
+}
+
+.search-result-item> p > strong {
+    color: orangered;
+    font-weight: bold;
+}

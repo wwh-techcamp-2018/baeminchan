@@ -72,10 +72,11 @@
 
         <form class="search-form" action="/" method="get">
             <label for="searching_text" class="blind">검색</label>
-            <input type="text" name="searching_text" id="searching_text"/>
+            <input type="text" name="searching_text" id="searching_text", autocomplete="off"/>
             <button type="submit">
                 <span>검색</span>
             </button>
+            <ul id="search-result-list"></ul>
         </form>
 
         <ul class="favorite-menu">
@@ -518,6 +519,7 @@
 {{/partial}}
 
 {{#partial "script"}}
+<script src="/js/class/search.js"></script>
 <script src="/js/main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.js"></script>
 <script type="text/javascript">
