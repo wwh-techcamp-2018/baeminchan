@@ -1,9 +1,11 @@
-package codesquad.web;
+package codesquad.web.api;
 
 import codesquad.domain.*;
 import codesquad.repository.CategoryRepository;
 import codesquad.service.CategoryService;
 import codesquad.util.SessionUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin/categories")
+@Api(value = "category", description = "Category Api")
 public class CategoryController {
 
     @Autowired
@@ -24,6 +27,7 @@ public class CategoryController {
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Get banner titles")
     public List<Category> rootCategories() {
         return categoryService.findCategoriesByParent(null);
     }

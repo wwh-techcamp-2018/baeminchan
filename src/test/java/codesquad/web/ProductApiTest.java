@@ -1,10 +1,15 @@
 package codesquad.web;
 
 import codesquad.domain.Product;
+import codesquad.domain.RecommendationDTO;
 import codesquad.support.test.AcceptanceTest;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,5 +44,15 @@ public class ProductApiTest extends AcceptanceTest {
         actualProduct.setPrice(4000);
         actualProduct.setThumbnailLink("https://cdn.bmf.kr/_data/product/IE15B/f4577c1459679650d0554635d921b536.jpg");
         assertThat(actualProduct).isEqualTo(readProduct);
+    }
+
+
+    @Test
+    public void recomendation() {
+        String uri = UriComponentsBuilder.fromUriString("/search/recommendations").queryParam("keyword","소고기").build().toUriString();
+        ResponseEntity<RecommendationDTO> responseEntity = template().getForEntity(uri, RecommendationDTO.class);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody().getKeyword()).isEqualTo("소고기");
+        assertThat(responseEntity.getBody().getProducts().size()).isEqualTo(6);
     }
 }

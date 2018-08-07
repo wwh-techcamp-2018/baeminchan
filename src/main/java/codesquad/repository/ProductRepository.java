@@ -11,4 +11,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Optional<Product> findProductByIdEquals(Long id);
 
     List<Product> findAllByEventCategoryEquals(EventCategory eventCategory);
+
+    List<Product> findAllByTitleContaining(String keyword);
 }

@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", function(evt) {
 
     getEventCategories();
 
+    const searchBar = new SearchBar();
+
     $(".direction-btn-box .next").addEventListener("click", function (evt) {
         evt.preventDefault();
         navigateRight();

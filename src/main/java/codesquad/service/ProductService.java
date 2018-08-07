@@ -7,6 +7,8 @@ import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService {
 
@@ -19,5 +21,9 @@ public class ProductService {
 
     public Product findProductById(Long id) {
         return productRepository.findProductByIdEquals(id).orElseThrow(NotFoundException::new);
+    }
+
+    public List<Product> findProductsContainingKeyword(String keyword) {
+        return productRepository.findAllByTitleContaining(keyword);
     }
 }
