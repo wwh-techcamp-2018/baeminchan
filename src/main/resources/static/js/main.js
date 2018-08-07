@@ -1,10 +1,11 @@
 const visible_image_class = "visible-image";
 const on_dot_class = "on";
 
-let interval = undefined;
+let interval;
+
 
 function activateAnimation() {
-    interval = window.setInterval(()=> {
+    interval = window.setInterval(() => {
         moveNext();
     }, 3000);
 }
@@ -61,8 +62,8 @@ function clickDot(clickDot) {
 function dotIndex(targetDot) {
     const dots = $_all(".dot");
     let next = -1;
-    dots.forEach((dot,idx) => {
-        if(dot === targetDot)
+    dots.forEach((dot, idx) => {
+        if (dot === targetDot)
             next = idx;
     });
     return next;
@@ -81,14 +82,14 @@ function init() {
 
     $(".dot-btn-box").addEventListener("click", (evt) => {
         evt.preventDefault();
-        if(evt.target.className === "dot")
+        if (evt.target.className === "dot")
             clickDot(evt.target);
     });
-
+    new Search();
 
     activateAnimation();
-
     getEventCategories();
+
 }
 
 initialize(init);
@@ -104,42 +105,40 @@ function getEventCategories() {
 
 function drawEventCategories(result) {
     var template = Handlebars.templates["precompile/event_title_template"];
-    for(const category of result) {
+    for (const category of result) {
         $(".tab-btn-box").innerHTML += template(category);
 
     }
     $_all(".tab-box .tab-btn-box li a").forEach((v) => {
-        v.addEventListener("click", (evt)=> {
+        v.addEventListener("click", (evt) => {
             evt.preventDefault();
             clickCategoryTab(evt.target);
         })
-    })
+    });
 
     initChoiceCategory();
-
 }
 
-function initChoiceCategory(){
+function initChoiceCategory() {
     const selectCategories = $_all(".event_category_title");
-    const randomCategory =  selectCategories[Math.floor(Math.random() * selectCategories.length)];
+    const randomCategory = selectCategories[Math.floor(Math.random() * selectCategories.length)];
     randomCategory.classList.toggle("on");
     getCategory(randomCategory.getAttribute("type"));
-
 }
 
-function getCategory(categoryId){
+function getCategory(categoryId) {
     getManager({
         url: "/eventcategories/" + categoryId,
         method: "GET",
-        callback: drowProducts
+        callback: drawProducts
     })
 }
 
-function drowProducts(result) {
+function drawProducts(result) {
     $(".tab-content-box").innerHTML = "";
     var template = Handlebars.templates["precompile/product_template"];
     const products = result.products;
-    for(const product of products) {
+    for (const product of products) {
         $(".tab-content-box").innerHTML += template(product);
     }
 }
@@ -147,6 +146,6 @@ function drowProducts(result) {
 function clickCategoryTab(target) {
     $(".tab-box .tab-btn-box li.on").classList.toggle("on");
     const categoryId = target.getAttribute("data-category-id");
-    $("#event_category_title-"+categoryId).classList.toggle("on");
+    $("#event_category_title-" + categoryId).classList.toggle("on");
     getCategory(categoryId);
 }
