@@ -463,6 +463,7 @@ a:focus {
 #gnb .menu > li.on .sub-menu,
 #gnb .menu > li:hover .sub-menu,
 #gnb .menu > li:focus .sub-menu {
+    z-index: 10;
     display: block;
 }
 
@@ -1520,7 +1521,6 @@ a:focus {
 }
 
 .shown {
-    z-index: 50;
     opacity: 1;
     transition: opacity 0.5s ease-in 0s;
 }
