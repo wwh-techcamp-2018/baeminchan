@@ -32,7 +32,8 @@ public class Category {
         this.title = title;
         this.parentCategory = parentCategory;
     }
+
 //    TODO: Product Entity 만들기
-//    @OneToMany(mappedBy = "category")
+//    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
 //    List<Product> products;
 }

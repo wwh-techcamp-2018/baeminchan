@@ -6,21 +6,78 @@ function createCategoryDomString(e) {
     return `<li ${brandClass()}data-id="${e.id}"><a href="side-dishs.html">${e.title}</a><ul class="sub-menu"></ul></li>`;
 }
 
+function createBestProductTitleDomString(e) {
+    return `
+    <li>
+        <a data-category-id="${e.id}" href="#">${e.name}</a>
+    </li>
+    `
+}
+
+function changeBestProductContent(productData, index) {
+    const origin = $All('.thumbnail-box')[index];
+    const {
+        title, originalPrice,
+        discountPercent, description, images
+    } = productData;
+
+    const image = images[0];
+
+    origin.querySelector('img').src = image;
+    origin.querySelector('img').alt = title;
+    origin.querySelector('.title').textContent = title;
+    origin.querySelector('.desc').textContent = description;
+    origin.querySelector('.original-price').textContent = originalPrice;
+    origin.querySelector('.final-price > .number').textContent = originalPrice - originalPrice * discountPercent / 100;
+}
+
 function initializeTopCategories() {
     fetchManager({
         url: "/api/category",
         method: "GET",
         onSuccess: ({json}) => {
             json.data.forEach((e) => {
-                let menu = createCategoryDomString(e);
+                const menu = createCategoryDomString(e);
                 $("#gnb ul.menu").insertAdjacentHTML("beforeend", menu);
             });
         }
     });
 
     $('#gnb ul.menu').addEventListener('mouseover', (e) => {
-        let pNode = e.target.parentNode;
+        const pNode = e.target.parentNode;
         if (pNode.hasAttribute("data-id")) loadSubMenus(pNode);
+    });
+}
+
+function initializeBestProducts() {
+    fetchManager({
+        url: "/api/bestProducts",
+        method: "GET",
+        onSuccess: ({json}) => {
+            json.data.forEach((e) => {
+                const name = createBestProductTitleDomString(e);
+                $(".tab-btn-box").insertAdjacentHTML('beforeend', name);
+            });
+            $All(".tab-btn-box > li > a")[Math.floor(Math.random() * json.data.length)].click();
+        }
+    });
+
+    $(".tab-btn-box").addEventListener('click',loadBestProduct);
+}
+
+function loadBestProduct(evt) {
+    console.log("called");
+    const target = evt.target;
+    if (!target.hasAttribute("data-category-id")) return;
+
+    fetchManager({
+        url: `/api/bestProducts/${target.getAttribute("data-category-id")}`,
+        method: "GET",
+        onSuccess: ({json}) => {
+            json.data.forEach((product, index) => {
+                changeBestProductContent(product, index);
+            });
+        }
     });
 }
 
@@ -108,4 +165,5 @@ function changePhase(targetIndex) {
 document.addEventListener('DOMContentLoaded', () => {
     initializeTopCategories();
     initializePromotions();
+    initializeBestProducts();
 });
