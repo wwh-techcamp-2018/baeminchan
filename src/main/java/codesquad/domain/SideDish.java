@@ -3,6 +3,7 @@ package codesquad.domain;
 import codesquad.enums.DeliveryType;
 import lombok.Getter;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.http.HttpStatus;
 
 import javax.persistence.*;
 import java.util.List;

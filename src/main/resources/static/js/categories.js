@@ -20,22 +20,12 @@ function appendCategories(categories) {
     $("#categoryMenu").insertAdjacentHTML("afterbegin", categoryHtml);
 }
 
-function appendBestCategories(bestcategories) {
-
-    var bestCategoryHtml= '';
-    var sideDishHtml = '';
-    bestcategories.forEach(function(bestcategory) {
-        bestCategoryHtml += `<li><a data-category-id="${bestcategory.id}" href="#">${bestcategory.name}</a>`;
-        bestCategoryHtml += `</li>`;
-
-
-         sideDishHtml += `<li class="" id="bestMenu-${bestcategory.id}"><ul class="tab-content-box">`;
-         bestcategory.sideDishes.forEach(function(sideDish) {
-            sideDishHtml += `
+function renderSideDish(prevDish, currDish) {
+            return prevDish + `
                           <li>
                             <a class="thumbnail-box" href="#">
                                 <div class="thumbnail">
-                                    <img src="https://cdn.bmf.kr/_data/product/I4DEC/ebab7a5c6f31b59c1d0ffda25f0c82a3.jpg" alt="${sideDish.name}" />
+                                    <img src="https://cdn.bmf.kr/_data/product/I4DEC/ebab7a5c6f31b59c1d0ffda25f0c82a3.jpg" alt="${currDish.name}" />
                                     <div class="overlay">
                                         <p class="txt">새벽배송</p>
                                         <p class="txt">전국택배</p>
@@ -46,12 +36,12 @@ function appendBestCategories(bestcategories) {
                                 </div>
 
                                 <dl class="content">
-                                    <dt class="title">${sideDish.name}</dt>
-                                    <dd class="desc">${sideDish.description}</dd>
+                                    <dt class="title">${currDish.name}</dt>
+                                    <dd class="desc">${currDish.description}</dd>
                                     <dd class="price-wrapper">
-                                        <span class="original-price">${sideDish.price}</span>
+                                        <span class="original-price">${currDish.price}</span>
                                         <span class="final-price">
-                                          <span class="number">${sideDish.salePrice}</span>
+                                          <span class="number">${currDish.salePrice}</span>
                                           <span class="unit">원</span>
                                         </span>
                                     </dd>
@@ -60,9 +50,19 @@ function appendBestCategories(bestcategories) {
                         </li>
                                         `;
 
-            });
+            }
 
-        sideDishHtml+=`</ul></li>`;
+function appendBestCategories(bestcategories) {
+    var bestCategoryHtml= '';
+    var sideDishHtml = '';
+
+    bestcategories.forEach(function(bestcategory) {
+        bestCategoryHtml += `<li><a data-category-id="${bestcategory.id}" href="#">${bestcategory.name}</a>`;
+        bestCategoryHtml += `</li>`;
+
+        sideDishHtml += `<li class="" id="bestMenu-${bestcategory.id}"><ul class="tab-content-box">`;
+        sideDishHtml += bestcategory.sideDishes.reduce(renderSideDish, '');
+        sideDishHtml += `</ul></li>`;
     });
 
     $("#bestCategoryBox").insertAdjacentHTML("beforeend", bestCategoryHtml);
@@ -80,7 +80,7 @@ function fetchManager({ url, method, body, headers, callback }) {
     })
 }
 
-function drawCategories() {
+function renderCategories() {
     fetchManager({
             url: '/api/categories',
             method: 'GET',
@@ -89,7 +89,7 @@ function drawCategories() {
         })
 }
 
-function drawBestCategories() {
+function renderBestCategories() {
     fetchManager({
             url: '/api/bestcategories',
             method: 'GET',
@@ -103,8 +103,8 @@ function makeRandomNum() {
 }
 
 function deleteOnAll(){
-    Array.from($('#bestCategorySideDishBox').children).map(child => child.classList.remove("on"));
-    Array.from($('#bestCategoryBox').children).map(child => child.classList.remove("on"));
+    Array.from($('#bestCategorySideDishBox').children).forEach((child) => child.classList.remove("on"));
+    Array.from($('#bestCategoryBox').children).forEach((child) => child.classList.remove("on"));
 }
 
 function makeOnByIndex(index){
@@ -114,8 +114,8 @@ function makeOnByIndex(index){
 
 document.addEventListener("DOMContentLoaded", () => {
     init();
-    drawCategories();
-    drawBestCategories();
+    renderCategories();
+    renderBestCategories();
 })
 
 function init() {
