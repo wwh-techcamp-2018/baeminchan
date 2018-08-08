@@ -1,7 +1,11 @@
 package codesquad.web;
 
 import codesquad.domain.Category;
+import codesquad.dto.CategoryDTO;
 import codesquad.service.CategoryService;
+import java.util.List;
+
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,9 +22,9 @@ public class ApiCategoryController {
     private CategoryService categoryService;
 
 
+    @ApiOperation(value = "모든 카테고리 조회", notes = "카테고리의 id,이름,자식노드들을 제공하여 카테고리바를 생성하도록 제공")
     @GetMapping("")
-    public ResponseEntity<Category> list() {
-        return new ResponseEntity<>(categoryService.findRoot(), HttpStatus.OK);
-
+    public ResponseEntity<CategoryDTO> dtoList() {
+        return new ResponseEntity<>(categoryService.findRootDto(), HttpStatus.OK);
     }
 }

@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Entity
@@ -38,6 +39,9 @@ public class Category {
     @Column
     @JsonProperty("deleted")
     private boolean deleted = false;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "category")
+    private List<Product> products;
 
     public Category(String title) {
         this.title = title;
@@ -77,4 +81,13 @@ public class Category {
     public void update(UpdateCategoryDTO updateCategoryDTO) {
         this.title = updateCategoryDTO.getTitle();
     }
+
+    public CategoryDTO toDTO() {
+        CategoryDTO categoryDTO = new CategoryDTO();
+        categoryDTO.setTitle(this.title);
+        categoryDTO.setId(this.id);
+        categoryDTO.setChildren(this.children.stream().map(child -> child.toDTO()).collect(Collectors.toList()));
+        return categoryDTO;
+    }
+
 }

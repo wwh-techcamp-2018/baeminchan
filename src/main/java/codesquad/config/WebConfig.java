@@ -1,4 +1,4 @@
-package codesquad;
+package codesquad.config;
 
 import codesquad.security.AdminInterceptor;
 import codesquad.security.ApiAdminInterceptor;
