@@ -26,4 +26,8 @@ public class Product {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> bannerUrls = new HashSet<>();
+
+    public boolean isMatchName(String serchText) {
+        return this.name.contains(serchText);
+    }
 }

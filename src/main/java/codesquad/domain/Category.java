@@ -26,7 +26,7 @@ public class Category {
     private Category parent;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "parent")
+    @JoinColumn(name = "parent_id")
     private List<Category> children = new ArrayList<>();
 
     public Category(String name) {
