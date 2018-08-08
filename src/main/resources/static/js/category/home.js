@@ -1,52 +1,127 @@
-const CLASS_NAME_NOW = "now";
-const side_dishes_cache = {};
+const UP    = 38;
+const DOWN  = 40;
+const ENTER = 13;
+const CLASS_INVISIBLE = "invisible";
+const CLASS_NAME_NOW  = "now";
+const SIDE_DISHES_CACHE = {};
 
 document.addEventListener("DOMContentLoaded", () => {
-    initEvents();
     const autoSearching = new AutoSearching();
-    $("#best-categories").addEventListener("click", onClickBestCategory);
-    $("#searching_text").addEventListener("keyup", autoSearching.onKeyUpSearchForm.bind(autoSearching));
+    requestCategories();
+    addEventListeners(autoSearching);
 });
 
-class AutoSearching {
-    onKeyUpSearchForm({target}) {
-        const pattern = /^[가-힇|A-Za-z|0-9]{0,20}$/;
-        if (target.value.trim() === "" || !pattern.test(target.value)) {
-            this.toggleInvisible(true);
-            return;
+function addEventListeners(autoSearching) {
+    document.onkeydown = function(event) {
+        if ($("." + CLASS_INVISIBLE) == null && event.keyCode === ENTER) event.preventDefault();
+    };
+    document.onclick = function({target}) {
+        if(target.parentNode.id === "searching_box") {
+            $("#searching_text").value = autoSearching.removeSpanTag(target.innerHTML);
         }
+        $("#searching_box").classList.add(CLASS_INVISIBLE);
+    };
+    $("#best-categories").addEventListener("click", onClickBestCategory);
+    $("#searching_text").addEventListener("keyup", autoSearching.onKeyUpSearchForm.bind(autoSearching));
+}
 
-        fetchManager({
-            url: '/api/sidedishes/' + target.value,
-            method: 'GET',
-            headers: { 'content-type': 'application/json'},
-            callback: this.onKeyUpCallBack.bind(this),
-            errCallback: alertError
-        });
+class AutoSearching {
+    constructor() {
+        this.index = -1;
+        this.indexLimit = -1;
     }
 
-    toggleInvisible(isInvisible) {
-        if(isInvisible) {
-            $("#searching_box").classList.add("invisible");
+    onKeyUpSearchForm({target, keyCode}) {
+        if(!this.checkEnableAjax(target)) return;
+
+        switch (keyCode) {
+            case UP:    this.moveUp(); break;
+            case DOWN:  this.moveDown(); break;
+            case ENTER: this.pressEnter(); break;
+            default   : fetchManager({
+                url: '/api/sidedishes/' + target.value,
+                method: 'GET',
+                headers: { 'content-type': 'application/json'},
+                callback: this.onKeyUpCallBack.bind(this),
+                errCallback: alertError
+            });
+        }
+    }
+
+    checkEnableAjax(target) {
+        const pattern = /^[가-힇|A-Za-z|0-9]{0,20}$/;
+        const currentText = target.value.trim();
+
+        if (currentText === "" || !pattern.test(currentText)) {
+            this.toggleInvisible(true);
+            return false;
+        }
+        return true;
+    }
+
+    moveUp() {
+        if(this.index < 0){
             return;
         }
+        this.removeBackground();
+        this.index--;
+        this.addBackground();
+    }
 
-        $("#searching_box").classList.remove("invisible");
+    moveDown() {
+        if(this.index >= 0) {
+            this.removeBackground();
+        }
+        this.index = (this.index + 1) % this.indexLimit;
+        this.addBackground();
+    }
+
+    pressEnter() {
+        if ($("." + CLASS_INVISIBLE) != null) return;
+
+        let rawText = $("#searching_box").children[this.index].innerHTML;
+        $("#searching_text").value = this.removeSpanTag(rawText);
+        this.index = -1;
+        this.toggleInvisible(true);
+    }
+
+    removeSpanTag(rawText) {
+        rawText = rawText.replace('<span class=\"highlight-search\">', "");
+        return rawText.replace("</span>", "");
     }
 
     onKeyUpCallBack(response) {
         response.json().then((sideDishes) => {
             this.toggleInvisible(sideDishes.length === 0);
+            this.index = -1;
+            this.indexLimit = sideDishes.length;
 
-            const searchingText = $("#searching_text").value;
             const searchingHTML = sideDishes
                 .map((sideDishName) => {
-                    return this.highlightWord(sideDishName, searchingText);
+                    return this.highlightWord(sideDishName, $("#searching_text").value);
                 })
                 .reduce(this.makeSearchingHTML, ``);
             $("#searching_box").innerHTML = '';
             $("#searching_box").insertAdjacentHTML("beforeend", searchingHTML);
         })
+    }
+
+    addBackground() {
+        if(this.index === -1) return;
+        $("#searching_box").children[this.index].classList.add("highlight-background");
+    }
+
+    removeBackground() {
+        $(".highlight-background").classList.remove("highlight-background");
+    }
+
+    toggleInvisible(isInvisible) {
+        if(isInvisible) {
+            $("#searching_box").classList.add(CLASS_INVISIBLE);
+            return;
+        }
+
+        $("#searching_box").classList.remove(CLASS_INVISIBLE);
     }
 
     highlightWord(word, searchingText) {
@@ -58,7 +133,7 @@ class AutoSearching {
     }
 }
 
-function initEvents() {
+function requestCategories() {
     fetchManager({
         url: '/api/categories',
         method: 'GET',
@@ -110,10 +185,10 @@ function onClickBestCategory(evt) {
     let {"target" : target} = evt;
     $(".now").classList.toggle(CLASS_NAME_NOW);
     target.classList.toggle(CLASS_NAME_NOW);
-    if(!side_dishes_cache[target.dataset["categoryId"]])
+    if(!SIDE_DISHES_CACHE[target.dataset["categoryId"]])
         loadSideDishes(target.dataset["categoryId"]);
     else
-        updateSideDishes(side_dishes_cache[target.dataset["categoryId"]]);
+        updateSideDishes(SIDE_DISHES_CACHE[target.dataset["categoryId"]]);
 }
 
 function loadSideDishes(categoryId) {
@@ -128,7 +203,7 @@ function loadSideDishes(categoryId) {
 
 function onSuccessBestSideDishes(response) {
     response.json().then((result) => {
-        side_dishes_cache[$(".now").dataset["categoryId"]] = result;
+        SIDE_DISHES_CACHE[$(".now").dataset["categoryId"]] = result;
         updateSideDishes(result);
     });
 }
