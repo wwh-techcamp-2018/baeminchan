@@ -34,3 +34,7 @@ function getManager({url,callback}) {
         callback(result);
     });
 }
+
+function range(start, end) {
+    return Array(end-start).fill(0).map((_, index) => start+index);
+}

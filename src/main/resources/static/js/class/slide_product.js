@@ -14,6 +14,8 @@ class SlideProduct {
         this.middleTranslate = -100;
         this.rightTranslate = -100;
 
+        this.productTemplate = Handlebars.templates["precompile/slide_product_template"];
+
         this.init();
     }
 
@@ -31,14 +33,12 @@ class SlideProduct {
 
     drawProducts() {
         let start = this.startIndex;
-        let template = Handlebars.templates["precompile/slide_product_template"];
-
         [this.left, this.middle, this.right].forEach((box) => {
             let productsHtml = "";
             const products = this.products.slice(start, start + this.BOX_CONTENTS_SIZE);
 
             for (const product of products) {
-                productsHtml += template(product);
+                productsHtml += this.productTemplate(product);
                 start = (start + 1) % this.products.length;
             }
             box.innerHTML += productsHtml;
@@ -68,13 +68,13 @@ class SlideProduct {
         });
     }
 
-    handlePrevBtnClick() {
+    handleNextBtnClick() {
         this.leftTranslate += 200;
         this.middleTranslate -= 100;
         this.rightTranslate -= 100;
-        this.translateSlide(this.left, this.leftTranslate);
-        this.translateSlide(this.middle, this.middleTranslate);
-        this.translateSlide(this.right, this.rightTranslate);
+        this.translateSlideWithoutAnimation(this.left, this.leftTranslate);
+        this.translateSlideWithAnimation(this.middle, this.middleTranslate);
+        this.translateSlideWithAnimation(this.right, this.rightTranslate);
 
         const left = this.left;
         this.left = this.middle;
@@ -85,15 +85,24 @@ class SlideProduct {
         this.leftTranslate = this.middleTranslate;
         this.middleTranslate = this.rightTranslate;
         this.rightTranslate = leftTranslate;
+
+        let productsHtml = "";
+        const totalBoxSize = this.BOX_CONTENTS_SIZE * this.BOX_COUNT;
+        let start = this.startIndex + totalBoxSize;
+        range(start, start + this.BOX_CONTENTS_SIZE).forEach((rawIndex) => {
+            productsHtml += this.productTemplate(this.products[rawIndex % this.products.length]);
+        });
+        this.right.innerHTML = productsHtml;
+        this.startIndex = (this.startIndex + this.BOX_CONTENTS_SIZE) % this.products.length;
     }
 
-    handleNextBtnClick() {
+    handlePrevBtnClick() {
         this.leftTranslate += 100;
         this.middleTranslate += 100;
         this.rightTranslate -= 200;
-        this.translateSlide(this.left, this.leftTranslate);
-        this.translateSlide(this.middle, this.middleTranslate);
-        this.translateSlide(this.right, this.rightTranslate);
+        this.translateSlideWithAnimation(this.left, this.leftTranslate);
+        this.translateSlideWithAnimation(this.middle, this.middleTranslate);
+        this.translateSlideWithoutAnimation(this.right, this.rightTranslate);
 
         const right = this.right;
         this.right = this.middle;
@@ -104,13 +113,31 @@ class SlideProduct {
         this.rightTranslate = this.middleTranslate;
         this.middleTranslate = this.leftTranslate;
         this.leftTranslate = rightTranslate;
+
+        let productsHtml = "";
+        let start = (this.startIndex + this.products.length - this.BOX_CONTENTS_SIZE) % this.products.length;
+        range(start, start + this.BOX_CONTENTS_SIZE).forEach((rawIndex) => {
+            productsHtml += this.productTemplate(this.products[rawIndex % this.products.length]);
+        });
+        this.left.innerHTML = productsHtml;
+        this.startIndex = (this.startIndex + this.products.length - this.BOX_CONTENTS_SIZE) % this.products.length;
+    }
+
+    translateSlideWithAnimation(slide, translate) {
+        slide.style.transition = "transform 0.5s";
+        this.translateSlide(slide, translate);
+    }
+
+    translateSlideWithoutAnimation(slide, translate) {
+        slide.style.transition = "";
+        this.translateSlide(slide, translate);
     }
 
     translateSlide(slide, translate) {
         slide.style.transform = this.buildTranslate(translate);
     }
 
-    buildTranslate(translateValue) {
-        return "translateX(" + translateValue + "%)";
+    buildTranslate(translate) {
+        return `translateX(${translate}%)`;
     }
 }
