@@ -1,3 +1,8 @@
+const CURRENT_AREA = "current-area"
+const DOWN_ARROW = 40;
+const UP_ARROW = 38;
+const ENTER = 13;
+
 class SearchBox {
     constructor() {
         this.init();
@@ -5,8 +10,7 @@ class SearchBox {
 
     init() {
         $("#searching_text").addEventListener("keyup", this.getSearchResults.bind(this));
-        $(".search-list-box").addEventListener("mouseover", this.makeHighlight.bind(this))
-        $(".search-list-box").addEventListener("click", this.clickSearchText.bind(this))
+        $(".search-list-box").addEventListener("click", this.clickSearchText.bind(this));
     }
 
     fetchManager({ url, method, body, headers, callback }) {
@@ -18,12 +22,20 @@ class SearchBox {
         })
     }
 
-    makeHighlight(evt) {
-        evt.target.textContent.contains($("#searching_text").value)
+    makeHighlight(searchResultTxt) {
+        const originWord = $("#searching_text").value;
+        const targetWord = '<span class="match-word">' + originWord + '</span>';
+        return searchResultTxt.replace(originWord, targetWord);
     }
 
+
     clickSearchText(evt) {
-        $("#searching_text").value = evt.target.textContent;
+        evt.target.closest('li').parentElement.childNodes.forEach(function (searchText) {
+            searchText.classList.remove(CURRENT_AREA);
+        })
+        evt.target.closest('li').classList.toggle(CURRENT_AREA);
+        $("#searching_text").value = evt.target.closest('li').textContent;
+        $("#searching_text").focus();
     }
 
     isEmptySearchText(evt) {
@@ -31,10 +43,24 @@ class SearchBox {
     }
 
     getSearchResults(evt) {
-        if(this.isEmptySearchText(evt)){
+        if(this.isEmptySearchText(evt)) {
             $(".search-list-box").innerHTML = '';
             return false;
         }
+
+        if(evt.keyCode === DOWN_ARROW) { // down arrow
+            this.downArrowHandler();
+            return false;
+        }
+        if(evt.keyCode === UP_ARROW) { // up arrow
+            this.upArrowHandler();
+            return false;
+        }
+        if(evt.keyCode === ENTER) { // enter
+            this.enterHandler();
+            return false;
+        }
+
         const queryString = '?query=' + evt.target.value;
         this.fetchManager({
             url: '/api/side/dishes'.concat(queryString),
@@ -42,6 +68,47 @@ class SearchBox {
             headers: { 'content-type': 'application/json'},
             callback: this.renderSearchResults.bind(this)
         })
+    }
+
+    enterHandler() {
+        if($(".current-area") != null) {
+            $("#searching_text").value = $(".current-area .search-result-word").textContent;
+        }
+        $(".search-list-box").innerHTML = '';
+        alert("검색 성공!")
+    }
+
+    upArrowHandler() {
+        const currentArea = $(".search-list-box .current-area");
+        if(currentArea === null) {
+            return false;
+        }
+        if(currentArea.previousElementSibling === null) {
+            currentArea.classList.toggle(CURRENT_AREA);
+            return false;
+        }
+        currentArea.previousElementSibling.classList.toggle(CURRENT_AREA);
+        currentArea.classList.toggle(CURRENT_AREA);
+    }
+
+    downArrowHandler() {
+        const currentAreaBox = $(".search-list-box");
+        const currentArea = $(".search-list-box .current-area");
+        if(currentAreaBox.hasChildNodes() === false) {
+            return false;
+        }
+
+        if(currentArea === null) {
+            $(".search-list-box").firstElementChild.classList.toggle(CURRENT_AREA);
+            return false;
+        }
+        if(currentArea.nextElementSibling === null) {
+            currentArea.classList.toggle(CURRENT_AREA);
+            currentArea.parentElement.firstElementChild.classList.toggle(CURRENT_AREA);
+            return false;
+        }
+        currentArea.nextElementSibling.classList.toggle(CURRENT_AREA);
+        currentArea.classList.toggle(CURRENT_AREA);
     }
 
     isEmpty(obj) {
@@ -54,7 +121,8 @@ class SearchBox {
         }
         let searchBoxHtml = '';
         for(const text of results) {
-            searchBoxHtml += `<li>${text.name}</li>`
+            let searchResultText = this.makeHighlight(text.name);
+            searchBoxHtml += `<li><a href="#"><span class="search-result-word">` + searchResultText + `</span></a></li>`
         }
         $(".search-list-box").innerHTML = searchBoxHtml;
     }
