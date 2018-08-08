@@ -52,4 +52,9 @@ public class BannerController {
         return eventCategoryService.findProductsByEventCategoryId(id);
     }
 
+    @GetMapping("/api/categories/category/{id}")
+    public List<Product> fetchProductsInCategory(@PathVariable Long id) {
+        return categoryService.findProductsByCategoryId(id);
+    }
+
 }

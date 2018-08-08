@@ -2,8 +2,10 @@ package codesquad.service;
 
 import codesquad.domain.Category;
 import codesquad.domain.CategoryDTO;
+import codesquad.domain.Product;
 import codesquad.exception.NotFoundException;
 import codesquad.repository.CategoryRepository;
+import codesquad.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -17,6 +19,9 @@ public class CategoryService {
 
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    ProductRepository productRepository;
 
     public Category save(Category category) {
         return categoryRepository.save(category);
@@ -53,6 +58,13 @@ public class CategoryService {
 
     public CategoryDTO findCategoryDTOById(Long id) {
         return new CategoryDTO(findCategoryById(id), findCategoriesByParent(findCategoryById(id)));
+    }
+
+    @Cacheable(value = "findProductsByCategoryId", key = "#id")
+    public List<Product> findProductsByCategoryId(Long id) {
+        return productRepository.findAllByCategoryEquals(
+                categoryRepository.findById(id).orElseThrow(NotFoundException::new)
+        );
     }
 
 }

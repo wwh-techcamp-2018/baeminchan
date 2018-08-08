@@ -73,3 +73,18 @@ textarea, select, input, button { outline: none; }
     color: #fa6565;
     font-weight: bold;
 }
+
+.content-group {
+
+}
+
+.content-box:first-child {
+
+}
+
+.content-box {
+    transform: translateX(-100%);
+}
+
+.content-box.on {
+}
