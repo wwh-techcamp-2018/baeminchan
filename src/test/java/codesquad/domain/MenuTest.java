@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,5 +58,13 @@ public class MenuTest {
         Menu menu = menuRepository.findById(child.getId()).get();
         log.debug("전체메뉴 : {} \n 자식메뉴 : {}", mainMenu, menu);
         assertThat(menu.getParent().getId()).isEqualTo(mainMenu.getId());
+    }
+
+    @Test
+    @Transactional
+    public void bestMenuTest(){
+        Menu bestRoot = menuRepository.findById(MenuContext.BEST_CATEGORY.getId()).get();
+        assertThat(bestRoot).isNotNull();
+        assertThat(bestRoot.getChildren().size()).isEqualTo(bestRoot.getChildCount());
     }
 }
