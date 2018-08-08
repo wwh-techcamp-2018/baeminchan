@@ -1,6 +1,7 @@
 package codesquad.atdd;
 
 import codesquad.domain.Menu;
+import codesquad.domain.MenuContext;
 import codesquad.domain.User;
 import codesquad.repository.MenuRepository;
 import codesquad.repository.UserRepository;
@@ -61,7 +62,7 @@ public class ApiMenuAcceptanceTest extends AcceptanceTest{
 
     @Test
     public void get단일메뉴_성공() throws URISyntaxException {
-        Menu menu = menuRepository.findByParentIsNull().get();
+        Menu menu = menuRepository.findById(MenuContext.MAIN_CATEGORY.getId()).get();
         RequestEntity<Void> requestEntity = RequestEntity.get(new URI("/api/menu/"+menu.getId())).accept(MediaType.APPLICATION_JSON).build();
         ResponseEntity<Menu> responseEntity = template().exchange(requestEntity, Menu.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -78,7 +79,7 @@ public class ApiMenuAcceptanceTest extends AcceptanceTest{
 
     @Test
     public void create메뉴() throws URISyntaxException{
-        Menu menu = menuRepository.findByParentIsNull().get();
+        Menu menu = menuRepository.findById(MenuContext.MAIN_CATEGORY.getId()).get();
         String body ="{\"parentId\":"+menu.getId()+",\n\"childMenuName\":"+"\"testMenu\"}";
         RequestEntity<String> requestEntity = RequestEntity.post(new URI("/api/admin/menu")).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).body(body,String.class);
         ResponseEntity<Void> responseEntity = basicAuthTemplate(defaultAdminUser).exchange(requestEntity, Void.class);
