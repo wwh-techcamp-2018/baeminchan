@@ -17,7 +17,6 @@ public enum UserPermissions {
                 .filter(p -> p.permissions == permissions)
                 .findFirst()
                 .orElseThrow(RuntimeException::new);
-        // TODO: Exception 처리 잘 해봐요 ㅎ_ㅎ
     }
 
     public long getPermissions() {

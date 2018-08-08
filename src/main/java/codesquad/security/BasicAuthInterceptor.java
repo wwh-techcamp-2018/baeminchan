@@ -2,7 +2,6 @@ package codesquad.security;
 
 import codesquad.domain.LoginDTO;
 import codesquad.domain.User;
-import codesquad.exception.UnauthorizedException;
 import codesquad.exception.UserVerificationException;
 import codesquad.service.UserService;
 import codesquad.util.SessionUtil;

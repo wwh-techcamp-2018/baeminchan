@@ -14,7 +14,7 @@ public class AcceptanceTest {
     @Autowired
     private TestRestTemplate template;
 
-    public TestRestTemplate template() {
+    protected TestRestTemplate template() {
         return template;
     }
 

@@ -5,6 +5,7 @@ import codesquad.domain.User;
 import codesquad.domain.UserDTO;
 import codesquad.service.UserService;
 import codesquad.util.SessionUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 public class UserController {
 
-    @Resource(name = "userService")
+    @Autowired
     private UserService userService;
 
     @RequestMapping("/signup")

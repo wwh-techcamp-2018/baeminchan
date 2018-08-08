@@ -14,11 +14,11 @@ import javax.annotation.Resource;
 @Service("userService")
 public class UserService {
 
-    @Resource(name = "userRepository")
-    UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     public void save(UserDTO userDTO) {
         isUniqueUser(userDTO.getEmail());

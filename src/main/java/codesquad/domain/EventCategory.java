@@ -9,12 +9,12 @@ public class EventCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @NotBlank
     @Size(min = 1, max = 20)
     @Column(nullable = false)
-    String title;
+    private String title;
 
     public Long getId() {
         return id;

@@ -15,10 +15,10 @@ import java.util.List;
 public class EventCategoryService {
 
     @Autowired
-    EventCategoryRepository eventCategoryRepository;
+    private EventCategoryRepository eventCategoryRepository;
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     public List<EventCategory> findAll() {
         return eventCategoryRepository.findAll();

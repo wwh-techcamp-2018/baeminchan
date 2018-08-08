@@ -11,31 +11,31 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @NotBlank
     @Size(min = 1, max = 50)
     @Column(nullable = false)
-    String title;
+    private String title;
 
     @NotBlank
     @Size(min = 1)
     @Column(nullable = false)
-    String contents;
+    private String contents;
 
     @NotNull
     @Column(nullable = false)
-    Integer price;
+    private Integer price;
 
     @NotBlank
     @Column(nullable = false)
-    String thumbnailLink;
+    private String thumbnailLink;
 
     @ManyToOne
-    Category category;
+    private Category category;
 
     @ManyToOne
-    EventCategory eventCategory;
+    private EventCategory eventCategory;
 
     @Override
     public boolean equals(Object o) {

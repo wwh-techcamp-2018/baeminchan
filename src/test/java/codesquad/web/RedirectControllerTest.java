@@ -1,6 +1,5 @@
 package codesquad.web;
 
-import codesquad.domain.User;
 import codesquad.support.test.AcceptanceTest;
 import codesquad.support.test.HtmlFormDataBuilder;
 import org.junit.Before;
@@ -15,7 +14,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class RedirectControllerTest extends AcceptanceTest {
 
-    HtmlFormDataBuilder builder;
+    private HtmlFormDataBuilder builder;
 
     @Before
     public void setUp() throws Exception {

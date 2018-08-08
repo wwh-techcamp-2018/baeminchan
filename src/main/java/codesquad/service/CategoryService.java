@@ -18,16 +18,16 @@ import java.util.Optional;
 public class CategoryService {
 
     @Autowired
-    CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository;
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     public Category save(Category category) {
         return categoryRepository.save(category);
     }
 
-    public void delete(Category category) {
+    private void delete(Category category) {
         categoryRepository.delete(category);
     }
 
