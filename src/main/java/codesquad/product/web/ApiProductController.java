@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
@@ -22,7 +22,10 @@ public class ApiProductController {
 
     @GetMapping("/search")
     public ResponseEntity<RestResponse> search(@RequestParam(value = "keyword", required = false) String keyword) {
-        List<ProductIdAndTitle> results =  productRepository.findTop10ByTitleContaining(Optional.ofNullable(keyword).orElse(""));
+        if (keyword == null || keyword.isEmpty()) {
+            return ResponseEntity.ok(RestResponse.of(Arrays.asList()));
+        }
+        List<ProductIdAndTitle> results =  productRepository.findTop10ByTitleContaining(keyword);
         return ResponseEntity.ok(RestResponse.of(results));
     }
 }
