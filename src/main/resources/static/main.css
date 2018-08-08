@@ -1519,3 +1519,29 @@ a:focus {
   width: 250px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
+
+.search-recommendation-list {
+  display: none;
+  position: absolute;
+  width: 100%;
+  border: 1px solid rgba(72, 63, 53, 0.6);
+  border-top: none;
+  background: #fff;
+  z-index: 1;
+}
+
+.search-recommendation-list > li {
+  padding: 10px;
+}
+
+.search-recommendation-list a:hover {
+  color: #666;
+}
+
+.search-recommendation-list .on {
+  background-color: #11c2bc;
+}
+
+.search-recommendation-list > li strong {
+  color: #f15858;
+}
