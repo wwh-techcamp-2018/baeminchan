@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/css/main.css" />
   <script src="/js/common.js"></script>
   <script src="/js/index.js"></script>
+    <script src="/js/search.js"></script>
 </head>
 
 <body>
@@ -70,14 +71,22 @@
       <a class="logo" href="#">
         <img src="/img/logo-main.png" alt="배민찬 - 모바일 넘버원 반찬가게" />
       </a>
+        <div class="search-box" style="z-index: 100;">
+            <form class="search-form" method="get" onsubmit="return false;">
+                <label for="searching_text" class="blind">검색</label>
+                <input type="text" name="searching_text" id="searching_text" autocomplete="off"/>
+                <button type="submit">
+                    <span>검색</span>
+                </button>
+            </form>
 
-      <form class="search-form" action="/" method="get">
-        <label for="searching_text" class="blind">검색</label>
-        <input type="text" name="searching_text" id="searching_text" />
-        <button type="submit">
-          <span>검색</span>
-        </button>
-      </form>
+            <ul id="autocomplete">
+                <li class="autocomplete-item autocomplete-item-selected">test</li>
+                <li class="autocomplete-item">test</li>
+                <li class="autocomplete-item">test</li>
+                <li class="autocomplete-item">test</li>
+            </ul>
+        </div>
 
       <ul class="favorite-menu">
         <li>
