@@ -1,13 +1,20 @@
 class Search {
+
     constructor() {
-        this.searchFocusIndex = undefined;
-        this.previousKeyword = undefined;
+        this.searchFocusIndex = -1;
+        this.previousKeyword;
+        this.minLength = 2;
         this.searchingText = $("#searching_text");
         this.searchResultList = $("#search-result-list");
         this.initEvents();
     }
 
     initEvents() {
+        this.handleSearchingTextKeydown();
+        this.handleSearchingTextInput();
+    }
+
+    handleSearchingTextKeydown() {
         this.searchingText.addEventListener("keydown", (evt) => {
             if (evt.key === "ArrowUp") {
                 this.handleArrowUp();
@@ -21,10 +28,12 @@ class Search {
                 this.clearSearchResultList();
             }
         });
+    }
 
+    handleSearchingTextInput() {
         this.searchingText.addEventListener("input", (evt) => {
             let keyword = evt.currentTarget.value;
-            if (keyword.length < 2) {
+            if (keyword.length < this.minLength) {
                 this.clearSearchResultList();
             }
             else if (keyword !== this.previousKeyword) {
@@ -44,10 +53,11 @@ class Search {
 
     drawSearchRecommendations(result) {
         this.initSearchFocus();
-        this.searchResultList.innerHTML = "";
+        let html = "";
         result.products.forEach((product) => {
-            this.searchResultList.innerHTML += this.getSearchResultLi(product, result.keyword);
+            html += this.getSearchResultLi(product, result.keyword);
         });
+        this.searchResultList.innerHTML = html;
     }
 
     getSearchResultLi(product, keyword) {
