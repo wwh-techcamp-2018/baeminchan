@@ -1,6 +1,6 @@
 package codesquad.web;
 
-import codesquad.domain.EventCategory;
+import codesquad.domain.category.EventCategory;
 import codesquad.dto.EventCategoryDto;
 import org.junit.Before;
 import org.junit.Test;

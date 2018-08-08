@@ -1,4 +1,4 @@
-package codesquad.domain;
+package codesquad.domain.category;
 
 import lombok.Getter;
 import lombok.Setter;

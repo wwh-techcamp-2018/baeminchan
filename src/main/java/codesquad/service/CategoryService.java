@@ -1,7 +1,7 @@
 package codesquad.service;
 
-import codesquad.domain.Category;
-import codesquad.domain.CategoryRepository;
+import codesquad.domain.category.Category;
+import codesquad.domain.category.CategoryRepository;
 import codesquad.domain.DomainField;
 import codesquad.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;

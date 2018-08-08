@@ -1,8 +1,8 @@
 package codesquad.service;
 
 import codesquad.domain.DomainField;
-import codesquad.domain.Product;
-import codesquad.domain.ProductRepository;
+import codesquad.domain.product.Product;
+import codesquad.domain.product.ProductRepository;
 import codesquad.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;

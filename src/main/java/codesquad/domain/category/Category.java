@@ -1,4 +1,4 @@
-package codesquad.domain;
+package codesquad.domain.category;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

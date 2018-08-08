@@ -1,6 +1,6 @@
 package codesquad.service;
 
-import codesquad.domain.EventCategoryRepository;
+import codesquad.domain.category.EventCategoryRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

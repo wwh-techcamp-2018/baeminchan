@@ -1,6 +1,6 @@
 package codesquad.dto;
 
-import codesquad.domain.User;
+import codesquad.domain.user.User;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;

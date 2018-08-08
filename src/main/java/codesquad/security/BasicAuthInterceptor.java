@@ -1,7 +1,7 @@
 package codesquad.security;
 
 import codesquad.exception.UnAuthenticationException;
-import codesquad.domain.User;
+import codesquad.domain.user.User;
 import codesquad.dto.LoginDto;
 import codesquad.service.UserService;
 import codesquad.util.SessionUtil;

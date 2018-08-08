@@ -1,5 +1,6 @@
-package codesquad.domain;
+package codesquad.domain.user;
 
+import codesquad.domain.DomainField;
 import codesquad.exception.BadRequestException;
 import codesquad.dto.SignupDto;
 import lombok.*;

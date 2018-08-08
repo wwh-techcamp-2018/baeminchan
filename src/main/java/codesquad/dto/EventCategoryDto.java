@@ -1,7 +1,7 @@
 package codesquad.dto;
 
-import codesquad.domain.EventCategory;
-import codesquad.domain.Product;
+import codesquad.domain.category.EventCategory;
+import codesquad.domain.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

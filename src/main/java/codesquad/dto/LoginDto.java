@@ -1,6 +1,6 @@
 package codesquad.dto;
 
-import codesquad.domain.User;
+import codesquad.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

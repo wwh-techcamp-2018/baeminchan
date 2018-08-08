@@ -1,6 +1,6 @@
 package codesquad.web;
 
-import codesquad.domain.Product;
+import codesquad.domain.product.Product;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;

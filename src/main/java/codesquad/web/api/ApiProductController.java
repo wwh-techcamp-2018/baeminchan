@@ -1,6 +1,6 @@
 package codesquad.web.api;
 
-import codesquad.domain.Product;
+import codesquad.domain.product.Product;
 import codesquad.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

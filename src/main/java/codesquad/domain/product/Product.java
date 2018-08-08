@@ -1,6 +1,7 @@
-package codesquad.domain;
+package codesquad.domain.product;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import codesquad.domain.category.Category;
+import codesquad.domain.category.EventCategory;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

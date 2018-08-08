@@ -1,8 +1,8 @@
 package codesquad.service;
 
 import codesquad.exception.BadRequestException;
-import codesquad.domain.User;
-import codesquad.domain.UserRepository;
+import codesquad.domain.user.User;
+import codesquad.domain.user.UserRepository;
 import codesquad.dto.LoginDto;
 import codesquad.dto.SignupDto;
 import codesquad.exception.UnAuthenticationException;
@@ -16,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import support.test.RequestEntity;
 
 import java.util.Optional;
 

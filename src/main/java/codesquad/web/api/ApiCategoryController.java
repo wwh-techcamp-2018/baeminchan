@@ -1,6 +1,6 @@
 package codesquad.web.api;
 
-import codesquad.domain.Category;
+import codesquad.domain.category.Category;
 import codesquad.service.CategoryService;
 import codesquad.validation.RestResponse;
 import org.springframework.beans.factory.annotation.Autowired;

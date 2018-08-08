@@ -1,7 +1,7 @@
 package codesquad.security;
 
-import codesquad.domain.User;
-import codesquad.domain.UserPermissions;
+import codesquad.domain.user.User;
+import codesquad.domain.user.UserPermissions;
 import codesquad.exception.UnAuthenticationException;
 import codesquad.exception.UnAuthorizedException;
 import codesquad.util.SessionUtil;
