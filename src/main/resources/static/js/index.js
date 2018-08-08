@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", function(evt) {
     const searchBar = new SearchBar();
 
 
-    const sideDishSlider = new Slider($("#side-dish"), "8");
-    const mainDishSlider = new Slider($("#main-dish"), "9");
+    const sideDishSlider = new Slider($("#side-dish"), "8", 4);
+    const mainDishSlider = new Slider($("#main-dish"), "9", 4);
 
 
 

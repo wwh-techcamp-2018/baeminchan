@@ -1,10 +1,10 @@
 class Slider {
-    constructor(sliderElement, categoryId) {
+    constructor(sliderElement, categoryId, viewSize) {
         this.sliderElement = sliderElement;
         this.categoryId = categoryId;
         this.elementList = [];
         this.startIndex = 0;
-        this.viewSize = 4;
+        this.viewSize = viewSize;
         this.init();
     }
 
@@ -23,33 +23,32 @@ class Slider {
         });
 
         this.sliderElement.querySelector(".content-group").addEventListener("transitionend", (evt) => {
-            if(evt.target.classList.contains("on")) {
-                this.updateStartIndex();
-                if(this.direction == 1) {
-                    let nextText = this.getSliderElementHolder(this.getNextStartRange());
+            if(!evt.target.classList.contains("on")) return false;
+            this.updateStartIndex();
+            if (this.direction == 1) {
+                let nextText = this.getSliderElementHolder(this.getStartRange(1));
 
-                    this.removeFirstContentBox();
+                this.removeFirstContentBox();
 
-                    this.sliderElement.querySelector(".content-box.on").classList.toggle("on");
-                    this.sliderElement.querySelector(".content-box:last-child").classList.toggle("on");
+                this.sliderElement.querySelector(".content-box.on").classList.toggle("on");
+                this.sliderElement.querySelector(".content-box:last-child").classList.toggle("on");
 
-                    this.contentGroup.innerHTML = this.contentGroup.innerHTML + nextText;
+                this.contentGroup.innerHTML = this.contentGroup.innerHTML + nextText;
 
-                    this.setPermanentTranslate();
-                } else {
-                    let prevText = this.getSliderElementHolder(this.getPrevStartRange());
+                this.setPermanentTranslate();
+            } else {
+                let prevText = this.getSliderElementHolder(this.getStartRange(-1));
 
-                    this.removeLastContentBox();
+                this.removeLastContentBox();
 
-                    this.sliderElement.querySelector(".content-box.on").classList.toggle("on");
-                    this.sliderElement.querySelector(".content-box:first-child").classList.toggle("on");
+                this.sliderElement.querySelector(".content-box.on").classList.toggle("on");
+                this.sliderElement.querySelector(".content-box:first-child").classList.toggle("on");
 
-                    this.contentGroup.innerHTML = prevText + this.contentGroup.innerHTML;
+                this.contentGroup.innerHTML = prevText + this.contentGroup.innerHTML;
 
-                    this.setPermanentTranslate();
-                }
-
+                this.setPermanentTranslate();
             }
+
         });
 
         getManager({
@@ -78,15 +77,16 @@ class Slider {
     }
 
     renderInitialState() {
+        let htmlText = "";
         for (let i = this.startIndex; i < this.viewSize; i++) {
-            this.sliderElement.querySelector(".content-group .content-box").innerHTML += this.elementList[i];
+            htmlText += this.elementList[i];
         }
-
+        this.sliderElement.querySelector(".content-group .content-box").innerHTML = htmlText;
         this.sliderElement.querySelector(".content-box").classList.toggle("on");
 
-        let prevText = this.getSliderElementHolder(this.getPrevStartRange());
+        let prevText = this.getSliderElementHolder(this.getStartRange(-1));
 
-        let nextText =this.getSliderElementHolder(this.getNextStartRange());
+        let nextText =this.getSliderElementHolder(this.getStartRange(1));
 
         this.contentGroup.innerHTML = prevText + this.contentGroup.innerHTML + nextText;
 
@@ -114,21 +114,8 @@ class Slider {
         return this.startIndex;
     }
 
-    getNextStartRange() {
-        let startIndex = (this.startIndex + this.viewSize) % this.products.length;
-        const ret = [];
-        let count = 0;
-        while(count < this.viewSize) {
-            ret.push(startIndex);
-            startIndex++;
-            startIndex %= this.products.length;
-            count++;
-        }
-        return ret;
-    }
-
-    getPrevStartRange() {
-        let startIndex = (this.startIndex - this.viewSize + this.products.length) % this.products.length;
+    getStartRange(direction) {
+        let startIndex = (this.startIndex + direction * this.viewSize + this.products.length) % this.products.length;
         const ret = [];
         let count = 0;
         while(count < this.viewSize) {
