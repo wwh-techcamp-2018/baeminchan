@@ -53,8 +53,10 @@ INSERT INTO CATEGORY (title, parent_id) VALUES ('반찬장인', 8);
 INSERT INTO CATEGORY (title, parent_id) VALUES ('셰프의요리', 8);
 INSERT INTO CATEGORY (title, parent_id) VALUES ('전국맛집', 8);
 INSERT INTO CATEGORY (title, parent_id) VALUES ('키즈관', 8);
+
 INSERT INTO USER (USER_TYPE, UID, EMAIL, ENCRYPTED_PASSWORD, NAME, PHONE_NO) VALUES ('AdminUser', 1, 'admin', '$2a$10$xoPpqVuwGChcvXjVAouReeBhUvBgFVJYG27vZIodBosICYWoEO.e6', '조광일', '01032412795');
 INSERT INTO USER (USER_TYPE, UID, EMAIL, ENCRYPTED_PASSWORD, NAME, PHONE_NO) VALUES ('NormalUser', 2, 'user', '$2a$10$xoPpqVuwGChcvXjVAouReeBhUvBgFVJYG27vZIodBosICYWoEO.e6', '조광일', '01032412795');
+
 INSERT INTO PROMOTION (promotion_url) values ('https://cdn.bmf.kr/banner/main_banner/180802/1533185299532_c3f29f9eed46.jpg');
 INSERT INTO PROMOTION (promotion_url) values ('https://cdn.bmf.kr/banner/main_event/171214/1513243712683_1e0a6312599e.jpg');
 INSERT INTO PROMOTION (promotion_url) values ('https://cdn.bmf.kr/banner/main_event/170628/1498639751272_e6cadbda65b4.jpg');

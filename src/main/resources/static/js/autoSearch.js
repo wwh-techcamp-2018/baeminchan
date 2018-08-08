@@ -11,7 +11,7 @@ function autoSearchFocusHandler(evt) {
 
     evt.preventDefault();
     if (!autoSearchList) {
-        getData("/api/product/search", autoSearchCallback);
+        getData("/api/auto_search", autoSearchCallback);
     }
 }
 

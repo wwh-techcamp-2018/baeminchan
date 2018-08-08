@@ -10,7 +10,7 @@ function createCategoryHandler() {
         method: "POST",
         body: JSON.stringify({
             parentId: toIntElseNull($("#add-input-parent-id").value),
-            title: $("#add-input-category-keyWord").value
+            title: $("#add-input-category-title").value
         }),
         headers: {"content-type": "application/json"},
         callback: refreshIfOk

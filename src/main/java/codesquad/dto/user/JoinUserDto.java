@@ -8,8 +8,8 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 public class JoinUserDto {
 
     private static final String PASSWORD_PATTERN = "^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,12}$";
@@ -36,6 +36,7 @@ public class JoinUserDto {
     public JoinUserDto() {
     }
 
+    @ApiModelProperty(hidden = true, readOnly = true)
     @AssertTrue(message = "비밀번호와 비밀번호확인이 다릅니다.")
     public boolean isConfirmPassword() {
         return password.equals(passwordConfirm);
