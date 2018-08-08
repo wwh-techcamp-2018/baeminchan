@@ -1,4 +1,4 @@
-package codesquad.web;
+package codesquad.web.api;
 
 import codesquad.domain.BestCategory;
 import codesquad.service.BestCategoryService;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/bestcategories")
+@RequestMapping("/api/best/categories")
 public class ApiBestCategoryController {
     @Autowired
     private BestCategoryService bestCategoryService;

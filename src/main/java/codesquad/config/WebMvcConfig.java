@@ -1,16 +1,13 @@
 package codesquad.config;
 
 import codesquad.security.AdminInterceptor;
-import codesquad.security.BasicAuthInterceptor;
-import net.sf.ehcache.CacheManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.Ordered;
@@ -18,12 +15,37 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+@Slf4j
 @Configuration
+@EnableSwagger2
 public class WebMvcConfig implements WebMvcConfigurer {
-    private static final Logger log = LoggerFactory.getLogger(WebMvcConfig.class);
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("team7_pair1")
+                .apiInfo(apiInfo())
+                .select()
+                .paths(PathSelectors.ant("/api/**"))
+                .build();
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("Team7_pair1")
+                .description("API Documentation")
+                .version("1.0")
+                .build();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -44,6 +66,19 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new MessageSourceAccessor(messageSource);
     }
 
+    @Bean
+    public CacheManager cacheManager() {
+        return new EhCacheCacheManager(ehCacheCacheManager().getObject());
+    }
+
+    @Bean
+    public EhCacheManagerFactoryBean ehCacheCacheManager() {
+        EhCacheManagerFactoryBean factory = new EhCacheManagerFactoryBean();
+        factory.setConfigLocation(new ClassPathResource("ehcache.xml"));
+        factory.setShared(true);
+        return factory;
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AdminInterceptor())
@@ -59,30 +94,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/join").setViewName("/user/join");
     }
 
-    @Configuration
-    @Profile("dev")
-    public class TestConfig extends WebMvcConfig {
-        @Bean
-        public BasicAuthInterceptor basicAuthInterceptor() {
-            return new BasicAuthInterceptor();
-        }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
 
-        @Override
-        public void addInterceptors(InterceptorRegistry registry) {
-            registry.addInterceptor(basicAuthInterceptor());
-        }
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
-    @Bean
-    public EhCacheCacheManager cacheManager() {
-        return new EhCacheCacheManager(ehCacheCacheManager().getObject());
-    }
-
-    @Bean
-    public EhCacheManagerFactoryBean ehCacheCacheManager() {
-        EhCacheManagerFactoryBean factory = new EhCacheManagerFactoryBean();
-        factory.setConfigLocation(new ClassPathResource("ehcache.xml"));
-        factory.setShared(true);
-        return factory;
-    }
 }

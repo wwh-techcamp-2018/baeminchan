@@ -13,7 +13,7 @@ public class ApiBestCategoryControllerTest extends AcceptanceTest {
 
     @Test
     public void 베스트_카테고리_조회() {
-        ResponseEntity<BestCategory[]> response = template().getForEntity("/api/bestcategories", BestCategory[].class);
+        ResponseEntity<BestCategory[]> response = template().getForEntity("/api/best/categories", BestCategory[].class);
         log.info("response.getBody() : {}", response.getBody());
         assertThat(response.getBody().length).isEqualTo(6);
     }

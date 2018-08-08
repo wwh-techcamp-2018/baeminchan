@@ -371,6 +371,7 @@ a:focus {
   grid-area: header;
   display: flex;
   padding: 15px 0;
+  z-index: 10;
 }
 
 #header .search-form {
@@ -422,6 +423,7 @@ a:focus {
 #gnb {
   grid-area: gnb;
   background: #483f35;
+  z-index: 1;
 }
 
 #gnb .menu {
@@ -1517,4 +1519,23 @@ a:focus {
 #page-template .thumbnail-box {
   width: 250px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.search-list-container {
+  background:#11c2bc;
+  line-height: 30px;
+}
+
+.search-result-word {
+  font-size: 15px;
+  color: black;
+}
+
+.match-word {
+  color: #bf1e4f;
+  font-weight: bold;
+}
+
+.current-area {
+  background: darkgray;
 }

@@ -2,8 +2,6 @@ package codesquad.web.admin;
 
 import codesquad.domain.Category;
 import codesquad.service.CategoryService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +13,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/categories")
 public class CategoryController {
-    private static final Logger log = LoggerFactory.getLogger(CategoryController.class);
-
     @Autowired
     private CategoryService categoryService;
 
