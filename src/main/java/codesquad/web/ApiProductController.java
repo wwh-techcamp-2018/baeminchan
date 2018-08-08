@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/products")
 public class ApiProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("")
+    @GetMapping("/titles")
     public ResponseEntity<List<Product>> findAllTitles() {
         return new ResponseEntity<List<Product>>(productService.findAllTitles(), HttpStatus.OK);
     }
