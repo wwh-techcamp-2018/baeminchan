@@ -1,0 +1,22 @@
+.auto-complete {
+    display:none;
+    position: absolute;
+    min-width: 210px;
+    border-top: none;
+    background: #a3dad9;
+    z-index: 3;
+}
+
+.search-form:focus > .auto-complete {
+    display:block;
+}
+
+.auto-complete > li {
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.auto-complete > .focus {
+    background-color: #93ADa4;
+}
