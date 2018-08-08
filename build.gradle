@@ -32,7 +32,9 @@ dependencies {
     compile('pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0')
 
     compile('org.springframework.boot:spring-boot-starter-cache')
-    compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.3'
+    compile('net.sf.ehcache:ehcache:2.10.3')
+
+    compile('org.projectlombok:lombok:1.18.2')
 
     compile('io.springfox:springfox-swagger2:2.9.2')
     compile('io.springfox:springfox-swagger-ui:2.9.2')

@@ -1,6 +1,10 @@
 package codesquad.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -9,110 +13,59 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
+@NoArgsConstructor
 public class Product implements Serializable {
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
+    @Getter
+    @Setter
     @NotBlank
     @Size(min = 1, max = 50)
     @Column(nullable = false)
-    String title;
+    private String title;
 
+    @Getter
+    @Setter
     @NotBlank
     @Size(min = 1)
     @Column(nullable = false)
-    String contents;
+    private String contents;
 
+    @Getter
+    @Setter
     @NotNull
     @Column(nullable = false)
-    Integer price;
+    private Integer price;
 
+    @Getter
+    @Setter
     @NotBlank
     @Column(nullable = false)
-    String thumbnailLink;
+    private String thumbnailLink;
 
+    @Getter
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    Category category;
+    private Category category;
 
+    @Getter
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    EventCategory eventCategory;
+    private EventCategory eventCategory;
 
-    public Product(){
-
-    }
-
-    public Product(String title, String contents, Integer price, String thumbnailLink) {
+    @Builder
+    public Product(Long id, String title, String contents, Integer price, String thumbnailLink) {
+        this.id = id;
         this.title = title;
         this.contents = contents;
         this.price = price;
         this.thumbnailLink = thumbnailLink;
-    }
-
-    public Product(Long id, String title, String contents, Integer price, String thumbnailLink) {
-        this(title, contents, price, thumbnailLink);
-        this.id = id;
     }
 
     public String generateUrl() {
         return "/product/" + id;
     }
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContents() {
-        return contents;
-    }
-
-    public void setContents(String contents) {
-        this.contents = contents;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public EventCategory getEventCategory() {
-        return eventCategory;
-    }
-
-    public void setEventCategory(EventCategory eventCategory) {
-        this.eventCategory = eventCategory;
-    }
-
-    public String getThumbnailLink() {
-        return thumbnailLink;
-    }
-
-    public void setThumbnailLink(String thumbnailLink) {
-        this.thumbnailLink = thumbnailLink;
-    }
 }

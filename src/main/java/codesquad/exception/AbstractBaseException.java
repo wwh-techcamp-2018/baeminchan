@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 public abstract class AbstractBaseException extends RuntimeException {
     private DomainField domainField;
 
-    public AbstractBaseException(DomainField domainField, String message){
+    AbstractBaseException(DomainField domainField, String message){
         super(message);
         this.domainField = domainField;
     }
