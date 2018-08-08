@@ -1,5 +1,6 @@
 package codesquad.repository;
 
+import codesquad.domain.Category;
 import codesquad.domain.EventCategory;
 import codesquad.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAllByEventCategoryEquals(EventCategory eventCategory);
 
     List<Product> findAllByTitleContaining(String keyword);
+
+    List<Product> findAllByCategoryEquals(Category category);
 }

@@ -30,9 +30,9 @@ class SearchBar {
 
 
         $("#searching_text").addEventListener("keydown",function (evt) {
-            console.log(evt.keyCode);
-            if(evt.keyCode == 40 || evt.keyCode == 38) {
-                evt.preventDefault();
+            const keyCode = evt.keyCode;
+            if(keyCode == 40 || keyCode == 38) {
+                //evt.preventDefault();
                 this.handleArrowKeys(evt.keyCode);
             }
 
@@ -55,6 +55,8 @@ class SearchBar {
     }
 
     handleSearchResults(result) {
+        this.selected = -1;
+
         if(this.getQueryKeyword() != result.keyword)
             return;
 

@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpSession;
 
 public class SessionUtil {
-    public static final String USER_SESSION_KEY = "loginedUser";
+    private static final String USER_SESSION_KEY = "loggedInUser";
     private static final Logger log = LoggerFactory.getLogger(SessionUtil.class);
 
     public static void setUserInSession(HttpSession session, User loginUser) {

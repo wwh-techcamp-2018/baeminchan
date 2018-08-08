@@ -8,9 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductApiTest extends AcceptanceTest {
@@ -53,6 +50,6 @@ public class ProductApiTest extends AcceptanceTest {
         ResponseEntity<RecommendationDTO> responseEntity = template().getForEntity(uri, RecommendationDTO.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody().getKeyword()).isEqualTo("소고기");
-        assertThat(responseEntity.getBody().getProducts().size()).isEqualTo(6);
+        assertThat(responseEntity.getBody().getProducts().size()).isEqualTo(11);
     }
 }

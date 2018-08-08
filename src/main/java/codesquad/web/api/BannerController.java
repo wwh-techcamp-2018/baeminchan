@@ -4,9 +4,6 @@ import codesquad.domain.Category;
 import codesquad.domain.CategoryDTO;
 import codesquad.domain.EventCategory;
 import codesquad.domain.Product;
-import codesquad.repository.CategoryRepository;
-import codesquad.repository.EventCategoryRepository;
-import codesquad.repository.UserRepository;
 import codesquad.service.CategoryService;
 import codesquad.service.EventCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +19,10 @@ import java.util.List;
 public class BannerController {
 
     @Autowired
-    CategoryService categoryService;
+    private CategoryService categoryService;
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    EventCategoryService eventCategoryService;
+    private EventCategoryService eventCategoryService;
 
     @GetMapping("/api/categories/root")
     @ResponseStatus(HttpStatus.OK)
@@ -50,6 +44,11 @@ public class BannerController {
     @GetMapping("/api/categories/event/{id}")
     public List<Product> fetchProductsInEventCategory(@PathVariable Long id) {
         return eventCategoryService.findProductsByEventCategoryId(id);
+    }
+
+    @GetMapping("/api/categories/category/{id}")
+    public List<Product> fetchProductsInCategory(@PathVariable Long id) {
+        return categoryService.findProductsByCategoryId(id);
     }
 
 }

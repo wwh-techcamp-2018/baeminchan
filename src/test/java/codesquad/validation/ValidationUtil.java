@@ -20,7 +20,7 @@ public class ValidationUtil {
             .buildDefaultValidatorFactory()
             .getValidator();
 
-    public static <T> void assertValidate(T object, Set<Class> annotations) {
+    private static <T> void assertValidate(T object, Set<Class> annotations) {
         Set<ConstraintViolation<T>> violations = validator.validate(object);
         for(ConstraintViolation<T> violation : violations) {
             log.debug("validation error message : {}", violation.getMessage());

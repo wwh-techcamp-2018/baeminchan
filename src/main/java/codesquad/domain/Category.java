@@ -21,8 +21,6 @@ public class Category {
     @Column(nullable = false)
     private String title;
 
-//    private Long order;
-
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -55,14 +53,6 @@ public class Category {
     public void setTitle(String title) {
         this.title = title;
     }
-
-//    public Long getOrder() {
-//        return order;
-//    }
-//
-//    public void setOrder(Long order) {
-//        this.order = order;
-//    }
 
     public Category getParent() {
         return parent;

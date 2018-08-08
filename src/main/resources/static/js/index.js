@@ -6,6 +6,12 @@ document.addEventListener("DOMContentLoaded", function(evt) {
 
     const searchBar = new SearchBar();
 
+
+    const sideDishSlider = new Slider($("#side-dish"), "8", 4);
+    const mainDishSlider = new Slider($("#main-dish"), "9", 4);
+
+
+
     $(".direction-btn-box .next").addEventListener("click", function (evt) {
         evt.preventDefault();
         navigateRight();
@@ -117,7 +123,6 @@ function drawEventCategoryProducts(result) {
 }
 
 function clickEventCategory(id) {
-    console.log(id);
     if ($("a.now")) {
         $("a.now").classList.toggle("now");
     }

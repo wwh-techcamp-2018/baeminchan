@@ -527,7 +527,7 @@ a:focus {
 }
 
 #main .main-item {
-  padding: 0 10px;
+  padding: 0 8px;
 }
 
 #main .main-item header {
@@ -1279,8 +1279,8 @@ a:focus {
   right: 0;
   top: 0;
   bottom: 0;
-  transform: translateX(100%);
-  opacity: 0;
+  /*transform: translateX(100%);*/
+  /*opacity: 0;*/
 }
 
 .sliding-list-box .content-group .prev,

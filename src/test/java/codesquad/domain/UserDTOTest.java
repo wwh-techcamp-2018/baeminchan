@@ -9,8 +9,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class UserDTOTest {
-    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    UserDTO user;
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private UserDTO user;
 
     @Before
     public void setUp() throws Exception {

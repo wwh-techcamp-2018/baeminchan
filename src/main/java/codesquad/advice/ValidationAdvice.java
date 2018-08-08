@@ -7,8 +7,6 @@ import codesquad.exception.NotFoundException;
 import codesquad.exception.UnauthorizedException;
 
 import codesquad.exception.UserVerificationException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.HttpStatus;
@@ -24,8 +22,6 @@ import java.util.Optional;
 
 @RestControllerAdvice
 public class ValidationAdvice {
-
-    private static final Logger log = LoggerFactory.getLogger(ValidationAdvice.class);
 
     @Autowired
     MessageSourceAccessor messageSourceAccessor;

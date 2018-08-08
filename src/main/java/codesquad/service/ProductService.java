@@ -7,6 +7,7 @@ import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +25,9 @@ public class ProductService {
     }
 
     public List<Product> findProductsContainingKeyword(String keyword) {
+        if(keyword.isEmpty()) {
+            return new ArrayList<Product>();
+        }
         return productRepository.findAllByTitleContaining(keyword);
     }
 }

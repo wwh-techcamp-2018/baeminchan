@@ -2,8 +2,8 @@ package codesquad.domain;
 
 public class LoginDTO {
 
-    String email;
-    String password;
+    private String email;
+    private String password;
 
     public LoginDTO() {};
 
