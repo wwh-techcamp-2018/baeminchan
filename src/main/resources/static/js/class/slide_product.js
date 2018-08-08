@@ -14,7 +14,7 @@ class SlideProduct {
         this.middleTranslate = -100;
         this.rightTranslate = -100;
 
-        this.productTemplate = Handlebars.templates["precompile/slide_product_template"];
+        this.productTemplate = null;
 
         this.init();
     }
@@ -55,20 +55,21 @@ class SlideProduct {
         this.middle = contents[1];
         this.right = contents[2];
 
-        console.log(this.left, this.middle, this.right);
+        this.productTemplate = Handlebars.templates["precompile/slide_product_template"];
 
-        $("#side-dish").querySelector(".btn.prev").addEventListener("click", (evt) => {
+        const sideDishSection = $("#side-dish");
+        sideDishSection.querySelector(".btn.prev").addEventListener("click", (evt) => {
             evt.preventDefault();
             this.handlePrevBtnClick()
         });
 
-        $("#side-dish").querySelector(".btn.next").addEventListener("click", (evt) => {
+        sideDishSection.querySelector(".btn.next").addEventListener("click", (evt) => {
             evt.preventDefault();
             this.handleNextBtnClick();
         });
     }
 
-    handleNextBtnClick() {
+    rotateNext() {
         this.leftTranslate += 200;
         this.middleTranslate -= 100;
         this.rightTranslate -= 100;
@@ -85,7 +86,9 @@ class SlideProduct {
         this.leftTranslate = this.middleTranslate;
         this.middleTranslate = this.rightTranslate;
         this.rightTranslate = leftTranslate;
+    }
 
+    refreshNextItems() {
         let productsHtml = "";
         const totalBoxSize = this.BOX_CONTENTS_SIZE * this.BOX_COUNT;
         let start = this.startIndex + totalBoxSize;
@@ -96,7 +99,7 @@ class SlideProduct {
         this.startIndex = (this.startIndex + this.BOX_CONTENTS_SIZE) % this.products.length;
     }
 
-    handlePrevBtnClick() {
+    rotatePrev() {
         this.leftTranslate += 100;
         this.middleTranslate += 100;
         this.rightTranslate -= 200;
@@ -113,7 +116,9 @@ class SlideProduct {
         this.rightTranslate = this.middleTranslate;
         this.middleTranslate = this.leftTranslate;
         this.leftTranslate = rightTranslate;
+    }
 
+    refreshPrevItems() {
         let productsHtml = "";
         let start = (this.startIndex + this.products.length - this.BOX_CONTENTS_SIZE) % this.products.length;
         range(start, start + this.BOX_CONTENTS_SIZE).forEach((rawIndex) => {
@@ -121,6 +126,16 @@ class SlideProduct {
         });
         this.left.innerHTML = productsHtml;
         this.startIndex = (this.startIndex + this.products.length - this.BOX_CONTENTS_SIZE) % this.products.length;
+    }
+
+    handleNextBtnClick() {
+        this.rotateNext();
+        this.refreshNextItems();
+    }
+
+    handlePrevBtnClick() {
+        this.rotatePrev();
+        this.refreshPrevItems();
     }
 
     translateSlideWithAnimation(slide, translate) {
@@ -134,10 +149,6 @@ class SlideProduct {
     }
 
     translateSlide(slide, translate) {
-        slide.style.transform = this.buildTranslate(translate);
-    }
-
-    buildTranslate(translate) {
-        return `translateX(${translate}%)`;
+        slide.style.transform = `translateX(${translate}%)`;
     }
 }
