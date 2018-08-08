@@ -6,6 +6,7 @@ import codesquad.product.domain.BestProductRepository;
 import codesquad.product.domain.Product;
 import codesquad.support.AcceptanceTest;
 import codesquad.support.FixtureFactory;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,7 @@ public class ApiBestProductAcceptanceTest extends AcceptanceTest {
 
     @Before
     public void setUp() throws Exception {
-        bestProductRepository.deleteAll();
-
         List<BestProduct> bestProducts = FixtureFactory.bestProductList(2, PRODUCTS_SIZE);
-
         bestProductId = bestProductRepository.saveAll(bestProducts).get(0).getId();
     }
 
@@ -58,5 +56,10 @@ public class ApiBestProductAcceptanceTest extends AcceptanceTest {
         });
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        bestProductRepository.deleteAll();
     }
 }
