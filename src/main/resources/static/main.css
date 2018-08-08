@@ -1432,6 +1432,26 @@ a:focus {
   background-position: center center;
 }
 
+#main-visual .img-box .img-1 {
+  background-image: url(./img/img-main-visual-slide_1.jpg);
+}
+
+#main-visual .img-box .img-2 {
+  background-image: url(./img/img-main-visual-slide_2.jpg);
+}
+
+#main-visual .img-box .img-3 {
+  background-image: url(./img/img-main-visual-slide_3.jpg);
+}
+
+#main-visual .img-box .img-4 {
+  background-image: url(./img/img-main-visual-slide_4.jpg);
+}
+
+#main-visual .img-box .img-5 {
+  background-image: url(./img/img-main-visual-slide_5.jpg);
+}
+
 #main-visual .direction-btn-box {
   position: absolute;
   left: 0;
@@ -1492,22 +1512,3 @@ a:focus {
   width: 250px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
-
- #main-visual .img-box li.img-item.current{
-    width: 100%; display: block;
-    opacity:1;
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
-  }
-
-
-  #main-visual .img-box li.img-item{
-   width: 100%;
-   opacity:0;
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
-  }

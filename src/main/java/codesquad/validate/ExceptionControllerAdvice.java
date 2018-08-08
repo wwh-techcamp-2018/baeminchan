@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -48,14 +47,6 @@ public class ExceptionControllerAdvice {
     public ErrorResponse handleIllegalArgumentException(RuntimeException exception){
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.registErrorMessage(new CustomFieldError(null, exception.getMessage()));
-        return errorResponse;
-    }
-
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(AuthorizationServiceException.class)
-    public ErrorResponse handleUnAuthorizedException(AuthorizationServiceException e){
-        ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.registErrorMessage(new CustomFieldError(null,  e.getMessage()));
         return errorResponse;
     }
 }
