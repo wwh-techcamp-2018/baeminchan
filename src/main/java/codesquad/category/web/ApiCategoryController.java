@@ -1,4 +1,4 @@
-package codesquad.category;
+package codesquad.category.web;
 
 import codesquad.RestResponse;
 import codesquad.category.domain.*;
@@ -45,14 +45,14 @@ public class ApiCategoryController {
     @Cacheable(value="bestCategory")
     public ResponseEntity<RestResponse> getBestCategory() {
         List<BestCategory> bestCategories = bestCategoryRepository.findAll();
-        return ResponseEntity.ok(new RestResponse(bestCategories));
+        return ResponseEntity.ok(RestResponse.of(bestCategories));
     }
 
     @GetMapping("/category/best/{id}")
     @Cacheable(value="bestCategoryProducts")
     public ResponseEntity<RestResponse> getProductList(@PathVariable Long id) {
         BestCategory bestCategory = bestCategoryRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        return ResponseEntity.ok(new RestResponse(bestCategory.getProducts()));
+        return ResponseEntity.ok(RestResponse.of(bestCategory.getProducts()));
     }
 
     @PostMapping("/admin/category")
