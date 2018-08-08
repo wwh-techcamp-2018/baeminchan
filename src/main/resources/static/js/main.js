@@ -86,6 +86,7 @@ function init() {
             clickDot(evt.target);
     });
     new Search();
+    new SlideProduct().requestProducts();
 
     activateAnimation();
     getEventCategories();
@@ -97,7 +98,6 @@ initialize(init);
 function getEventCategories() {
     getManager({
         url: "/eventcategories",
-        method: "GET",
         callback: drawEventCategories
     })
 
@@ -129,7 +129,6 @@ function initChoiceCategory() {
 function getCategory(categoryId) {
     getManager({
         url: "/eventcategories/" + categoryId,
-        method: "GET",
         callback: drawProducts
     })
 }

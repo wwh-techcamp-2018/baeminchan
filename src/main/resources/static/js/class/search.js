@@ -46,7 +46,6 @@ class Search {
     getSearchRecommendations(keyword) {
         getManager({
             url: "/search/recommendations?keyword=" + encodeURI(keyword),
-            method: "GET",
             callback: this.drawSearchRecommendations.bind(this)
         })
     }

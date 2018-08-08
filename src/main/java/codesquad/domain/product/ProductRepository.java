@@ -8,5 +8,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findAllByEventCategoryId(Long id);
 
+    List<Product> findAllByCategoryId(Long id);
+
     List<Product> findAllByTitleContains(String keyword);
 }
