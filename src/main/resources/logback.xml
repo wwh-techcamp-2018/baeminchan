@@ -13,7 +13,7 @@
 
     <logger name="codesquad" level="DEBUG"/>
 
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
 
