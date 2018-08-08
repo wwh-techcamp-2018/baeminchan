@@ -374,6 +374,7 @@ a:focus {
 }
 
 #header .search-form {
+    z-index: 10;
   position: relative;
   margin: 14px 10px 14px 40px;
 }
@@ -390,6 +391,7 @@ a:focus {
 #header .search-form input[type="text"]:hover,
 #header .search-form input[type="text"]:focus {
   border-color: #2ac1bc;
+    outline: none;
 }
 
 #header .search-form button[type="submit"] {
@@ -1503,4 +1505,22 @@ a:focus {
 #page-template .thumbnail-box {
   width: 250px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+#search-result {
+    background: #96DCD9;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#search-result li {
+    padding: 10px 8px;
+}
+
+#search-result li.on {
+    background: #8EAEA4;
+}
+
+.highlight-keyword {
+    color: #DE1468;
 }

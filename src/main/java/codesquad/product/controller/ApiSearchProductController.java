@@ -18,8 +18,13 @@ public class ApiSearchProductController {
     @Autowired
     private SearchService searchService;
 
-    @GetMapping("/{keyword}")
+    @GetMapping("{keyword}")
     public RestResponse<List<Product>> searchByKeyword(@PathVariable String keyword) {
         return RestResponse.success(searchService.searchByKeyword(keyword));
+    }
+
+    @GetMapping("")
+    public RestResponse<List<Product>> searchByKeyword() {
+        return RestResponse.success();
     }
 }

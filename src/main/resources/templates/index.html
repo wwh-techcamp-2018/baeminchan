@@ -9,6 +9,7 @@
   <script src="/js/category.js"></script>
   <script src="/js/promotion.js"></script>
   <script src="/js/bestProduct.js"></script>
+    <script src="/js/search.js"></script>
 </head>
 
 <body>
@@ -75,10 +76,15 @@
 
       <form class="search-form" action="/" method="get">
         <label for="searching_text" class="blind">검색</label>
-        <input type="text" name="searching_text" id="searching_text" />
+          <input type="text" name="searching_text" id="searching_text" autocomplete="off"/>
         <button type="submit">
           <span>검색</span>
         </button>
+
+          <div id="search-result">
+              <ul>
+              </ul>
+          </div>
       </form>
 
       <ul class="favorite-menu">

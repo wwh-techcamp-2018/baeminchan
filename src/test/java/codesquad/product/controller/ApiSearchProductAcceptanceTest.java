@@ -44,4 +44,11 @@ public class ApiSearchProductAcceptanceTest extends AcceptanceTest {
         assertThat(resp.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(resp.getBody().getData()).hasSize(6);
     }
+
+    @Test
+    public void searchEmptyKeyword() {
+        ResponseEntity<RestResponse<List<Product>>> resp = getResponseEntityList(SEARCH_PRODUCT_API, reference);
+
+        assertThat(resp.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
 }
