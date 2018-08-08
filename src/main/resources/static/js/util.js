@@ -41,21 +41,7 @@ const postfixMaker = (indexMaker, name, postFix) => {
     return indexMaker(name) + postFix;
 };
 
-const next = (element) => {
-  return element.nextElementSibling || element.parentElement.firstElementChild;
-};
 
-const prev = (element) => {
-  return element.previousElementSibling || element.parentElement.lastElementChild;
-};
-
-const removeClass = (className, target) => {
-  target.classList.remove(className);
-};
-
-const addClass = (className, target) => {
-  target.classList.add(className);
-};
 
 
 

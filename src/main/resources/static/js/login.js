@@ -15,7 +15,7 @@ getElement($, idString, 'login_btn').onclick = () => {
 
     fetchManager({
         url: requestURL.login,
-        method: 'POST',
+        method: METHOD.POST,
         body: JSON.stringify(loginInput),
         headers: ContentType.JSON,
         callback: resultProcess,

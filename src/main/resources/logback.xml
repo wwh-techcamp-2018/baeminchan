@@ -7,16 +7,11 @@
         </layout>
     </appender>
 
-    <property name="LOG_PATH" value="logs"/>
-
     <logger name="support.jackson" level="DEBUG"/>
 
     <logger name="codesquad" level="DEBUG"/>
 
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
-
-
-
 </configuration>
