@@ -1,5 +1,6 @@
 const KEY_UP = 38;
 const KEY_DOWN = 40;
+const KEY_ENTER = 13;
 
 class SearchBar {
     constructor() {
@@ -35,25 +36,42 @@ class SearchBar {
             })
             .doFetch();
     };
+
+    selectInput() {
+        $('#searching_text').value = $('li[class="on"]').textContent;
+        $('#search-result>ul').innerText = "";
+    }
+
+    down() {
+        const focused = $('.search-form li.on');
+        focused ? (() => {
+            focused.classList.toggle('on');
+            focused.nextElementSibling.classList.toggle('on');
+        })() : $('.search-form li').classList.toggle('on');
+    }
+
+    up() {
+        const focused = $('.search-form li.on');
+        focused ? (() => {
+            focused.classList.toggle('on');
+            focused.previousElementSibling.classList.toggle('on');
+        })() : $All('.search-form li').pop().classList.toggle('on');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     let searchBar = new SearchBar();
     addEvent('.search-form', 'keyup', evt => {
-        const focused = $('.search-form li.on');
-
-        if (!focused) {
-            $('.search-form li').classList.toggle('on');
-        }
-
-        if (evt.keyCode === KEY_DOWN) {
-            focused.classList.toggle('on');
-            focused.nextElementSibling.classList.toggle('on');
-        }
-
-        if (evt.keyCode === KEY_UP) {
-            focused.classList.toggle('on');
-            focused.previousElementSibling.classList.toggle('on');
+        switch (evt.keyCode) {
+            case KEY_DOWN:
+                searchBar.down();
+                break;
+            case KEY_UP:
+                searchBar.up();
+                break;
+            case KEY_ENTER:
+                searchBar.selectInput();
+                break;
         }
     });
 });
