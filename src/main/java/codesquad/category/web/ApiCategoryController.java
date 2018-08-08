@@ -6,6 +6,9 @@ import codesquad.product.domain.Product;
 import codesquad.security.HttpSessionUtils;
 import codesquad.user.domain.User;
 import codesquad.user.domain.UserRepository;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,7 @@ public class ApiCategoryController {
     @Autowired
     private BestCategoryRepository bestCategoryRepository;
 
+    @ApiOperation(value = "카테고리 전체 목록 조회")
     @GetMapping("/category")
     public ResponseEntity<Category> list() {
         Category category = findById(Category.ROOT_ID);
@@ -41,6 +45,7 @@ public class ApiCategoryController {
         return ResponseEntity.ok(category);
     }
 
+    @ApiOperation(value = "(이벤트) 베스트 반찬 카테고리 목록 조회")
     @GetMapping("/category/best")
     @Cacheable(value="bestCategory")
     public ResponseEntity<RestResponse> getBestCategory() {
@@ -48,6 +53,8 @@ public class ApiCategoryController {
         return ResponseEntity.ok(RestResponse.of(bestCategories));
     }
 
+    @ApiOperation(value = "게시판 등록")
+    @ApiImplicitParam(name = "id", value = "이벤트 반찬 카테고리 id", required = true, dataType = "long")
     @GetMapping("/category/best/{id}")
     @Cacheable(value="bestCategoryProducts")
     public ResponseEntity<RestResponse> getProductList(@PathVariable Long id) {
