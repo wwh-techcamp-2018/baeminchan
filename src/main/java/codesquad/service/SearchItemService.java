@@ -14,7 +14,7 @@ public class SearchItemService {
     private SearchItemRepository searchItemRepository;
 
     @Cacheable(value = "SearchItems")
-    public List<SearchItem> findAll(){
+    public List<SearchItem> findAll() {
         return searchItemRepository.findAll();
     }
 }

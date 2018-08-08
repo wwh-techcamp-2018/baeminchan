@@ -1,70 +1,118 @@
-window.addEventListener("DOMContentLoaded", () => {
-    $("#searching_text").addEventListener("focus", autoSearchFocusHandler)
-    $("#searching_text").addEventListener("keyup", autoSearchKeyUpHandler)
-});
-
 let autoSearchList;
 
-function autoSearchFocusHandler(evt) {
-    evt.preventDefault();
-    if(autoSearchList === undefined)
-        getData("/api/product/search", autoSearchCallback)
-}
+function autoSearchCallback(response) {
 
-function autoSearchKeyUpHandler(evt) {
-    if(autoSearchList === undefined)
-        return;
-    if(evt.target.value === "") {
-        autoSearchList.removeAutoSearchView($(".auto_search_div"));
-        return;
-    }
-    autoSearchList.appendAutoSearchView($(".auto_search_div"), evt.target.value)
-
-}
-
-function autoSearchCallback(response){
     response.json().then(res => {
         autoSearchList = new AutoSearchList(res.data);
     })
 }
 
-class AutoSearchList{
+function autoSearchFocusHandler(evt) {
+
+    evt.preventDefault();
+    if (!autoSearchList) {
+        getData("/api/product/search", autoSearchCallback);
+    }
+}
+
+function autoSearchInputHandler(evt) {
+
+    if (!autoSearchList) {
+        return;
+    }
+    autoSearchList.removeAutoSearchView($(".auto_search_ul"));
+    if (evt.target.value === "") {
+        return;
+    }
+    autoSearchList.appendAutoSearchView($(".auto_search_div"), evt.target.value.trim())
+}
+
+function autoSearchKeyDownHandler(evt) {
+    const evtCode = evt.code;
+    const funtionKey = ["Enter", "ArrowUp", "ArrowDown"]
+    if (funtionKey.includes(evtCode)) {
+        evt.preventDefault();
+        if (evtCode === "Enter") {
+            autoSearchList.enterHandler();
+            return;
+        }
+        autoSearchList.arrowBtnHandler(evtCode);
+    }
+}
+
+function autoSearchBtnHandler(evt) {
+
+    evt.preventDefault();
+    autoSearchList.removeAutoSearchView($(".auto_search_ul"));
+}
+
+class AutoSearchList {
     constructor(data) {
         this.searchList = [];
-        for(const searchItem of data){
+        for (const searchItem of data) {
             this.searchList.push(new SearchItem(searchItem.id, searchItem.keyWord));
         }
     }
 
-    makeAutoSearchView(matchedSearchItems){
+    makeAutoSearchView(matchedSearchItems, searchValue) {
         let autoSearchHTML = `<ul class="auto_search_ul">`
-        for(const matchedSearchItem of matchedSearchItems){
-            autoSearchHTML += matchedSearchItem.makeSearchItemLi();
+        for (const matchedSearchItem of matchedSearchItems) {
+            autoSearchHTML += matchedSearchItem.makeSearchItemLi(searchValue);
         }
         autoSearchHTML += `</ul>`;
         return autoSearchHTML;
     }
 
     appendAutoSearchView(target, searchValue) {
-        this.removeAutoSearchView(target);
         const matchedSearchItems = this.getMatchedSearchItems(searchValue);
-        if(matchedSearchItems.length === 0)
+        if (matchedSearchItems.length === 0)
             return;
-        target.insertAdjacentHTML("afterbegin", this.makeAutoSearchView(matchedSearchItems));
+        target.insertAdjacentHTML("afterbegin", this.makeAutoSearchView(matchedSearchItems, searchValue));
     }
 
     removeAutoSearchView(target) {
-        if(target.firstElementChild === null)
+        if (!target)
             return;
-        target.removeChild(target.firstElementChild);
+        target.parentElement.removeChild(target);
     }
 
-    getMatchedSearchItems(searchValue){
+    getMatchedSearchItems(searchValue) {
         return this.searchList.filter(item => item.isMatchedSearchItem(searchValue));
     }
 
-    reducer(accumulator, currentValue){
-        currentValue
+    arrowBtnHandler(evtCode) {
+        const parent = $(".auto_search_ul");
+        if (!parent)
+            return;
+        const on = $(".auto_search_ul .on");
+        if (!on) {
+            parent.firstElementChild.classList.add("on");
+            return;
+        }
+        this.moveOnClass(on, evtCode)
+    }
+
+    moveOnClass(target, dir) {
+        target.classList.remove("on");
+        if (dir === "ArrowUp") {
+            getPrevElement(target).classList.add("on");
+            return;
+        }
+        if (dir === "ArrowDown") {
+            getNextElement(target).classList.add("on");
+            return;
+        }
+    }
+
+    enterHandler() {
+        const autoSearchUl = $(".auto_search_ul");
+        if (!autoSearchUl)
+            return;
+        const on = $(".auto_search_ul .on");
+        if (on) {
+            $("#searching_text").value = on.textContent;
+        }
+        this.removeAutoSearchView(autoSearchUl);
     }
 }
 
@@ -74,11 +122,26 @@ class SearchItem {
         this.keyWord = keyWord;
     }
 
-    makeSearchItemLi(){
-        return `<li id = "search_item_${this.id}">${this.keyWord}</li>`
+    makeSearchItemLi(searchValue) {
+        return `<li id = "search_item_${this.id}">${this.getHighlightKeyWord(searchValue)}</li>`
+    }
+
+    getHighlightKeyWord(searchValue) {
+        const matchedIndex = Hangul.rangeSearch(this.keyWord, searchValue);
+        const slicedWord = this.keyWord.slice(matchedIndex[0][0], matchedIndex[0][1] + 1)
+        if (searchValue === slicedWord)
+            return this.keyWord.replace(slicedWord, `<span class = "highlight">${slicedWord}</span>`)
+        return this.keyWord;
     }
 
     isMatchedSearchItem(searchValue) {
-        return Hangul.search(this.keyWord,searchValue) >= 0 ? true : false;
+        return Hangul.search(this.keyWord, searchValue) >= 0 ? true : false;
     }
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+    $("#searching_text").addEventListener("focus", autoSearchFocusHandler);
+    $("#searching_text").addEventListener("input", autoSearchInputHandler);
+    $("#searching_text").addEventListener("keydown", autoSearchKeyDownHandler);
+    $("#searching_btn").addEventListener("click", autoSearchBtnHandler);
+});
