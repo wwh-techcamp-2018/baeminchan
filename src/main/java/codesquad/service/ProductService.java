@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class ProductService {
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     public Product create(Product product) {
         return productRepository.save(product);

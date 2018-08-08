@@ -20,10 +20,10 @@ public class UserService {
     private static final Logger log = LoggerFactory.getLogger(UserService.class);
 
     @Resource(name = "passwordEncoder")
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Resource(name = "userRepository")
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     void setPasswordEncoder(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;

@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import support.test.RequestEntity;
 
 import java.util.Optional;
 
@@ -40,13 +41,13 @@ public class UserServiceTest {
     @Before
     public void setUp() throws Exception {
         userService.setPasswordEncoder(passwordEncoder);
-        signupDto = new SignupDto();
-        signupDto.setEmail("email@aa");
-        signupDto.setPassword("password");
-        signupDto.setPasswordConfirm("password");
-        signupDto.setName("name");
-        signupDto.setPhoneNumber("00-00-00");
-
+        signupDto = SignupDto.builder()
+                .email("email@aa")
+                .password("password")
+                .passwordConfirm("password")
+                .name("name")
+                .phoneNumber("00-00-00")
+                .build();
         loginDto = new LoginDto("email@aa", "password");
     }
 

@@ -17,10 +17,14 @@ import java.util.List;
 public class EventCategoryService {
 
     @Autowired
-    EventCategoryRepository eventCategoryRepository;
+    private EventCategoryRepository eventCategoryRepository;
+
+    public void setEventCategoryRepository(EventCategoryRepository eventCategoryRepository) {
+        this.eventCategoryRepository = eventCategoryRepository;
+    }
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     @Cacheable(value = "eventCategories")
     public List<EventCategory> readEventCategories() {
