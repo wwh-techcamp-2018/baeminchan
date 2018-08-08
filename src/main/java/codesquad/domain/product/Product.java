@@ -1,32 +1,31 @@
 package codesquad.domain.product;
 
-import lombok.Getter;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.DecimalMin;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
-@Getter
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 1, max = 255)
+    @Column
+    @Size(min = 2)
     private String title;
 
-    @Size(min = 1, max = 255)
+    @Column
+    @Size(min = 2)
     private String description;
 
-    @Size(min = 1, max = 255)
-    private String imgUrl;
-
-    @DecimalMin(value = "0")
+    @Column
     private Long price;
 
-    private String bestTab;
+    @Column
+    @Size(min = 2)
+    private String imgUrl;
+//
+//    @ManyToOne()
+//    @JoinColumn(name="category_id")
+//    private Category category;
 }

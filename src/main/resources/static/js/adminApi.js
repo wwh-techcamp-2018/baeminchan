@@ -36,7 +36,7 @@ function updateCategoryHandler() {
         body: JSON.stringify({
             parentId: toIntElseNull($("#update-input-parent-id").value),
             categoryId: toIntElseNull($("#update-input-category-id").value),
-            title: $("#update-input-category-keyWord").value
+            title: $("#update-input-category-title").value
         }),
         callback: refreshIfOk
     });

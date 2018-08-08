@@ -1,7 +1,7 @@
 package codesquad.service;
 
-import codesquad.domain.product.Product;
-import codesquad.domain.product.ProductRepository;
+import codesquad.domain.product.BestProduct;
+import codesquad.domain.product.BestProductRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -11,13 +11,12 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class ProductService {
+public class BestProductService {
     @Autowired
-    private ProductRepository productRepository;
+    private BestProductRepository bestProductRepository;
 
     @Cacheable(value = "products")
-    public List<Product> findAll() {
-        log.info("하...");
-        return productRepository.findAll();
+    public List<BestProduct> findAll() {
+        return bestProductRepository.findAll();
     }
 }

@@ -1,8 +1,7 @@
 package codesquad.controller;
 
-import codesquad.domain.product.Product;
-import codesquad.domain.search.SearchItem;
-import codesquad.service.ProductService;
+import codesquad.domain.product.BestProduct;
+import codesquad.service.BestProductService;
 import codesquad.service.SearchItemService;
 import codesquad.util.CustomResponse;
 import io.swagger.annotations.ApiOperation;
@@ -24,7 +23,7 @@ import java.util.List;
 public class ApiProductController {
 
     @Autowired
-    private ProductService productService;
+    private BestProductService bestProductService;
 
     @Autowired
     private SearchItemService searchItemService;
@@ -36,7 +35,7 @@ public class ApiProductController {
     })
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
-    public CustomResponse<List<Product>> list() {
-        return new CustomResponse<>(CustomResponse.MSG.OK, productService.findAll());
+    public CustomResponse<List<BestProduct>> list() {
+        return new CustomResponse<>(CustomResponse.MSG.OK, bestProductService.findAll());
     }
 }

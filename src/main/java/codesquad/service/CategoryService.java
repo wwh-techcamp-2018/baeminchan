@@ -6,6 +6,7 @@ import codesquad.dto.category.CategoryDto;
 import codesquad.exception.CategoryNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class CategoryService {
     @Autowired
     CategoryRepository categoryRepository;
 
+    @CacheEvict(value = "categories", allEntries = true)
     public Category add(CategoryDto categoryDto) {
         if (categoryDto.isRoot()) {
             return categoryRepository.save(new Category(categoryDto.getTitle()));
@@ -35,11 +37,13 @@ public class CategoryService {
         return categoryRepository.findByParent(null);
     }
 
+    @CacheEvict(value = "categories", allEntries = true)
     public void delete(Long cid) {
         categoryRepository.deleteById(cid);
     }
 
     @Transactional
+    @CacheEvict(value = "categories", allEntries = true)
     public Category update(CategoryDto categoryDto) {
         Category category = categoryRepository.findById(categoryDto.getCategoryId())
                 .orElseThrow(CategoryNotFoundException::new);
