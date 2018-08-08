@@ -3,9 +3,60 @@ const side_dishes_cache = {};
 
 document.addEventListener("DOMContentLoaded", () => {
     initEvents();
+    const autoSearching = new AutoSearching();
     $("#best-categories").addEventListener("click", onClickBestCategory);
-    $("#searching_text").addEventListener("keyup", onKeyUpSearchForm);
+    $("#searching_text").addEventListener("keyup", autoSearching.onKeyUpSearchForm.bind(autoSearching));
 });
+
+class AutoSearching {
+    onKeyUpSearchForm({target}) {
+        const pattern = /^[가-힇|A-Za-z|0-9]{0,20}$/;
+        if (target.value.trim() === "" || !pattern.test(target.value)) {
+            this.toggleInvisible(true);
+            return;
+        }
+
+        fetchManager({
+            url: '/api/sidedishes/' + target.value,
+            method: 'GET',
+            headers: { 'content-type': 'application/json'},
+            callback: this.onKeyUpCallBack.bind(this),
+            errCallback: alertError
+        });
+    }
+
+    toggleInvisible(isInvisible) {
+        if(isInvisible) {
+            $("#searching_box").classList.add("invisible");
+            return;
+        }
+
+        $("#searching_box").classList.remove("invisible");
+    }
+
+    onKeyUpCallBack(response) {
+        response.json().then((sideDishes) => {
+            this.toggleInvisible(sideDishes.length === 0);
+
+            const searchingText = $("#searching_text").value;
+            const searchingHTML = sideDishes
+                .map((sideDishName) => {
+                    return this.highlightWord(sideDishName, searchingText);
+                })
+                .reduce(this.makeSearchingHTML, ``);
+            $("#searching_box").innerHTML = '';
+            $("#searching_box").insertAdjacentHTML("beforeend", searchingHTML);
+        })
+    }
+
+    highlightWord(word, searchingText) {
+        return word.replace(searchingText, `<span class="highlight-search">${searchingText}</span>`);
+    }
+
+    makeSearchingHTML(prev, curr) {
+        return prev + `<li>${curr}</li>`;
+    }
+}
 
 function initEvents() {
     fetchManager({
@@ -23,54 +74,6 @@ function initEvents() {
         callback: onSuccessBestCategories,
         errCallback: alertError
     });
-}
-
-function onKeyUpSearchForm({target}) {
-    const pattern = /^[가-힇|A-Za-z|0-9]{0,20}$/;
-    if (target.value.trim() === "" || !pattern.test(target.value)) {
-        toggleInvisible(true);
-        return;
-    }
-
-    fetchManager({
-        url: '/api/sidedishes/' + target.value,
-        method: 'GET',
-        headers: { 'content-type': 'application/json'},
-        callback: onKeyUpCallBack,
-        errCallback: alertError
-    });
-}
-
-function toggleInvisible(isInvisible) {
-    if(isInvisible) {
-        $("#searching_box").classList.add("invisible");
-    } else {
-        $("#searching_box").classList.remove("invisible");
-    }
-}
-
-function onKeyUpCallBack(response) {
-    response.json().then((sideDishes) => {
-        console.log(sideDishes);
-        toggleInvisible(sideDishes.length === 0);
-
-        const searchingText = $("#searching_text").value;
-        const searchingHTML = sideDishes.map((sideDishName) => {
-                return highlightWord(sideDishName, searchingText);
-            })
-            .reduce(makeSearchingHTML, ``);
-        $("#searching_box").innerHTML = '';
-        $("#searching_box").insertAdjacentHTML("beforeend", searchingHTML);
-    })
-}
-
-function highlightWord(word, searchingText) {
-    return word.replace(searchingText, `<span class="highlight-search">${searchingText}</span>`);
-}
-
-function makeSearchingHTML (prev, curr) {
-    // console.log(curr);
-    return prev + `<li>${curr}</li>`;
 }
 
 function onSuccess(response) {
@@ -131,12 +134,12 @@ function onSuccessBestSideDishes(response) {
 }
 
 function updateSideDishes(result) {
-    const html = getSideDishesTemplete(result);
+    const html = getSideDishesTemplate(result);
     $("#best-side-dish-box").innerHTML = '';
     $("#best-side-dish-box").insertAdjacentHTML("beforeend", html);
 }
 
-function getSideDishesTemplete(sideDishes) {
+function getSideDishesTemplate(sideDishes) {
     return sideDishes.reduce((prev, next) => {
         return prev + `<li>
                   <a class="thumbnail-box" href="#">
