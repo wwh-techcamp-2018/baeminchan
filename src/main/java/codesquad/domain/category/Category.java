@@ -54,4 +54,8 @@ public class Category {
         this.title = categoryDto.getTitle();
         this.parent = parent;
     }
+
+    public void addProduct(Product product) {
+        products.add(product);
+    }
 }
