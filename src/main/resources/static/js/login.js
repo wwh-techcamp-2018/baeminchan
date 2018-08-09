@@ -1,13 +1,11 @@
-function successLogin(response) {
-    document.location.href = '/';
-}
+document.addEventListener("DOMContentLoaded", () => {
+    initLoginEvents();
+})
 
-function failLogin(response) {
-    $('.err_msg').innerHTML = '로그인에 실패했습니다. 아이디와 비밀번호를 다시 확인하세요.';
-    $('#member_id').value = '';
-    $('#pwd').value = '';
+function initLoginEvents() {
+    const loginBtn = $(".btn_login");
+    loginBtn.addEventListener("click", loginHandler);
 }
-
 
 function loginHandler(evt) {
     evt.preventDefault();
@@ -27,18 +25,17 @@ function loginHandler(evt) {
             email: memberId,
             password: password
         }),
-        callback: successLogin,
-        failCallback: failLogin
+        onSuccess: successLoginCallback,
+        onFailure: failLoginCallback
     })
 }
 
-
-function initEvents() {
-    const loginBtn = $(".btn_login");
-    loginBtn.addEventListener("click", loginHandler);
-
+function successLoginCallback(response) {
+    document.location.href = '/';
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    initEvents();
-})
+function failLoginCallback(response) {
+    $('.err_msg').innerHTML = '로그인에 실패했습니다. 아이디와 비밀번호를 다시 확인하세요.';
+    $('#member_id').value = '';
+    $('#pwd').value = '';
+}

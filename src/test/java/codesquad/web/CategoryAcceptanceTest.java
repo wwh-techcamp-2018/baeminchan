@@ -52,8 +52,9 @@ public class CategoryAcceptanceTest {
         categoryDto.addChild(CategoryDto.defaultCategoryDto().setName("child1"));
         categoryDto.addChild(CategoryDto.defaultCategoryDto().setName("child2"));
 
+
         ResponseEntity<CustomResponse> categoryResponse = template.withBasicAuth(email, "1234")
-                .postForEntity("/admin/categories", categoryDto, CustomResponse.class);
+                .postForEntity("/api/admin/categories", categoryDto, CustomResponse.class);
 
         assertThat(categoryResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(categoryService.findByName(name)).isNotNull();
@@ -67,7 +68,7 @@ public class CategoryAcceptanceTest {
         categoryDto.addChild(CategoryDto.defaultCategoryDto().setName("child1"));
         categoryDto.addChild(CategoryDto.defaultCategoryDto().setName("child2"));
 
-        ResponseEntity<CustomResponse> categoryResponse = template.postForEntity("/admin/categories", categoryDto, CustomResponse.class);
+        ResponseEntity<CustomResponse> categoryResponse = template.postForEntity("/api/admin/categories", categoryDto, CustomResponse.class);
 
         assertThat(categoryResponse.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
         assertThat(categoryResponse.getBody().getMessage()).isEqualTo(ValidationMessageUtil.UNAUTHENTICATION);

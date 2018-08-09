@@ -1,11 +1,15 @@
-function initCategories(callback, failCallback) {
+document.addEventListener("DOMContentLoaded", () => {
+    initCategories(getCategoryCallback, failGetCategoryCallback);
+})
+
+function initCategories(successCallback, failCallback) {
     fetchManager({
         url: '/api/categories',
         method: 'GET',
         headers: {'content-type': 'application/json'},
         body: {},
-        callback: callback,
-        failCallback: failCallback
+        onSuccess: successCallback,
+        onFailure: failCallback
     })
 }
 
@@ -28,5 +32,3 @@ function getCategoryCallback(response) {
 function failGetCategoryCallback() {
     alert('카테고리 정보를 가져오는데 실패했습니다.');
 }
-
-initCategories(getCategoryCallback, failGetCategoryCallback);

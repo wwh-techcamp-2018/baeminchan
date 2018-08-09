@@ -8,6 +8,7 @@ import codesquad.validation.ValidationMessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -21,6 +22,7 @@ public class CategoryService {
                 .orElseThrow(() -> new CategoryNotFoundException(ValidationMessageUtil.CATEGORY_NOT_FOUND));
     }
 
+    @Transactional
     public Category save(CategoryDto categoryDto) {
         return categoryRepository.save(categoryDto.toEntity());
     }

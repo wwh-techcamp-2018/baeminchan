@@ -20,14 +20,19 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(length = 100, nullable = false, unique = true)
     private String email;
+
     @Column(length = 100, nullable = false)
     private String password;
+
     @Column(length = 30, nullable = false)
     private String username;
+
     @Column(length = 11, nullable = false)
     private String phoneNumber;
+
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>(Arrays.asList(Role.DEFAULT));
 
