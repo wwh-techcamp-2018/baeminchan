@@ -2,6 +2,10 @@ function $(selector) {
     return document.querySelector(selector);
 }
 
+function $All(selector) {
+    return Array.from(document.querySelectorAll(selector));
+}
+
 function valueOf(selector) {
     return $(selector).value;
 }
