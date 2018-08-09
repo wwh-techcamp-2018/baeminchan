@@ -1,12 +1,10 @@
-const CLASS_NAME_NOW = "now";
-const side_dishes_cache = {};
+import { AutoSearching } from "./AutoSearching.js";
+const ENTER = 13;
+const CLASS_INVISIBLE = "invisible";
+const CLASS_NAME_NOW  = "now";
+const SIDE_DISHES_CACHE = {};
 
-document.addEventListener("DOMContentLoaded", () => {
-    initEvents();
-    $("#best-categories").addEventListener("click", onClickBestCategory);
-});
-
-function initEvents() {
+function requestCategories() {
     fetchManager({
         url: '/api/categories',
         method: 'GET',
@@ -27,15 +25,10 @@ function initEvents() {
 function onSuccess(response) {
     response.json().then((response) => {
         response.forEach((category) => {
-            // 추가
-            const html1 = `<li>
-                              <a href="./side-dishs.html">` + category.name + `</a>
-                              <ul class="sub-menu">`;
-
-            const html2 = category.subCategories.reduce((prevSubCategory, nextSubCategory) => { return prevSubCategory + `<li><a href="#">` + nextSubCategory.name + `</a></li>`}, ``);
-
-            const html3 = `</ul></li>`;
-            $("#menu").insertAdjacentHTML("beforeend", html1 + html2 + html3);
+            const parentCategoryHTML = `<li><a href="./side-dishs.html">${category.name}</a><ul class="sub-menu">`;
+            const subCategoriesHTML = category.subCategories.reduce((prevSubCategory, nextSubCategory) => { return prevSubCategory + `<li><a href="#">${nextSubCategory.name}</a></li>`}, ``);
+            const closingHTML = `</ul></li>`;
+            $("#menu").insertAdjacentHTML("beforeend", parentCategoryHTML + subCategoriesHTML + closingHTML);
         });
     });
 }
@@ -48,20 +41,19 @@ function onSuccessBestCategories(response) {
 
         $("#best-categories").insertAdjacentHTML("beforeend", html);
 
-        const randomNumber = (generateRandomNumber(1, result.length));
+        const randomNumber = (generateRandomNumber(0, result.length - 1));
         loadSideDishes(randomNumber);
-        $("#best-categories").children[randomNumber - 1].querySelector("a").classList.toggle(CLASS_NAME_NOW);
+        $("#best-categories").children[randomNumber].querySelector("a").classList.toggle(CLASS_NAME_NOW);
     });
 }
 
-function onClickBestCategory(evt) {
-    let {"target" : target} = evt;
+function onClickBestCategory({target}) {
     $(".now").classList.toggle(CLASS_NAME_NOW);
     target.classList.toggle(CLASS_NAME_NOW);
-    if(!side_dishes_cache[target.dataset["categoryId"]])
+    if(!SIDE_DISHES_CACHE[target.dataset["categoryId"]])
         loadSideDishes(target.dataset["categoryId"]);
     else
-        updateSideDishes(side_dishes_cache[target.dataset["categoryId"]]);
+        updateSideDishes(SIDE_DISHES_CACHE[target.dataset["categoryId"]]);
 }
 
 function loadSideDishes(categoryId) {
@@ -76,18 +68,18 @@ function loadSideDishes(categoryId) {
 
 function onSuccessBestSideDishes(response) {
     response.json().then((result) => {
-        side_dishes_cache[$(".now").dataset["categoryId"]] = result;
+        SIDE_DISHES_CACHE[$(".now").dataset["categoryId"]] = result;
         updateSideDishes(result);
     });
 }
 
 function updateSideDishes(result) {
-    const html = getSideDishesTemplete(result);
+    const html = getSideDishesTemplate(result);
     $("#best-side-dish-box").innerHTML = '';
     $("#best-side-dish-box").insertAdjacentHTML("beforeend", html);
 }
 
-function getSideDishesTemplete(sideDishes) {
+function getSideDishesTemplate(sideDishes) {
     return sideDishes.reduce((prev, next) => {
         return prev + `<li>
                   <a class="thumbnail-box" href="#">
@@ -122,6 +114,23 @@ function alertError() {
     alert("요기요를 이용해주세요...죄송합니다.");
 }
 
-function generateRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+document.addEventListener("DOMContentLoaded", () => {
+    const autoSearching = new AutoSearching();
+    requestCategories();
+    addEventListeners(autoSearching);
+});
+
+function addEventListeners(autoSearching) {
+    document.onkeydown = function(event) {
+        if ($("." + CLASS_INVISIBLE) == null && event.keyCode === ENTER) event.preventDefault();
+    };
+
+    document.onclick = function({target}) {
+        if(target.parentNode.id === "searching_box") {
+            $("#searching_text").value = autoSearching.removeSpanTag(target.innerHTML);
+        }
+        $("#searching_box").classList.add(CLASS_INVISIBLE);
+    };
+    $("#best-categories").addEventListener("click", onClickBestCategory);
+    $("#searching_text").addEventListener("keyup", autoSearching.onKeyUpSearchForm.bind(autoSearching));
 }
