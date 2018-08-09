@@ -128,3 +128,13 @@ INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(15, 'https://cdn
 INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(16, 'https://cdn.bmf.kr/_data/product/I1BF4/a0954782a02f9e956577a5d8907bad69.jpg');
 INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(17, 'https://cdn.bmf.kr/_data/product/I1BF4/a0954782a02f9e956577a5d8907bad69.jpg');
 INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(18, 'https://cdn.bmf.kr/_data/product/IA7F1/c4eebd6b6b1feb612bcbaa47c71c4c38.jpg');
+
+INSERT INTO product(name) VALUES('연어');
+INSERT INTO product(name) VALUES('연어장');
+INSERT INTO product(name) VALUES('자연어처리');
+INSERT INTO product(name) VALUES('구운연어');
+INSERT INTO product(name) VALUES('훈제연어');
+INSERT INTO product(name) VALUES('연어샐러드');
+INSERT INTO product(name) VALUES('연어짱');
+INSERT INTO product(name) VALUES('연어뱃살튀김');
+INSERT INTO product(name) VALUES('연어스테이크');
