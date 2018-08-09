@@ -1,5 +1,6 @@
 package codesquad.web;
 
+import codesquad.domain.Product;
 import codesquad.dto.CategoryDto;
 import codesquad.dto.CategoryListDto;
 import codesquad.dto.CategoryPostDto;
@@ -64,9 +65,24 @@ public class ApiAdminAcceptanceTest extends AcceptanceTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
+    @Test
+    public void addProduct() {
+        Product newProduct = Product.defaultProduct();
+        ResponseEntity<Void> response = basicAdminAuthTemplate().postForEntity("/api/admin/products", newProduct, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+    }
+
+    @Test
+    public void deleteProduct() {
+        ResponseEntity<Void> response = basicAdminAuthTemplate().exchange("/api/admin/products/1", HttpMethod.DELETE, null, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
     private HttpEntity createHttpEntity(Object body) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new HttpEntity(body, headers);
     }
+
+
 }

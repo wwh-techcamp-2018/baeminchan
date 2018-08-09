@@ -11,6 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -31,5 +32,18 @@ public class ProductServiceTest {
         when(productRepository.findByNameLike("%연어%")).thenReturn(Arrays.asList(salmon1, salmon2, salmon3));
 
         assertThat(productService.search("연어")).contains("자연어처리", "연어장");
+    }
+
+    @Test
+    public void add() {
+        Product product = Product.defaultProduct();
+        when(productRepository.save(product)).thenReturn(product);
+        assertThat(productService.save(product)).isEqualTo(product);
+    }
+
+    @Test
+    public void delete() {
+        productService.delete(1L);
+        verify(productRepository).deleteById(1L);
     }
 }

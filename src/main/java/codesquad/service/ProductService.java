@@ -19,4 +19,14 @@ public class ProductService {
         return products.stream().map(product -> product.getName()).collect(Collectors.toList());
     }
 
+    public Product save(Product product) {
+        return productRepository.save(product);
+    }
+
+    public void delete(Long id) {
+        productRepository.deleteById(id);
+    }
+
+
+
 }
