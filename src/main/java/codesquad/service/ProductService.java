@@ -20,4 +20,12 @@ public class ProductService {
         }
         return productRepository.findAll().stream().filter((p) -> p.isMatchName(searchText)).collect(Collectors.toList());
     }
+
+    public Product save(Product product) {
+        return productRepository.save(product);
+    }
+
+    public void delete(Long id) {
+        productRepository.deleteById(id);
+    }
 }

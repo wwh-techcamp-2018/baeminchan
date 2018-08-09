@@ -30,4 +30,8 @@ public class Product {
     public boolean isMatchName(String serchText) {
         return this.name.contains(serchText);
     }
+
+    public Product(String name) {
+        this.name = name;
+    }
 }
