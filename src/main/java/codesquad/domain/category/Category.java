@@ -1,6 +1,7 @@
 package codesquad.domain.category;
 
 
+import codesquad.domain.product.Product;
 import codesquad.dto.category.CategoryDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -20,6 +21,13 @@ public class Category {
     @Size(min = 1, max = 32)
     @Column(nullable = false)
     private String title;
+
+    @Column
+    private boolean deleted = false;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "categoryId")
+    private List<Product> products = new ArrayList<>();
 
     @ManyToOne()
     @JoinColumn(name = "parentId")
@@ -45,5 +53,9 @@ public class Category {
     public void update(CategoryDto categoryDto, Category parent) {
         this.title = categoryDto.getTitle();
         this.parent = parent;
+    }
+
+    public void addProduct(Product product) {
+        products.add(product);
     }
 }

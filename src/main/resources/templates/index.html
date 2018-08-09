@@ -69,13 +69,15 @@
             <img src="./img/logo-main.png" alt="배민찬 - 모바일 넘버원 반찬가게"/>
         </a>
 
-        <form class="search-form" action="/" method="get">
+        <div class="search-form">
             <label for="searching_text" class="blind">검색</label>
-            <input type="text" name="searching_text" id="searching_text"/>
-            <button type="submit">
+            <input type="text" name="searching_text" id="searching_text" autocomplete="off"/>
+            <button type="submit" id="searching_btn">
                 <span>검색</span>
             </button>
-        </form>
+            <div class="auto_search_div">
+            </div>
+        </div>
 
         <ul class="favorite-menu">
             <li>
@@ -638,9 +640,12 @@
     </section>
 </footer>
 <!-- // footer -->
+<script src="/js/hangul-js/hangul.js" type="text/javascript"></script>
+<script src="/js/common.js"></script>
 <script src="/js/categoryApi.js"></script>
 <script src="/js/promotion.js"></script>
 <script src="/js/bestTab.js"></script>
+<script src="/js/autoSearch.js"></script>
 
 </body>
 

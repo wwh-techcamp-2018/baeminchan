@@ -23,7 +23,7 @@ public class ApiUserController {
     @Resource(name = "userService")
     UserService userService;
 
-    @ApiOperation(value = "회원가입", notes = "회원정보를 입력하여 회원가입 시도 ")
+    @ApiOperation(value = "회원가입", notes = "회원정보를 입력하여 회원가입 시도합니다.")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "삽입 성공"),
             @ApiResponse(code = 400, message = "잘못된 요청")
@@ -35,10 +35,10 @@ public class ApiUserController {
     }
 
 
-    @ApiOperation(value = "로그인", notes = "아이디, 비밀번호를 입력하여 로그인하였습니다.")
+    @ApiOperation(value = "로그인", notes = "아이디, 비밀번호를 입력하여 로그인합니다.")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "삽입 성공"),
-            @ApiResponse(code = 400, message = "잘못된 요청")
+            @ApiResponse(code = 200, message = "로그인 성공"),
+            @ApiResponse(code = 400, message = "로그인 실패")
     })
     @PostMapping("/login")
     public ResponseEntity<NormalUser> login(HttpSession session, @RequestBody LoginUserDto loginUserDto) {
@@ -46,8 +46,13 @@ public class ApiUserController {
         return ResponseEntity.ok(null);
     }
 
+    @ApiOperation(value = "로그아웃", notes = "로그아웃합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "로그아웃 성공"),
+            @ApiResponse(code = 400, message = "로그아웃 실패")
+    })
     @GetMapping("/logout")
-    public ResponseEntity<NormalUser> logout(HttpSession session, @RequestBody LoginUserDto loginUserDto) {
+    public ResponseEntity<Void> logout(HttpSession session) {
         session.removeAttribute(SessionUtil.SESSION_KEY);
         return ResponseEntity.ok(null);
     }

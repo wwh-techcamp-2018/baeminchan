@@ -56,7 +56,7 @@ function insertBestTabContentHTML(tabs) {
 }
 
 function reducer(accumulator, value) {
-    accumulator[value.bestTab] = 
+    accumulator[value.bestTab] =
         accumulator[value.bestTab] ? [...accumulator[value.bestTab], value] : [value];
     return accumulator;
 }
