@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function loadCategories() {
     fetchManager({
-        url: "/api/category",
+        url: "/api/categories",
         method: 'GET',
         headers: {'content-type': 'application/json'},
         onSuccess: onSuccess,

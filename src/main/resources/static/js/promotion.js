@@ -12,7 +12,7 @@ function initPromotionEvents() {
 
 function loadPromotion() {
     fetchManager({
-            url: "/api/promotion",
+            url: "/api/promotions",
             method: 'GET',
             headers: {'content-type': 'application/json'},
             onSuccess: promotionCallback,
