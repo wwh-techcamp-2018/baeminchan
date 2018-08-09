@@ -1,15 +1,13 @@
-package codesquad.category;
+package codesquad.category.web;
 
 import codesquad.RestResponse;
 import codesquad.category.domain.*;
-import codesquad.product.domain.Product;
 import codesquad.security.HttpSessionUtils;
 import codesquad.user.domain.User;
 import codesquad.user.domain.UserRepository;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.annotations.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +32,7 @@ public class ApiCategoryController {
     @Autowired
     private BestCategoryRepository bestCategoryRepository;
 
+    @ApiOperation(value = "카테고리 전체 목록 조회")
     @GetMapping("/category")
     public ResponseEntity<Category> list() {
         Category category = findById(Category.ROOT_ID);
@@ -41,18 +40,12 @@ public class ApiCategoryController {
         return ResponseEntity.ok(category);
     }
 
+    @ApiOperation(value = "(이벤트) 베스트 반찬 카테고리 목록 조회")
     @GetMapping("/category/best")
     @Cacheable(value="bestCategory")
     public ResponseEntity<RestResponse> getBestCategory() {
         List<BestCategory> bestCategories = bestCategoryRepository.findAll();
-        return ResponseEntity.ok(new RestResponse(bestCategories));
-    }
-
-    @GetMapping("/category/best/{id}")
-    @Cacheable(value="bestCategoryProducts")
-    public ResponseEntity<RestResponse> getProductList(@PathVariable Long id) {
-        BestCategory bestCategory = bestCategoryRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        return ResponseEntity.ok(new RestResponse(bestCategory.getProducts()));
+        return ResponseEntity.ok(RestResponse.of(bestCategories));
     }
 
     @PostMapping("/admin/category")

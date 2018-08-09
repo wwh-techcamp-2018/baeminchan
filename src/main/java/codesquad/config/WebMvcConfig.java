@@ -5,6 +5,7 @@ import codesquad.security.BasicAuthInterceptor;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -12,12 +13,19 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableCaching
 public abstract class WebMvcConfig implements WebMvcConfigurer {
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -65,6 +73,33 @@ public abstract class WebMvcConfig implements WebMvcConfigurer {
         public void addInterceptors(InterceptorRegistry registry) {
             registry.addInterceptor(basicAuthInterceptor());
             super.addInterceptors(registry);
+        }
+    }
+
+    @Configuration
+    @EnableSwagger2
+    @Profile("local")
+    static class LocalWebConfig extends WebMvcConfig {
+        @Bean
+        public Docket api() {
+            return new Docket(DocumentationType.SWAGGER_2)
+                    .select()
+                    .apis(RequestHandlerSelectors.basePackage("codesquad"))
+                    .paths(PathSelectors.any())
+                    .build();
+        }
+
+        @Override
+        public void addResourceHandlers(ResourceHandlerRegistry registry) {
+            registry.addResourceHandler("/resources/**")
+                    .addResourceLocations("/WEB-INF/resources/");
+
+            registry.addResourceHandler("swagger-ui.html")
+                    .addResourceLocations("classpath:/META-INF/resources/");
+
+            registry.addResourceHandler("/webjars/**")
+                    .addResourceLocations("classpath:/META-INF/resources/webjars/");
+
         }
     }
 

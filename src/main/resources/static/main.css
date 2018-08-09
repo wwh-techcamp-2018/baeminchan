@@ -1432,13 +1432,12 @@ a:focus {
   background-position: center center;
   opacity: 0;
   z-index: 0;
-  transition: opacity 0.25s ease-in, z-index 0.25s ease-in;
+  transition: opacity 0.25s ease-in;
 }
 
 #main-visual .img-box .img-item.current {
   opacity: 1;
-  z-index: 1;
-  transition: opacity 0.25s ease-in, z-index 0.25s ease-in;
+  transition: opacity 0.25s ease-in;
 }
 
 #main-visual .img-box .img-1 {
@@ -1470,7 +1469,6 @@ a:focus {
   margin: 0 auto;
   width: 980px;
   height: 100%;
-  z-index: 2;
 }
 
 #main-visual .direction-btn-box .prev {
@@ -1492,7 +1490,6 @@ a:focus {
   left: 50%;
   bottom: 15px;
   transform: translateX(-50%);
-  z-index: 2;
 }
 
 #main-visual .dot-btn-box .dot {
@@ -1521,4 +1518,30 @@ a:focus {
 #page-template .thumbnail-box {
   width: 250px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.search-recommendation-list {
+  display: none;
+  position: absolute;
+  width: 100%;
+  border: 1px solid rgba(72, 63, 53, 0.6);
+  border-top: none;
+  background: #fff;
+  z-index: 1;
+}
+
+.search-recommendation-list > li {
+  padding: 10px;
+}
+
+.search-recommendation-list a:hover {
+  color: #666;
+}
+
+.search-recommendation-list .on {
+  background-color: #11c2bc;
+}
+
+.search-recommendation-list > li strong {
+  color: #f15858;
 }

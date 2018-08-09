@@ -41,21 +41,4 @@ public class ApiBestCategoryAcceptanceTest extends AcceptanceTest {
         assertThat(response.getBody().getData()).contains(bestCategory);
     }
 
-    @Test
-    public void get_특정베스트카테고리_반찬리스트() {
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        ResponseEntity<RestResponse<List<Product>>> response = template.exchange(
-                "/category/best/1",
-                HttpMethod.GET,
-                new HttpEntity<>(headers),
-                new ParameterizedTypeReference<RestResponse<List<Product>>>() {
-                });
-
-        log.debug("1 best-category : {}", response.getBody().getData());
-
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody().getData()).isNotEmpty();
-    }
 }

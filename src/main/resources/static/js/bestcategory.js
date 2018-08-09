@@ -27,7 +27,7 @@ function clickBestCategory(e){
 
 function fetchProducts(bestCategoryId){
     fetchManager({
-        url: "/category/best/"+bestCategoryId,
+        url: `/category/best/${bestCategoryId}/products`,
         method: "get",
         headers: { 'content-type': 'application/json; charset=utf-8' },
         success: fetchProductsSuccess,
