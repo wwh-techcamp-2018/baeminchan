@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode
-public class BestCategoryDto {
+public class BestCategoryDto implements Serializable {
 
     private String categoryName;
     private List<Product> products;
@@ -30,7 +30,13 @@ public class BestCategoryDto {
         return new BestCategory(this.categoryName, this.products);
     }
 
+    public BestCategoryDto setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+        return this;
+    }
 
-
-
+    public BestCategoryDto setProducts(List<Product> products) {
+        this.products = products;
+        return this;
+    }
 }

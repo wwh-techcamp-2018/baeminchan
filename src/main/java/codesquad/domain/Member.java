@@ -1,5 +1,6 @@
 package codesquad.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,12 +9,12 @@ import support.domain.Role;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,24 +51,6 @@ public class Member {
 
     public boolean matchPassword(String rawPassword, PasswordEncoder bcryptPasswordEncoder) {
         return bcryptPasswordEncoder.matches(rawPassword, this.password);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Member member = (Member) o;
-        return id == member.id &&
-                Objects.equals(email, member.email) &&
-                Objects.equals(password, member.password) &&
-                Objects.equals(username, member.username) &&
-                Objects.equals(phoneNumber, member.phoneNumber) &&
-                Objects.equals(roles, member.roles);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, email, password, username, phoneNumber, roles);
     }
 
     public boolean isAdmin() {

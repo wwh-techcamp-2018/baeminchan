@@ -4,11 +4,25 @@
 }
 
 .current {
-  z-index: 1;
-  opacity: 1;
+    z-index: 1;
+    opacity: 1;
 }
 
 .dot-btn-box, .direction-btn-box {
-  z-index: 2;
+    z-index: 2;
 }
 
+#main {
+    position: relative;
+    z-index: 0;
+}
+
+#gnb {
+    position: relative;
+    z-index: 0;
+}
+
+#header {
+    position: relative;
+    z-index: 1;
+}

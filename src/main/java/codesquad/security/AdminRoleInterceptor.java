@@ -43,6 +43,4 @@ public class AdminRoleInterceptor extends HandlerInterceptorAdapter {
         response.getWriter().write(json);
         response.flushBuffer();
     }
-
-
 }

@@ -128,3 +128,55 @@ INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(15, 'https://cdn
 INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(16, 'https://cdn.bmf.kr/_data/product/I1BF4/a0954782a02f9e956577a5d8907bad69.jpg');
 INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(17, 'https://cdn.bmf.kr/_data/product/I1BF4/a0954782a02f9e956577a5d8907bad69.jpg');
 INSERT INTO product_banner_urls(product_id, banner_urls) VALUES(18, 'https://cdn.bmf.kr/_data/product/IA7F1/c4eebd6b6b1feb612bcbaa47c71c4c38.jpg');
+
+INSERT INTO product(name) VALUES('연어');
+INSERT INTO product(name) VALUES('여름에 맛있는 냉면');
+INSERT INTO product(name) VALUES('연어장');
+INSERT INTO product(name) VALUES('자연어처리');
+INSERT INTO product(name) VALUES('구운연어');
+INSERT INTO product(name) VALUES('훈제연어');
+INSERT INTO product(name) VALUES('연어샐러드');
+INSERT INTO product(name) VALUES('연어짱');
+INSERT INTO product(name) VALUES('연어뱃살튀김');
+INSERT INTO product(name) VALUES('연어스테이크');
+
+INSERT INTO product(name) VALUES('피자');
+INSERT INTO product(name) VALUES('여름이라면 피자');
+INSERT INTO product(name) VALUES('가슴을 활짝 피자');
+INSERT INTO product(name) VALUES('치즈피자');
+INSERT INTO product(name) VALUES('채식피자');
+INSERT INTO product(name) VALUES('오징어 피자');
+INSERT INTO product(name) VALUES('피자헛 페퍼로니특가');
+INSERT INTO product(name) VALUES('불고기 피자');
+INSERT INTO product(name) VALUES('치즈 크러스트 피자');
+INSERT INTO product(name) VALUES('피피피자로시작하는말');
+INSERT INTO product(name) VALUES('파파스 치킨 피자');
+
+INSERT INTO product(name) VALUES('게살버거');
+INSERT INTO product(name) VALUES('연한 게살 버거');
+INSERT INTO product(name) VALUES('버거킹 몬스터디럭스');
+INSERT INTO product(name) VALUES('모스버거');
+INSERT INTO product(name) VALUES('남방 치킨 버거');
+INSERT INTO product(name) VALUES('차고 버거');
+INSERT INTO product(name) VALUES('치즈버거');
+INSERT INTO product(name) VALUES('불고기버거');
+INSERT INTO product(name) VALUES('상하이스파이시버거');
+
+INSERT INTO product(name) VALUES('국대떡볶이');
+INSERT INTO product(name) VALUES('연어가 들어가있지 않은 떡볶이');
+INSERT INTO product(name) VALUES('치즈떡볶이');
+INSERT INTO product(name) VALUES('짜장떡볶이');
+INSERT INTO product(name) VALUES('엄청매운떡볶이짱매웡');
+INSERT INTO product(name) VALUES('국물떡볶이');
+INSERT INTO product(name) VALUES('떡볶이튀김순대');
+
+INSERT INTO product(name) VALUES('만두');
+INSERT INTO product(name) VALUES('갈비만두');
+INSERT INTO product(name) VALUES('김치만두');
+INSERT INTO product(name) VALUES('고기만두');
+INSERT INTO product(name) VALUES('야채왕만두');
+INSERT INTO product(name) VALUES('물만두');
+INSERT INTO product(name) VALUES('군만두');
+INSERT INTO product(name) VALUES('찐만두');
+INSERT INTO product(name) VALUES('카트만두 정통 카레');
+

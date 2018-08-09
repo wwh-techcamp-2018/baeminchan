@@ -1,10 +1,7 @@
 package codesquad.web;
 
 import codesquad.domain.BestCategory;
-import codesquad.dto.BestCategoryDto;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.CacheManager;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;

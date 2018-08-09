@@ -1,8 +1,10 @@
 package codesquad.web;
 
+import codesquad.domain.Product;
 import codesquad.dto.CategoryPostDto;
 import codesquad.dto.PromotionDto;
 import codesquad.service.CategoryService;
+import codesquad.service.ProductService;
 import codesquad.service.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,28 +21,43 @@ public class ApiAdminController {
     private CategoryService categoryService;
     @Autowired
     private PromotionService promotionService;
+    @Autowired
+    private ProductService productService;
 
-    @PostMapping("/category")
-    public ResponseEntity<Void> add(@RequestBody CategoryPostDto categoryPostDto) {
-        categoryService.add(categoryPostDto);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+
+    @PostMapping("/categories")
+    public ResponseEntity add(@RequestBody CategoryPostDto categoryPostDto) {
+            categoryService.add(categoryPostDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @DeleteMapping("/category")
-    public ResponseEntity<Void> delete(@RequestBody CategoryPostDto categoryPostDto) {
+    @DeleteMapping("/categories")
+    public ResponseEntity delete(@RequestBody CategoryPostDto categoryPostDto) {
         categoryService.delete(categoryPostDto);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/promotion")
-    public ResponseEntity<Void> addPromotion(@RequestBody PromotionDto promotionDto) {
+    @PostMapping("/promotions")
+    public ResponseEntity addPromotion(@RequestBody PromotionDto promotionDto) {
         promotionService.save(promotionDto);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @DeleteMapping("/promotion/{id}")
-    public ResponseEntity<Void> deletePromotion(@PathVariable Long id) {
+    @DeleteMapping("/promotions/{id}")
+    public ResponseEntity deletePromotion(@PathVariable Long id) {
         promotionService.delete(id);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/products")
+    public ResponseEntity addProduct(@RequestBody Product product) {
+        productService.save(product);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("/products/{id}")
+    public ResponseEntity deleteProduct(@PathVariable Long id) {
+        productService.delete(id);
+        return ResponseEntity.ok().build();
     }
 }

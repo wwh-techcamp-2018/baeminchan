@@ -35,6 +35,10 @@ public class Product implements Serializable {
         this.bannerUrls = bannerUrls;
     }
 
+    public Product(String name) {
+        this(name, null, null, null);
+    }
+
     public static Product defaultProduct() {
         return new Product("냉호박죽", 5850, 0, Arrays.asList("https://cdn.bmf.kr/_data/product/IC5BB/7db9fa5a56f6203836ae7c90ab67b3ce.jpg"));
     }

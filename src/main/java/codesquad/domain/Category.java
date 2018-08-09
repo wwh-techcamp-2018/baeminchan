@@ -24,7 +24,6 @@ public class Category {
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "parent_id")
     private Category parent;
 
     @Column
@@ -101,6 +100,4 @@ public class Category {
         this.parent.getChildren().remove(this);
         setParent(null);
     }
-
-//TODO products 만들어줘야 함
 }

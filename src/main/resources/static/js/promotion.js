@@ -12,7 +12,7 @@ function initPromotionEvents() {
 
 function loadPromotion() {
     fetchManager({
-            url: "/api/promotion",
+            url: "/api/promotions",
             method: 'GET',
             headers: {'content-type': 'application/json'},
             onSuccess: promotionCallback,
@@ -87,8 +87,6 @@ function getNextSibling(parentClassName, targetElement) {
     }
     return siblingElement;
 }
-
-
 
 function getOrder(element) {
     return Array.prototype.indexOf.call(element.parentElement.children, element);
