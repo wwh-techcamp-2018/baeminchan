@@ -1,0 +1,18 @@
+.suggestions li {
+     font-family: Verdana, 나눔고딕, "Nanum", "Malgun Gothic", sans-serif;
+     height: 29px;
+     font-size: 15px;
+     padding: 4px;
+}
+
+.suggestions ul {
+    background-color: #a3dad9;
+}
+
+.suggestions .selected {
+    background-color: lightgray;
+}
+
+.suggestions strong {
+    color: deeppink;
+}
