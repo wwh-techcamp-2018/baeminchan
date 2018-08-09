@@ -1524,3 +1524,25 @@ a:focus {
     opacity: 1;
     transition: opacity 0.5s ease-in 0s;
 }
+
+.search-box {
+    z-index: 100;
+}
+
+#autocomplete {
+    margin: -14px 10px 0 40px;
+}
+
+.autocomplete-item {
+    padding: 10px 15px 10px 15px;
+    background: #2ac1bc;
+    color: white;
+}
+
+.autocomplete-item-selected {
+    background: black;
+}
+
+.highlighting {
+    color: red;
+}
