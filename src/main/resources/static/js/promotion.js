@@ -88,8 +88,6 @@ function getNextSibling(parentClassName, targetElement) {
     return siblingElement;
 }
 
-
-
 function getOrder(element) {
     return Array.prototype.indexOf.call(element.parentElement.children, element);
 }

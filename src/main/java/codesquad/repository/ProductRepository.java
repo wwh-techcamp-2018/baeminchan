@@ -1,6 +1,5 @@
 package codesquad.repository;
 
-
 import codesquad.domain.Product;
 import org.springframework.data.repository.CrudRepository;
 

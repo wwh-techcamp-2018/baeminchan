@@ -1,23 +1,20 @@
 class AutoComplete {
     constructor(){
-        this.initEvents();
+        this.initAutocompleteEvents();
     }
 
-    initEvents(){
-//        $(".search-form").addEventListener("submit", (e) => e.preventDefault());
+    initAutocompleteEvents(){
          document.addEventListener("keydown", (e) => {if (e.keyCode == 13) e.preventDefault()});
         $("#searching_text").addEventListener("keyup", this.keyboardHandlerOnAutoComplete.bind(this));
         document.addEventListener("click", this.changeAutoCompleteDisplay.bind(this));
     }
 
     keyboardHandlerOnAutoComplete(e) {
-        console.log(e.key);
         if (e.key == "Enter" && $(".suggestions .selected") != null) {
             this.fillInSearchBox($(".suggestions .selected"));
             this.clearSuggestions();
             return;
         }
-
 
         if (e.key != "ArrowDown" && e.key != "ArrowUp") {
             this.runAutoComplete();
@@ -112,9 +109,6 @@ class AutoComplete {
                 (response) => { if (response.ok)
                                 response.json().then((suggestions) => {this.renderSuggestions(suggestions, keyword);});
                                 });
-
-//        const suggestions = ["연어", "연어샐러드", "연어장", "연어덮밥", "연어알", "자연어처리", "연어초밥", "훈제연어", "생연어"];
-//        return suggestions;
     }
 }
 document.addEventListener("DOMContentLoaded", () => {

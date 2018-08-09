@@ -20,8 +20,6 @@ public class ApiProductAcceptanceTest  extends AcceptanceTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).contains("연어장", "자연어처리");
         assertThat(response.getBody()).doesNotContain("맛없는반찬1");
-
-
     }
 
     @Test
