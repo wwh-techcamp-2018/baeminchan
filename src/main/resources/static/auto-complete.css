@@ -20,3 +20,7 @@
 .auto-complete > .focus {
     background-color: #93ADa4;
 }
+
+.auto-complete > li > strong {
+    color: red;
+}
