@@ -5,6 +5,7 @@ import codesquad.dto.CategoryDTO;
 import codesquad.dto.UpdateCategoryDTO;
 import codesquad.exception.CategoryNotFoundException;
 import codesquad.repository.CategoryRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,14 @@ public class CategoryService {
         return findById(ROOT_ID);
     }
 
+    public CategoryDTO findRootDto() {return findById(ROOT_ID).toDTO();}
+
     private Category findById(Long id) {
         return categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new);
+    }
+
+    public List<Category> findAll(){
+        return categoryRepository.findByParent(null);
     }
 
     public Category addChild(CategoryDTO categoryDTO) {

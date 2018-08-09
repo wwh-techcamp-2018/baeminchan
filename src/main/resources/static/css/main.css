@@ -376,23 +376,27 @@ a:focus {
 #header .search-form {
     position: relative;
     margin: 14px 10px 14px 40px;
+    width: 210px;
+    height: 40px;
 }
 
 #header .search-form input[type="text"] {
     padding: 0 38px 0 15px;
-    width: 210px;
-    height: 40px;
+    width: 100%;
+    height: 100%;
     border: 1px solid #cfd0d2;
     color: #888;
+    font-size: 14px;
     font-family: Verdana, 나눔고딕, "Nanum", "Malgun Gothic", sans-serif;
 }
 
 #header .search-form input[type="text"]:hover,
 #header .search-form input[type="text"]:focus {
     border-color: #2ac1bc;
+    outline: none;
 }
 
-#header .search-form button[type="submit"] {
+#header .search-form button {
     position: absolute;
     top: 1px;
     right: 1px;
@@ -404,10 +408,35 @@ a:focus {
     cursor: pointer;
 }
 
-#header .search-form button[type="submit"]:hover,
-#header .search-form button[type="submit"]:focus {
+#header .search-form button:hover,
+#header .search-form button:focus {
     background-position: center -38px;
 }
+
+#header .search-form ul.on {
+    z-index: 1;
+    width: 100%;
+    background-color: white;
+    border: solid 1px #cfd0d2;
+}
+
+#header .search-form ul li {
+    padding: 2px;
+    font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#header .search-form ul li.on {
+    background-color: #e6e6e6;
+}
+
+#header .search-form ul li span {
+    color: #2ac1bc;
+}
+
 
 #header .favorite-menu {
     display: flex;
@@ -420,6 +449,7 @@ a:focus {
 }
 
 #gnb {
+    z-index: -1;
     grid-area: gnb;
     background: #483f35;
 }

@@ -27,7 +27,11 @@ public class Product {
 
     @Column
     @Size(min = 2)
-    private String discribe;
+    private String description;
+
+    @ManyToOne
+    @JsonIgnore
+    private Category category;
 
     @ManyToOne
     @JsonIgnore
