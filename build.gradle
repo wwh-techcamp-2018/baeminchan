@@ -39,6 +39,9 @@ dependencies {
     compile('io.springfox:springfox-swagger2:2.9.2')
     compile('io.springfox:springfox-swagger-ui:2.9.2')
 
+    compile('io.springfox:springfox-swagger2:2.9.2')
+    compile('io.springfox:springfox-swagger-ui:2.9.2')
+
     compile('org.hibernate:hibernate-java8')
     runtime('net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1')
     testCompile('org.springframework.boot:spring-boot-starter-test')

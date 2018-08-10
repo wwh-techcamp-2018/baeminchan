@@ -1,5 +1,4 @@
 class Search {
-
     constructor() {
         this.searchFocusIndex = -1;
         this.previousKeyword;

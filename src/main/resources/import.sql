@@ -56,3 +56,4 @@ INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_
 INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('9[집반찬연구소] 유유유자소스 꼬시래기무침 250g', '맛, 향, 식감 세 박자가 딱딱 맞아떨어지는 유자소스 꼬시래기무침', 5800, 'https://cdn.bmf.kr/_data/product/IBB87/fa527b4914461eefbcdbaa5185c70f05.jpg', 3, 1);
 
 INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('18[슈퍼키친] 버터치킨마커니 300g',  '이색 치킨 요리? 어렵지 않아요!', 9520, 'https://cdn.bmf.kr/_data/product/IF596/20e150430fd19e219062e12383d05491.jpg', 2, 6);
+
