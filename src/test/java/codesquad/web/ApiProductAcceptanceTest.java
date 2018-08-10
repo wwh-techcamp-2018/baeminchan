@@ -1,6 +1,6 @@
 package codesquad.web;
 
-import codesquad.domain.Product;
+import codesquad.domain.product.Product;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
@@ -24,7 +24,13 @@ public class ApiProductAcceptanceTest extends AcceptanceTest {
 
     @Test
     public void allAcceptanceTest() {
-        Product newProduct = new Product("신상품", "맛있는 고기반찬", 7000, "url/wefw");
+        Product newProduct = Product.builder()
+                .title("신상품")
+                .contents("맛있는 고기반찬")
+                .price(7000)
+                .thumbnailLink("url/wefw")
+                .build();
+
         RequestEntity createRequestEntity = builder
                 .withUrl(ADMIN_PRODUCT)
                 .withMethod(HttpMethod.POST)

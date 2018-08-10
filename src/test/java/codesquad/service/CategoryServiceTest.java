@@ -1,7 +1,7 @@
 package codesquad.service;
 
-import codesquad.domain.Category;
-import codesquad.domain.CategoryRepository;
+import codesquad.domain.category.Category;
+import codesquad.domain.category.CategoryRepository;
 import codesquad.exception.BadRequestException;
 import org.junit.Before;
 import org.junit.Test;

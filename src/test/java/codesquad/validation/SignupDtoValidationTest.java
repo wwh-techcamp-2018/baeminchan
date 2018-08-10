@@ -15,18 +15,18 @@ public class SignupDtoValidationTest {
 
     @Before
     public void setup() {
-        builder = new SignupDto.SignupDtoBuilder()
-                .withEmail("aa@aa.aa")
-                .withPassword("password")
-                .withPasswordConfirm("password")
-                .withName("aabbcc")
-                .withPhoneNumber("010-0101-0011");
+        builder = SignupDto.builder()
+                .email("aa@aa.aa")
+                .password("password")
+                .passwordConfirm("password")
+                .name("aabbcc")
+                .phoneNumber("010-0101-0011");
     }
 
     @Test
     public void emailPatternNotMatch() throws Exception {
         ValidationUtil.assertValidate(
-                builder.withEmail("aaaa").build(),
+                builder.email("aaaa").build(),
                 new HashSet<>(Arrays.asList(Pattern.class))
         );
     }
@@ -34,7 +34,7 @@ public class SignupDtoValidationTest {
     @Test
     public void phoneNumberPatternNotMatch() throws Exception {
         ValidationUtil.assertValidate(
-                builder.withPhoneNumber("001a-a-").build(),
+                builder.phoneNumber("001a-a-").build(),
                 new HashSet<>(Arrays.asList(Pattern.class))
         );
     }
@@ -42,7 +42,7 @@ public class SignupDtoValidationTest {
     @Test
     public void nameSizeNotMatch() throws Exception {
         ValidationUtil.assertValidate(
-                builder.withName("").build(),
+                builder.name("").build(),
                 new HashSet<>(Arrays.asList(NotBlank.class, Size.class))
         );
     }

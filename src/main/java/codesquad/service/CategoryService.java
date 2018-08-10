@@ -1,8 +1,10 @@
 package codesquad.service;
 
-import codesquad.domain.Category;
-import codesquad.domain.CategoryRepository;
+import codesquad.domain.category.Category;
+import codesquad.domain.category.CategoryRepository;
 import codesquad.domain.DomainField;
+import codesquad.domain.product.Product;
+import codesquad.domain.product.ProductRepository;
 import codesquad.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -17,6 +19,9 @@ public class CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     public Category save(Category category) {
         return categoryRepository.save(category);
@@ -64,5 +69,9 @@ public class CategoryService {
         return categoryRepository
                 .findById(id)
                 .orElseThrow(() -> new BadRequestException(DomainField.ID, "존재하지 않는 카테고리입니다."));
+    }
+
+    public List<Product> findProductsByCategoryId(Long id) {
+        return productRepository.findAllByCategoryId(id);
     }
 }

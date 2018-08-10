@@ -1,7 +1,9 @@
-package codesquad.domain;
+package codesquad.domain.user;
 
+import codesquad.domain.DomainField;
 import codesquad.exception.BadRequestException;
 import codesquad.dto.SignupDto;
+import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
+@ToString
+@NoArgsConstructor
 public class User {
     public static final User GUEST_USER = new GuestUser();
 
@@ -17,37 +21,44 @@ public class User {
     public static final String PHONENUMBER_PATTERN = "[0-9]+-[0-9]+-[0-9]+";
     public static final String PASSWORD_PATTERN = "^[0-9a-zA-Z]+";
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Getter
+    @Setter
     @NotBlank
     @Pattern(regexp = EMAIL_PATTERN)
     @Column(length = 40, unique = true, nullable = false, updatable = false)
     private String email;
 
+    @Getter
+    @Setter
     @Column(nullable = false)
     private String password;
 
+    @Getter
+    @Setter
     @NotBlank
     @Size(min = 1, max = 10)
     @Column(length = 10, nullable = false)
     private String name;
 
+    @Getter
+    @Setter
     @NotBlank
     @Size(min = 4, max = 14)
     @Pattern(regexp = PHONENUMBER_PATTERN)
     @Column(length = 14, nullable = false)
     private String phoneNumber;
 
+    @Getter
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
-    private UserPermissions permissions;
+    private UserPermissions permissions = UserPermissions.NORMAL;
 
-    public User() {
-        this.permissions = UserPermissions.NORMAL;
-    }
-
+    @Builder
     public User(String email, String password, String name, String phoneNumber, UserPermissions permissions) {
         this.email = email;
         this.password = password;
@@ -56,37 +67,17 @@ public class User {
         this.permissions = permissions;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
     public static User of(SignupDto signupDto, PasswordEncoder passwordEncoder) {
         if (!signupDto.isPasswordMatched())
             throw new BadRequestException(DomainField.USER_PASSWORD_CONFIRM, "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 
-        return new User(
-                signupDto.getEmail(),
-                passwordEncoder.encode(signupDto.getPassword()),
-                signupDto.getName(),
-                signupDto.getPhoneNumber(),
-                UserPermissions.NORMAL
-        );
+        return User.builder()
+                .email(signupDto.getEmail())
+                .password(passwordEncoder.encode(signupDto.getPassword()))
+                .name(signupDto.getName())
+                .phoneNumber(signupDto.getPhoneNumber())
+                .permissions(UserPermissions.NORMAL)
+                .build();
     }
 
     public User checkPassword(String loginPassword, PasswordEncoder encoder) {
@@ -109,17 +100,5 @@ public class User {
         public boolean isGuestUser() {
             return true;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", permissions=" + permissions +
-                '}';
     }
 }

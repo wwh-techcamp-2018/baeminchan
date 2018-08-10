@@ -1,6 +1,6 @@
 package codesquad.util;
 
-import codesquad.domain.User;
+import codesquad.domain.user.User;
 
 import javax.servlet.http.HttpSession;
 

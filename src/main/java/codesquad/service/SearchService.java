@@ -1,6 +1,6 @@
 package codesquad.service;
 
-import codesquad.domain.ProductRepository;
+import codesquad.domain.product.ProductRepository;
 import codesquad.dto.SearchRecommendationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package codesquad.util;
 
-import codesquad.domain.User;
+import codesquad.domain.user.User;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpSession;
 

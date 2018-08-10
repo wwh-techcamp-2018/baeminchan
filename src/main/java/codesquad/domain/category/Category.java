@@ -1,6 +1,7 @@
-package codesquad.domain;
+package codesquad.domain.category;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -10,63 +11,35 @@ import java.util.List;
 
 
 @Entity
+@NoArgsConstructor
+@ToString
 public class Category implements Serializable {
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
+    @Getter
     @NotBlank
     @Size(min = 1, max = 50)
     @Column(nullable = false)
     private String title;
 
+    @Setter
     @JsonIgnore
     @ManyToOne
     private Category parent;
 
+    @Getter
     @OneToMany(mappedBy = "parent", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Category> children;
 
-    public Category() {
-
-    }
 
     private Category(Long id, String title) {
         this.id = id;
         this.title = title;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setParent(Category parent) {
-        this.parent = parent;
-    }
-
-    public void setChildren(List<Category> children) {
-        this.children = children;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Category getParent() {
-        return parent;
-    }
-
-    public List<Category> getChildren() {
-        return children;
     }
 
 
@@ -80,13 +53,5 @@ public class Category implements Serializable {
 
     public void update(Category updateCategory) {
         title = updateCategory.title;
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                '}';
     }
 }

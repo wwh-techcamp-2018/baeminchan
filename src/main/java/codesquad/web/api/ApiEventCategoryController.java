@@ -1,6 +1,6 @@
 package codesquad.web.api;
 
-import codesquad.domain.EventCategory;
+import codesquad.domain.category.EventCategory;
 import codesquad.dto.EventCategoryDto;
 import codesquad.service.EventCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

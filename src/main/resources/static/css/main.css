@@ -1043,6 +1043,10 @@ a:focus {
   background: rgba(0, 0, 0, 0.6);
 }
 
+.thumbnail-box .thumbnail .overlay:hover {
+  opacity: 1;
+}
+
 .thumbnail-box .thumbnail .overlay .txt {
   position: relative;
   line-height: 2.4;
@@ -1280,8 +1284,8 @@ a:focus {
   right: 0;
   top: 0;
   bottom: 0;
-  transform: translateX(100%);
-  opacity: 0;
+  /*transform: translateX(100%);*/
+  /*opacity: 0;*/
 }
 
 .sliding-list-box .content-group .prev,
@@ -1321,7 +1325,7 @@ a:focus {
 }
 
 .sliding-list-box .content-box>li {
-  margin: 0 15px;
+  margin: 0 14px;
   width: 217px;
 }
 

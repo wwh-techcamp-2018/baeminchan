@@ -5,12 +5,12 @@ INSERT INTO USER (email, password, name, phone_number, permissions ) VALUES("adm
 
 INSERT INTO CATEGORY (title, parent_id) VALUES("밑반찬", NULL);
 INSERT INTO CATEGORY (title, parent_id) VALUES("국 * 찌개", 1);
-INSERT INTO CATEGORY (title, parent_id) VALUES("메인반찬", 2);
+INSERT INTO CATEGORY (title, parent_id) VALUES("메인반찬", NULL);
 INSERT INTO CATEGORY (title, parent_id) VALUES("아이반찬", NULL);
 INSERT INTO CATEGORY (title, parent_id) VALUES("정기식단", NULL);
 INSERT INTO CATEGORY (title, parent_id) VALUES("간편식", NULL);
 INSERT INTO CATEGORY (title, parent_id) VALUES("간식", NULL);
-INSERT INTO CATEGORY (title, parent_id) VALUES("브랜드관", NULL);
+INSERT INTO CATEGORY (title, parent_id) VALUES("브랜드관", 2);
 
 
 
@@ -21,40 +21,39 @@ insert into event_category values(4, "추천해요 아이반찬");
 insert into event_category values(5, "할인특가 세트상품");
 insert into event_category values(6, "맛있는 간식타임");
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('1[집밥의완성] 매운 돼지가지볶음 380g', '이번 주 매콤한 메인요리로 딱!', 4500, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg', 3, 1);
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('1[집밥의완성] 매운 돼지가지볶음 380g', '이번 주 매콤한 메인요리로 딱!', 4500, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg', 1, 1);
 
 INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('2고기 반찬', '아침에 먹기 좋은 반찬~~!', 4000, 'https://cdn.bmf.kr/_data/product/IE15B/f4577c1459679650d0554635d921b536.jpg', 1, 1);
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('3[집밥의완성] 궁중식 소고기오이감정 370g', '여름 오이와 함께 되직하게 끓여낸 입맛을 사로잡는 궁중요리', 6500, 'https://cdn.bmf.kr/_data/product/I4DEC/ebab7a5c6f31b59c1d0ffda25f0c82a3.jpg', 2, 1);
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('3[집밥의완성] 궁중식 소고기오이감정 370g', '여름 오이와 함께 되직하게 끓여낸 입맛을 사로잡는 궁중요리', 6500, 'https://cdn.bmf.kr/_data/product/I4DEC/ebab7a5c6f31b59c1d0ffda25f0c82a3.jpg', 1, 1);
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('4[너의반찬] 소고기 육전 250g', '양념간장 곁들여서 딱 드셔보세요~', 8000, 'https://cdn.bmf.kr/_data/product/I86DF/31c3669a458564e5ebf0a528caae8ce8.jpg', 2, 2);
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('4[너의반찬] 소고기 육전 250g', '양념간장 곁들여서 딱 드셔보세요~', 8000, 'https://cdn.bmf.kr/_data/product/I86DF/31c3669a458564e5ebf0a528caae8ce8.jpg', 1, 2);
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('5[집밥의완성] 껌승(베트남식 돼지구이) 630g', '매콤 짭조름한 소스에 콕!', 8900, 'https://cdn.bmf.kr/_data/product/I5200/da93cbe8aa03e01aaf1a642a4ca54ef1.jpg', 3, 2);
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('5[집밥의완성] 껌승(베트남식 돼지구이) 630g', '매콤 짭조름한 소스에 콕!', 8900, 'https://cdn.bmf.kr/_data/product/I5200/da93cbe8aa03e01aaf1a642a4ca54ef1.jpg', 1, 2);
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('6[슈퍼키친] 버터치킨마커니 300g',  '이색 치킨 요리? 어렵지 않아요!', 9520, 'https://cdn.bmf.kr/_data/product/IF596/20e150430fd19e219062e12383d05491.jpg', 3, 2);
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('6[슈퍼키친] 버터치킨마커니 300g',  '이색 치킨 요리? 어렵지 않아요!', 9520, 'https://cdn.bmf.kr/_data/product/IF596/20e150430fd19e219062e12383d05491.jpg', 1, 2);
 
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('7[맑을담] 꽁치김치찜 500g', '꽁치와 김치의 칼칼한 콜라보', 7200, 'https://cdn.bmf.kr/_data/product/I1BF4/fc673205293c8126526576503c4d8907.jpg', 1, 1);
 
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('8[집반찬연구소] 유자소스 꼬시래기무침 250g', '맛, 향, 식감 세 박자가 딱딱 맞아떨어지는 유자소스 꼬시래기무침', 5800, 'https://cdn.bmf.kr/_data/product/IBB87/fa527b4914461eefbcdbaa5185c70f05.jpg', 1, 1);
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('7[집밥의완성] 매운 돼지가지볶음 380g', '이번 주 매콤한 메인요리로 딱!', 4500, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg', 3, 3);
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('1[집밥의완성] 궁중식 소고기오이감정 370g', '여름 오이와 함께 되직하게 끓여낸 입맛을 사로잡는 궁중요리', 6500, 'https://cdn.bmf.kr/_data/product/I4DEC/ebab7a5c6f31b59c1d0ffda25f0c82a3.jpg', 3, 3);
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('8고기 반찬', '아침에 먹기 좋은 반찬~~!', 4000, 'https://cdn.bmf.kr/_data/product/IE15B/f4577c1459679650d0554635d921b536.jpg', 1, 3);
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('2[너의반찬] 소고기 육전 250g', '양념간장 곁들여서 딱 드셔보세요~', 8000, 'https://cdn.bmf.kr/_data/product/I86DF/31c3669a458564e5ebf0a528caae8ce8.jpg', 3, 4);
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('9[집밥의완성] 궁중식 소고기오이감정 370g', '여름 오이와 함께 되직하게 끓여낸 입맛을 사로잡는 궁중요리', 6500, 'https://cdn.bmf.kr/_data/product/I4DEC/ebab7a5c6f31b59c1d0ffda25f0c82a3.jpg', 2, 3);
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('3[집밥의완성] 껌승(베트남식 돼지구이) 630g', '매콤 짭조름한 소스에 콕!', 8900, 'https://cdn.bmf.kr/_data/product/I5200/da93cbe8aa03e01aaf1a642a4ca54ef1.jpg', 3, 4);
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('10[너의반찬] 소고기 육전 250g', '양념간장 곁들여서 딱 드셔보세요~', 8000, 'https://cdn.bmf.kr/_data/product/I86DF/31c3669a458564e5ebf0a528caae8ce8.jpg', 2, 4);
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('4[슈퍼키친] 버터치킨마커니 300g',  '이색 치킨 요리? 어렵지 않아요!', 9520, 'https://cdn.bmf.kr/_data/product/IF596/20e150430fd19e219062e12383d05491.jpg', 3, 4);
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('11[집밥의완성] 껌승(베트남식 돼지구이) 630g', '매콤 짭조름한 소스에 콕!', 8900, 'https://cdn.bmf.kr/_data/product/I5200/da93cbe8aa03e01aaf1a642a4ca54ef1.jpg', 3, 4);
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('5[집밥의완성] 매운 돼지가지볶음 380g', '이번 주 매콤한 메인요리로 딱!', 4500, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg', 3, 5);
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('12[슈퍼키친] 버터치킨마커니 300g',  '이색 치킨 요리? 어렵지 않아요!', 9520, 'https://cdn.bmf.kr/_data/product/IF596/20e150430fd19e219062e12383d05491.jpg', 3, 4);
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('6고기 반찬', '아침에 먹기 좋은 반찬~~!', 4000, 'https://cdn.bmf.kr/_data/product/IE15B/f4577c1459679650d0554635d921b536.jpg', 3, 5);
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('13[집밥의완성] 매운 돼지가지볶음 380g', '이번 주 매콤한 메인요리로 딱!', 4500, 'https://cdn.bmf.kr/_data/product/I21A3/a5ae10184ec276667e0a35e6f3012f20.jpg', 3, 5);
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('7[집밥의완성] 궁중식 소고기오이감정 370g', '여름 오이와 함께 되직하게 끓여낸 입맛을 사로잡는 궁중요리', 6500, 'https://cdn.bmf.kr/_data/product/I4DEC/ebab7a5c6f31b59c1d0ffda25f0c82a3.jpg', 3, 5);
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('14고기 반찬', '아침에 먹기 좋은 반찬~~!', 4000, 'https://cdn.bmf.kr/_data/product/IE15B/f4577c1459679650d0554635d921b536.jpg', 1, 5);
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('8[맑을담] 꽁꽁치김치찜 500g', '꽁치와 김치의 칼칼한 콜라보', 7200, 'https://cdn.bmf.kr/_data/product/I1BF4/fc673205293c8126526576503c4d8907.jpg', 3, 1);
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('15[집밥의완성] 궁중식 소고기오이감정 370g', '여름 오이와 함께 되직하게 끓여낸 입맛을 사로잡는 궁중요리', 6500, 'https://cdn.bmf.kr/_data/product/I4DEC/ebab7a5c6f31b59c1d0ffda25f0c82a3.jpg', 2, 5);
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('9[집반찬연구소] 유유유자소스 꼬시래기무침 250g', '맛, 향, 식감 세 박자가 딱딱 맞아떨어지는 유자소스 꼬시래기무침', 5800, 'https://cdn.bmf.kr/_data/product/IBB87/fa527b4914461eefbcdbaa5185c70f05.jpg', 3, 1);
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('16[너의반찬] 소고기 육전 250g', '양념간장 곁들여서 딱 드셔보세요~', 8000, 'https://cdn.bmf.kr/_data/product/I86DF/31c3669a458564e5ebf0a528caae8ce8.jpg', 2, 6);
+INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('18[슈퍼키친] 버터치킨마커니 300g',  '이색 치킨 요리? 어렵지 않아요!', 9520, 'https://cdn.bmf.kr/_data/product/IF596/20e150430fd19e219062e12383d05491.jpg', 2, 6);
 
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('17[집밥의완성] 껌승(베트남식 돼지구이) 630g', '매콤 짭조름한 소스에 콕!', 8900, 'https://cdn.bmf.kr/_data/product/I5200/da93cbe8aa03e01aaf1a642a4ca54ef1.jpg', 3, 6);
-
-INSERT INTO product (title, contents, price, thumbnail_link, category_id, event_category_id) VALUES ('18[슈퍼키친] 버터치킨마커니 300g',  '이색 치킨 요리? 어렵지 않아요!', 9520, 'https://cdn.bmf.kr/_data/product/IF596/20e150430fd19e219062e12383d05491.jpg', 3, 6);

@@ -26,11 +26,19 @@ function fetchManager({url, method, body, onSuccess, onFailure}) {
         });
 }
 
-function getManager({url, method, callback}) {
-    fetch(url, {method, headers: {"Content-type": "application/json"}, credentials: "same-origin"})
+function getManager({url,callback}) {
+    fetch(url, {method : "GET", headers: {"Content-type": "application/json"}, credentials: "same-origin"})
         .then((response) => {
             return response.json();
         }).then((result) => {
         callback(result);
     });
+}
+
+function range(start, end) {
+    return Array(end-start).fill(0).map((_, index) => start+index);
+}
+
+function range(end) {
+    return range(0, end);
 }

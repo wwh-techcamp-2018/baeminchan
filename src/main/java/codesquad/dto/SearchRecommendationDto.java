@@ -1,37 +1,18 @@
 package codesquad.dto;
 
-import codesquad.domain.Product;
+import codesquad.domain.product.Product;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 public class SearchRecommendationDto {
 
     private String keyword;
 
     private List<Product> products;
-
-    public SearchRecommendationDto() {
-
-    }
-
-    public SearchRecommendationDto(String keyword, List<Product> products) {
-        this.keyword = keyword;
-        this.products = products;
-    }
-
-    public String getKeyword() {
-        return keyword;
-    }
-
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
 }

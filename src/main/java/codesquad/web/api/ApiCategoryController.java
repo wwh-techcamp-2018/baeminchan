@@ -1,6 +1,7 @@
 package codesquad.web.api;
 
-import codesquad.domain.Category;
+import codesquad.domain.category.Category;
+import codesquad.domain.product.Product;
 import codesquad.service.CategoryService;
 import codesquad.validation.RestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,10 @@ public class ApiCategoryController {
     @DeleteMapping("/admin/categories/{id}")
     public void delete(@PathVariable Long id) {
         categoryService.delete(id);
+    }
+
+    @GetMapping("/categories/{id}/products")
+    public List<Product> categoryProduct(@PathVariable Long id) {
+        return categoryService.findProductsByCategoryId(id);
     }
 }

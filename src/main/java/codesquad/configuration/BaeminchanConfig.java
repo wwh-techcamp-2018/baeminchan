@@ -29,7 +29,8 @@ public class BaeminchanConfig implements WebMvcConfigurer {
 
     private static final Logger log = LoggerFactory.getLogger(BaeminchanConfig.class);
 
-    @Value("${spring.cache.ehcache.config}") String ecacheConfig;
+    @Value("${spring.cache.ehcache.config}")
+    private String ehcacheConfig;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -53,7 +54,6 @@ public class BaeminchanConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(adminAuthInterceptor()).addPathPatterns("/admin/**").order(1);
-
     }
 
     @Bean
@@ -62,14 +62,15 @@ public class BaeminchanConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public CacheManager cacheManager(){
+    public CacheManager cacheManager() {
         return new EhCacheCacheManager(ehCacheManagerFactoryBean().getObject());
     }
+
     @Bean
-    public EhCacheManagerFactoryBean ehCacheManagerFactoryBean(){
+    public EhCacheManagerFactoryBean ehCacheManagerFactoryBean() {
         EhCacheManagerFactoryBean factory = new EhCacheManagerFactoryBean();
         factory.setShared(true);
-        factory.setConfigLocation(new ClassPathResource(ecacheConfig));
+        factory.setConfigLocation(new ClassPathResource(ehcacheConfig));
         return factory;
     }
 

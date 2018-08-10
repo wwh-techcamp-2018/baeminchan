@@ -1,6 +1,6 @@
 package codesquad.web;
 
-import codesquad.domain.EventCategory;
+import codesquad.domain.category.EventCategory;
 import codesquad.dto.EventCategoryDto;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ApiEventCategoryAcceptanceTest extends AcceptanceTest {
 
-    RequestEntity.Builder builder;
+    private RequestEntity.Builder builder;
 
     @Before
     public void setUp() throws Exception {
@@ -24,16 +24,15 @@ public class ApiEventCategoryAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
-    public void readEventCategories(){
+    public void readEventCategories() {
         RequestEntity readRequestEntity = builder
                 .withUrl("/eventcategories")
                 .withMethod(HttpMethod.GET)
                 .withReturnType(List.class)
                 .build();
 
-        ResponseEntity<List<EventCategory>> readResponseEntity = request(template(),readRequestEntity);
+        ResponseEntity<List<EventCategory>> readResponseEntity = request(template(), readRequestEntity);
         assertThat(readResponseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(readResponseEntity.getBody().size()).isEqualTo(6);
     }
 
     @Test
@@ -46,7 +45,6 @@ public class ApiEventCategoryAcceptanceTest extends AcceptanceTest {
 
         ResponseEntity<EventCategoryDto> readResponseEntity = request(template(), readRequestEntity);
         assertThat(readResponseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(readResponseEntity.getBody().getProducts().size()).isEqualTo(3);
-
     }
+
 }

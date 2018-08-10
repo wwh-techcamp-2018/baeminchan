@@ -1,7 +1,7 @@
 package codesquad.security;
 
-import codesquad.domain.User;
-import codesquad.domain.UserPermissions;
+import codesquad.domain.user.User;
+import codesquad.domain.user.UserPermissions;
 import codesquad.exception.UnAuthenticationException;
 import codesquad.exception.UnAuthorizedException;
 import codesquad.util.SessionUtil;
@@ -30,22 +30,28 @@ public class AdminAuthInterceptorTest {
 
     @Test
     public void preHandle() throws Exception {
-        User user = new User("admin@admin.com"
-                ,"12345678"
-                ,"admin"
-                ,"010-1234-5678"
-                ,UserPermissions.ADMIN);
+        User user = User.builder()
+                .email("admin@admin.com")
+                .password("12345678")
+                .name("admin")
+                .phoneNumber("010-1234-5678")
+                .permissions(UserPermissions.ADMIN)
+                .build();
+
         SessionUtil.setUserSession(session, user);
         assertThat(adminAuthInterceptor.preHandle(request,null,null)).isEqualTo(true);
     }
 
     @Test(expected = UnAuthorizedException.class)
     public void preHandleInValidationByNormalUser() throws Exception {
-        User user = new User("normal@normal.com"
-                ,"12345678"
-                ,"normal"
-                ,"010-1234-5678"
-                ,UserPermissions.NORMAL);
+        User user = User.builder()
+                .email("normal@normal.com")
+                .password("12345678")
+                .name("normal")
+                .phoneNumber("010-1234-5678")
+                .permissions(UserPermissions.NORMAL)
+                .build();
+
         SessionUtil.setUserSession(session, user);
         assertThat(adminAuthInterceptor.preHandle(request,null,null)).isEqualTo(true);
     }

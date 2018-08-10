@@ -1,13 +1,12 @@
 package codesquad.domain;
 
+import codesquad.domain.category.Category;
 import codesquad.validation.ValidationUtil;
 import org.junit.Test;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Arrays;
-
-import static org.junit.Assert.*;
 
 public class CategoryValidationTest {
 

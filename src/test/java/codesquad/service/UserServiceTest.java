@@ -1,8 +1,8 @@
 package codesquad.service;
 
 import codesquad.exception.BadRequestException;
-import codesquad.domain.User;
-import codesquad.domain.UserRepository;
+import codesquad.domain.user.User;
+import codesquad.domain.user.UserRepository;
 import codesquad.dto.LoginDto;
 import codesquad.dto.SignupDto;
 import codesquad.exception.UnAuthenticationException;
@@ -40,13 +40,13 @@ public class UserServiceTest {
     @Before
     public void setUp() throws Exception {
         userService.setPasswordEncoder(passwordEncoder);
-        signupDto = new SignupDto();
-        signupDto.setEmail("email@aa");
-        signupDto.setPassword("password");
-        signupDto.setPasswordConfirm("password");
-        signupDto.setName("name");
-        signupDto.setPhoneNumber("00-00-00");
-
+        signupDto = SignupDto.builder()
+                .email("email@aa")
+                .password("password")
+                .passwordConfirm("password")
+                .name("name")
+                .phoneNumber("00-00-00")
+                .build();
         loginDto = new LoginDto("email@aa", "password");
     }
 

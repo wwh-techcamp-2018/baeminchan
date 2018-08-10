@@ -3,7 +3,7 @@ package codesquad.security;
 import codesquad.exception.UnAuthenticationException;
 import codesquad.exception.UnAuthorizedException;
 import codesquad.domain.DomainField;
-import codesquad.domain.User;
+import codesquad.domain.user.User;
 import codesquad.util.SessionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

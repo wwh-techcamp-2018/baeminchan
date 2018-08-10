@@ -3,8 +3,8 @@ package codesquad.service;
 import codesquad.exception.BadRequestException;
 import codesquad.exception.UnAuthenticationException;
 import codesquad.domain.DomainField;
-import codesquad.domain.User;
-import codesquad.domain.UserRepository;
+import codesquad.domain.user.User;
+import codesquad.domain.user.UserRepository;
 import codesquad.dto.LoginDto;
 import codesquad.dto.SignupDto;
 import org.slf4j.Logger;
@@ -20,10 +20,10 @@ public class UserService {
     private static final Logger log = LoggerFactory.getLogger(UserService.class);
 
     @Resource(name = "passwordEncoder")
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Resource(name = "userRepository")
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     void setPasswordEncoder(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;

@@ -1,8 +1,8 @@
 package codesquad.service;
 
 import codesquad.domain.DomainField;
-import codesquad.domain.Product;
-import codesquad.domain.ProductRepository;
+import codesquad.domain.product.Product;
+import codesquad.domain.product.ProductRepository;
 import codesquad.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class ProductService {
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     public Product create(Product product) {
         return productRepository.save(product);
