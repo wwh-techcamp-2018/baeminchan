@@ -35,7 +35,6 @@ public class ApiSearchAcceptanceTest extends AcceptanceTest {
 
         ResponseEntity<SearchRecommendationDto> responseEntity = request(template(), searchRequestEntity);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(responseEntity.getBody().getProducts().size()).isEqualTo(6);
         assertThat(responseEntity.getBody().getKeyword()).isEqualTo("소고기");
     }
 }

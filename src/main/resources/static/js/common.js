@@ -38,3 +38,7 @@ function getManager({url,callback}) {
 function range(start, end) {
     return Array(end-start).fill(0).map((_, index) => start+index);
 }
+
+function range(end) {
+    return range(0, end);
+}

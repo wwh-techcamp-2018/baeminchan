@@ -100,7 +100,7 @@
             <ul class="menu">
                 {{#categories}}
                 <li>
-                    <a href="#">{{title}}</a>
+                    <a href="#" id="category-{{id}}">{{title}}</a>
                     <ul class="sub-menu">
                         {{#each children}}
                         <li>
@@ -224,11 +224,11 @@
 
 
             <ul class="content-group">
-                    <ul class="content-box side-dish-box aa">
+                    <ul class="content-box">
                     </ul>
-                    <ul class="content-box side-dish-box bb">
+                    <ul class="content-box">
                     </ul>
-                    <ul class="content-box side-dish-box cc">
+                    <ul class="content-box">
                     </ul>
             </ul>
             <!-- .content-group -->
@@ -260,7 +260,14 @@
                 </a>
             </div>
 
-            <ul class="content-group"></ul>
+            <ul class="content-group">
+                <ul class="content-box">
+                </ul>
+                <ul class="content-box">
+                </ul>
+                <ul class="content-box">
+                </ul>
+            </ul>
         </div>
         <!-- .sliding-list-box -->
 
@@ -304,6 +311,7 @@
 {{#partial "script"}}
 <script src="/js/class/search.js"></script>
 <script src="/js/class/slide_product.js"></script>
+<script src="/js/class/content_box.js"></script>
 <script src="/js/main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.js"></script>
 <script type="text/javascript">

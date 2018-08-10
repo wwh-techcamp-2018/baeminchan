@@ -33,7 +33,6 @@ public class ApiEventCategoryAcceptanceTest extends AcceptanceTest {
 
         ResponseEntity<List<EventCategory>> readResponseEntity = request(template(), readRequestEntity);
         assertThat(readResponseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(readResponseEntity.getBody().size()).isEqualTo(6);
     }
 
     @Test
@@ -46,7 +45,6 @@ public class ApiEventCategoryAcceptanceTest extends AcceptanceTest {
 
         ResponseEntity<EventCategoryDto> readResponseEntity = request(template(), readRequestEntity);
         assertThat(readResponseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(readResponseEntity.getBody().getProducts().size()).isEqualTo(3);
     }
 
 }

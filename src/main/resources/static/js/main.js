@@ -36,6 +36,7 @@ function currentFocusIndex() {
         if (image.classList.contains("visible-image"))
             current = index;
     });
+
     return current;
 }
 
@@ -86,7 +87,8 @@ function init() {
             clickDot(evt.target);
     });
     new Search();
-    new SlideProduct().requestProducts();
+    new SlideProduct("side-dish").requestSideDishes();
+    new SlideProduct("main-dish").requestMainDishes();
 
     activateAnimation();
     getEventCategories();
@@ -134,12 +136,11 @@ function getCategory(categoryId) {
 }
 
 function drawProducts(result) {
-    $(".tab-content-box").innerHTML = "";
     var template = Handlebars.templates["precompile/product_template"];
     const products = result.products;
-    for (const product of products) {
-        $(".tab-content-box").innerHTML += template(product);
-    }
+    $(".tab-content-box").innerHTML = products.reduce((prev, next) => {
+        return prev + template(next);
+    }, "");
 }
 
 function clickCategoryTab(target) {
